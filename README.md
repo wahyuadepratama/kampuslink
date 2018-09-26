@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Laravel Template
 
 ### 1. Requirement
@@ -21,6 +22,10 @@ Functional template:
 - guest > all pages about the user who have not logged in
 - user > all pages about the user who have logged in
 - layouts > all pages about the layouts in the apps
+=======
+# KampusLink
+KampusLink
+>>>>>>> 111baccae3d7b90365d5d80e6d2b2dad80d24e26
 =======
 # KampusLink
 KampusLink
