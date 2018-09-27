@@ -13,14 +13,14 @@
     <link rel="apple-touch-icon" href="apple-icon.png">
     <link rel="shortcut icon" href="favicon.ico">
 
-    <link rel="stylesheet" href="{{URL::asset('admin/assets/css/normalize.css')}}">
-    <link rel="stylesheet" href="{{URL::asset('admin/assets/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{URL::asset('admin/assets/css/font-awesome.min.css')}}">
-    <link rel="stylesheet" href="{{URL::asset('admin/assets/css/themify-icons.css')}}">
-    <link rel="stylesheet" href="{{URL::asset('admin/assets/css/flag-icon.min.css')}}">
-    <link rel="stylesheet" href="{{URL::asset('admin/assets/css/cs-skin-elastic.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('admins/assets/css/normalize.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('admins/assets/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('admins/assets/css/font-awesome.min.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('admins/assets/css/themify-icons.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('admins/assets/css/flag-icon.min.css')}}">
+    <link rel="stylesheet" href="{{URL::asset('admins/assets/css/cs-skin-elastic.css')}}">
     <!-- <link rel="stylesheet" href="assets/css/bootstrap-select.less"> -->
-    <link rel="stylesheet" href="{{URL::asset('admin/assets/scss/style.css')}}">    
+    <link rel="stylesheet" href="{{URL::asset('admins/assets/scss/style.css')}}">    
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
@@ -39,10 +39,10 @@
 
   </div>
 
-  <script src="{{URL::asset('admin/assets/js/vendor/jquery-2.1.4.min.js')}}"></script>
+  <script src="{{URL::asset('admins/assets/js/vendor/jquery-2.1.4.min.js')}}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
-  <script src="{{URL::asset('admin/assets/js/plugins.js')}}"></script>
-  <script src="{{URL::asset('admin/assets/js/main.js')}}"></script>
+  <script src="{{URL::asset('admins/assets/js/plugins.js')}}"></script>
+  <script src="{{URL::asset('admins/assets/js/main.js')}}"></script>
 
   @yield('script')
 

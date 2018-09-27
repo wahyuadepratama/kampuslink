@@ -18,11 +18,11 @@ class CreateTableOrganization extends Migration
           $table->string('name');
           $table->string('photo_profile')->default('default-avatar.svg');
           $table->string('photo_cover')->default('default-cover.svg');
-          $table->string('instagram');
-          $table->string('line');
-          $table->string('facebook');
-          $table->string('whatsapp');
-          $table->string('phone');
+          $table->string('instagram')->nullable();
+          $table->string('line')->nullable();
+          $table->string('facebook')->nullable();
+          $table->string('whatsapp')->nullable();
+          $table->string('phone')->nullable();
           $table->text('description');
           $table->timestamps();
 

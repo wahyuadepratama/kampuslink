@@ -16,7 +16,7 @@ class CreateTableCampus extends Migration
       Schema::create('campus', function (Blueprint $table) {
           $table->increments('id');
           $table->string('name');
-          $table->string('logo');
+          $table->string('logo')->default('default-logo.svg');
           $table->string('location');
           $table->text('description');
           $table->string('background_color');
