@@ -51,6 +51,19 @@ class UserTableSeeder extends Seeder
           'program_study_id' => 3,
           'created_at'=> Carbon::now(),
           'updated_at'=> Carbon::now(),
+        ],
+        [
+          'username' => "sitisarah",
+          'email' => 'siti@gmail.com',
+          'password' => '$2y$10$.7hqO3OKindL4AA.nxVTb.2QJGo/mpPBNjDc2Uc800T0HTmrl9wGa',
+          'fullname' => 'Siti Sarah',
+          'nim' => '1511521020',
+          'phone' => '08137141919',
+          'role_id' => 2,
+          'remember_token' => str_random(40),
+          'program_study_id' => 3,
+          'created_at'=> Carbon::now(),
+          'updated_at'=> Carbon::now(),
         ]
        ]);
 

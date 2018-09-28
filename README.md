@@ -1,22 +1,32 @@
-# Laravel Template
+# KampusLink
 
 ### 1. Requirement
-- Use Laravel 5.5.43 (PHP >= 7.0)
-- Use Sufee Admin
+- Menggunakan XAMPP atau LAMPP dengan PHP minimal versi 7.0
+- Sudah terinstall git (https://git-scm.com/downloads)
+- Sudah terinstall composer (https://getcomposer.org/download/)
 
-### 2. Features
-Functional template:
-  - Auth Login + Register
-  - Admin View + Template
-  - User CRUD
-  - Reset Password
-  - Soft Delete
-
-### 3. Stucture Views
-
-- admin > all pages about view admin
-- auth  > all pages about auth in the apps like login, register, forget password, etc
-- errors > all pages about the error page like 404, 403, 501, etc
-- guest > all pages about the user who have not logged in
-- user > all pages about the user who have logged in
-- layouts > all pages about the layouts in the apps
+### 2. Deployment
+1. Masuk ke folder htdocs (jika menggunakan XAMPP) dan masukan perintah
+```sh
+git clone https://github.com/wahyuadepratama/kampuslink.git
+```
+2. Selelah selesai, masuk ke folder kampuslink dan ketikan perintah berikut
+```sh
+composer update
+```
+3. Selanjutnya buat database pada mysql (gunakan phpmyadmin). Nama database bebas.
+4. Setelah selesai, ubah file .env.example menjadi file .env dan ubah isi file sesuai dengan nama, username dan password database yang kamu gunakan.
+```sh
+DB_DATABASE=isi ini dengan nama database kamu
+DB_USERNAME=isi ini dengan user database kamu
+DB_PASSWORD=isi ini dengan password database kamu
+```
+5. Selanjutnya masukan perintah berikut
+```sh
+php artisan key:generate
+```
+6. Terakhir jalankan server dengan perintah
+```sh
+php artisan serve
+```
+7. Untuk mengaksesnya via browser, buka link: localhost:8000 di browser kamu

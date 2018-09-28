@@ -13,7 +13,14 @@ class DatabaseSeeder extends Seeder
         FacultySeeder::class,
         ProgramStudySeeder::class,
         UserTableSeeder::class,
-        OrganizationSeeder::class
+        OrganizationSeeder::class,
+        EventCategorySeeder::class,
+        EventSeeder::class,
+        SubEventSeeder::class,
+        CommentSeeder::class,
+        TransactionSeeder::class,
+        TicketSeeder::class,
+        SuggestionSeeder::class
       ]);
     }
 }
