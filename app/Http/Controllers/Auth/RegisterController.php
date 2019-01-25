@@ -49,4 +49,8 @@ class RegisterController extends Controller
             'role_id' => 2,
         ]);
     }
+
+    public function showRegistrationForm() {
+        return view('guest.register');
+    }
 }

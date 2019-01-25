@@ -1,4 +1,4 @@
-@extends('layouts.app-admin')
+@extends('partial/_admin')
 
 @section('head')
   <link href="{{URL::asset('admins/assets/css/lib/vector-map/jqvmap.min.css')}}" rel="stylesheet">

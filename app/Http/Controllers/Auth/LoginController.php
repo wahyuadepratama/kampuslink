@@ -21,7 +21,7 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     public function __construct()
     {
@@ -36,6 +36,11 @@ class LoginController extends Controller
        $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
        request()->merge([$field => $login]);
        return $field;
+    }
+
+    public function showLoginForm()
+    {
+        return view('guest.login');
     }
 
 }

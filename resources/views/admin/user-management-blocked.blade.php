@@ -1,4 +1,4 @@
-@extends('layouts.app-admin')
+@extends('partial/_admin')
 
 @section('head')
   <link rel="stylesheet" href="{{URL::asset('admins/assets/css/lib/datatable/dataTables.bootstrap.min.css')}}">
