@@ -8,13 +8,17 @@ class Event extends Model
 {
   protected $table = "event";
 
-  protected $fillable = [
-    'name', 'description', 'qr_code', 'status', 'start_time', 'end_time', 'date', 'photo', 'web_link', 'organization_id', 'created_at', 'updated_at'
-  ];
+  protected $quarded = [];
 
   public function organization(){
     return $this->belongsTo('App\Models\Organization','organization_id');
   }
+
+  public function eventCategory(){
+    return $this->hasMany('App\Models\EventCategory');
+  }
+
+  // for attributes
 
   public function getDateAttribute()
   {

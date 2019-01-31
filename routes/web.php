@@ -3,7 +3,9 @@
 Route::get('/', 'GuestController@index');
 
 Auth::routes();
-Route::get('category', 'GuestController@indexCategory');
+Route::get('event', 'GuestController@indexEvent');
+Route::get('event/{slug}', 'GuestController@showEvent');
+Route::get('event/{campus}/{organization}/{category}', 'GuestController@filter');
 
 // Admin
 Route::get('root', 'AdminController@index');

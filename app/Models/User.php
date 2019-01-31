@@ -11,13 +11,7 @@ class User extends Authenticatable
 
     protected $dates = ['deleted_at'];
 
-    protected $fillable = [
-        'name', 'username' ,'email','role_id','password','avatar'
-    ];
-
-    protected $hidden = [
-        'password', 'remember_token'
-    ];
+    protected $guarded = [];
 
     public function role(){
       return $this->belongsTo('App\Models\Role','role_id');
@@ -25,5 +19,9 @@ class User extends Authenticatable
 
     public function organization(){
       return $this->hasMany('App\Models\Organization');
+    }
+
+    public function programStudy(){
+      return $this->belongsTo('App\Models\ProgramStudy','program_study_id');
     }
 }

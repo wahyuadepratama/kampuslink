@@ -21,6 +21,8 @@
 	<!-- main css -->
 	<link rel="stylesheet" href="{{asset('client/css/style.css')}}">
 	<link rel="stylesheet" href="{{asset('client/css/responsive.css')}}">
+	<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script> -->
+	<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -46,10 +48,10 @@
 
 							<div class="col-lg-7">
 								<ul class="nav navbar-nav center_nav pull-right">
-									<li class="nav-item active">
+									<li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
 										<a class="nav-link" href="/">Home</a>
 									</li>
-									<li class="nav-item">
+									<li class="nav-item {{ Request::is('event', 'event/*') ? 'active' : '' }}">
 										<a class="nav-link" href="/event">Event</a>
 									</li>
 									<li class="nav-item submenu dropdown">
@@ -60,7 +62,7 @@
 											</li>
 										</ul>
 									</li>
-									<li class="nav-item">
+									<li class="nav-item {{ Request::is('kontak') ? 'active' : '' }}">
 										<a class="nav-link" href="/kontak">Kontak</a>
 									</li>
 								</ul>

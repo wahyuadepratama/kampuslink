@@ -13,7 +13,7 @@
 						<p>Membuat kamu lebih mudah untuk mencari event yang diinginkan. Pada tahap ini kami dalam
 						pengembangan ke seluruh
 						    organisasi di Universitas Andalas, nantikan kami di kampus kamu gays.</p>
-						<a class="x-button" href="/category">Lihat Event</a>
+						<a class="x-button" href="/event">Lihat Event</a>
 					</div>
 				</div>
 
@@ -24,8 +24,9 @@
 						<div class="kategori">
 							<select>
 								<option selected="" value="">KATEGORI</option>
-								<option>E-SPORT</option>
-								<option>SEMINAR</option>
+								@foreach($categories as $category)
+								<option value="/category/{{ $category->id }}">{{ $category->name }}</option>
+								@endforeach
 							</select>
 						</div>
 						<div class="cari">
@@ -49,7 +50,10 @@
 			<div class="row">
 				<div class="col-lg-6">
 					<div class="hot_deal_box">
-						<img class="img-fluid" src="{{asset('client/img/product/hot_deals/deal1.jpg')}}" alt="">
+						<img class="img-fluid" src="{{asset('client/img/product/hot_deals/deal1.jpg')}}">
+
+
+
 						<div class="content">
 							<!-- <h2>Daftarkan Dirimu Agar Kami Tahu Kampus Mu</h2> -->
 							<!-- <h2>Daftarkan Diri Agar Kamu Tahu Teman Kampus Mu Yang Telah Tergabung</h2> -->
@@ -106,84 +110,69 @@
 			<div class="sliderx-set">
 				<!-- box set 1 -->
 				<div class="box-set">
-					@foreach($events as $event)
-					<a href="single-product.php">
-					<div class="box">
-						<div class="box-image">
-							<img src="{{ URL::asset('storage/poster/'. $event->photo) }}">
-						</div>
-						<div class="content">
-							<span class="title">{{ $event->name }}</span>
-							<span class="waktu">{{ $event->date }}</span>
-							<span class="lokasi">tidak ada field</span>
-						</div>
-					</div>
-					</a>
-					@endforeach
+					@php $a = 10 @endphp
+					@foreach($subEvents as $subEvent)
+						@if($a > 5)
+							<a href="/event/{{ $subEvent->slug }}">
+							<div class="box" style="margin-bottom: 20%">
+								<div class="box-image">
+									<img class="load-delay" src="/client/css/images/bx_loader.gif" data-original="{{ URL::asset('storage/poster/'. $subEvent->photo) }}">
+								</div>
+								<div class="content">
+									<span class="title">
+										@php
+											$string = $subEvent->name;
+											$string = strip_tags($string);
 
+											if (strlen($string) > 15) {
+												$trimstring = substr($string, 0, 15);
+											} else {
+												$trimstring = $string;
+											}
+											echo $trimstring . ' ..';
+										@endphp
+									</span>
+									<span class="waktu">@php echo \Carbon\Carbon::parse($subEvent->date)->format('l, d F Y'); @endphp</span>
+									<span class="lokasi">{{ $subEvent->location }}</span>
+								</div>
+							</div>
+							</a>
+						@endif
+						@php $a--; @endphp
+					@endforeach
 				</div>
 				<!-- box set 2 -->
 				<div class="box-set">
-					<a href="single-product.php">
-					<div class="box">
-						<div class="box-image">
-							<img src="{{asset('client/img/product/feature-product/6.jpeg')}}">
-						</div>
-						<div class="content">
-							<span class="title">Judul</span>
-							<span class="waktu">SABTU, 4 APRIL 2019</span>
-							<span class="lokasi">TAMAN BUDAYA, PADANG</span>
-						</div>
-					</div>
-					</a>
-					<a href="single-product.php">
-					<div class="box">
-						<div class="box-image">
-							<img src="{{asset('client/img/product/feature-product/7.jpeg')}}">
-						</div>
-						<div class="content">
-							<span class="title">Judul</span>
-							<span class="waktu">SABTU, 4 APRIL 2019</span>
-							<span class="lokasi">TAMAN BUDAYA, PADANG</span>
-						</div>
-					</div>
-					</a>
-					<a href="single-product.php">
-					<div class="box">
-						<div class="box-image">
-							<img src="{{asset('client/img/product/feature-product/8.jpeg')}}">
-						</div>
-						<div class="content">
-							<span class="title">Judul</span>
-							<span class="waktu">SABTU, 4 APRIL 2019</span>
-							<span class="lokasi">TAMAN BUDAYA, PADANG</span>
-						</div>
-					</div>
-					</a>
-					<a href="single-product.php">
-					<div class="box">
-						<div class="box-image">
-							<img src="{{asset('client/img/product/feature-product/9.jpeg')}}">
-						</div>
-						<div class="content">
-							<span class="title">Judul</span>
-							<span class="waktu">SABTU, 4 APRIL 2019</span>
-							<span class="lokasi">TAMAN BUDAYA, PADANG</span>
-						</div>
-					</div>
-					</a>
-					<a href="single-product.php">
-					<div class="box">
-						<div class="box-image">
-							<img src="{{asset('client/img/product/feature-product/7.jpeg')}}">
-						</div>
-						<div class="content">
-							<span class="title">Judul</span>
-							<span class="waktu">SABTU, 4 APRIL 2019</span>
-							<span class="lokasi">TAMAN BUDAYA, PADANG</span>
-						</div>
-					</div>
-					</a>
+					@php $a = 10 @endphp
+					@foreach($subEvents as $subEvent)
+						@if($a < 6)
+							<a href="/event/{{ $subEvent->slug }}">
+							<div class="box">
+								<div class="box-image">
+									<img class="load-delay" src="/client/css/images/bx_loader.gif" data-original="{{ URL::asset('storage/poster/'. $subEvent->photo) }}">
+								</div>
+								<div class="content">
+									<span class="title" >
+										@php
+											$string = $subEvent->name;
+											$string = strip_tags($string);
+
+											if (strlen($string) > 15) {
+												$trimstring = substr($string, 0, 15);
+											} else {
+												$trimstring = $string;
+											}
+											echo $trimstring . ' ..';
+										@endphp
+									</span>
+									<span class="waktu">@php echo \Carbon\Carbon::parse($subEvent->date)->format('l, d F Y'); @endphp</span>
+									<span class="lokasi">{{ $subEvent->location }}</span>
+								</div>
+							</div>
+							</a>
+						@endif
+						@php $a--; @endphp
+					@endforeach
 				</div>
 			</div>
 		</div>
@@ -202,65 +191,43 @@
 			<!-- view 1  = medium, view 2 = small -->
 			<div class="view-set view-2">
 				<div class="produk">
+
+					@foreach($subEventRatings as $data)
 					<div class="box-produk">
 						<div class="produk-img">
-							<img src="{{asset('client/img/product/feature-product/1.jpeg')}}">
+							<img class="load-delay1" src="/client/css/images/bx_loader.gif" data-original="{{ asset('storage/poster/'. $data->subEvent->photo)}}">
 							<a class="icon_btn qr" href="{{asset('client/img/clients-logo/qr-kode.png')}}">
 								<i class="fa fa-qrcode"></i>
 							</a>
 						</div>
 						<div class="content-set">
 							<div class="content">
-								<span class="kategori">SEMINAR NASIONAL</span>
-								<span class="judul">JUDUL ACARA YANG DI ADAKAN</span>
-								<span class="waktu">SENIN, 24 APRIL 2019</span>
+								<span class="kategori"></span>
+								<span class="judul">{{ $data->subEvent->name }}</span>
+								<span class="waktu">@php echo \Carbon\Carbon::parse($data->subEvent->date)->format('l, d F Y'); @endphp</span>
 								<!-- <span class="desk">Disini adalah bagian dimana pengunjung bisa membaca sedikit dari detail acara yang akan kamu adakan, sehingga pengunjung bisa mendapat sedikit informasi dari acara, sehingga pengunjung sedikit mengerti tentang acara ini dan memiliki alasan untuk menekan tombol View Detail untuk mengetahui informasi lebih baik...  Baca Selengkapnya...</span> -->
-								<span class="desk">Disini adalah bagian dimana pengunjung bisa membaca sedikit dari detail acara yang akan kamu adakan, sehingga pengunjung bisa mendapat sedikit informasi dari acara..  Baca Selengkapnya...</span>
-							</div>
-							<div class="foot">
-								<span class="lokasi">PKM UNAND - UNIVERSITAS ANDALAS</span>
-								<a href="single-product.php" class="btn-view">VIEW DETAIL</a>
-							</div>
-						</div>
-					</div>
+								<span class="desk">
+									@php
+										$string = $data->subEvent->description;
+										$string = strip_tags($string);
 
-					<div class="box-produk">
-						<div class="produk-img">
-							<img src="{{asset('client/img/product/feature-product/2.jpeg')}}">
-						</div>
-						<div class="content-set">
-							<div class="content">
-								<span class="kategori">SEMINAR NASIONAL</span>
-								<span class="judul">JUDUL ACARA YANG DI ADAKAN</span>
-								<span class="waktu">SENIN, 24 APRIL 2019</span>
-								<!-- <span class="desk">Disini adalah bagian dimana pengunjung bisa membaca sedikit dari detail acara yang akan kamu adakan, sehingga pengunjung bisa mendapat sedikit informasi dari acara, sehingga pengunjung sedikit mengerti tentang acara ini dan memiliki alasan untuk menekan tombol View Detail untuk mengetahui informasi lebih baik...  Baca Selengkapnya...</span> -->
-								<span class="desk">Disini adalah bagian dimana pengunjung bisa membaca sedikit dari detail acara yang akan kamu adakan, sehingga pengunjung bisa mendapat sedikit informasi dari acara..  Baca Selengkapnya...</span>
+										if (strlen($string) > 250) {
+											$trimstring = substr($string, 0, 250);
+										} else {
+											$trimstring = $string;
+										}
+										echo $trimstring;
+									@endphp
+								</span>
 							</div>
 							<div class="foot">
-								<span class="lokasi">PKM UNAND - UNIVERSITAS ANDALAS</span>
-								<a href="single-product.php" class="btn-view">VIEW DETAIL</a>
+								<span class="lokasi">{{ $data->subEvent->location }} </span>
+								<a href="/event/{{ $data->subEvent->slug }}" class="btn-view">VIEW DETAIL</a>
 							</div>
 						</div>
 					</div>
+					@endforeach
 
-					<div class="box-produk">
-						<div class="produk-img">
-							<img src="{{asset('client/img/product/feature-product/3.jpeg')}}">
-						</div>
-						<div class="content-set">
-							<div class="content">
-								<span class="kategori">SEMINAR NASIONAL</span>
-								<span class="judul">JUDUL ACARA YANG DI ADAKAN</span>
-								<span class="waktu">SENIN, 24 APRIL 2019</span>
-								<!-- <span class="desk">Disini adalah bagian dimana pengunjung bisa membaca sedikit dari detail acara yang akan kamu adakan, sehingga pengunjung bisa mendapat sedikit informasi dari acara, sehingga pengunjung sedikit mengerti tentang acara ini dan memiliki alasan untuk menekan tombol View Detail untuk mengetahui informasi lebih baik...  Baca Selengkapnya...</span> -->
-								<span class="desk">Disini adalah bagian dimana pengunjung bisa membaca sedikit dari detail acara yang akan kamu adakan, sehingga pengunjung bisa mendapat sedikit informasi dari acara..  Baca Selengkapnya...</span>
-							</div>
-							<div class="foot">
-								<span class="lokasi">PKM UNAND - UNIVERSITAS ANDALAS</span>
-								<a href="single-product.php" class="btn-view">VIEW DETAIL</a>
-							</div>
-						</div>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -316,7 +283,7 @@
 <script src="{{asset('client/vendors/owl-carousel/owl.carousel.min.js')}}"></script>
 <script src="{{asset('client/js/jquery.ajaxchimp.min.js')}}"></script>
 <script src="{{asset('client/vendors/counter-up/jquery.waypoints.min.js')}}"></script>
-<script src="{{asset('client/vendors/flipclock/timer.js')}}"></script>
+<!-- <script src="{{asset('client/vendors/flipclock/timer.js')}}"></script> -->
 <script src="{{asset('client/vendors/counter-up/jquery.counterup.js')}}"></script>
 <script src="{{asset('client/js/mail-script.js')}}"></script>
 <script src="{{asset('client/js/theme.js')}}"></script>
@@ -368,6 +335,30 @@ $(document).ready(function(){
     	}
     });
     // end   view medium dan smalll
+
+		// load image delay 1
+
+			$(document).ready(function () {
+			setTimeout(function () {
+				$('.load-delay').each(function () {
+					var imagex = $(this);
+					var imgOriginal = imagex.data('original');
+					$(imagex).attr('src', imgOriginal);
+				});
+			}, 3000);
+			});
+
+		// load image delay 2
+
+			$(document).ready(function () {
+			setTimeout(function () {
+				$('.load-delay1').each(function () {
+					var imagex = $(this);
+					var imgOriginal = imagex.data('original');
+					$(imagex).attr('src', imgOriginal);
+				});
+			}, 5000);
+			});
 
 });
 </script>
