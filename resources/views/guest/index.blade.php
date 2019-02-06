@@ -116,7 +116,7 @@
 							<a href="/event/{{ $subEvent->slug }}">
 							<div class="box" style="margin-bottom: 20%">
 								<div class="box-image">
-									<img class="load-delay" src="/client/css/images/bx_loader.gif" data-original="{{ URL::asset('storage/poster/'. $subEvent->photo) }}">
+									<img class="load-delay" src="/client/css/images/bx_loader.gif" data-original="{!! URL::asset('storage/poster/'.$subEvent->photo) !!}">
 								</div>
 								<div class="content">
 									<span class="title">
