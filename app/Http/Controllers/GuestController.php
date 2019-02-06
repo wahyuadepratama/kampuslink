@@ -31,9 +31,20 @@ class GuestController extends Controller
                                       ->orderBy('total','desc')
                                       ->take(3)
                                       ->get();
-      $categories = Category::all();
 
-      return view('guest.index')->with('subEvents', $subEvents)->with('subEventRatings', $subEventRatings)->with('categories', $categories);
+      $subEventRatings2  = EventViewer::join('sub_event','event_viewer.sub_event_id','=','sub_event.id')
+                                      ->select('sub_event_id', DB::raw('count(*) as total'))
+                                      ->where('sub_event.status','ongoing')
+                                      ->groupBy('sub_event_id')
+                                      ->orderBy('total','desc')
+                                      ->take(10)
+                                      ->get();
+
+      $categories = Category::orderBy('name')->get();
+
+      return view('guest.index')->with('subEvents', $subEvents)->with('subEventRatings', $subEventRatings)
+                                ->with('categories', $categories)
+                                ->with('subEventRatings2', $subEventRatings2);
     }
 
     public function checkDueEvent()
@@ -111,7 +122,35 @@ class GuestController extends Controller
       $viewer     = count(EventViewer::where('sub_event_id', $subEvent->id)->get());
       $categories = EventCategory::where('sub_event_id', $subEvent->id)->get();
 
-      return view('guest.event_detail')->with('subEvent', $subEvent)->with('categories', $categories)->with('viewer', $viewer);
+      // Suggesstion Event
+      $suggestions = SubEvent::where('event_id', $subEvent->id)->inRandomOrder()->limit(10)->get();
+      $data = [];
+      foreach($suggestions as $key){
+        if($key->id != $subEvent->id){
+            array_push($data, $key);
+        }
+      }
+
+      if($data == NULL){
+        $suggestions = EventCategory::where('sub_event_id', $subEvent->id)->inRandomOrder()->limit(10)->get();
+        $data = [];
+        foreach($suggestions as $key){          
+          if($key->subEvent->id != $subEvent->id){
+              array_push($data, $key);
+          }
+        }
+
+        if($data == NULL){
+          $data = SubEvent::inRandomOrder()->limit(10)->get();
+        }
+      }
+
+      // End Suggesstion Event
+
+      return view('guest.event_detail')->with('subEvent', $subEvent)
+                                      ->with('categories', $categories)
+                                      ->with('viewer', $viewer)
+                                      ->with('suggestions', $data);
     }
 
     public function filter($campusId, $organizationId, $categoryId)
