@@ -7,6 +7,8 @@ Route::get('event', 'GuestController@indexEvent');
 Route::get('event/{slug}', 'GuestController@showEvent');
 Route::get('event/{campus}/{organization}/{category}', 'GuestController@filter');
 
+Route::get('profile', 'UserController@profile');
+
 // Admin
 Route::get('root', 'AdminController@index');
 Route::get('root/user-management','AdminController@indexUser');

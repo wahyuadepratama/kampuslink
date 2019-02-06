@@ -172,6 +172,13 @@
 	.header_area .navbar .nav.navbar-nav.navbar-right li {
 		margin-left: 0px;
 	}
+	.header_area .navbar .login{
+		padding: 0;
+		min-height: 40px;
+		line-height: 40px;
+		justify-content: flex-start;
+	}
+	
 	/* End Main Menu Area css
 	============================================================================================ */
 	/* Blog page Area css
@@ -224,7 +231,7 @@
 		margin-top: 50px;
 	}
 	.s_product_text {
-		margin-top: 30px;
+		margin-top: 20px;
 	}
 	.review_box{
 		margin-top: 50px;

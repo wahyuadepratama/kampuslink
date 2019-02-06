@@ -7,12 +7,14 @@
 			<div class="container-fluid">
 
 				<div class="banner_content row">
-					<div class="offset-lg-2 col-lg-8">
-						<h3>Kampus Link
-							<br />Event</h3>
-						<p>Membuat kamu lebih mudah untuk mencari event yang diinginkan. Pada tahap ini kami dalam
-						pengembangan ke seluruh
-						    organisasi di Universitas Andalas, nantikan kami di kampus kamu gays.</p>
+					<div class="offset-lg-2 col-lg-8 tengah">
+						<div class="populer">
+							@foreach($subEventRatings2 as $data)
+							<a href="/event/{{ $data->subEvent->slug }}">{{ $data->subEvent->name }}</a>
+							@endforeach
+						</div>
+					</div>
+					<div class="tengah">
 						<a class="x-button" href="/event">Lihat Event</a>
 					</div>
 				</div>
@@ -30,7 +32,7 @@
 							</select>
 						</div>
 						<div class="cari">
-							<input id="cari" type="text" name="" placeholder="CARI BERDASARKAN KATEGORI...">
+							<input id="cari" type="text" name="" placeholder="CARI EVENT DISINI...">
 						</div>
 						<div class="submit">
 							<button type="submit">SEARCH</button>
@@ -50,7 +52,7 @@
 			<div class="row">
 				<div class="col-lg-6">
 					<div class="hot_deal_box">
-						<img class="img-fluid" src="{{asset('client/img/product/hot_deals/deal1.jpg')}}">
+						<img class="img-fluid" src="{{asset('client/img/deal1.jpg')}}">
 
 
 
@@ -66,7 +68,7 @@
 
 				<div class="col-lg-6">
 					<div class="hot_deal_box">
-						<img class="img-fluid" src="{{asset('client/img/product/hot_deals/deal1.jpg')}}" alt="">
+						<img class="img-fluid" src="{{asset('client/img/deal1.jpg')}}" alt="">
 						<div class="content">
 							<h2>Daftarkan Organisasi Kamu Disini</h2>
 							<p>go!</p>
@@ -114,7 +116,7 @@
 					@foreach($subEvents as $subEvent)
 						@if($a > 5)
 							<a href="/event/{{ $subEvent->slug }}">
-							<div class="box" style="margin-bottom: 20%">
+							<div class="box">
 								<div class="box-image">
 									<img class="load-delay" src="/client/css/images/bx_loader.gif" data-original="{{ URL::asset('storage/poster/'. $subEvent->photo) }}">
 								</div>
@@ -152,7 +154,7 @@
 									<img class="load-delay" src="/client/css/images/bx_loader.gif" data-original="{{ URL::asset('storage/poster/'. $subEvent->photo) }}">
 								</div>
 								<div class="content">
-									<span class="title" >
+									<span class="title">
 										@php
 											$string = $subEvent->name;
 											$string = strip_tags($string);

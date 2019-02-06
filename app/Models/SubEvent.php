@@ -18,9 +18,13 @@ class SubEvent extends Model
     return $this->belongsTo('App\Models\Event','event_id');
   }
 
+  public function eventCategory(){
+    return $this->hasMany('App\Models\EventCategory');
+  }
+
   public function eventViewer(){
     return $this->hasMany('App\Models\EventViewer');
-  }  
+  }
 
   public function getUpdatedAtAttribute()
   {

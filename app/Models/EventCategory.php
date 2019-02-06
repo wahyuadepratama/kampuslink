@@ -15,8 +15,8 @@ class EventCategory extends Model
     return $this->belongsTo('App\Models\Category','category_id');
   }
 
-  public function event(){
-    return $this->belongsTo('App\Models\Event','sub_event_id');
+  public function subEvent(){
+    return $this->belongsTo('App\Models\SubEvent','sub_event_id');
   }
 
 }

@@ -4,7 +4,8 @@
 	<div class="product_image_area">
 		<div class="container">
 			<div class="row s_product_inner">
-				<div class="col-lg-7">
+
+				<div class="col-lg-6">
 					<div class="s_product_img">
 						<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 							<div class="carousel-inner">
@@ -15,77 +16,147 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-5">
+
+				<div class="col-lg-6">
 					<div class="s_product_text">
 						<div>
 							<h2>DETAIL INFO</h2>
 						</div>
-						<div>
-							<ul class="list">
-								<li>
-									<a class="active" href="#">
-										<span><i class="fa fa-th-large"></i></span>
-										@php $count = count($categories) @endphp
-										@foreach($categories as $category)
+						<div class="detail">
 
-											{{$category->category->name}}
+							<div class="content">
+								<ul class="list">
+									<li>
+										<a class="active" href="#">
+											<span><i class="fa fa-th-large"></i></span>
+											@php $count = count($categories) @endphp
+											@foreach($categories as $category)
 
-											@php $count--; @endphp
+												{{$category->category->name}}
 
-											@if($count > 0)
-												@php echo ","; @endphp
-											@endif
+												@php $count--; @endphp
 
-										@endforeach
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<span><i class="fa fa-calendar"></i></span> {{ $subEvent->event->organization->name }}
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<span><i class="fa fa-map-marker"></i></span> {{ $subEvent->location }} </a>
-								</li>
-								<li>Kontak :</li>
-								<li>
-									<a href="#"><img src="{{asset('client/img/clients-logo/wa.png')}}"> {{ $subEvent->whatsapp }} </a>
-								</li>
-								<li>
-									<a href="#"><img src="{{asset('client/img/clients-logo/line.png')}}"> {{ $subEvent->line }}</a>
-								</li>
-								<li>
-									<a href="#"><img src="{{asset('client/img/clients-logo/line.png')}}"> {{ $subEvent->web_link }}</a>
-								</li>
-							</ul>
+												@if($count > 0)
+													@php echo ","; @endphp
+												@endif
+
+											@endforeach
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<span><i class="fa fa-calendar"></i></span> {{ $subEvent->event->organization->name }}
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<span><i class="fa fa-map-marker"></i></span> {{ $subEvent->location }} </a>
+									</li>
+									<li>Kontak :</li>
+									<li>
+										<a href="#"><img src="{{asset('client/img/clients-logo/wa.png')}}"> {{ $subEvent->whatsapp }} </a>
+									</li>
+									<li>
+										<a href="#"><img src="{{asset('client/img/clients-logo/line.png')}}"> {{ $subEvent->line }}</a>
+									</li>
+									<li>
+										<a href="#"><img src="{{asset('client/img/clients-logo/line.png')}}"> {{ $subEvent->web_link }}</a>
+									</li>
+								</ul>
+							</div>
+
+							<div class="qr">
+								<img src="{{ asset('client/img/clients-logo/qr-kode.png') }}">
+							</div>
+
 						</div>
-
 					</div>
+
+					<section class="deskripsi-area section_gap">
+						<div class="container">
+							<div class="content">
+								<div class="title">
+									<h2>{{ $subEvent->name }}</h2>
+									<p>@php echo \Carbon\Carbon::parse($subEvent->date)->format('l, d F Y'); @endphp</p>
+								</div>
+								<div class="desk">
+									<p>{{ $subEvent->description }}</p>
+								</div>
+								<div class="e-tiket">
+									<a href="cart.php">BELI TIKET</a>
+								</div>
+							</div>
+						</div>
+					</section>
+
 				</div>
 			</div>
 		</div>
 	</div>
 	<!--================End Single Product Area =================-->
 
-	<!-- Deskripsi Event -->
-	<section class="deskripsi-area section_gap">
-		<div class="container">
-			<div class="content">
-				<div class="title">
-					<h2>{{ $subEvent->name }}</h2>
-					<p>@php echo \Carbon\Carbon::parse($subEvent->date)->format('l, d F Y'); @endphp</p>
+	<section class="feature_product_area section_gap">
+		<div class="container-fluid">
+			<h4>Event Disarankan</h4>
+			<div class="sliderx-set">
+				<!-- box set 1 -->
+				<div class="box-set">
+					@php $a = 10 @endphp
+					@foreach($suggestions as $suggestion)
+						@if($a > 5)
+						<a href="/event/{{ $suggestion->slug }}">
+						<div class="box">
+							<div class="box-image">
+								<img class="load-delay" src="/client/css/images/bx_loader.gif" data-original="{{ URL::asset('storage/poster/'. $suggestion->photo) }}">
+							</div>
+							<div class="content">
+								<span class="title">
+									@php
+										$string = $suggestion->name;
+										$string = strip_tags($string);
+
+										if (strlen($string) > 15) {
+											$trimstring = substr($string, 0, 15);
+										} else {
+											$trimstring = $string;
+										}
+										echo $trimstring . ' ..';
+									@endphp
+								</span>
+								<span class="waktu">@php echo \Carbon\Carbon::parse($suggestion->date)->format('l, d F Y'); @endphp</span>
+								<span class="lokasi">{{ $suggestion->location }}</span>
+							</div>
+						</div>
+						</a>
+						@endif
+						@php $a--; @endphp
+					@endforeach
 				</div>
-				<div class="desk">
-					<p>{{ $subEvent->description }}</p>
+
+				<div class="box-set">
+					@php $a = 10 @endphp
+					@foreach($suggestions as $suggestion)
+						@if($a < 6)
+						<a href="single-product.php">
+						<div class="box">
+							<div class="box-image">
+								<img src="{{ asset('storage/poster/'. $suggestion->photo) }}">
+							</div>
+							<div class="content">
+								<span class="title">Judul</span>
+								<span class="waktu">SABTU, 4 APRIL 2019</span>
+								<span class="lokasi">TAMAN BUDAYA, PADANG</span>
+							</div>
+						</div>
+						</a>
+						@endif
+						@php $a--; @endphp
+					@endforeach
 				</div>
-				<div class="e-tiket">
-					<a href="cart.php">BELI TIKET</a>
-				</div>
+
 			</div>
 		</div>
 	</section>
-	<!-- END Deskripsi Event -->
 
   <!--================ Subscription Area ================-->
   @include('partial/_subscribe_area')
@@ -96,11 +167,34 @@
   <!--================ End footer Area  =================-->
 
 
-
-
+<!-- Optional JavaScript -->
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-@include('partial/_script_footer')
+<script src="{{asset('client/js/jquery-3.2.1.min.js')}}"></script>
+<script src="{{asset('client/js/popper.js')}}"></script>
+<script src="{{asset('client/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('client/js/stellar.js')}}"></script>
+<script src="{{asset('client/vendors/lightbox/simpleLightbox.min.js')}}"></script>
+<!-- <script src="vendors/lightbox/lightbox-plus-jquery.min.js"></script> -->
+<script src="{{asset('client/vendors/nice-select/js/jquery.nice-select.min.js')}}"></script>
+<script src="{{asset('client/vendors/isotope/imagesloaded.pkgd.min.js')}}"></script>
+<script src="{{asset('client/vendors/isotope/isotope-min.js')}}"></script>
+<script src="{{asset('client/vendors/owl-carousel/owl.carousel.min.js')}}"></script>
+<script src="{{asset('client/js/jquery.ajaxchimp.min.js')}}"></script>
+<script src="{{asset('client/vendors/counter-up/jquery.waypoints.min.js')}}"></script>
+<!-- <script src="{{asset('client/vendors/flipclock/timer.js')}}"></script> -->
+<script src="{{asset('client/vendors/counter-up/jquery.counterup.js')}}"></script>
+<script src="{{asset('client/js/mail-script.js')}}"></script>
+<script src="{{asset('client/js/theme.js')}}"></script>
+<script src="{{asset('client/js/jquery.bxslider.min.js')}}"></script>
+<script>
+	$(document).ready(function(){
+	  $('.sliderx-set').bxSlider();
+	});
+</script>
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+
 
 <script type="text/javascript">
 $(document).ready(function(){

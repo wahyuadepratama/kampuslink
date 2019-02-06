@@ -68,6 +68,46 @@
 								</ul>
 							</div>
 
+							@if(isset(Auth::user()->role_id))
+
+							<div class="col-lg-2">
+								<ul class="nav navbar-nav navbar-right right_nav pull-right"><hr>
+									<li class="nav-item">
+										<a href="#" class="login">
+											<img src="{{ asset('client/img/clients-logo/user.png') }}">
+											<span>4</span>
+										</a>
+										<div class="mediaD">
+											<div class="header">
+												<div>
+													<img src="{{ asset('storage/avatar/'. Auth::user()->photo_profile) }}" width="50">
+												</div>
+												<div>
+													<h4>{{ Auth::user()->fullname }}</h4>
+													<p>{{ Auth::user()->email }}</p>
+												</div>
+											</div>
+											<div class="body">
+												<ul>
+													<li><a href="/transaction"><i class="fa fa-ticket"></i> Transaksi & Tiket</a> <span>4</span></li>
+													<li><a href="/profile"><i class="fa fa-cog"></i> Edit Profil</a></li>
+												</ul>
+												<div class="logout">
+													<a href="{{ route('logout') }}"
+						                    onclick="event.preventDefault();
+						                             document.getElementById('logout-form').submit();">Logout</a>
+						              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+						                  {{ csrf_field() }}
+						              </form>
+												</div>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+
+							@else
+
 							<div class="col-lg-2">
 								<ul class="nav navbar-nav navbar-right right_nav pull-right"><hr>
 									<li class="nav-item">
@@ -78,6 +118,8 @@
 									<hr>
 								</ul>
 							</div>
+
+							@endif
 
 						</div>
 					</div>
