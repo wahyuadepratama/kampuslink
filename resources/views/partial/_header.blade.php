@@ -80,7 +80,8 @@
 										<div class="mediaD">
 											<div class="header">
 												<div>
-													<img src="{{ asset('storage/avatar/'. Auth::user()->photo_profile) }}" width="50">
+													<!-- <img src="{{ asset('storage/avatar/'. Auth::user()->photo_profile) }}" width="50"> -->
+													<img src="{{ asset('client/img/clients-logo/user.png') }}" width="50">
 												</div>
 												<div>
 													<h4>{{ Auth::user()->fullname }}</h4>

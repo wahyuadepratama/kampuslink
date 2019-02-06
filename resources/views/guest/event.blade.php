@@ -50,12 +50,12 @@
 							<div class="col-md-3">
 								<div class="f_p_item">
 									<div class="f_p_img">
-										<img class="img-fluid load-delay{{$subEvent->id}}" src="/client/css/images/bx_loader.gif" data-original="{{asset('storage/poster/'. $subEvent->photo)}}" alt="">
+										<img class="img-fluid load-delay{{$subEvent->id}}" src="/client/css/images/bx_loader.gif" data-original="{{asset('client/img/product/'. $subEvent->photo)}}" alt="">
 										<div class="p_icon">
 											<a href="{{asset('client/img/clients-logo/qr-kode.png')}}">
 												<i class="fa fa-qrcode" aria-hidden="true"></i>
 											</a>
-											<a href="{{asset('storage/poster/'. $subEvent->photo)}}">
+											<a href="{{asset('client/img/product/'. $subEvent->photo)}}">
 												<i class="fa fa-search-plus"></i>
 											</a>
 										</div>

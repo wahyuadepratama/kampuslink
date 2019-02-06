@@ -42,7 +42,8 @@ class GuestController extends Controller
 
       $categories = Category::orderBy('name')->get();
 
-      return view('guest.index')->with('subEvents', $subEvents)->with('subEventRatings', $subEventRatings)
+      return view('guest.index')->with('subEvents', $subEvents)
+                                ->with('subEventRatings', $subEventRatings)
                                 ->with('categories', $categories)
                                 ->with('subEventRatings2', $subEventRatings2);
     }
