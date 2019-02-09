@@ -90,8 +90,8 @@
 											</div>
 											<div class="body">
 												<ul>
-													<li><a href="/transaction"><i class="fa fa-ticket"></i> Transaksi & Tiket</a> <span>4</span></li>
-													<li><a href="/profile"><i class="fa fa-cog"></i> Edit Profil</a></li>
+													<li><a href="/transaction/1"><i class="fa fa-ticket"></i> Transaksi & Tiket</a> <span>4</span></li>
+													<li><a href="/profile/2"><i class="fa fa-cog"></i> Edit Profil</a></li>
 												</ul>
 												<div class="logout">
 													<a href="{{ route('logout') }}"

@@ -270,4 +270,41 @@ class GuestController extends Controller
       }
     }
 
+    public function front_end($id=null,$status=null,$tiket=null){
+      ###Transaksi dan Tiket###
+      // tabel transaksi
+      if($id==1 && $status==null){
+        return view('front_end.transaksi');
+      }
+      // menunggu pembayaran
+      if($id==1 && $status==1){
+        return view('front_end.konfirmasi')->with('status', $status);
+      }
+      // pembayaran dibatalkan
+      if($id==1 && $status==2){
+        return view('front_end.konfirmasi')->with('status', $status);
+      }
+      // pembayaran diproses
+      if($id==1 && $status==3){
+        return view('front_end.konfirmasi')->with('status', $status);
+      }
+      // pembayaran ditolak
+      if($id==1 && $status==4){
+        return view('front_end.konfirmasi')->with('status', $status);
+      }
+      // pembayaran berhasil
+      if($id==1 && $status==5 && $tiket==null){
+        return view('front_end.konfirmasi')->with('status', $status);
+      }
+      // tiket
+      if($id==1 && $status==5 && $tiket==1){
+        return view('front_end.tiket');
+      }
+
+      ###Edit Profil###
+      if ($id==2) {
+        return view('front_end.profil');
+      }
+    }
+
 }
