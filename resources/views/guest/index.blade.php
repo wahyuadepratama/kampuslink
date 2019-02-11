@@ -115,32 +115,32 @@
 					@php $a = 10 @endphp
 					@foreach($subEvents as $subEvent)
 						@if($a > 5)
-							<a href="/event/{{ $subEvent->slug }}">
-							<div class="box">
-								<div class="box-image">
-									<img class="load-delay" src="/client/css/images/bx_loader.gif" data-original="{!! URL::asset('storage/poster/'.$subEvent->photo) !!}">
-								</div>
-								<div class="content">
-									<span class="title">
-										@php
-											$string = $subEvent->name;
-											$string = strip_tags($string);
+					<div class="card">
+						<div class="card-img">
+							<img class="card-img-top load-delay" src="/client/css/images/bx_loader.gif" data-original="{!! URL::asset('client/img/product/'.$subEvent->photo) !!}">
+						</div>
+						<a href="/event/{{ $subEvent->slug }}">
+						<div class="card-body">
+					    	<h5 class="card-title">
+					    		@php
+									$string = $subEvent->name;
+									$string = strip_tags($string);
 
-											if (strlen($string) > 15) {
-												$trimstring = substr($string, 0, 15);
-											} else {
-												$trimstring = $string;
-											}
-											echo $trimstring . ' ..';
-										@endphp
-									</span>
-									<span class="waktu">@php echo \Carbon\Carbon::parse($subEvent->date)->format('l, d F Y'); @endphp</span>
-									<span class="lokasi">{{ $subEvent->location }}</span>
-								</div>
-							</div>
-							</a>
+									if (strlen($string) > 15) {
+										$trimstring = substr($string, 0, 15);
+									} else {
+										$trimstring = $string;
+									}
+									echo $trimstring . ' ..';
+								@endphp
+					    	</h5>
+					    	<p class="waktu">@php echo \Carbon\Carbon::parse($subEvent->date)->format('l, d F Y'); @endphp</p>
+					    	<p class="lokasi">{{ $subEvent->location }}</p>
+						</div>
+						</a>
+					</div>
 						@endif
-						@php $a--; @endphp
+					@php $a--; @endphp
 					@endforeach
 				</div>
 				<!-- box set 2 -->
@@ -148,32 +148,30 @@
 					@php $a = 10 @endphp
 					@foreach($subEvents as $subEvent)
 						@if($a < 6)
-							<a href="/event/{{ $subEvent->slug }}">
-							<div class="box">
-								<div class="box-image">
-									<img class="load-delay" src="/client/css/images/bx_loader.gif" data-original="{{ URL::asset('storage/poster/'. $subEvent->photo) }}">
-								</div>
-								<div class="content">
-									<span class="title">
-										@php
-											$string = $subEvent->name;
-											$string = strip_tags($string);
+					<div class="card">
+						<img class="card-img-top load-delay" src="/client/css/images/bx_loader.gif" data-original="{!! URL::asset('client/img/product/'.$subEvent->photo) !!}">
+						<a href="/event/{{ $subEvent->slug }}">
+						<div class="card-body">
+					    	<h5 class="card-title">
+					    		@php
+									$string = $subEvent->name;
+									$string = strip_tags($string);
 
-											if (strlen($string) > 15) {
-												$trimstring = substr($string, 0, 15);
-											} else {
-												$trimstring = $string;
-											}
-											echo $trimstring . ' ..';
-										@endphp
-									</span>
-									<span class="waktu">@php echo \Carbon\Carbon::parse($subEvent->date)->format('l, d F Y'); @endphp</span>
-									<span class="lokasi">{{ $subEvent->location }}</span>
-								</div>
-							</div>
-							</a>
+									if (strlen($string) > 15) {
+										$trimstring = substr($string, 0, 15);
+									} else {
+										$trimstring = $string;
+									}
+									echo $trimstring . ' ..';
+								@endphp
+					    	</h5>
+					    	<p class="waktu">@php echo \Carbon\Carbon::parse($subEvent->date)->format('l, d F Y'); @endphp</p>
+					    	<p class="lokasi">{{ $subEvent->location }}</p>
+						</div>
+						</a>
+					</div>
 						@endif
-						@php $a--; @endphp
+					@php $a--; @endphp
 					@endforeach
 				</div>
 			</div>
@@ -197,7 +195,7 @@
 					@foreach($subEventRatings as $data)
 					<div class="box-produk">
 						<div class="produk-img">
-							<img class="load-delay1" src="/client/css/images/bx_loader.gif" data-original="{{ asset('storage/poster/'. $data->subEvent->photo)}}">
+							<img class="load-delay1" src="/client/css/images/bx_loader.gif" data-original="{{ asset('client/img/product/'. $data->subEvent->photo)}}">
 							<a class="icon_btn qr" href="{{asset('client/img/clients-logo/qr-kode.png')}}">
 								<i class="fa fa-qrcode"></i>
 							</a>
@@ -223,9 +221,10 @@
 								</span>
 							</div>
 							<div class="foot">
-								<span class="lokasi">{{ $data->subEvent->location }} </span>
-								<a href="/event/{{ $data->subEvent->slug }}" class="btn-view">VIEW DETAIL</a>
+								
 							</div>
+							<span class="lokasi">{{ $data->subEvent->location }} </span>
+							<a href="/event/{{ $data->subEvent->slug }}" class="btn-view">VIEW DETAIL</a>
 						</div>
 					</div>
 					@endforeach

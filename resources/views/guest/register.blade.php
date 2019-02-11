@@ -41,7 +41,7 @@
 								<input type="email" class="form-control" id="email" name="email" placeholder="Email Address">
 							</div>
 							<div class="col-md-12 form-group">
-								<input type="text" class="form-control" id="password" name="password" placeholder="Password">
+								<input type="password" class="form-control" id="password" name="password" placeholder="Password">
 							</div>
 							<div class="col-md-12 form-group">
 								<input type="password" class="form-control" id="pass" name="pass" placeholder="Confirm password">
