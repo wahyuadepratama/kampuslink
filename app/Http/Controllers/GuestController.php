@@ -135,7 +135,7 @@ class GuestController extends Controller
       if($data == NULL){
         $suggestions = EventCategory::where('sub_event_id', $subEvent->id)->inRandomOrder()->limit(10)->get();
         $data = [];
-        foreach($suggestions as $key){          
+        foreach($suggestions as $key){
           if($key->subEvent->id != $subEvent->id){
               array_push($data, $key);
           }
@@ -271,6 +271,7 @@ class GuestController extends Controller
     }
 
     public function front_end($id=null,$status=null,$tiket=null){
+      
       ###Transaksi dan Tiket###
       // tabel transaksi
       if($id==1 && $status==null){

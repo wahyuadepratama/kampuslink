@@ -76,7 +76,7 @@
                                       </div>
                                       <div class="modal-footer">
                                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                          <form class="" action="/root/user-management/restore/{{$data1->id}}" method="post">
+                                          <form class="" action="{{ url('root/user-management/restore/'. $data1->id )}}" method="post">
                                             {{ csrf_field() }}
                                             <input type="submit" class="btn btn-success" value="Buka Blokir"></input>
                                           </form>

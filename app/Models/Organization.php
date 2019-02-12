@@ -17,4 +17,8 @@ class Organization extends Model
   public function user(){
     return $this->belongsTo('App\Models\User','user_id');
   }
+
+  public function campus(){
+    return $this->belongsTo('App\Models\Campus','campus_id');
+  }
 }

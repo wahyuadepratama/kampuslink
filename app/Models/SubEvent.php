@@ -26,6 +26,14 @@ class SubEvent extends Model
     return $this->hasMany('App\Models\EventViewer');
   }
 
+  public function transaction(){
+    return $this->hasMany('App\Models\Transaction');
+  }
+
+  public function subEventTicket(){
+    return $this->hasMany('App\Models\SubEventTicket');
+  }
+
   public function getUpdatedAtAttribute()
   {
     return \Carbon\Carbon::parse($this->attributes['updated_at'])->diffForHumans();

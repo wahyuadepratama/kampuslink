@@ -18,6 +18,27 @@
 <!--================Profil Box Area =================-->
 <section class="profil_box_area p_120">
   <div class="container">
+
+    @if($message = Session::get('success'))
+      <div class="alert alert-success">
+        {{$message}}
+      </div>
+    @endif
+
+    @if($message = Session::get('error'))
+      <div class="alert alert-danger">
+        {{$message}}
+      </div>
+    @endif
+
+    @if ( count( $errors ) > 0 )
+      @foreach($errors->all() as $error)
+      <div class="alert alert-danger">
+        {{ $error }}
+      </div>
+      @endforeach
+    @endif
+
     <div class="row" style="position: relative;overflow: hidden;padding-bottom: 0.4em;">
       <div class="col-lg-6 profil-form">
         <div class="pilihan">
@@ -29,25 +50,26 @@
         <!-- =======FORM PROFIL======= -->
         <div class="login_form_inner reg_form" id="form-profil">
           <h3>Edit Profil</h3>
-          <form class="row login_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
+          <form class="row login_form" action="{{ url('update-profile-user') }}" method="post">
+            {{ csrf_field() }}
             <div class="col-md-12 form-group">
-              <input type="text" class="form-control" placeholder="Nama" value="{{ Auth::user()->fullname }}">
+              <input name="name" type="text" class="form-control" placeholder="Nama" value="{{ Auth::user()->fullname }}" required>
             </div>
             <div class="col-md-12 form-group">
-              <input type="text" class="form-control" placeholder="Nomor HP" value="{{ Auth::user()->phone }}">
+              <input name="phone" type="text" class="form-control" placeholder="Nomor HP" value="{{ Auth::user()->phone }}" required>
             </div>
             <div class="col-md-12 form-group">
-              <input type="date" class="form-control" placeholder="TTL" value="{{ Auth::user()->date_birth }}">
+              <input name="date_birth" type="date" class="form-control" placeholder="TTL" value="{{ Auth::user()->date_birth }}">
             </div>
             <div class="col-md-12 i-radio">
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                <input name="gender" class="form-check-input" type="radio" value="man" checked>
                 <label class="form-check-label" for="exampleRadios1">
                   Laki-laki
                 </label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                <input name="gender" class="form-check-input" type="radio" value="woman">
                 <label class="form-check-label" for="exampleRadios2">
                   Perempuan
                 </label>
@@ -61,18 +83,19 @@
         <!-- =======FORM KAMPUS======= -->
         <div class="login_form_inner reg_form" id="form-kampus">
           <h3>Edit Kampus</h3>
-          <form class="row login_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
+          <form class="row login_form" action="{{ url('update-kampus-user') }}" method="post">
+            {{ csrf_field() }}
             <div class="col-md-12 form-group">
-              <input type="text" class="form-control" placeholder="Nomor BP/NIM" value="{{ Auth::user()->nim }}">
+              <input type="text" class="form-control" value="{{ Auth::user()->nim }}" disabled>
             </div>
             <div class="col-md-12 form-group">
-              <input type="text" class="form-control" placeholder="Kampus" value="{{ Auth::user()->programStudy->faculty->campus->name }}">
+              <input id="myCampus" name="campus" type="text" class="form-control" placeholder="Kampus" value="{{ Auth::user()->programStudy->faculty->campus->name }}">
             </div>
             <div class="col-md-12 form-group">
-              <input type="text" class="form-control" placeholder="Fakultas" value="{{ Auth::user()->programStudy->faculty->name }}">
+              <input id="myFaculty" name="faculty" type="text" class="form-control" placeholder="Fakultas" value="{{ Auth::user()->programStudy->faculty->name }}">
             </div>
             <div class="col-md-12 form-group">
-              <input type="text" class="form-control" placeholder="Jurusan" value="{{ Auth::user()->programStudy->name }}">
+              <input id="myProgramStudy" name="program_study" type="text" class="form-control" placeholder="Jurusan" value="{{ Auth::user()->programStudy->name }}">
             </div>
             <div class="col-md-12 form-group">
               <button type="submit" value="submit" class="btn submit_btn">Simpan</button>
@@ -82,15 +105,16 @@
         <!-- =======FORM LOGIN======= -->
         <div class="login_form_inner reg_form" id="form-login">
           <h3>Edit Akun Login</h3>
-          <form class="row login_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
+          <form class="row login_form" action="{{ url('update-login-user') }}" method="post">
+            {{ csrf_field() }}
             <div class="col-md-12 form-group">
-              <input type="email" class="form-control" id="email" name="email" placeholder="email@domain.com" value="{{ Auth::user()->email }}" disabled>
+              <input type="email" class="form-control" id="email" placeholder="email@domain.com" value="{{ Auth::user()->email }}" disabled>
             </div>
             <div class="col-md-12 form-group">
-              <input type="text" class="form-control" id="password" name="password" placeholder="Password Baru">
+              <input type="password" class="form-control" id="password" name="password" placeholder="Password Baru" required>
             </div>
             <div class="col-md-12 form-group">
-              <input type="password" class="form-control" id="pass" name="pass" placeholder="Konfirmasi password">
+              <input type="password" class="form-control" id="pass" name="password_confirmation" placeholder="Konfirmasi password" required>
             </div>
             <div class="col-md-12 form-group">
               <button type="submit" value="submit" class="btn submit_btn">Update</button>
@@ -102,52 +126,76 @@
         <div class="login_form_inner profil">
           <table width="100%">
             <tr>
-              <th align="left">Akun Profil</th>
-              <th></th>
+              <td align="left"> <h5><strong>Akun Profil</strong></h5> </td>
+              <td></td>
             </tr>
             <tr>
               <td align="left">Nama</td>
-              <td align="left">Nama Lengkap</td>
+              <td align="left">{{ Auth::user()->name }}</td>
             </tr>
             <tr>
               <td align="left">Hp</td>
-              <td align="left">081263000000</td>
+              <td align="left">{{ Auth::user()->phone }}</td>
             </tr>
             <tr>
-              <td align="left">TTL</td>
-              <td align="left">1 Januari 2019</td>
+              <td align="left">Tanggal Lahir</td>
+              <td align="left">{{ \Carbon\Carbon::parse(Auth::user()->date_birth)->format('d F Y') }}</td>
             </tr>
             <tr>
               <td align="left">Jenis Kelamin</td>
+              @if(Auth::user()->gender == "man")
               <td align="left">Laki-laki</td>
+              @else
+              <td align="left">Perempuan</td>
+              @endif
             </tr>
             <tr>
-              <th align="left">Akun Kampus</th>
-              <th></th>
+              <td align="left"></td>
+              <td align="left"></td>
+            </tr>
+            <tr>
+              <td align="left"></td>
+              <td align="left"></td>
+            </tr>
+            <tr>
+              <td align="left"> <h5><strong>Akun Kampus</strong></h5> </td>
+              <td></td>
             </tr>
             <tr>
               <td align="left">Nomor BP/NIM</td>
-              <td align="left">19191919</td>
+              <td align="left">{{ Auth::user()->nim }}</td>
             </tr>
             <tr>
               <td align="left">Kampus</td>
-              <td align="left">Universitas Andalas</td>
+              <td align="left">{{ Auth::user()->programStudy->faculty->campus->name }}</td>
             </tr>
             <tr>
               <td align="left">Fakultas</td>
-              <td align="left">Teknik</td>
+              <td align="left">{{ Auth::user()->programStudy->faculty->name }}</td>
             </tr>
             <tr>
               <td align="left">Jurusan</td>
-              <td align="left">Teknik Mesin</td>
+              <td align="left">{{ Auth::user()->programStudy->name }}</td>
             </tr>
             <tr>
               <td align="left">Status</td>
-              <td align="left">Belum Diverivikasi</td>
+              @if(Auth::user()->status == 0)
+              <td align="left"> <button type="button" class="btn btn-sm btn-danger">Belum Diverifikasi</button> </td>
+              @else
+              <td align="left"> <button type="button" class="btn btn-sm btn-success">Sudah Diverifikasi</button></td>
+              @endif
             </tr>
             <tr>
-              <th align="left">Akun Login</th>
-              <th></th>
+              <td align="left"></td>
+              <td align="left"></td>
+            </tr>
+            <tr>
+              <td align="left"></td>
+              <td align="left"></td>
+            </tr>
+            <tr>
+              <td align="left"> <h5><strong>Akun Login</strong></h5> </td>
+              <td></td>
             </tr>
             <tr>
               <td align="left">Email</td>
@@ -176,15 +224,19 @@
 </section>
 <!--================End Profil Box Area =================-->
 
+<!--================CSS Cuztome Area =================-->
+<style>*{box-sizing:border-box}.autocomplete{position:relative;display:inline-block}input{border:1px solid transparent;background-color:#f1f1f1;padding:10px}.autocomplete-items{position:absolute;border:1px solid #d4d4d4;border-bottom:none;border-top:none;z-index:99;top:100%;left:4%;right:4%;text-align:left}.autocomplete-items div{padding:10px;cursor:pointer;background-color:#fff;border-bottom:1px solid #d4d4d4}.autocomplete-items div:hover{background-color:#e9e9e9}.autocomplete-active{background-color:#1e90ff!important;color:#fff}
+</style>
+<!--================End of CSS Cuztome Area =================-->
+
+
 <!--================ start footer Area  =================-->
 @include('partial/_footer')
 <!--================ End footer Area  =================-->
 
-
-
-
 <!-- Optional JavaScript -->
 @include('partial/_script_footer_user')
+@include('partial/_js_edit_profile')
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
 </body>

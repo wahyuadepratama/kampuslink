@@ -24,4 +24,8 @@ class User extends Authenticatable
     public function programStudy(){
       return $this->belongsTo('App\Models\ProgramStudy','program_study_id');
     }
+
+    public function transaction(){
+      return $this->hasMany('App\Models\Transaction');
+    }
 }
