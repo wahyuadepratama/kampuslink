@@ -36,7 +36,7 @@
 
             @foreach($transactions as $transaction)
 
-            <tr class="row100 body">
+            <tr class="row100 body <?php if($transaction->seen == false){echo 'active';}  ?>">
 							<td class="cell100 column1">{{ $transaction->subEvent->name }}</td>
 							<td class="cell100 column2">
                 @php

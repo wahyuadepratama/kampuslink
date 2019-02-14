@@ -104,43 +104,4 @@ class UserController extends Controller
      return back()->with('success', 'Kamu Berhasil Memperbarui Data Login');
   }
 
-  public function indexTransaction()
-  {
-    $transaction  = Transaction::where('user_id', Auth::user()->id)->orderBy('created_at','desc')->get();
-
-    // return Transaction::join('ticket','ticket.transaction_id','=','transaction.id')
-    //                 ->select('transaction.*', 'ticket.price', 'ticket.qr_code', 'ticket.link', 'ticket.status', 'transaction.status as transaction_status')
-    //                 ->where('transaction.user_id', Auth::user()->id)
-    //                 ->orderBy('transaction.created_at','asc')
-    //                 ->get();
-
-    return view('user.transaction')->with('transactions', $transaction);
-  }
-
-  public function showTransaction($id)
-  {
-    $oneTransaction = Transaction::find($id);
-    $this->checkOwner($oneTransaction->user_id);
-
-    $ticket = Ticket::where('transaction_id', $oneTransaction->id)->get();
-    $total = 0;
-
-    foreach($ticket as $key){
-      $total = $total + $key->price;
-    }
-
-    return view('user.detail_transaction')->with('status', $oneTransaction->status)
-                                          ->with('transaction', $oneTransaction)
-                                          ->with('total', $total);
-
-    $ticket = Ticket::where('transaction_id', $id)->get();
-  }
-
-  public function checkOwner($id)
-  {
-    if(Auth::user()->id != $id){
-      return abort(404);
-    }
-  }
-
 }

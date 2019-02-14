@@ -50,7 +50,7 @@
 							<div class="col-md-3">
 								<div class="f_p_item">
 									<div class="f_p_img">
-										<img class="img-fluid load-delay{{$subEvent->id}}" src="/client/css/images/bx_loader.gif" data-original="{{asset('client/img/product/'. $subEvent->photo)}}" alt="">
+										<img class="img-fluid load-delay{{$subEvent->id}}" src="/client/css/images/bx_loader.gif" data-original="{{asset('storage/poster/'. $subEvent->photo)}}" alt="">
 										<div class="p_icon">
 											<a href="{{asset('client/img/clients-logo/qr-kode.png')}}">
 												<i class="fa fa-qrcode" aria-hidden="true"></i>
@@ -81,8 +81,8 @@
 
 											</span>
 											<span class="p_caption">
-												<p><i class="fa fa-calendar" aria-hidden="true"></i> 14 - 20 April 2018</p>
-												<p><i class="fa fa-map-marker" aria-hidden="true"></i> Fakultas Matematika dan Ilmu Pengetahuan </p>
+												<p><i class="fa fa-calendar" aria-hidden="true"></i> {{ \Carbon\Carbon::parse($subEvent->date)->format('l, d F Y') }}</p>
+												<p><i class="fa fa-map-marker" aria-hidden="true"></i> {{ $subEvent->location }} </p>
 											</span>
 											<div class="p_properti">
 												<span class="p_contact">

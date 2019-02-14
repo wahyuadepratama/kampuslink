@@ -6,6 +6,8 @@ Auth::routes();
 Route::get('event', 'GuestController@indexEvent');
 Route::get('event/{slug}', 'GuestController@showEvent');
 Route::get('event/{campus}/{organization}/{category}', 'GuestController@filter');
+Route::get('event/{slug}/process', 'TransactionController@processTransaction');
+Route::post('event/{slug}/process', 'TransactionController@postProcessTransaction');
 
 Route::get('profile', 'UserController@profile');
 Route::get('get-campus', 'UserController@getDataCampus');
@@ -15,8 +17,8 @@ Route::post('update-profile-user', 'UserController@updateDataProfileUser');
 Route::post('update-kampus-user', 'UserController@updateDataKampusUser');
 Route::post('update-login-user', 'UserController@updateDataLoginUser');
 
-Route::get('transaction', 'UserController@indexTransaction');
-Route::get('transaction/{id}', 'UserController@showTransaction');
+Route::get('transaction', 'TransactionController@indexTransaction');
+Route::get('transaction/{id}', 'TransactionController@showTransaction');
 
 // Admin
 Route::get('root', 'AdminController@index');

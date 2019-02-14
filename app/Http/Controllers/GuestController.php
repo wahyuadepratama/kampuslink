@@ -13,34 +13,43 @@ use App\Models\EventViewer;
 use App\Models\Category;
 use App\Models\Campus;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Cache;
 
 class GuestController extends Controller
 {
     public function index()
     {
       $this->checkDueEvent();
-      $subEvents = SubEvent::with('event')->where('approved', 1)->where('status','ongoing')
-                            ->orderBy('created_at','desc')
-                            ->take(10)
-                            ->get();
+      $subEvents = Cache::remember('index_sub_events', 30, function () {
+                      return SubEvent::with('event')->where('approved', 1)->where('status','ongoing')
+                                            ->orderBy('created_at','desc')
+                                            ->take(10)
+                                            ->get();
+                   });
 
-      $subEventRatings  = EventViewer::join('sub_event','event_viewer.sub_event_id','=','sub_event.id')
-                                      ->select('sub_event_id', DB::raw('count(*) as total'))
-                                      ->where('sub_event.status','ongoing')
-                                      ->groupBy('sub_event_id')
-                                      ->orderBy('total','desc')
-                                      ->take(3)
-                                      ->get();
+      $subEventRatings  = Cache::remember('index_sub_event_ratings', 30, function () {
+                          return EventViewer::join('sub_event','event_viewer.sub_event_id','=','sub_event.id')
+                                        ->select('sub_event_id', DB::raw('count(*) as total'))
+                                        ->where('sub_event.status','ongoing')
+                                        ->groupBy('sub_event_id')
+                                        ->orderBy('total','desc')
+                                        ->take(3)
+                                        ->get();
+                        });
 
-      $subEventRatings2  = EventViewer::join('sub_event','event_viewer.sub_event_id','=','sub_event.id')
-                                      ->select('sub_event_id', DB::raw('count(*) as total'))
-                                      ->where('sub_event.status','ongoing')
-                                      ->groupBy('sub_event_id')
-                                      ->orderBy('total','desc')
-                                      ->take(10)
-                                      ->get();
+      $subEventRatings2  = Cache::remember('index_sub_event_rating_2', 30, function () {
+                              return EventViewer::join('sub_event','event_viewer.sub_event_id','=','sub_event.id')
+                                                ->select('sub_event_id', DB::raw('count(*) as total'))
+                                                ->where('sub_event.status','ongoing')
+                                                ->groupBy('sub_event_id')
+                                                ->orderBy('total','desc')
+                                                ->take(10)
+                                                ->get();
+                          });
 
-      $categories = Category::orderBy('name')->get();
+      $categories = Cache::remember('index_categories', 30, function () {
+                        return Category::orderBy('name')->get();
+                    });
 
       return view('guest.index')->with('subEvents', $subEvents)
                                 ->with('subEventRatings', $subEventRatings)
@@ -63,10 +72,18 @@ class GuestController extends Controller
     public function indexEvent()
     {
       $this->checkDueEvent();
-      $subEvents  = SubEvent::with('event')->where('approved', 1)->where('status','ongoing')->orderBy('created_at','desc')->paginate(12);
-      $categories = Category::orderBy('name','asc')->get();
-      $campus     = Campus::orderBy('name','asc')->get();
-      $organizations = Organization::orderBy('name','asc')->get();
+      $subEvents  = Cache::remember('index_event_sub_events', 30, function () {
+                        return SubEvent::with('event')->where('approved', 1)->where('status','ongoing')->orderBy('created_at','desc')->paginate(12);
+                    });
+      $categories = Cache::remember('index_event_categories', 30, function () {
+                        return Category::orderBy('name','asc')->get();
+                    });
+      $campus     = Cache::remember('index_event_campus', 30, function () {
+                        return Campus::orderBy('name','asc')->get();
+                    });
+      $organizations = Cache::remember('index_event_organizations', 30, function () {
+                          return Organization::orderBy('name','asc')->get();
+                      });
 
       return view('guest.event')->with('subEvents', $subEvents)
                                 ->with('categories', $categories)
@@ -156,9 +173,17 @@ class GuestController extends Controller
 
     public function filter($campusId, $organizationId, $categoryId)
     {
-      $categories = Category::orderBy('name','asc')->get();
-      $campus     = Campus::orderBy('name','asc')->get();
-      $organizations = Organization::orderBy('name','asc')->get();
+      $categories = Cache::remember('filter_categories', 30, function () {
+                        return Category::orderBy('name','asc')->get();
+                    });
+
+      $campus     = Cache::remember('filter_campus', 30, function () {
+                      return Campus::orderBy('name','asc')->get();
+                    });
+
+      $organizations = Cache::remember('filter_organizations', 30, function () {
+                          return Organization::orderBy('name','asc')->get();
+                        });
 
       if ($campusId == "all" && $organizationId == "all" && $categoryId == "all"){
 
@@ -267,44 +292,6 @@ class GuestController extends Controller
                                   ->with('organizations', $organizations)
                                   ->with('oldCategoryId', $categoryId)
                                   ->with('oldCategoryName', $oldCategory->category->name);
-      }
-    }
-
-    public function front_end($id=null,$status=null,$tiket=null){
-      
-      ###Transaksi dan Tiket###
-      // tabel transaksi
-      if($id==1 && $status==null){
-        return view('front_end.transaksi');
-      }
-      // menunggu pembayaran
-      if($id==1 && $status==1){
-        return view('front_end.konfirmasi')->with('status', $status);
-      }
-      // pembayaran dibatalkan
-      if($id==1 && $status==2){
-        return view('front_end.konfirmasi')->with('status', $status);
-      }
-      // pembayaran diproses
-      if($id==1 && $status==3){
-        return view('front_end.konfirmasi')->with('status', $status);
-      }
-      // pembayaran ditolak
-      if($id==1 && $status==4){
-        return view('front_end.konfirmasi')->with('status', $status);
-      }
-      // pembayaran berhasil
-      if($id==1 && $status==5 && $tiket==null){
-        return view('front_end.konfirmasi')->with('status', $status);
-      }
-      // tiket
-      if($id==1 && $status==5 && $tiket==1){
-        return view('front_end.tiket');
-      }
-
-      ###Edit Profil###
-      if ($id==2) {
-        return view('front_end.profil');
       }
     }
 

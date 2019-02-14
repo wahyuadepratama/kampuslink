@@ -75,7 +75,7 @@
 									<li class="nav-item">
 										<a href="#" class="login">
 											<img src="{{ asset('client/img/clients-logo/user.png') }}">
-											<span>4</span>
+											<span>@php $count = \App\Models\Transaction::where('seen', false)->get(); $counted = count($count); echo $counted; @endphp</span>
 										</a>
 										<div class="mediaD">
 											<div class="header">
@@ -90,7 +90,7 @@
 											</div>
 											<div class="body">
 												<ul>
-													<li><a href="/transaction"><i class="fa fa-ticket"></i> Transaksi & Tiket</a> <span>4</span></li>
+													<li><a href="/transaction"><i class="fa fa-ticket"></i> Transaksi & Tiket</a> <span>@php $count = \App\Models\Transaction::where('seen', false)->get(); $counted = count($count); echo $counted; @endphp</span></li>
 													<li><a href="/profile"><i class="fa fa-cog"></i> Edit Profil</a></li>
 												</ul>
 												<div class="logout">

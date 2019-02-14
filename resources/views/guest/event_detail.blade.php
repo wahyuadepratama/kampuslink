@@ -83,7 +83,7 @@
 									<p>{{ $subEvent->description }}</p>
 								</div>
 								<div class="e-tiket">
-									<a href="cart.php">BELI TIKET</a>
+									<a href="{{ url('event/' .$subEvent->slug)}}/process">BELI TIKET</a>
 								</div>
 							</div>
 						</div>
