@@ -33,9 +33,16 @@
 				<div class="col-lg-6">
 					<div class="login_form_inner reg_form">
 						<h3>Create an Account</h3>
-						<form class="row login_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
+						<form class="row login_form" action="{{ route('register') }}" method="post">
+							{{ csrf_field() }}
+
 							<div class="col-md-12 form-group">
 								<input type="text" class="form-control" id="name" name="name" placeholder="Name">
+								@if ($errors->has('name'))
+										<span class="help-block">
+												<strong>{{ $errors->first('name') }}</strong>
+										</span>
+								@endif
 							</div>
 							<div class="col-md-12 form-group">
 								<input type="email" class="form-control" id="email" name="email" placeholder="Email Address">
@@ -44,7 +51,12 @@
 								<input type="password" class="form-control" id="password" name="password" placeholder="Password">
 							</div>
 							<div class="col-md-12 form-group">
-								<input type="password" class="form-control" id="pass" name="pass" placeholder="Confirm password">
+								<input type="password" class="form-control" id="pass" name="password_confirmation" placeholder="Confirm password">
+								@if ($errors->has('password'))
+										<span class="help-block">
+												<strong>{{ $errors->first('password') }}</strong>
+										</span>
+								@endif
 							</div>
 							<div class="col-md-12 form-group">
 								<div class="creat_account">

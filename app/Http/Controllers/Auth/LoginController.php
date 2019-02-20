@@ -31,7 +31,7 @@ class LoginController extends Controller
     //Customize login disini.......
 
     public function username()
-    {
+    {       
        $login = request()->input('identity');
        $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
        request()->merge([$field => $login]);

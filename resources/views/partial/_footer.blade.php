@@ -29,31 +29,31 @@
       </div>
       <div class="col-lg-3 col-md-6 col-sm-6">
         <div class="single-footer-widget instafeed">
-          <h6 class="footer_title">Instagram Feed</h6>
+          <h6 class="footer_title">icon Feed</h6>
           <ul class="list instafeed d-flex flex-wrap">
             <li>
-              <img src="{{asset('client/img/instagram/Image-01.jpg')}}" alt="">
+              <img src="{{asset('client/img/icon/Image-01.jpg')}}" alt="">
             </li>
             <li>
-              <img src="{{asset('client/img/instagram/Image-02.jpg')}}" alt="">
+              <img src="{{asset('client/img/icon/Image-02.jpg')}}" alt="">
             </li>
             <li>
-              <img src="{{asset('client/img/instagram/Image-03.jpg')}}" alt="">
+              <img src="{{asset('client/img/icon/Image-03.jpg')}}" alt="">
             </li>
             <li>
-              <img src="{{asset('client/img/instagram/Image-04.jpg')}}" alt="">
+              <img src="{{asset('client/img/icon/Image-04.jpg')}}" alt="">
             </li>
             <li>
-              <img src="{{asset('client/img/instagram/Image-05.jpg')}}" alt="">
+              <img src="{{asset('client/img/icon/Image-05.jpg')}}" alt="">
             </li>
             <li>
-              <img src="{{asset('client/img/instagram/Image-06.jpg')}}" alt="">
+              <img src="{{asset('client/img/icon/Image-06.jpg')}}" alt="">
             </li>
             <li>
-              <img src="{{asset('client/img/instagram/Image-07.jpg')}}" alt="">
+              <img src="{{asset('client/img/icon/Image-07.jpg')}}" alt="">
             </li>
             <li>
-              <img src="{{asset('client/img/instagram/Image-08.jpg')}}" alt="">
+              <img src="{{asset('client/img/icon/Image-08.jpg')}}" alt="">
             </li>
           </ul>
         </div>

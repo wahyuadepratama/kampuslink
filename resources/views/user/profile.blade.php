@@ -225,7 +225,7 @@
 <!--================End Profil Box Area =================-->
 
 <!--================CSS Cuztome Area =================-->
-<style>*{box-sizing:border-box}.autocomplete{position:relative;display:inline-block}input{border:1px solid transparent;background-color:#f1f1f1;padding:10px}.autocomplete-items{position:absolute;border:1px solid #d4d4d4;border-bottom:none;border-top:none;z-index:99;top:100%;left:4%;right:4%;text-align:left}.autocomplete-items div{padding:10px;cursor:pointer;background-color:#fff;border-bottom:1px solid #d4d4d4}.autocomplete-items div:hover{background-color:#e9e9e9}.autocomplete-active{background-color:#1e90ff!important;color:#fff}
+<style>*{box-sizing:border-box}.autocomplete{position:relative;display:inline-block}input{border:1px solid transparent;background-color:#f1f1f1;padding:10px}.autocomplete-items{position:absolute;border:1px solid #d4d4d4;border-bottom:none;border-top:none;z-index:99;top:100%;left:4%;right:4%;text-align:left}.autocomplete-items div{padding:10px;cursor:pointer;background-color:#fff;border-bottom:1px solid #d4d4d4}.autocomplete-items div:hover{background-color:#019fe8}.autocomplete-active{background-color:#1e90ff!important;color:#fff}
 </style>
 <!--================End of CSS Cuztome Area =================-->
 

@@ -23,7 +23,7 @@
 							<th class="cell100 column1">Event</th>
 							<th class="cell100 column2">Total</th>
 							<th class="cell100 column3">Status</th>
-							<th class="cell100 column4">Jadwal</th>
+							<th class="cell100 column4">Dipesan</th>
 							<th class="cell100 column5">Lihat</th>
 						</tr>
 					</thead>
@@ -49,7 +49,7 @@
                 @endphp
               </td>
 							<td class="cell100 column3">{{ $transaction->status }}</td>
-							<td class="cell100 column4">@php echo \Carbon\Carbon::parse($transaction->subEvent->date)->format('l, d F Y'); @endphp</td>
+							<td class="cell100 column4">@php echo \Carbon\Carbon::parse($transaction->created_at)->format('l, d F Y'); @endphp</td>
 							<td class="cell100 column5"><a href="{{ url('transaction/'. $transaction->id) }}"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
 						</tr>
 

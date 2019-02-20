@@ -50,51 +50,61 @@
 							<div class="col-md-3">
 								<div class="f_p_item">
 									<div class="f_p_img">
-										<img class="img-fluid load-delay{{$subEvent->id}}" src="/client/css/images/bx_loader.gif" data-original="{{asset('storage/poster/'. $subEvent->photo)}}" alt="">
-										<div class="p_icon">
-											<a href="{{asset('client/img/clients-logo/qr-kode.png')}}">
+										<img class="img-fluid load-delay{{$subEvent->id}}" src="/client/css/images/bx_loader.gif" data-original="{{asset('storage/poster/_medium/'. $subEvent->photo)}}" alt="">
+										<div class="p_icon">											
+											@if(\Carbon\Carbon::parse($subEvent->created_at)->format('Y-m-d') == \Carbon\Carbon::now()->toDateString())
+											<span class="badge" style="color:black;">New</span>&nbsp;&nbsp;&nbsp;&nbsp;
+											@endif
+											<a href="{{asset('client/img/icon/qr-kode.png')}}">
 												<i class="fa fa-qrcode" aria-hidden="true"></i>
 											</a>
-											<a href="{{asset('client/img/product/'. $subEvent->photo)}}">
+											<a href="{{asset('storage/poster/_medium/'. $subEvent->photo)}}">
 												<i class="fa fa-search-plus"></i>
 											</a>
 										</div>
 									</div>
 									<div class="f_p_body">
 										<div class="p_desc">
-											<span class="p_title" style="font-size: 95%">
+											<span class="p_title" style="font-size: 80%; font-weight: bolder">
 												@php
 													$string = $subEvent->name;
 													$string = strip_tags($string);
 
 													if (strlen($string) > 15) {
-														$trimstring = substr($string, 0, 15);
+														$trimstring = substr($string, 0, 15) . ' ..';
 													} else {
 														$trimstring = $string;
 													}
-													echo $trimstring . ' ..';
+													echo $trimstring ;
 												@endphp
-
-												@if(\Carbon\Carbon::parse($subEvent->created_at)->format('Y-m-d') == \Carbon\Carbon::now()->toDateString())
-												<span class="badge" style="color:black">New</span>
-												@endif
-
 											</span>
-											<span class="p_caption">
-												<p><i class="fa fa-calendar" aria-hidden="true"></i> {{ \Carbon\Carbon::parse($subEvent->date)->format('l, d F Y') }}</p>
-												<p><i class="fa fa-map-marker" aria-hidden="true"></i> {{ $subEvent->location }} </p>
+											<span class="p_caption" style="font-size: 80%">
+												<p><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp; {{ \Carbon\Carbon::parse($subEvent->date)->format('d F Y') }}</p>
+												<p><i class="fa fa-map-marker" aria-hidden="true"></i>
+													@php
+														$string = $subEvent->location;
+														$string = strip_tags($string);
+
+														if (strlen($string) > 20) {
+															$trimstring = substr($string, 0, 20)  . ' ..';
+														} else {
+															$trimstring = $string;
+														}
+														echo $trimstring;
+													@endphp
+												</p>
 											</span>
 											<div class="p_properti">
 												<span class="p_contact">
-													<h4>Contact</h4>
+													<h4></h4>
 													<ul class="ul-contact">
 														<!-- <li><a href="#" class="orange active"></a></li> -->
-														<li><a href="#" class="green"><img src="{{ asset('client/img/clients-logo/wa.png') }}"></a></li>
+														<li><a href="{{ url('http://wa.me/'. $subEvent->whatsapp) }}" target="_blank"><img src="{{ asset('client/img/icon/whatsapp.png') }}"></a></li>
 														<!-- <li><a href="#" class="yellow"></a></li> -->
 													</ul>
 												</span>
 												<span class="p_detail">
-													<a href="/event/{{ $subEvent->slug }}">Detail</a>
+													<a href="/event/{{ $subEvent->slug }}" style="font-size: 90% !important; font-weight: bolder">Detail</a>
 												</span>
 											</div>
 										</div>

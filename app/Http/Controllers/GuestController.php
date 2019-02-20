@@ -14,6 +14,7 @@ use App\Models\Category;
 use App\Models\Campus;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Auth;
 
 class GuestController extends Controller
 {
@@ -33,7 +34,7 @@ class GuestController extends Controller
                                         ->where('sub_event.status','ongoing')
                                         ->groupBy('sub_event_id')
                                         ->orderBy('total','desc')
-                                        ->take(3)
+                                        ->take(5)
                                         ->get();
                         });
 
@@ -73,7 +74,7 @@ class GuestController extends Controller
     {
       $this->checkDueEvent();
       $subEvents  = Cache::remember('index_event_sub_events', 30, function () {
-                        return SubEvent::with('event')->where('approved', 1)->where('status','ongoing')->orderBy('created_at','desc')->paginate(12);
+                        return SubEvent::with('event')->where('approved', 1)->where('status','ongoing')->orderBy('date','asc')->paginate(20);
                     });
       $categories = Cache::remember('index_event_categories', 30, function () {
                         return Category::orderBy('name','asc')->get();
@@ -194,6 +195,9 @@ class GuestController extends Controller
                           ->join('category','category.id','=','event_category.category_id')
                           ->select('sub_event.*', 'category.name as category')
                           ->where('event_category.category_id', $categoryId)
+                          ->where('sub_event.status', 'ongoing')
+                          ->where('sub_event.approved', 1)
+                          ->orderBy('sub_event.date','asc')
                           ->paginate(12);
         $oldCategory = EventCategory::with('category')->where('category_id', $categoryId)->first();
 
@@ -208,6 +212,9 @@ class GuestController extends Controller
                           ->join('organization','organization.id','=','event.organization_id')
                           ->select('sub_event.*')
                           ->where('organization.id', $organizationId)
+                          ->where('sub_event.status', 'ongoing')
+                          ->where('sub_event.approved', 1)
+                          ->orderBy('sub_event.date','asc')
                           ->paginate(12);
 
         return view('guest.event')->with('subEvents', $subEvents)
@@ -221,6 +228,9 @@ class GuestController extends Controller
                           ->join('campus','campus.id','=','organization.campus_id')
                           ->select('sub_event.*')
                           ->where('campus.id', $campusId)
+                          ->where('sub_event.status', 'ongoing')
+                          ->where('sub_event.approved', 1)
+                          ->orderBy('sub_event.date','asc')
                           ->paginate(12);
 
         return view('guest.event')->with('subEvents', $subEvents)
@@ -236,6 +246,9 @@ class GuestController extends Controller
                           ->select('sub_event.*', 'category.name as category')
                           ->where('organization.id', $organizationId)
                           ->where('event_category.category_id', $categoryId)
+                          ->where('sub_event.status', 'ongoing')
+                          ->where('sub_event.approved', 1)
+                          ->orderBy('sub_event.date','asc')
                           ->paginate(12);
         $oldCategory = EventCategory::with('category')->where('category_id', $categoryId)->first();
 
@@ -255,6 +268,9 @@ class GuestController extends Controller
                           ->select('sub_event.*', 'category.name as category')
                           ->where('event_category.category_id', $categoryId)
                           ->where('campus.id', $campusId)
+                          ->where('sub_event.status', 'ongoing')
+                          ->where('sub_event.approved', 1)
+                          ->orderBy('sub_event.date','asc')
                           ->paginate(12);
         $oldCategory = EventCategory::with('category')->where('category_id', $categoryId)->first();
 
@@ -270,7 +286,10 @@ class GuestController extends Controller
                           ->join('campus','campus.id','=','organization.campus_id')
                           ->where('organization.id', $organizationId)
                           ->where('campus.id', $campusId)
+                          ->where('sub_event.status', 'ongoing')
+                          ->where('sub_event.approved', 1)
                           ->select('sub_event.*')
+                          ->orderBy('sub_event.date','asc')
                           ->paginate(12);
 
         return view('guest.event')->with('subEvents', $subEvents)
@@ -284,6 +303,9 @@ class GuestController extends Controller
                           ->select('sub_event.*')
                           ->where('campus.id', $campusId)
                           ->where('organization.id', $organizationId)
+                          ->where('sub_event.status', 'ongoing')
+                          ->where('sub_event.approved', 1)
+                          ->orderBy('sub_event.date','asc')
                           ->paginate(12);
         $oldCategory = EventCategory::with('category')->where('category_id', $categoryId)->first();
         return view('guest.event')->with('subEvents', $subEvents)
@@ -293,6 +315,17 @@ class GuestController extends Controller
                                   ->with('oldCategoryId', $categoryId)
                                   ->with('oldCategoryName', $oldCategory->category->name);
       }
+    }
+
+    public function getDataSubEvent()
+    {
+      return SubEvent::where('approved', 1)->where('status','ongoing')->get();
+    }
+
+    public function search(Request $request)
+    {
+      $data = SubEvent::where('name', $request->event)->first();
+      return redirect('/event'.'/'. $data->slug );
     }
 
 }

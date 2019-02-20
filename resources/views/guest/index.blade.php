@@ -10,32 +10,25 @@
 					<div class="offset-lg-2 col-lg-8 tengah">
 						<div class="populer">
 							@foreach($subEventRatings2 as $data)
-							<a href="/event/{{ $data->subEvent->slug }}">{{ $data->subEvent->name }}</a>
+							<a href="{{ url('event/'. $data->subEvent->slug) }}">{{ $data->subEvent->name }}</a>
 							@endforeach
 						</div>
 					</div>
 					<div class="tengah">
-						<a class="x-button" href="/event">Lihat Event</a>
+						<a class="x-button" href="{{ url('event') }}">Lihat Event</a>
 					</div>
 				</div>
 
 				<div class="search-menu"></div>
 
 				<div class="search-box col-lg-10">
-					<form>
-						<div class="kategori">
-							<select>
-								<option selected="" value="">KATEGORI</option>
-								@foreach($categories as $category)
-								<option value="/category/{{ $category->id }}">{{ $category->name }}</option>
-								@endforeach
-							</select>
-						</div>
+					<form action="{{ url('event/search') }}" method="post">
+						{{ csrf_field() }}
 						<div class="cari">
-							<input id="cari" type="text" name="" placeholder="CARI EVENT DISINI...">
+							<input id="cari" type="text" name="event" placeholder="Cari Event Disini .." autofocus="autofocus">
 						</div>
 						<div class="submit">
-							<button type="submit">SEARCH</button>
+							<button type="submit" style="font-size:95%">SEARCH</button>
 						</div>
 					</form>
 				</div>
@@ -54,15 +47,13 @@
 					<div class="hot_deal_box">
 						<img class="img-fluid" src="{{asset('client/img/deal1.jpg')}}">
 
-
-
 						<div class="content">
 							<!-- <h2>Daftarkan Dirimu Agar Kami Tahu Kampus Mu</h2> -->
 							<!-- <h2>Daftarkan Diri Agar Kamu Tahu Teman Kampus Mu Yang Telah Tergabung</h2> -->
-							<h2>Daftarkan Dirimu</h2>
-							<p>Daftarkan Diri Agar Kamu Tahu Teman Kampus Mu Yang Telah Tergabung</p>
+							<h2>Daftarkan Dirimu Disini!</h2>
+							<!-- <p>Bergabunglah dengan ribuan orang lainnya untuk berbagi informasi dunia kampus disini!</p> -->
 						</div>
-						<a class="hot_deal_link" href="/login"></a>
+						<a class="hot_deal_link" href="{{ url('login')}}"></a>
 					</div>
 				</div>
 
@@ -70,10 +61,10 @@
 					<div class="hot_deal_box">
 						<img class="img-fluid" src="{{asset('client/img/deal1.jpg')}}" alt="">
 						<div class="content">
-							<h2>Daftarkan Organisasi Kamu Disini</h2>
-							<p>go!</p>
+							<h2>Daftarkan Organisasimu Disini!</h2>
+							<!-- <p>go!</p> -->
 						</div>
-						<a class="hot_deal_link" href="/login"></a>
+						<a class="hot_deal_link" href="{{ url('login')}}"></a>
 					</div>
 				</div>
 			</div>
@@ -84,23 +75,14 @@
 	<!--================Kategori =================-->
 	<section class="clients_logo_area">
 		<div class="container-fluid">
-			<h3>KATEGORI</h3>
+			<!-- <h3>KATEGORI</h3> -->
 			<div class="clients_slider owl-carousel kategori">
+				@foreach($categories as $category)
 				<div class="item">
-					<img src="{{asset('client/img/clients-logo/c-logo-1.png')}}" alt="">
+					<h3>{{ $category->name }}</h3>
+					<h6 style="color: white">{{ $category->description }}</h6>
 				</div>
-				<div class="item">
-					<img src="{{asset('client/img/clients-logo/c-logo-2.png')}}" alt="">
-				</div>
-				<div class="item">
-					<img src="{{asset('client/img/clients-logo/c-logo-3.png')}}" alt="">
-				</div>
-				<div class="item">
-					<img src="{{asset('client/img/clients-logo/c-logo-4.png')}}" alt="">
-				</div>
-				<div class="item">
-					<img src="{{asset('client/img/clients-logo/c-logo-5.png')}}" alt="">
-				</div>
+				@endforeach
 			</div>
 		</div>
 	</section>
@@ -112,14 +94,14 @@
 			<div class="sliderx-set">
 				<!-- box set 1 -->
 				<div class="box-set">
-					@php $a = 10 @endphp
+					@php $a = 10; $x = 1000; @endphp
 					@foreach($subEvents as $subEvent)
 						@if($a > 5)
 					<div class="card">
-						<div class="card-img">
-							<img class="card-img-top load-delay" src="/client/css/images/bx_loader.gif" data-original="{!! URL::asset('client/img/product/'.$subEvent->photo) !!}">
+						<div class="card-img" style="width:100%;height:200px;overflow:hidden;">
+							<img class="card-img-top load-delay{{ $subEvent->id }}" src="/client/css/images/bx_loader.gif" data-original="{!! URL::asset('storage/poster/_medium/'.$subEvent->photo) !!}">
 						</div>
-						<a href="/event/{{ $subEvent->slug }}">
+						<a href="{{ url('event/' . $subEvent->slug) }}">
 						<div class="card-body">
 					    	<h5 class="card-title">
 					    		@php
@@ -134,23 +116,38 @@
 									echo $trimstring . ' ..';
 								@endphp
 					    	</h5>
-					    	<p class="waktu">@php echo \Carbon\Carbon::parse($subEvent->date)->format('l, d F Y'); @endphp</p>
-					    	<p class="lokasi">{{ $subEvent->location }}</p>
+					    	<p style="font-size: 80%" class="waktu"><span><i class="fa fa-calendar"></i></span> @php echo \Carbon\Carbon::parse($subEvent->date)->format('l, d F Y'); @endphp</p>
+					    	<p style="font-size: 80%" class="lokasi"><span><i class="fa fa-map-marker"></i></span> {{ $subEvent->location }}</p>
 						</div>
 						</a>
 					</div>
+
+					<script type="text/javascript">
+						$(document).ready(function () {
+						setTimeout(function () {
+							$('.load-delay{{ $subEvent->id }}').each(function () {
+								var imagex = $(this);
+								var imgOriginal = imagex.data('original');
+								$(imagex).attr('src', imgOriginal);
+							});
+						}, 1000 + {{ $x }});
+						});
+					</script>
+
 						@endif
-					@php $a--; @endphp
+					@php $a--; $x = $x + 1000; @endphp
 					@endforeach
 				</div>
 				<!-- box set 2 -->
 				<div class="box-set">
-					@php $a = 10 @endphp
+					@php $a = 10; $x = 3000; @endphp
 					@foreach($subEvents as $subEvent)
 						@if($a < 6)
 					<div class="card">
-						<img class="card-img-top load-delay" src="/client/css/images/bx_loader.gif" data-original="{!! URL::asset('client/img/product/'.$subEvent->photo) !!}">
-						<a href="/event/{{ $subEvent->slug }}">
+						<div class="card-img" style="width:100%;height:200px;overflow:hidden;">
+							<img class="card-img-top load-delay{{ $subEvent->id }}" src="/client/css/images/bx_loader.gif" data-original="{!! URL::asset('storage/poster/_medium/'.$subEvent->photo) !!}">
+						</div>
+						<a href="{{ url('event/' . $subEvent->slug) }}">
 						<div class="card-body">
 					    	<h5 class="card-title">
 					    		@php
@@ -165,13 +162,26 @@
 									echo $trimstring . ' ..';
 								@endphp
 					    	</h5>
-					    	<p class="waktu">@php echo \Carbon\Carbon::parse($subEvent->date)->format('l, d F Y'); @endphp</p>
-					    	<p class="lokasi">{{ $subEvent->location }}</p>
+					    	<p class="waktu" style="font-size: 80%"><span><i class="fa fa-calendar"></i></span> @php echo \Carbon\Carbon::parse($subEvent->date)->format('l, d F Y'); @endphp</p>
+					    	<p class="lokasi" style="font-size: 80%"><span><i class="fa fa-map-marker"></i></span> {{ $subEvent->location }}</p>
 						</div>
 						</a>
 					</div>
+
+					<script type="text/javascript">
+						$(document).ready(function () {
+						setTimeout(function () {
+							$('.load-delay{{ $subEvent->id }}').each(function () {
+								var imagex = $(this);
+								var imgOriginal = imagex.data('original');
+								$(imagex).attr('src', imgOriginal);
+							});
+						}, 1000 + {{ $x }});
+						});
+					</script>
+
 						@endif
-					@php $a--; @endphp
+					@php $a--; $x = $x + 1000; @endphp
 					@endforeach
 				</div>
 			</div>
@@ -183,19 +193,22 @@
 	<section class="produk-area section_gap">
 		<div class="container">
 			<div class="view">
-				<select id="view">
-					<option value="small">SMALL VIEW</option>
-					<option value="medium">MEDIUM VIEW</option>
-				</select>
+				<div class="col-md-3">
+					<select id="view" class="form-control">
+						<option value="small">Small View</option>
+						<option value="medium">Medium View</option>
+					</select>
+				</div>
 			</div>
 			<!-- view 1  = medium, view 2 = small -->
 			<div class="view-set view-2">
 				<div class="produk">
 
+					@php $x = 5000; @endphp
 					@foreach($subEventRatings as $data)
 					<div class="box-produk">
 						<div class="produk-img">
-							<img class="load-delay1" src="/client/css/images/bx_loader.gif" data-original="{{ asset('client/img/product/'. $data->subEvent->photo)}}">
+							<img class="load-delay-second{{ $data->subEvent->id }}" src="/client/css/images/bx_loader.gif" data-original="{{ asset('storage/poster/_medium/'. $data->subEvent->photo)}}">
 							<a class="icon_btn qr" href="{{asset('client/img/clients-logo/qr-kode.png')}}">
 								<i class="fa fa-qrcode"></i>
 							</a>
@@ -221,12 +234,26 @@
 								</span>
 							</div>
 							<div class="foot">
-								
+
 							</div>
 							<span class="lokasi">{{ $data->subEvent->location }} </span>
-							<a href="/event/{{ $data->subEvent->slug }}" class="btn-view">VIEW DETAIL</a>
+							<a href="{{ url('event/' . $data->subEvent->slug) }}" class="btn-view">VIEW DETAIL</a>
 						</div>
 					</div>
+
+					<script type="text/javascript">
+						$(document).ready(function () {
+						setTimeout(function () {
+							$('.load-delay-second{{ $data->subEvent->id }}').each(function () {
+								var imagex = $(this);
+								var imgOriginal = imagex.data('original');
+								$(imagex).attr('src', imgOriginal);
+							});
+						}, 1000 + {{ $x }});
+						});
+					</script>
+
+						@php $x = $x + 1000; @endphp
 					@endforeach
 
 				</div>
@@ -235,39 +262,18 @@
 	</section>
 	<!--================ End Produk Area ================-->
 
-	<!--================ Subscription Area ================-->
-	<section class="subscription-area section_gap">
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-lg-8">
-					<div class="section-title text-center">
-						<h2>Subscribe for Our Newsletter</h2>
-						<span>We won’t send any kind of spam</span>
-					</div>
-				</div>
-			</div>
-			<div class="row justify-content-center">
-				<div class="col-lg-6">
-					<div id="mc_embed_signup">
-						<form target="_blank" novalidate action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&id=92a4423d01"
-						 method="get" class="subscription relative">
-							<input type="email" name="EMAIL" placeholder="Email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email address'"
-							 required="">
-							<!-- <div style="position: absolute; left: -5000px;">
-								<input type="text" name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="">
-							</div> -->
-							<button type="submit" class="newsl-btn">Get Started</button>
-							<div class="info"></div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!--================ End Subscription Area ================-->
+	<style>
+	*{box-sizing:border-box}
+	.autocomplete{position:relative;display:inline-block}
+	.autocomplete-items{position:absolute;border:1px solid #d4d4d4;border-bottom:none;border-top:none;z-index:99;top:70%;left:15%;right:15%;text-align:left}
+	.autocomplete-items div{padding:10px;cursor:pointer;background-color:#ffffffe6;border-bottom:1px solid #d4d4d4}
+	.autocomplete-items div:hover{background-color:#019fe8}
+	.autocomplete-active{background-color:#1e90ff!important;color:#fff}
+	</style>
+	@include('partial/_js_search_index')
 
+	@include('partial/_subscribe_area')
 	@include('partial/_footer')
-
 
 
 <!-- Optional JavaScript -->
@@ -287,7 +293,7 @@
 <!-- <script src="{{asset('client/vendors/flipclock/timer.js')}}"></script> -->
 <script src="{{asset('client/vendors/counter-up/jquery.counterup.js')}}"></script>
 <script src="{{asset('client/js/mail-script.js')}}"></script>
-<script src="{{asset('client/js/theme.js')}}"></script>
+<!-- <script src="{{asset('client/js/theme.js')}}"></script> -->
 <script src="{{asset('client/js/jquery.bxslider.min.js')}}"></script>
 <script>
 	$(document).ready(function(){
@@ -336,30 +342,6 @@ $(document).ready(function(){
     	}
     });
     // end   view medium dan smalll
-
-		// load image delay 1
-
-			$(document).ready(function () {
-			setTimeout(function () {
-				$('.load-delay').each(function () {
-					var imagex = $(this);
-					var imgOriginal = imagex.data('original');
-					$(imagex).attr('src', imgOriginal);
-				});
-			}, 3000);
-			});
-
-		// load image delay 2
-
-			$(document).ready(function () {
-			setTimeout(function () {
-				$('.load-delay1').each(function () {
-					var imagex = $(this);
-					var imgOriginal = imagex.data('original');
-					$(imagex).attr('src', imgOriginal);
-				});
-			}, 5000);
-			});
 
 });
 </script>

@@ -1,4 +1,4 @@
-<section class="subscription-area section_gap">
+<section class="subscription-area section_gap" style="padding-top: 5%; padding-bottom: 5%; background-color: #f0f0f0;">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-8">
