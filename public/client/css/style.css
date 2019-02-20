@@ -5626,8 +5626,8 @@ span.r_acara span.not{/*not*/
 /*====End Tiket====*/
 
 /* Global font  */
-html *:not(.fa .lnr)
+/* html *:not(.fa .lnr)
 {
    font-family: 'Ubuntu' !important;
-}
+} */
 /* End of global font */
