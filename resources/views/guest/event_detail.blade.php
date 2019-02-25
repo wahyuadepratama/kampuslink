@@ -27,7 +27,7 @@
 							<div class="content">
 								<ul class="list">
 									<li>
-										<a class="active" href="#" style="font-family: 'Ubuntu' !important">
+										<a class="active" href="#">
 											<span><i class="fa fa-th-large"></i></span>
 											@php $count = count($categories) @endphp
 											@foreach($categories as $category)
@@ -44,23 +44,23 @@
 										</a>
 									</li>
 									<li>
-										<a href="#" style="font-family: 'Ubuntu' !important">
+										<a href="#">
 											<span><i class="fa fa-home"></i></span> {{ $subEvent->event->organization->name }}
 										</a>
 									</li>
 									<li>
-										<a href="#" style="font-family: 'Ubuntu' !important">
+										<a href="#">
 											<span><i class="fa fa-map-marker"></i></span> {{ $subEvent->location }} </a>
 									</li>
-									<br><li style="font-family: 'Ubuntu' !important; font-weight: bold">Kontak :</li>
+									<br><li style="font-weight: bold">Kontak :</li>
 									<li>
-										<a href="#"><img src="{{asset('client/img/icon/whatsapp.png')}}" style="font-family: 'Ubuntu' !important">&nbsp; {{ $subEvent->whatsapp }} </a>
+										<a href="#"><img src="{{asset('client/img/icon/whatsapp.png')}}">&nbsp; {{ $subEvent->whatsapp }} </a>
 									</li>
 									<li>
-										<a href="#"><img src="{{asset('client/img/icon/line.png')}}" style="font-family: 'Ubuntu' !important">&nbsp; {{ $subEvent->line }}</a>
+										<a href="#"><img src="{{asset('client/img/icon/line.png')}}">&nbsp; {{ $subEvent->line }}</a>
 									</li>
 									<li>
-										<a href="{{ $subEvent->web_link }}" style="font-family: 'Ubuntu' !important"><img src="{{asset('client/img/icon/web.png')}}" style="width: 4%">&nbsp; {{ $subEvent->web_link }}</a>
+										<a href="{{ $subEvent->web_link }}"><img src="{{asset('client/img/icon/web.png')}}" style="width: 4%">&nbsp; {{ $subEvent->web_link }}</a>
 									</li>
 								</ul>
 							</div>

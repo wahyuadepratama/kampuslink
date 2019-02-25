@@ -18,10 +18,10 @@
 	<link rel="stylesheet" href="{{asset('client/vendors/animate-css/animate.css')}}">
 	<link rel="stylesheet" href="{{asset('client/vendors/jquery-ui/jquery-ui.css')}}">
 	<link rel="stylesheet" href="{{asset('client/css/jquery.bxslider.css')}}">
+	<link href="https://fonts.googleapis.com/css?family=Cabin|Dosis" rel="stylesheet">
 	<!-- main css -->
 	<link rel="stylesheet" href="{{asset('client/css/style.css')}}">
 	<link rel="stylesheet" href="{{asset('client/css/responsive.css')}}">
-	<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 	<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script> -->
 	<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
 </head>
@@ -50,21 +50,21 @@
 							<div class="col-lg-7">
 								<ul class="nav navbar-nav center_nav pull-right">
 									<li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
-										<a class="nav-link" href="/" style="font-family: 'Ubuntu' !important">Home</a>
+										<a class="nav-link" href="/" style="font-family: 'Cabin' !important">Home</a>
 									</li>
 									<li class="nav-item {{ Request::is('event', 'event/*') ? 'active' : '' }}">
-										<a class="nav-link" href="/event" style="font-family: 'Ubuntu' !important">Event</a>
+										<a class="nav-link" href="/event" style="font-family: 'Cabin' !important">Event</a>
 									</li>
 									<li class="nav-item submenu dropdown">
-										<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="font-family: 'Ubuntu' !important">Koran</a>
+										<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="font-family: 'Cabin' !important">Koran</a>
 										<ul class="dropdown-menu">
 											<li class="nav-item">
-												<a class="nav-link" href="#" style="font-family: 'Ubuntu' !important">Coming Soon</a>
+												<a class="nav-link" href="#"style="font-family: 'Cabin' !important">Coming Soon</a>
 											</li>
 										</ul>
 									</li>
 									<li class="nav-item {{ Request::is('kontak') ? 'active' : '' }}">
-										<a class="nav-link" href="/kontak" style="font-family: 'Ubuntu' !important">Kontak</a>
+										<a class="nav-link" href="/kontak" style="font-family: 'Cabin' !important">Kontak</a>
 									</li>
 								</ul>
 							</div>
@@ -76,7 +76,7 @@
 								<div class="col-lg-2">
 									<ul class="nav navbar-nav navbar-right right_nav pull-right"><hr>
 										<li class="nav-item">
-											<a href="#" class="login" style="font-family: 'Ubuntu' !important">
+											<a href="#" class="login" >
 												<img src="{{ asset('client/img/icon/user.png') }}">
 												<span>@php $count = \App\Models\Transaction::where('seen', false)->get(); $counted = count($count); echo $counted; @endphp</span>
 											</a>
@@ -93,13 +93,13 @@
 												</div>
 												<div class="body">
 													<ul>
-														<li><a href="/transaction" style="font-family: 'Ubuntu' !important"><i class="fa fa-ticket"></i> Transaksi & Tiket</a> <span>@php $count = \App\Models\Transaction::where('seen', false)->get(); $counted = count($count); echo $counted; @endphp</span></li>
-														<li><a href="/profile" style="font-family: 'Ubuntu' !important"><i class="fa fa-cog"></i> Edit Profil</a></li>
+														<li><a href="/transaction"><i class="fa fa-ticket"></i> Transaksi & Tiket</a> <span>@php $count = \App\Models\Transaction::where('seen', false)->get(); $counted = count($count); echo $counted; @endphp</span></li>
+														<li><a href="/profile"><i class="fa fa-cog"></i> Edit Profil</a></li>
 													</ul>
 													<div class="logout">
 														<a href="{{ route('logout') }}"
 							                    onclick="event.preventDefault();
-							                             document.getElementById('logout-form').submit();" style="font-family: 'Ubuntu' !important">Logout</a>
+							                             document.getElementById('logout-form').submit();">Logout</a>
 							              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
 							                  {{ csrf_field() }}
 							              </form>
@@ -124,15 +124,15 @@
 														<!-- <img src="{{ asset('storage/avatar/'. Auth::user()->photo_profile) }}" width="50"> -->
 														<img src="{{ asset('client/img/icon/user.png') }}" width="50">
 													</div>
-													<div>
+													<!-- <div>
 														<h4>{{ Auth::user()->fullname }}</h4>
 														<p>{{ Auth::user()->email }}</p>
-													</div>
+													</div> -->
 												</div>
 												<div class="body">
 													<ul>
 														<li><a href="/organization"><i class="fa fa-ticket"></i> Dashboard</a></li>
-														<li><a href="/transaction" style="font-family: 'Ubuntu' !important"><i class="fa fa-ticket"></i> Transaksi & Tiket</a> <span>@php $count = \App\Models\Transaction::where('seen', false)->get(); $counted = count($count); echo $counted; @endphp</span></li>
+														<li><a href="/transaction"><i class="fa fa-ticket"></i> Transaksi & Tiket</a> <span>@php $count = \App\Models\Transaction::where('seen', false)->get(); $counted = count($count); echo $counted; @endphp</span></li>
 													</ul>
 													<div class="logout">
 														<a href="{{ route('logout') }}"

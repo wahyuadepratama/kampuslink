@@ -10,7 +10,6 @@
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <link href="{{ asset('client/img/logo/icon.png') }}" rel="shortcut icon">
     <link href="{{ asset('client/img/logo/icon/.png') }}" rel="apple-touch-icon">
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
     <link href="{{ asset('_admin/bower_components/select2/dist/css/select2.min.css')}}" rel="stylesheet">
     <link href="{{ asset('_admin/bower_components/bootstrap-daterangepicker/daterangepicker.css')}}" rel="stylesheet">
     <link href="{{ asset('_admin/bower_components/dropzone/dist/dropzone.css')}}" rel="stylesheet">
@@ -48,7 +47,7 @@
                   {{ Auth::user()->fullname }}
                 </div>
                 <div class="logged-user-role">
-                  Pengurus
+                  Anggota
                 </div>
               </div>
               <div class="logged-user-toggler-arrow">
@@ -64,7 +63,7 @@
                       {{ Auth::user()->fullname }}
                     </div>
                     <div class="logged-user-role">
-                      Pengurus
+                      Anggota
                     </div>
                   </div>
                 </div>

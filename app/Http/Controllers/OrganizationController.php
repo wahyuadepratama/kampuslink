@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Intervention\Image\Facades\Image as Image;
 use Illuminate\Support\Facades\Auth;
 use App\Models\UserOrganization;
 use Illuminate\Http\Request;
@@ -73,18 +74,102 @@ class OrganizationController extends Controller
     public function event()
     {
       $organization = UserOrganization::where('user_id', Auth::user()->id)->first();
-      $event = Event::where('organization_id', $organization->organization_id)->get();
 
-      $subEvent = [];
-      foreach($event as $key){
-        $subEvent = array_merge($subEvent, SubEvent::where('status', 'ongoing')->where('event_id', $key->id)->get()->toArray() );
-      }      
+      if(isset($_GET['search'])){
+        if($_GET['search'] == "all-big-event"){
+          $event = Event::where('organization_id', $organization->organization_id)->get();
+          return view('organization/event')->with('event', $event);
+        }
+        if($_GET['search'] == "all-event"){
+          $event = Event::where('organization_id', $organization->organization_id)->get();
+          $subEvent = [];
+          foreach($event as $key){
+            $subEvent = array_merge($subEvent, SubEvent::where('status', 'ongoing')->where('event_id', $key->id)->get()->toArray() );
+          }
+          return view('organization/event')->with('subEvent', $subEvent)->with('oldSearch', ['name' => 'Semua Event', 'value' => 'all-event']);
+        }
+        if($_GET['search'] == "event-approved"){
+          $event = Event::where('organization_id', $organization->organization_id)->get();
+          $subEvent = [];
+          foreach($event as $key){
+            $subEvent = array_merge($subEvent, SubEvent::where('status', 'ongoing')->where('approved', 1)->where('event_id', $key->id)->get()->toArray() );
+          }
+          return view('organization/event')->with('subEvent', $subEvent)->with('oldSearch', ['name' => 'Event yang Sudah Disetujui', 'value' => 'event-approved']);
+        }
+        if($_GET['search'] == "event-pending"){
+          $event = Event::where('organization_id', $organization->organization_id)->get();
+          $subEvent = [];
+          foreach($event as $key){
+            $subEvent = array_merge($subEvent, SubEvent::where('status', 'ongoing')->where('approved', 0)->where('event_id', $key->id)->get()->toArray() );
+          }
+          return view('organization/event')->with('subEvent', $subEvent)->with('oldSearch', ['name' => 'Event yang Pending', 'value' => 'event-pending']);
+        }
+        if($_GET['search'] == "event-reject"){
+          $event = Event::where('organization_id', $organization->organization_id)->get();
+          $subEvent = [];
+          foreach($event as $key){
+            $subEvent = array_merge($subEvent, SubEvent::where('status', 'ongoing')->where('approved', 2)->where('event_id', $key->id)->get()->toArray() );
+          }
+          return view('organization/event')->with('subEvent', $subEvent)->with('oldSearch', ['name' => 'Event yang Ditolak', 'value' => 'event-reject']);
+        }
+        if($_GET['search'] == "event-past"){
+          $event = Event::where('organization_id', $organization->organization_id)->get();
+          $subEvent = [];
+          foreach($event as $key){
+            $subEvent = array_merge($subEvent, SubEvent::where('status', 'past')->where('event_id', $key->id)->get()->toArray() );
+          }
+          return view('organization/event')->with('subEvent', $subEvent)->with('oldSearch', ['name' => 'Event yang Sudah Berlalu', 'value' => 'event-past']);
+        }
+      }else{
+        $event = Event::where('organization_id', $organization->organization_id)->get();
+        return view('organization/event')->with('event', $event);
+      }
+    }
 
-      return view('organization/event')->with('subEvent', $subEvent);
+    public function addBigEvent(Request $request)
+    {
+      return view('organization/big_event_add');
+    }
+
+    public function storeBigEvent(Request $request)
+    {
+      $start_date = Carbon::parse($request->start_date)->format('Y-m-d');
+      $end_date = Carbon::parse($request->end_date)->format('Y-m-d');
+      $organization = UserOrganization::where('user_id', Auth::user()->id)->first();
+
+      $thumbnail      = $request->file('photo');
+      $filename      = str_slug($request->name).'_'.time() . '.' . $thumbnail->getClientOriginalExtension();
+
+      $small          = 'storage/poster/_small/' . $filename;
+      $createSmall   = Image::make($thumbnail)->resize(25, 35)->save($small);
+
+      $medium          = 'storage/poster/_medium/' . $filename;
+      $createMedium   = Image::make($thumbnail)->resize(210, 297)->save($medium);
+
+      $large          = 'storage/poster/_large/' . $filename;
+      $createLarge   = Image::make($thumbnail)->resize(794, 1123)->save($large);
+
+      Event::create([
+        'organization_id' => $organization->organization_id,
+        'name' => $request->name,
+        'description' => $request->description,
+        'photo' => $filename,
+        'start_date' => $start_date,
+        'end_date' => $end_date,
+        'web_link' => $request->web_link,
+        'created_at' => Carbon::now()->setTimezone('Asia/Jakarta')
+      ]);
+
+      return back();
     }
 
     public function addEvent()
     {
-      return "halaman add event";
+      return view('organization/event_add');
+    }
+
+    public function searchEvent($id)
+    {
+      return "tes";
     }
 }

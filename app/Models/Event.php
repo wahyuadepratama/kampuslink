@@ -8,7 +8,7 @@ class Event extends Model
 {
   protected $table = "event";
 
-  protected $quarded = [];
+  protected $guarded = [];
 
   public function organization(){
     return $this->belongsTo('App\Models\Organization','organization_id');

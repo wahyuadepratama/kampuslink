@@ -18,10 +18,10 @@
       </div>
       <div class="logged-user-info-w">
         <div class="logged-user-name">
-          Nama Lengkap
+          {{ Auth::user()->fullname }}
         </div>
         <div class="logged-user-role">
-          Pengurus
+          Anggota
         </div>
       </div>
     </div>

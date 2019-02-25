@@ -54,9 +54,9 @@ TABLE OF CONTENTS
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 
-html * {
+/* html * {
   font-family: 'Ubuntu' !important;
-}
+} */
 :root {
   --blue: #30a2e9;
   --indigo: #30a2e9;
