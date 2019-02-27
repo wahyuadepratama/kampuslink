@@ -12,6 +12,10 @@ Route::post('event/search', 'GuestController@search');
 Route::get('/kontak', function(){
 	return view('guest.kontak');
 });
+Route::get('/register_organization', function(){
+	return view('user.register_organization');
+});
+
 
 
 Route::get('profile', 'UserController@profile');

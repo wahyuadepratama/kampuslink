@@ -68,7 +68,14 @@ h1, h2, h3, h4, h5, h6 {
 button:focus {
   outline: none;
   box-shadow: none; }
-
+textarea{
+  border: none !important;
+  border-radius: 0 !important;
+}
+textarea:focus{
+  box-shadow: none !important; 
+  border-color: whitesmoke !important;
+}
 .p_120 {
   padding-top: 120px;
   padding-bottom: 120px; }
@@ -2908,8 +2915,8 @@ h6 {
   border: none;
   border-radius: 0px;
   height: 40px;
-  background: #f9f9ff !important;
-  padding-left: 45px;
+  background: #ffffff !important;
+  /*padding-left: 45px;*/
   padding-right: 40px;
   width: 100%; }
 
