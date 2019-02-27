@@ -4782,7 +4782,7 @@ h6 {
 .f_social_wd p {
   font-size: 14px;
   color: #777777;
-  margin-bottom: 15px; }
+  margin-bottom: 4px; }
 .f_social_wd .f_social a {
   font-size: 14px;
   color: #777777;
@@ -4792,7 +4792,9 @@ h6 {
     color: #00a2e9; }
   .f_social_wd .f_social a:last-child {
     margin-right: 0px; }
-
+.footer-area .f_social_wd p i{
+  margin-right: 7px;
+}
 /*---------------------------------------------------- */
 
 /*# sourceMappingURL=style.css.map */
@@ -5630,3 +5632,27 @@ span.r_acara span.not{/*not*/
    font-family: 'Cabin','Cabin' !important;
 } */
 /* End of global font */
+.title_color.team{
+  text-align: center;
+  font-size: 1.872rem;
+  margin-bottom: 6rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+.single-footer-widget.teamx .team-content{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.single-footer-widget.teamx .team-content img{
+  width: 200px;
+  border-radius: 50%;
+}
+.single-footer-widget.teamx .team{
+  color: black;
+  font-weight: 600;
+  letter-spacing: 2px;
+  font-size: 16px;
+  margin-top: 1rem;
+}
