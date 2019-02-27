@@ -19,6 +19,7 @@
 	<link rel="stylesheet" href="{{asset('client/vendors/jquery-ui/jquery-ui.css')}}">
 	<link rel="stylesheet" href="{{asset('client/css/jquery.bxslider.css')}}">
 	<link href="https://fonts.googleapis.com/css?family=Cabin|Dosis" rel="stylesheet">
+	<link rel="stylesheet" href="{{ asset('client/vendors/sweetalert2/sweetalert2.min.css')}}">
 	<!-- main css -->
 	<link rel="stylesheet" href="{{asset('client/css/style.css')}}">
 	<link rel="stylesheet" href="{{asset('client/css/responsive.css')}}">

@@ -12,6 +12,9 @@
 <script src="{{ asset('client/vendors/jquery-ui/jquery-ui.js') }}"></script>
 <script src="{{ asset('client/vendors/counter-up/jquery.waypoints.min.js') }}"></script>
 <script src="{{ asset('client/vendors/counter-up/jquery.counterup.js') }}"></script>
+<script src="{{ asset('client/vendors/sweetalert2/sweetalert2.all.min.js') }}"></script>
+<script src="{{ asset('client/vendors/sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
 <script src="{{ asset('client/js/theme.js') }}"></script>
 <script>
 $(document).ready(function(){

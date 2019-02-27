@@ -67,7 +67,8 @@
 								</div>
 							</div>
 							<div class="col-md-12 form-group">
-								<button type="submit" value="submit" class="btn submit_btn">Buat</button>
+								<button type="button" value="submit" class="btn submit_btn">Buat</button>
+								<!-- doc => https://sweetalert2.github.io/  -->
 							</div>
 						</form>
 					</div>
@@ -79,9 +80,21 @@
 
   @include('partial/_footer')
 
-	<!-- Optional JavaScript -->
-	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	@include('partial/_script_footer')
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+@include('partial/_script_footer')
+<script type="text/javascript">
+$(document).ready(function(){
+	$('button').click(function(){
+		Swal.fire({
+		  type: 'success',
+		  title: 'Berhasil',
+		  text: ''
+		});
+	});
+	// doc => https://sweetalert2.github.io/
+});
+</script>
 
 </body>
 
