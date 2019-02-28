@@ -43,9 +43,9 @@
       <div class="col-lg-6 profil-form">
         <div class="pilihan">
           <!-- <h4>Atur</h4> -->
-          <button class="btn-profil">Profil</button>
-          <button class="btn-kampus">Kampus</button>
-          <button class="btn-login">Login</button>
+          <button class="btn-profil" id="edit">Profil</button>
+          <button class="btn-kampus" id="edit">Kampus</button>
+          <button class="btn-login" id="edit">Login</button>
         </div>
         <!-- =======FORM PROFIL======= -->
         <div class="login_form_inner reg_form" id="form-profil">
@@ -122,90 +122,124 @@
           </form>
         </div>
       </div>
+      <style type="text/css">
+        .card-profil{
+          padding: 1.875rem;
+          position: relative;
+          font-size: .9375rem;
+        }
+        .card-profil h6{
+          font-size: 1rem;
+          margin: 0 0 .5rem;
+          color: #354052;
+          font-weight: 600;
+          text-align: left;
+          letter-spacing: 1px;
+        }
+        .card-flex{
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          border-bottom: 1px solid #e6eaee;
+          padding-top: .9375rem;
+          padding-bottom: .9375rem;
+          margin: 0;
+        }
+        .card-flex dt{
+          width: 25%;
+          color: #354052;
+          text-align: left;
+          font-weight: 300;
+          margin: 0;
+        }
+        .card-flex dd{
+          margin: 0;
+        }
+        .card-flex dd img{
+          width: 50px;
+          border-radius: 50%;
+        }
+      </style>
       <div class="col-lg-6 profil-view">
         <div class="login_form_inner profil">
-          <table width="100%">
-            <tr>
-              <td align="left"> <h5><strong>Akun Profil</strong></h5> </td>
-              <td></td>
-            </tr>
-            <tr>
-              <td align="left">Nama</td>
-              <td align="left">{{ Auth::user()->name }}</td>
-            </tr>
-            <tr>
-              <td align="left">Hp</td>
-              <td align="left">{{ Auth::user()->phone }}</td>
-            </tr>
-            <tr>
-              <td align="left">Tanggal Lahir</td>
-              <td align="left">{{ \Carbon\Carbon::parse(Auth::user()->date_birth)->format('d F Y') }}</td>
-            </tr>
-            <tr>
-              <td align="left">Jenis Kelamin</td>
+          <div class="pilihan">
+            <!-- <h4>Atur</h4> -->
+            <button class="btn-profil" id="detail">Profil</button>
+            <button class="btn-kampus" id="detail">Kampus</button>
+            <button class="btn-login" id="detail">Login</button>
+          </div>
+          <div class="card-profil" id="detail-profil">
+            <h6 class="card-text-bold">Profil</h6>
+            <dl class="card-flex">
+              <dt>Nama </dt>
+              <dd>{{ Auth::user()->fullname }}</dd>
+            </dl>
+            <dl class="card-flex">
+              <dt>Hp</dt>
+              <dd>{{ Auth::user()->phone }}</dd>
+            </dl>
+            <dl class="card-flex">
+              <dt>Tanggal Lahir</dt>
+              <dd>{{ \Carbon\Carbon::parse(Auth::user()->date_birth)->format('d F Y') }}</dd>
+            </dl>
+            <dl class="card-flex">
+              <dt>Jenis Kelamin</dt>
               @if(Auth::user()->gender == "man")
-              <td align="left">Laki-laki</td>
+              <dd>Laki-laki</dd>
               @else
-              <td align="left">Perempuan</td>
+              <dd>Perempuan</dd>
               @endif
-            </tr>
-            <tr>
-              <td align="left"></td>
-              <td align="left"></td>
-            </tr>
-            <tr>
-              <td align="left"></td>
-              <td align="left"></td>
-            </tr>
-            <tr>
-              <td align="left"> <h5><strong>Akun Kampus</strong></h5> </td>
-              <td></td>
-            </tr>
-            <tr>
-              <td align="left">Nomor BP/NIM</td>
-              <td align="left">{{ Auth::user()->nim }}</td>
-            </tr>
-            <tr>
-              <td align="left">Kampus</td>
-              <td align="left">{{ Auth::user()->programStudy->faculty->campus->name }}</td>
-            </tr>
-            <tr>
-              <td align="left">Fakultas</td>
-              <td align="left">{{ Auth::user()->programStudy->faculty->name }}</td>
-            </tr>
-            <tr>
-              <td align="left">Jurusan</td>
-              <td align="left">{{ Auth::user()->programStudy->name }}</td>
-            </tr>
-            <tr>
-              <td align="left">Status</td>
+            </dl>
+            <dl class="card-flex">
+              <dt>Avatar</dt>
+              <dd><img src="{{ asset('client/img/team/alfikri.jpg') }}"></dd>
+            </dl>
+            <dl class="card-flex">
+              <dt>Kota Asal</dt>
+              <dd>Koto Baru Balai Janggo, Payakumbuh Utara, Payakumbuh</dd>
+            </dl>
+          </div>
+
+          <div class="card-profil" id="detail-kampus">
+            <h6 class="card-text-bold">Akun Kampus</h6>
+            <dl class="card-flex">
+              <dt>Nomor BP/NIM</dt>
+              <dd>{{ Auth::user()->nim }}</dd>
+            </dl>
+            <dl class="card-flex">
+              <dt>Kampus</dt>
+              <dd>{{ Auth::user()->programStudy->faculty->campus->name }}</dd>
+            </dl>
+            <dl class="card-flex">
+              <dt>Fakultas</dt>
+              <dd>{{ Auth::user()->programStudy->faculty->name }}</dd>
+            </dl>
+            <dl class="card-flex">
+              <dt>Jurusan</dt>
               @if(Auth::user()->status == 0)
-              <td align="left"> <button type="button" class="btn btn-sm btn-danger">Belum Diverifikasi</button> </td>
+              <dd><button type="button" class="btn btn-sm btn-danger">Belum Diverifikasi</button></dd>
               @else
-              <td align="left"> <button type="button" class="btn btn-sm btn-success">Sudah Diverifikasi</button></td>
+              <dd><button type="button" class="btn btn-sm btn-success">Sudah Diverifikasi</button></dd>
               @endif
-            </tr>
-            <tr>
-              <td align="left"></td>
-              <td align="left"></td>
-            </tr>
-            <tr>
-              <td align="left"></td>
-              <td align="left"></td>
-            </tr>
-            <tr>
-              <td align="left"> <h5><strong>Akun Login</strong></h5> </td>
-              <td></td>
-            </tr>
-            <tr>
-              <td align="left">Email</td>
-              <td align="left">email@email.com</td>
-            </tr>
-            <tr>
-              <td align="left">Password</td>
-              <td align="left">********</td>
-            </tr>
-          </table>
+            </dl>
+            <dl class="card-flex">
+              <dt>Status</dt>
+              <dd>{{ Auth::user()->programStudy->faculty->name }}</dd>
+            </dl>
+          </div>
+
+          <div class="card-profil" id="detail-login">
+            <h6 class="card-text-bold">Akun Login</h6>
+            <dl class="card-flex">
+              <dt>Email</dt>
+              <dd>email@email.com</dd>
+            </dl>
+            <dl class="card-flex">
+              <dt>Password</dt>
+              <dd>********</dd>
+            </dl>
+          </div>
+
         </div>
       </div>
 

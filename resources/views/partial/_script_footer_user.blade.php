@@ -30,7 +30,7 @@ $('button.editx').click(function(){
 });
 // v-tampil
 // v-tutup
-$('button.btn-profil').click(function(){
+$('button.btn-profil#edit').click(function(){
   $('#form-kampus').addClass('v-tutup');
   $('#form-login').addClass('v-tutup');
   $('#form-profil').addClass('v-tampil');
@@ -39,7 +39,7 @@ $('button.btn-profil').click(function(){
   $('#form-login').removeClass('v-tampil');
   $('#form-profil').removeClass('v-tutup');
 });
-$('button.btn-kampus').click(function(){
+$('button.btn-kampus#edit').click(function(){
   $('#form-kampus').addClass('v-tampil');
   $('#form-login').addClass('v-tutup');
   $('#form-profil').addClass('v-tutup');
@@ -48,7 +48,7 @@ $('button.btn-kampus').click(function(){
   $('#form-login').removeClass('v-tampil');
   $('#form-profil').removeClass('v-tampil');
 });
-$('button.btn-login').click(function(){
+$('button.btn-login#edit').click(function(){
   $('#form-kampus').addClass('v-tutup');
   $('#form-login').addClass('v-tampil');
   $('#form-profil').addClass('v-tutup');
@@ -56,6 +56,34 @@ $('button.btn-login').click(function(){
   $('#form-kampus').removeClass('v-tampil');
   $('#form-login').removeClass('v-tutup');
   $('#form-profil').removeClass('v-tampil');
+});
+
+$('button.btn-profil#detail').click(function(){
+  $('#detail-kampus').addClass('v-tutup');
+  $('#detail-login').addClass('v-tutup');
+  $('#detail-profil').addClass('v-tampil');
+
+  $('#detail-kampus').removeClass('v-tampil');
+  $('#detail-login').removeClass('v-tampil');
+  $('#detail-profil').removeClass('v-tutup');
+});
+$('button.btn-kampus#detail').click(function(){
+  $('#detail-kampus').addClass('v-tampil');
+  $('#detail-login').addClass('v-tutup');
+  $('#detail-profil').addClass('v-tutup');
+
+  $('#detail-kampus').removeClass('v-tutup');
+  $('#detail-login').removeClass('v-tampil');
+  $('#detail-profil').removeClass('v-tampil');
+});
+$('button.btn-login#detail').click(function(){
+  $('#detail-kampus').addClass('v-tutup');
+  $('#detail-login').addClass('v-tampil');
+  $('#detail-profil').addClass('v-tutup');
+
+  $('#detail-kampus').removeClass('v-tampil');
+  $('#detail-login').removeClass('v-tutup');
+  $('#detail-profil').removeClass('v-tampil');
 });
 });
 </script>
