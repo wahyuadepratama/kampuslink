@@ -78,8 +78,13 @@
 									<ul class="nav navbar-nav navbar-right right_nav pull-right"><hr>
 										<li class="nav-item">
 											<a href="#" class="login" >
-												<img src="{{ asset('client/img/icon/user.png') }}">
-												<span>@php $count = \App\Models\Transaction::where('seen', false)->get(); $counted = count($count); echo $counted; @endphp</span>
+												<img src="{{ asset('client/img/icon/user.png') }}">	
+												@php 
+												$count = \App\Models\Transaction::where('seen', false)->get(); $counted = count($count);
+												if($counted>0){
+													echo "<span>".$counted."</span>";
+												} 
+												@endphp	
 											</a>
 											<div class="mediaD">
 												<div class="header">
@@ -94,7 +99,15 @@
 												</div>
 												<div class="body">
 													<ul>
-														<li><a href="/transaction"><i class="fa fa-ticket"></i> Transaksi & Tiket</a> <span>@php $count = \App\Models\Transaction::where('seen', false)->get(); $counted = count($count); echo $counted; @endphp</span></li>
+														<li>
+															<a href="/transaction"><i class="fa fa-ticket"></i> Transaksi & Tiket</a> 
+															@php 
+															$count = \App\Models\Transaction::where('seen', false)->get(); $counted = count($count);
+															if($counted>0){
+																echo "<span>".$counted."</span>";
+															} 
+															@endphp	
+														</li>
 														<li><a href="/profile"><i class="fa fa-cog"></i> Edit Profil</a></li>
 													</ul>
 													<div class="logout">

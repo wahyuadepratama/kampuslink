@@ -30,7 +30,7 @@ Table of Content:
 14/ features
 15/ career
 16/ contact
-17/ footer
+17/ footer 
 
 =====================================================================*/
 /*----------------------------------------------------*/
@@ -3923,11 +3923,14 @@ h6 {
 .cart_area {
   padding-top: 100px;
   padding-bottom: 100px; }
-
+.cart_inner{
+  padding: 1.875rem;
+  background: #fff;
+}
 .cart_inner .table thead tr th {
   border-top: 0px;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 700;
   font-family: 'Cabin',"Roboto", sans-serif;
   color: #777777;
   border-bottom: 0px !important; }
@@ -5519,16 +5522,19 @@ span.r_acara span.not{/*not*/
   opacity: 0 !important;
 }
 @media (max-width:767px){
+  .profil_box_area .profil-atur{
+    top: -30px;
+  }
   .profil_box_area .profil-atur .img-edit img{
     height: 500px;
     width: 100%;
   }
   .profil-atur2{
-    top: 500px !important;
+    top: 470px !important;
     left: 0 !important;
   }
   .profil_box_area{
-    padding-left: 24px;
+    padding-left: 0!important;
     padding-bottom: 35px;
     padding-top: 65px;
   }

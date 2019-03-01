@@ -77,7 +77,7 @@
                         </div>
                       </div>
                       <div class="tab-pane" id="tab_sales">
-                        <div class="row justify-content-sm-center">
+                        <div class="row">
                           <div class="col-sm-7">
                             <div class="element-wrapper">
                               <div class="element-box">
