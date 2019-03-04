@@ -212,7 +212,7 @@
                 </h6>
                 <div class="element-box-tp">
                   <div class="el-buttons-list full-width">
-                    <a class="btn btn-white btn-sm" href="event_tambah.php"><i class="os-icon os-icon-delivery-box-2"></i><span>Buat Event Baru</span></a>
+                    <a class="btn btn-white btn-sm" href="{{ url('organization/event/add') }}"><i class="os-icon os-icon-delivery-box-2"></i><span>Buat Event Baru</span></a>
                   </div>
                 </div>
               </div>

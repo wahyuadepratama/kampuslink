@@ -39,13 +39,13 @@
 							<div class="form-group col-md-12">
 								<div class="form-select" id="default-select">
 									<select style="display: none;">
-										<option value="">==Tingkat Organisasi==</option>
+										<option value="0">==Nama Kampus==</option>
 										<option value="1">Jurusan</option>
 										<option value="1">Fakultas</option>
 										<option value="1">Kampus</option>
 									</select>
 									<div class="nice-select" tabindex="0">
-										<span class="current">==Tingkat Organisasi==</span>
+										<span class="current">==Nama Kampus==</span>
 										<ul class="list">
 											<li data-value="1" class="option">Jurusan</li>
 											<li data-value="1" class="option">Fakultas</li>
@@ -55,7 +55,7 @@
 								</div>
 							</div>
 							<div class="col-md-12 form-group">
-								<textarea class="form-control" placeholder="Lokasi Organisasi"></textarea>
+								<textarea class="form-control" placeholder="Deskripsi Organisasi"></textarea>
 								<span class="help-block">
 										<strong></strong>
 								</span>

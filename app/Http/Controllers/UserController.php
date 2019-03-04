@@ -104,4 +104,9 @@ class UserController extends Controller
      return back()->with('success', 'Kamu Berhasil Memperbarui Data Login');
   }
 
+  public function showRegisterOrganization()
+  {
+    return view('user/register_organization');
+  }
+
 }

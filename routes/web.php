@@ -1,5 +1,5 @@
 <?php
- 
+
 Route::get('/', 'GuestController@index');
 
 Auth::routes();
@@ -9,12 +9,8 @@ Route::get('event/{campus}/{organization}/{category}', 'GuestController@filter')
 Route::get('event/{slug}/process', 'TransactionController@processTransaction');
 Route::post('event/{slug}/process', 'TransactionController@postProcessTransaction');
 Route::post('event/search', 'GuestController@search');
-Route::get('/kontak', function(){
-	return view('guest.kontak');
-});
-Route::get('/register_organization', function(){
-	return view('user.register_organization');
-});
+Route::get('/kontak', function(){	return view('guest.kontak'); });
+Route::get('/register-organization','UserController@showRegisterOrganization');
 
 
 
@@ -43,7 +39,7 @@ Route::get('organization/event/add', 'OrganizationController@addEvent');
 Route::post('organization/event/add', 'OrganizationController@storeEvent');
 
 Route::get('organization/event', 'OrganizationController@event');
-Route::get('organization/event/{id}', 'OrganizationController@searchEvent');
+Route::get('organization/event/{slug}', 'OrganizationController@searchEvent');
 
 
 // Admin

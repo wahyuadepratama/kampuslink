@@ -25,6 +25,11 @@
                       Buat Big Event
                     </h6>
                     <div class="element-content">
+                      @if (\Session::has('message'))
+                          <div class="alert alert-success">
+                              {!! \Session::get('message') !!}
+                          </div>
+                      @endif
                       <div class="element-box">
                         <form id="formValidate" method="post" action="{{ url('organization/event/add-big-event') }}" enctype="multipart/form-data">
                           {{ csrf_field() }}

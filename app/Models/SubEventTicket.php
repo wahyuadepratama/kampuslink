@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class SubEventTicket extends Model
 {
   protected $table = "sub_event_ticket";
+  public $timestamps = false;
 
   protected $guarded = [];
 
