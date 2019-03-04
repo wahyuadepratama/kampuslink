@@ -186,7 +186,7 @@
 								<td align="right">
 									<div class="checkout_btn_inner">
 										<!-- <a class="gray_btn" href="#">Continue Shopping</a> -->
-                    <a class="main_btn" href="javascript:{}" onclick="document.getElementById('my_form').submit();">Proceed to checkout</a>
+                    <a class="main_btn" href="javascript:{}" onclick="document.getElementById('my_form').submit();" id="proses_btn">Proceed to checkout</a>
 									</div>
 								</td>
 							</tr>
@@ -223,7 +223,11 @@
 <script src="{{ asset('client/vendors/counter-up/jquery.waypoints.min.js')}}"></script>
 <script src="{{ asset('client/vendors/counter-up/jquery.counterup.js')}}"></script>
 <script src="{{ asset('client/js/theme.js')}}"></script>
-
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#proses_btn').('class','btn-block');
+});
+</script>
 </body>
 
 </html>

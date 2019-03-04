@@ -30,7 +30,7 @@ Table of Content:
 14/ features
 15/ career
 16/ contact
-17/ footer
+17/ footer 
 
 =====================================================================*/
 /*----------------------------------------------------*/
@@ -68,7 +68,14 @@ h1, h2, h3, h4, h5, h6 {
 button:focus {
   outline: none;
   box-shadow: none; }
-
+textarea{
+  border: none !important;
+  border-radius: 0 !important;
+}
+textarea:focus{
+  box-shadow: none !important; 
+  border-color: whitesmoke !important;
+}
 .p_120 {
   padding-top: 120px;
   padding-bottom: 120px; }
@@ -2908,8 +2915,8 @@ h6 {
   border: none;
   border-radius: 0px;
   height: 40px;
-  background: #f9f9ff !important;
-  padding-left: 45px;
+  background: #ffffff !important;
+  /*padding-left: 45px;*/
   padding-right: 40px;
   width: 100%; }
 
@@ -3916,11 +3923,14 @@ h6 {
 .cart_area {
   padding-top: 100px;
   padding-bottom: 100px; }
-
+.cart_inner{
+  padding: 1.875rem;
+  background: #fff;
+}
 .cart_inner .table thead tr th {
   border-top: 0px;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 700;
   font-family: 'Cabin',"Roboto", sans-serif;
   color: #777777;
   border-bottom: 0px !important; }
@@ -4782,7 +4792,7 @@ h6 {
 .f_social_wd p {
   font-size: 14px;
   color: #777777;
-  margin-bottom: 15px; }
+  margin-bottom: 4px; }
 .f_social_wd .f_social a {
   font-size: 14px;
   color: #777777;
@@ -4792,7 +4802,9 @@ h6 {
     color: #00a2e9; }
   .f_social_wd .f_social a:last-child {
     margin-right: 0px; }
-
+.footer-area .f_social_wd p i{
+  margin-right: 7px;
+}
 /*---------------------------------------------------- */
 
 /*# sourceMappingURL=style.css.map */
@@ -5412,9 +5424,12 @@ span.r_acara span.not{/*not*/
 }
 
 /*====START Profil====*/
-.profil_box_area .login_form_inner.profil{
+.profil_box_area{
   padding-left: 70px;
   padding-bottom: 70px;
+}
+.login_form_inner.profil{
+  padding: 0;
 }
 .profil_box_area .profil-atur{
   position: absolute;
@@ -5452,15 +5467,15 @@ span.r_acara span.not{/*not*/
 .profil_box_area .profil-atur .img-edit .edit button.editx{
   display: none;
 }
-.profil-form .pilihan{
+.pilihan{
   display: flex;
   justify-content: flex-start;
   width: 100%;
 }
-.profil-form .pilihan h4{
+.pilihan h4{
   /*width: 10%;*/
 }
-.profil-form .pilihan button{
+.pilihan button{
   width: 33.33%;
   background: #00a2e9;
   border: 1px solid white;
@@ -5470,7 +5485,7 @@ span.r_acara span.not{/*not*/
   cursor: pointer;
   transition: 200ms;
 }
-.profil-form .pilihan button:hover{
+.pilihan button:hover{
   border: 1px solid #00a2e9;
   box-shadow: 1px 1px 14px -2px black;
   /*transform: scale(1.000);*/
@@ -5507,16 +5522,19 @@ span.r_acara span.not{/*not*/
   opacity: 0 !important;
 }
 @media (max-width:767px){
+  .profil_box_area .profil-atur{
+    top: -30px;
+  }
   .profil_box_area .profil-atur .img-edit img{
     height: 500px;
     width: 100%;
   }
   .profil-atur2{
-    top: 500px !important;
+    top: 470px !important;
     left: 0 !important;
   }
-  .profil_box_area .login_form_inner.profil{
-    padding-left: 24px;
+  .profil_box_area{
+    padding-left: 0!important;
     padding-bottom: 35px;
     padding-top: 65px;
   }
@@ -5630,3 +5648,38 @@ span.r_acara span.not{/*not*/
    font-family: 'Cabin','Cabin' !important;
 } */
 /* End of global font */
+.title_color.team{
+  text-align: center;
+  font-size: 1.872rem;
+  margin-bottom: 6rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+.single-footer-widget.teamx .team-content{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.single-footer-widget.teamx .team-content img{
+  width: 200px;
+  border-radius: 50%;
+}
+.single-footer-widget.teamx .team{
+  color: black;
+  font-weight: 600;
+  letter-spacing: 2px;
+  font-size: 16px;
+  margin-top: 1rem;
+}
+.login_form_inner{
+  background: #fff;
+  border-radius: 4px;
+}
+#detail-kampus,#detail-login{
+  position: absolute;
+  visibility: hidden;
+  transition: 500ms;
+  opacity: 0;
+}
+

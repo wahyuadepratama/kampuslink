@@ -95,7 +95,7 @@
 	</div>
 	<!--================End Single Product Area =================-->
 
-	<section class="feature_product_area section_gap">
+	<section class="feature_product_area p_120">
 		<div class="container-fluid">
 			<h4>Event Disarankan</h4>
 			<div class="sliderx-set">

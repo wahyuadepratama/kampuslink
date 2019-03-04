@@ -53,7 +53,7 @@
 							<h2>Daftarkan Dirimu Disini!</h2>
 							<!-- <p>Bergabunglah dengan ribuan orang lainnya untuk berbagi informasi dunia kampus disini!</p> -->
 						</div>
-						<a class="hot_deal_link" href="{{ url('login')}}"></a>
+						<a class="hot_deal_link" href="{{ url('register')}}"></a>
 					</div>
 				</div>
 
@@ -64,7 +64,7 @@
 							<h2>Daftarkan Organisasimu Disini!</h2>
 							<!-- <p>go!</p> -->
 						</div>
-						<a class="hot_deal_link" href="{{ url('login')}}"></a>
+						<a class="hot_deal_link" href="{{ url('/register_organization')}}"></a>
 					</div>
 				</div>
 			</div>

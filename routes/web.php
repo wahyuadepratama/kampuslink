@@ -1,5 +1,5 @@
 <?php
-
+ 
 Route::get('/', 'GuestController@index');
 
 Auth::routes();
@@ -9,6 +9,13 @@ Route::get('event/{campus}/{organization}/{category}', 'GuestController@filter')
 Route::get('event/{slug}/process', 'TransactionController@processTransaction');
 Route::post('event/{slug}/process', 'TransactionController@postProcessTransaction');
 Route::post('event/search', 'GuestController@search');
+Route::get('/kontak', function(){
+	return view('guest.kontak');
+});
+Route::get('/register_organization', function(){
+	return view('user.register_organization');
+});
+
 
 
 Route::get('profile', 'UserController@profile');
