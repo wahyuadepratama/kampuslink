@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.4.1deb2ubuntu2.1
--- http://www.phpmyadmin.net
+-- version 4.6.6deb5
+-- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Feb 20, 2019 at 05:35 PM
--- Server version: 10.0.36-MariaDB-0ubuntu0.16.04.1
--- PHP Version: 7.0.33-1+ubuntu16.04.1+deb.sury.org+1
+-- Host: localhost:3306
+-- Generation Time: Mar 07, 2019 at 09:18 AM
+-- Server version: 10.1.38-MariaDB-0ubuntu0.18.04.1
+-- PHP Version: 7.2.15-0ubuntu0.18.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -103,10 +103,10 @@ INSERT INTO `comment` (`id`, `content`, `sub_event_id`, `sender`, `created_at`, 
 CREATE TABLE `event` (
   `id` int(10) UNSIGNED NOT NULL,
   `organization_id` int(10) UNSIGNED NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '1',
   `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` text COLLATE utf8mb4_unicode_ci,
   `qr_code` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `start_date` date DEFAULT NULL,
   `end_date` date DEFAULT NULL,
   `photo` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'default-image.png',
@@ -119,9 +119,11 @@ CREATE TABLE `event` (
 -- Dumping data for table `event`
 --
 
-INSERT INTO `event` (`id`, `organization_id`, `name`, `description`, `qr_code`, `status`, `start_date`, `end_date`, `photo`, `web_link`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Firetech', 'Firetech adalah bla bla bla bla bla', 'kajd8afd87', 'pending', '2018-09-27', '2018-09-27', '1.jpeg', 'firetech.neotelemetri.com', '2018-09-27 00:12:34', '2018-09-27 00:12:34'),
-(2, 2, 'ISCE', 'ISCE adalah bla bla bla bla bla', 'kajd8afdfd87', 'pending', '2018-09-27', '2018-09-27', '2.jpeg', 'isce.hmsiunand.com', '2018-09-27 00:12:34', '2018-09-27 00:12:34');
+INSERT INTO `event` (`id`, `organization_id`, `status`, `name`, `description`, `qr_code`, `start_date`, `end_date`, `photo`, `web_link`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 'Firetech', 'Firetech adalah bla bla bla bla bla', 'kajd8afd87', '2018-09-27', '2018-09-27', '1.jpeg', 'firetech.neotelemetri.com', '2018-09-27 00:12:34', '2018-09-27 00:12:34'),
+(2, 2, 1, 'ISCE', 'ISCE adalah bla bla bla bla bla', 'kajd8afdfd87', '2018-09-27', '2018-09-27', '2.jpeg', 'isce.hmsiunand.com', '2018-09-27 00:12:34', '2019-02-25 01:49:56'),
+(3, 1, 1, 'dafaafa', '<p>adfadfafd</p>', NULL, '2019-02-25', '2019-02-25', 'dafaafa_1551068875.jpg', 'dafadfaf', '2019-02-25 04:27:55', '2019-02-24 21:27:55'),
+(24, 1, 0, 'Lomba Makan Kerupuk', NULL, NULL, NULL, NULL, 'default-image.png', NULL, '2019-03-04 09:20:19', '2019-03-04 02:20:19');
 
 -- --------------------------------------------------------
 
@@ -233,7 +235,10 @@ INSERT INTO `event_viewer` (`id`, `viewer_id`, `sub_event_id`, `seen_on`) VALUES
 (59, 4, 4, '2019-02-15 08:50:07'),
 (60, 5, 2, '2019-02-15 08:57:14'),
 (61, 2, 7, '2019-02-18 01:23:43'),
-(62, 2, 1, '2019-02-19 01:12:34');
+(62, 2, 1, '2019-02-19 01:12:34'),
+(63, 2, 10, '2019-02-20 12:05:58'),
+(64, 2, 7, '2019-02-21 02:49:45'),
+(65, 2, 5, '2019-03-04 03:45:53');
 
 -- --------------------------------------------------------
 
@@ -355,8 +360,7 @@ CREATE TABLE `sub_event` (
   `location` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `whatsapp` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `line` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `qr_code` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `price` int(11) NOT NULL,
+  `qr_code` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'ongoing',
   `approved` int(1) DEFAULT '0',
   `start_time` time DEFAULT NULL,
@@ -372,17 +376,18 @@ CREATE TABLE `sub_event` (
 -- Dumping data for table `sub_event`
 --
 
-INSERT INTO `sub_event` (`id`, `event_id`, `name`, `slug`, `description`, `location`, `whatsapp`, `line`, `qr_code`, `price`, `status`, `approved`, `start_time`, `end_time`, `date`, `photo`, `web_link`, `created_at`, `updated_at`) VALUES
-(1, 2, 'Lomba TIK', 'lomba-tik-832938', 'Lomba TIK adalah bla bla bla bla bla Lomba TIK adalah bla bla bla bla bla', 'PKM, Universitas Andalas, Limau Manis, Pauh', '0813713219871', 'id_line_h', 'kajd8afd87d', 30000, 'ongoing', 1, '08:00:00', '12:00:00', '2019-02-28', '1.jpeg', 'firetech.neotelemetri.com', '2019-02-12 00:12:35', '2019-02-20 08:40:30'),
-(2, 1, 'Hackathon', 'hackathon-91238291', 'Hackathon adalah bla bla bla bla bla', 'DilLo Padang', '0813713219889', 'id_line_eu', 'kajd8afd87d9', 300000, 'ongoing', 1, '07:12:35', '07:12:35', '2019-02-28', '2.jpeg', 'firetech.neotelemetri.com', '2018-09-27 00:12:35', '2019-02-20 08:40:34'),
-(3, 2, 'Expo dan Bazar', 'expo-dan-bazar-328391823', 'Expo dan bazar adalah bla bla bla bla bla', 'Fakultas Teknologi Informasi, Universitas Andalas', '08137321239', 'id_line_eur', 'kajd8afd87d49', 500000, 'ongoing', 1, '07:12:35', '07:12:35', '2019-02-27', '3.jpeg', 'isce.hmsiunand.com', '2018-09-27 00:12:35', '2019-02-20 08:40:37'),
-(4, 1, 'Lomba Desain', 'lomba-desain-934384', 'bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain', 'Padang Selatan', '92389283', 'djfkdjf', 'blabla.jpg', 20000, 'ongoing', 1, '08:00:00', '12:00:00', '2019-02-23', '4.jpeg', '', '2019-01-29 01:00:00', '2019-02-20 08:40:40'),
-(5, 1, 'Lomba MLBB', 'lomba-mlbb-8384934', 'bal bal balb alb albal alb alb al balbab', 'Padang', NULL, NULL, 'babababa', 321212, 'ongoing', 1, '10:00:00', '20:00:00', '2019-02-21', '1.jpeg', 'bla.com', '2019-01-29 03:00:00', '2019-02-20 08:40:45'),
-(6, 1, 'Lomba PUBG', 'lomba-pubg-3434134', 'adfafda adaf d ffdfdf dfdf d f', 'Pekanbaru', NULL, NULL, 'adfafafdaf', 323232, 'ongoing', 1, '10:00:00', '18:00:00', '2019-03-28', '5.jpeg', 'dfdf', '2019-01-29 05:00:00', '2019-02-20 08:40:49'),
-(7, 2, 'Lomba Mikrotik', 'lomba-mikrotik-343847', 'adfafdadf dfdf df dfd f dfdf', 'Padang, Unand', NULL, NULL, '23123dafaf', 323123, 'ongoing', 1, '09:00:00', '16:00:00', '2019-03-14', '7.jpeg', 'erererer', '2019-01-29 08:00:00', '2019-02-20 08:40:43'),
-(8, 1, 'Lomba Lari 200km Padang - Payakumbuh', 'tes-9348934', 'adfadfafdafafd', 'adfaf', NULL, NULL, 'dafafd', 34324, 'ongoing', 1, '08:00:00', '18:00:00', '2019-02-27', '8.jpeg', 'dfdf', '2019-01-29 09:00:00', '2019-02-20 08:40:47'),
-(9, 2, 'Lomba lorem ipsum', 'lomba-lorem-ipsum-293829', 'Lorem ipsum dolor sit amet, ipsum consulatu molestiae ut vis, et vix omnes praesent. Eirmod mediocritatem mei in, ei ipsum assum recteque ius. Zril efficiendi his ei. Meliore torquatos nec ea, eu viderer percipit pri. Iuvaret luptatum petentium mea id, eu probatus abhorreant eos.', 'Lorem ipsum dolor sit amet, ipsum consulatu', '23123213', '2131212', 'Lorem ipsum dolor sit amet, ipsum consulatu', 2000, 'ongoing', 1, '07:00:00', '15:00:00', '2019-02-27', 'default-image.png', 'Lorem ipsum dolor sit amet, ipsum consulatu', '2019-02-03 17:00:00', '2019-02-20 08:40:51'),
-(10, 2, 'Lorem ipsum dolor sit', 'lorem-ipsum-92384923', 'Lorem ipsum dolor sit amet, ipsum consulatu Lorem ipsum dolor sit amet, ipsum consulatu Lorem ipsum dolor sit amet, ipsum consulatu Lorem ipsum dolor sit amet, ipsum consulatu Lorem ipsum dolor sit amet, ipsum consulatu Lorem ipsum dolor sit amet, ipsum consulatu', 'Lorem ipsum dolor sit amet, ipsum consulatu', '2313123', '12312313', 'Lorem ipsum dolor sit amet, ipsum consulatu', 3000, 'ongoing', 1, '06:00:00', '15:00:00', '2019-02-21', 'default-image.png', 'Lorem ipsum dolor sit amet, ipsum consulatu', '2019-02-17 17:00:00', '2019-02-20 08:40:54');
+INSERT INTO `sub_event` (`id`, `event_id`, `name`, `slug`, `description`, `location`, `whatsapp`, `line`, `qr_code`, `status`, `approved`, `start_time`, `end_time`, `date`, `photo`, `web_link`, `created_at`, `updated_at`) VALUES
+(1, 2, 'Lomba TIK', 'lomba-tik-832938', 'Lomba TIK adalah bla bla bla bla bla Lomba TIK adalah bla bla bla bla bla', 'PKM, Universitas Andalas, Limau Manis, Pauh', '0813713219871', 'id_line_h', 'kajd8afd87d', 'ongoing', 1, '08:00:00', '12:00:00', '2019-06-11', '1.jpeg', 'firetech.neotelemetri.com', '2019-02-12 00:12:35', '2019-03-04 08:53:06'),
+(2, 1, 'Hackathon Hackathon Hackathon', 'hackathon-91238291', 'Hackathon adalah bla bla bla bla bla', 'DilLo Padang', '0813713219889', 'id_line_eu', 'kajd8afd87d9', 'ongoing', 0, '07:12:35', '07:12:35', '2019-02-28', '2.jpeg', 'firetech.neotelemetri.com', '2018-09-27 00:12:35', '2019-02-25 02:10:18'),
+(3, 2, 'Expo dan Bazar', 'expo-dan-bazar-328391823', 'Expo dan bazar adalah bla bla bla bla bla', 'Fakultas Teknologi Informasi, Universitas Andalas', '08137321239', 'id_line_eur', 'kajd8afd87d49', 'past', 1, '07:12:35', '07:12:35', '2019-02-27', '3.jpeg', 'isce.hmsiunand.com', '2018-09-27 00:12:35', '2019-03-03 20:23:52'),
+(4, 2, 'Lomba Desain', 'lomba-desain-934384', 'bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain', 'Padang Selatan', '92389283', 'djfkdjf', 'blabla.jpg', 'past', 1, '08:00:00', '12:00:00', '2019-02-23', '4.jpeg', '', '2019-01-29 01:00:00', '2019-02-25 01:53:27'),
+(5, 1, 'Lomba MLBB', 'lomba-mlbb-8384934', 'bal bal balb alb albal alb alb al balbab', 'Padang', NULL, NULL, 'babababa', 'ongoing', 1, '10:00:00', '20:00:00', '2019-03-30', '1.jpeg', 'bla.com', '2019-01-29 03:00:00', '2019-02-25 01:59:02'),
+(6, 2, 'Lomba PUBG', 'lomba-pubg-3434134', 'adfafda adaf d ffdfdf dfdf d f', 'Pekanbaru', NULL, NULL, 'adfafafdaf', 'ongoing', 1, '10:00:00', '18:00:00', '2019-03-28', '5.jpeg', 'dfdf', '2019-01-29 05:00:00', '2019-02-25 01:53:34'),
+(7, 2, 'Lomba Mikrotik', 'lomba-mikrotik-343847', 'adfafdadf dfdf df dfd f dfdf', 'Padang, Unand', NULL, NULL, '23123dafaf', 'ongoing', 1, '09:00:00', '16:00:00', '2019-03-14', '7.jpeg', 'erererer', '2019-01-29 08:00:00', '2019-02-20 08:40:43'),
+(8, 2, 'Lomba Lari 200km Padang - Payakumbuh', 'tes-9348934', 'adfadfafdafafd', 'adfaf', NULL, NULL, 'dafafd', 'ongoing', 1, '08:00:00', '18:00:00', '2019-06-14', '8.jpeg', 'dfdf', '2019-01-29 09:00:00', '2019-03-04 08:52:50'),
+(9, 2, 'Lomba lorem ipsum', 'lomba-lorem-ipsum-293829', 'Lorem ipsum dolor sit amet, ipsum consulatu molestiae ut vis, et vix omnes praesent. Eirmod mediocritatem mei in, ei ipsum assum recteque ius. Zril efficiendi his ei. Meliore torquatos nec ea, eu viderer percipit pri. Iuvaret luptatum petentium mea id, eu probatus abhorreant eos.', 'Lorem ipsum dolor sit amet, ipsum consulatu', '23123213', '2131212', 'Lorem ipsum dolor sit amet, ipsum consulatu', 'ongoing', 1, '07:00:00', '15:00:00', '2019-06-13', 'default-image.png', 'Lorem ipsum dolor sit amet, ipsum consulatu', '2019-02-03 17:00:00', '2019-03-04 08:52:40'),
+(10, 2, 'Lorem ipsum dolor sit', 'lorem-ipsum-92384923', 'Lorem ipsum dolor sit amet, ipsum consulatu Lorem ipsum dolor sit amet, ipsum consulatu Lorem ipsum dolor sit amet, ipsum consulatu Lorem ipsum dolor sit amet, ipsum consulatu Lorem ipsum dolor sit amet, ipsum consulatu Lorem ipsum dolor sit amet, ipsum consulatu', 'Lorem ipsum dolor sit amet, ipsum consulatu', '2313123', '12312313', 'Lorem ipsum dolor sit amet, ipsum consulatu', 'ongoing', 1, '06:00:00', '15:00:00', '2019-06-05', 'default-image.png', 'Lorem ipsum dolor sit amet, ipsum consulatu', '2019-02-17 17:00:00', '2019-03-04 08:52:26'),
+(14, 24, 'Lomba Makan Kerupuk', 'lomba-makan-kerupuk', '<p>adfafafafaf</p>', 'adafafafafafadf', '08412382', 'fgfgfg', NULL, 'ongoing', 0, '01:03:00', '14:04:00', '2019-03-04', 'event_lomba-makan-kerupuk_1551691220.jpg', 'firetech.neotelemetri.com', '2019-03-04 09:20:20', '2019-03-04 02:20:20');
 
 -- --------------------------------------------------------
 
@@ -414,7 +419,9 @@ INSERT INTO `sub_event_ticket` (`id`, `sub_event_id`, `type`, `price`, `stock`) 
 (9, 7, 'Reguler', 20000, 13),
 (10, 8, 'Reguler', 12000, 14),
 (11, 9, 'Reguler', 23000, 15),
-(12, 10, 'Reguler', 40000, 17);
+(12, 10, 'Reguler', 40000, 17),
+(13, 14, 'Reguler', 5000, 4),
+(14, 14, 'VIP', 5000, 4);
 
 -- --------------------------------------------------------
 
@@ -475,7 +482,9 @@ INSERT INTO `ticket` (`id`, `transaction_id`, `price`, `qr_code`, `link`, `statu
 (13, 10, 20000, 'qr/8246809375', 'link/7123086818', 'active', '2019-02-15 09:19:52', '2019-02-15 02:19:52'),
 (14, 10, 60000, 'qr/6133249283', 'link/3169149711', 'active', '2019-02-15 09:19:52', '2019-02-15 02:19:52'),
 (15, 11, 20000, 'qr/6682525523', 'link/5550588276', 'active', '2019-02-19 01:17:51', '2019-02-18 18:17:51'),
-(16, 11, 60000, 'qr/6173203103', 'link/3455439601', 'active', '2019-02-19 01:17:51', '2019-02-18 18:17:51');
+(16, 11, 60000, 'qr/6173203103', 'link/3455439601', 'active', '2019-02-19 01:17:51', '2019-02-18 18:17:51'),
+(17, 12, 0, 'qr/3040085281', 'link/8956509839', 'active', '2019-03-04 03:46:07', '2019-03-03 20:46:07'),
+(18, 13, 0, 'qr/1157947457', 'link/7355433867', 'active', '2019-03-04 09:37:35', '2019-03-04 02:37:35');
 
 -- --------------------------------------------------------
 
@@ -504,14 +513,16 @@ CREATE TABLE `transaction` (
 INSERT INTO `transaction` (`id`, `user_id`, `sub_event_id`, `admin_cost`, `unique_code`, `sender`, `status`, `proof_payment`, `seen`, `created_at`, `updated_at`) VALUES
 (1, 2, 1, 300, 12131, 'Hapis Firman', 'Pembayaran Dibatalkan', NULL, 1, '2018-09-28 00:12:35', '2019-02-19 03:53:28'),
 (2, 3, 2, 300, 12131, 'Aqli Mulia', 'Pembayaran Berhasil', NULL, 1, '2018-09-27 00:12:35', '2019-02-19 03:53:35'),
-(3, 2, 4, 300, 123, 'John', 'Menunggu Pembayaran', NULL, 1, '2019-02-12 03:31:23', '2019-02-12 03:31:23'),
+(3, 2, 4, 300, 123, 'John', 'Menunggu Pembayaran', NULL, 1, '2019-02-12 03:31:23', '2019-03-04 01:51:12'),
 (4, 2, 5, 300, 234, 'Doe', 'Pembayaran Dibatalkan', NULL, 1, '2019-02-03 01:00:00', '2019-02-15 02:39:24'),
 (5, 2, 4, 300, 345, 'John Doe', 'Diproses', NULL, 1, '2019-02-01 17:00:00', '2019-02-12 03:34:10'),
 (6, 2, 8, 300, 456, 'Smith', 'Ditolak', NULL, 1, '2019-01-02 08:00:00', '2019-02-12 03:34:10'),
 (7, 2, 7, 400, 567, 'Pierre', 'Pembayaran Berhasil', NULL, 1, '2019-01-23 13:00:00', '2019-02-12 03:34:46'),
 (9, 2, 1, 300, 333, NULL, 'Menunggu Pembayaran', NULL, 1, '2019-02-13 09:17:53', '2019-02-14 02:48:57'),
-(10, 2, 1, 300, 216, NULL, 'Pembayaran Berhasil', NULL, 1, '2019-02-15 09:19:52', '2019-02-19 03:50:19'),
-(11, 5, 3, 300, 547, NULL, 'Menunggu Pembayaran', NULL, 1, '2019-02-19 01:17:51', '2019-02-18 18:17:51');
+(10, 2, 1, 300, 216, NULL, 'Pembayaran Berhasil', NULL, 1, '2019-02-15 09:19:52', '2019-03-04 01:51:05'),
+(11, 5, 3, 300, 547, NULL, 'Menunggu Pembayaran', NULL, 1, '2019-02-19 01:17:51', '2019-02-20 03:57:07'),
+(12, 5, 5, 300, 442, NULL, 'Menunggu Pembayaran', NULL, 1, '2019-03-04 03:46:06', '2019-03-03 20:46:07'),
+(13, 5, 10, 300, 350, NULL, 'Menunggu Pembayaran', NULL, 1, '2019-03-04 09:37:35', '2019-03-04 02:37:35');
 
 -- --------------------------------------------------------
 
@@ -552,10 +563,10 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `role_id`, `program_study_id`, `status`, `username`, `email`, `password`, `fullname`, `nim`, `phone`, `photo_profile`, `photo_ktm`, `date_birth`, `gender`, `last_login`, `token_fcm`, `phone_type`, `android_type`, `apps_version`, `banned`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 1, 1, 1, 'admin', 'admin@gmail.com', '$2y$10$.7hqO3OKindL4AA.nxVTb.2QJGo/mpPBNjDc2Uc800T0HTmrl9wGa', 'Administrator', '1511521021', '081371321919', 'user.png', 'default-avatar.svg', NULL, 'man', NULL, NULL, NULL, NULL, NULL, NULL, 'QBRBs8OwferxTsucSQtBrbX0Aob5HlmEza8GwMoFCGElqETuYcp6MLqVAihc', '2018-09-27 00:12:34', '2019-02-14 04:56:21', NULL),
-(2, 3, 1, 1, 'badusaputra', 'badu@gmail.com', '$2y$10$4zCFV55pzomQcNirljybIeNx8C.q8ijGis9M2sFHFq534aI/dz8RC', 'Badu Saputra', '1511521022', '081371321914', 'user.png', 'default-avatar.svg', '2019-01-09', 'man', NULL, NULL, NULL, NULL, NULL, NULL, 'pBTw6HxHnZkEgnk4FevR6Q7RuXdTZIL1xLjNEegFeUZgUKRjRpehZgBhsN34', '2018-09-27 00:12:34', '2019-02-19 00:58:18', NULL),
+(2, 3, 1, 1, 'badusaputra', 'badu@gmail.com', '$2y$10$4zCFV55pzomQcNirljybIeNx8C.q8ijGis9M2sFHFq534aI/dz8RC', 'Badu Saputra', '1511521022', '081371321914', 'user.png', 'default-avatar.svg', '2019-01-09', 'man', NULL, NULL, NULL, NULL, NULL, NULL, 'nlBTae0ZtAI9gN7YlGoDdWOPgP0pflKVzeeGxIGTy6YF1EfVLddDVPob1D2X', '2018-09-27 00:12:34', '2019-03-04 09:24:23', NULL),
 (3, 3, 3, 0, 'budiperkasa', 'budi@gmail.com', '$2y$10$.7hqO3OKindL4AA.nxVTb.2QJGo/mpPBNjDc2Uc800T0HTmrl9wGa', 'Budi Perkasa', '1511521023', '081371421919', 'user.png', 'default-avatar.svg', NULL, 'man', NULL, NULL, NULL, NULL, NULL, NULL, 'k2p4cAkCLpN5gCB56sKV7RcAONnq0yxj0hfwAVKv', '2018-09-27 00:12:34', '2019-02-14 04:58:21', NULL),
 (4, 2, 3, 0, 'sitisarah', 'siti@gmail.com', '$2y$10$.7hqO3OKindL4AA.nxVTb.2QJGo/mpPBNjDc2Uc800T0HTmrl9wGa', 'Siti Sarah', '1511521020', '08137141919', 'user.png', 'default-avatar.svg', NULL, 'woman', NULL, NULL, NULL, NULL, NULL, NULL, '4DQxm4uG1idjbEFn4Gl6KxXJeUqgqmnF6vxI5MQl', '2018-09-27 00:12:34', '2019-02-18 04:30:58', NULL),
-(5, 2, 2, 0, 'wahyuadepratama', 'wahyuadepratama@gmail.com', '$2y$10$7rYORf/qK2wY.3/qm4g2eetiO28cA95d0TDlVTMXva23kSTThfdkq', 'Wahyu Ade Pratama', '1511521024', '081371321971', 'user.png', 'default-avatar.svg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ch2KYR1SnhXlWC63frXlFWdR8zSVVTGwRCqahNFPrvUddzs2RjjbLvHTSuLB', '2018-10-01 03:32:24', '2019-02-18 06:47:46', NULL);
+(5, 2, 2, 0, 'wahyuadepratama', 'wahyuadepratama@gmail.com', '$2y$10$7rYORf/qK2wY.3/qm4g2eetiO28cA95d0TDlVTMXva23kSTThfdkq', 'Wahyu Ade Pratama', '1511521024', '081371321971', 'user.png', 'default-avatar.svg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'V4q1rDULPUfzNGrW9bMo11cqpMZu3XdXm398DKDl7LQ9ctuiZ1aYYEejhcDI', '2018-10-01 03:32:24', '2019-03-04 09:22:57', NULL);
 
 -- --------------------------------------------------------
 
@@ -594,7 +605,7 @@ CREATE TABLE `viewer` (
 --
 
 INSERT INTO `viewer` (`id`, `ip_address`, `last_view`) VALUES
-(2, '127.0.0.1', '2019-02-19 01:12:34'),
+(2, '127.0.0.1', '2019-03-04 03:45:53'),
 (3, '10.21.2.112', '2019-01-29 02:50:06'),
 (4, '192.168.43.1', '2019-02-15 08:50:07'),
 (5, '192.168.43.99', '2019-02-15 08:57:14');
@@ -758,7 +769,7 @@ ALTER TABLE `comment`
 -- AUTO_INCREMENT for table `event`
 --
 ALTER TABLE `event`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT for table `event_category`
 --
@@ -768,7 +779,7 @@ ALTER TABLE `event_category`
 -- AUTO_INCREMENT for table `event_viewer`
 --
 ALTER TABLE `event_viewer`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 --
 -- AUTO_INCREMENT for table `faculty`
 --
@@ -793,12 +804,12 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `sub_event`
 --
 ALTER TABLE `sub_event`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `sub_event_ticket`
 --
 ALTER TABLE `sub_event_ticket`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `suggestion`
 --
@@ -808,12 +819,12 @@ ALTER TABLE `suggestion`
 -- AUTO_INCREMENT for table `ticket`
 --
 ALTER TABLE `ticket`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `transaction`
 --
 ALTER TABLE `transaction`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `users`
 --
