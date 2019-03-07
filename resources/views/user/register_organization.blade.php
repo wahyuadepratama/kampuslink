@@ -27,9 +27,9 @@
 							{{ csrf_field() }}
 							<div class="col-md-12 form-group">
 								<input type="text" name="name" value="{{ old('name') }}" class="form-control" id="name" placeholder="Nama Organisasi" required>
-								<span class="help-block">
-										<strong></strong>
-								</span>
+							</div>
+							<div class="col-md-12 form-group">
+								<input type="text" name="ig" value="{{ old('ig') }}" class="form-control" id="name" placeholder="Akun Instagram (ex: @neotelemetri)" required>
 							</div>
 							<div class="col-md-12 form-group">
 								<textarea class="form-control" name="description" placeholder="Deskripsi Organisasi">{{ old('description') }}</textarea>
@@ -39,7 +39,6 @@
 							</div>
 							<div class="form-group col-md-12">
 								<div class="form-select" id="default-select">
-<<<<<<< HEAD
 									<select style="display: none;" name="campus">
 										<option value="0">Pilih Kampus</option>
 										@foreach($campus as $key)
@@ -49,31 +48,6 @@
 								</div>
 							</div>
 							<div class="col-md-12 form-group">
-=======
-									<select style="display: none;">
-										<option value="0">==Nama Kampus==</option>
-										<option value="1">Jurusan</option>
-										<option value="1">Fakultas</option>
-										<option value="1">Kampus</option>
-									</select>
-									<div class="nice-select" tabindex="0">
-										<span class="current">==Nama Kampus==</span>
-										<ul class="list">
-											<li data-value="1" class="option">Jurusan</li>
-											<li data-value="1" class="option">Fakultas</li>
-											<li data-value="1" class="option">Kampus</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-12 form-group">
-								<textarea class="form-control" placeholder="Deskripsi Organisasi"></textarea>
-								<span class="help-block">
-										<strong></strong>
-								</span>
-							</div>
-							<div class="col-md-12 form-group">
->>>>>>> origin/front-end
 								<div class="creat_account">
 									<input type="checkbox" id="f-option2" name="selector" required>
 									<label for="f-option2"> Setuju dengan syarat dan ketentuan KampusLink </label>

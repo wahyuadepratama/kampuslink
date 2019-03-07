@@ -9,16 +9,10 @@ Route::get('event/{campus}/{organization}/{category}', 'GuestController@filter')
 Route::get('event/{slug}/process', 'TransactionController@processTransaction');
 Route::post('event/{slug}/process', 'TransactionController@postProcessTransaction');
 Route::post('event/search', 'GuestController@search');
-<<<<<<< HEAD
+
 Route::get('/kontak', function(){	return view('guest.kontak'); });
 Route::get('/register-organization','UserController@showRegisterOrganization');
 Route::post('/store-register-organization', 'UserController@storeRegisterOrganization');
-=======
-
-Route::get('/kontak', function(){	return view('guest.kontak'); });
-Route::get('/register-organization','UserController@showRegisterOrganization');
-
->>>>>>> origin/front-end
 
 
 Route::get('profile', 'UserController@profile');
@@ -35,18 +29,18 @@ Route::get('transaction/{id}', 'TransactionController@showTransaction');
 Route::get('get-all-sub-event', 'GuestController@getDataSubEvent');
 
 
-Route::get('organization/{name}', 'OrganizationController@home');
-Route::get('organization/{name}/profile', 'OrganizationController@profile');
-Route::post('organization/{name}/profile', 'OrganizationController@saveProfile');
+Route::get('organization/{ig}', 'OrganizationController@home');
+Route::get('organization/{ig}/profile', 'OrganizationController@profile');
+Route::post('organization/{ig}/profile', 'OrganizationController@saveProfile');
 
-Route::get('organization/event/add-big-event', 'OrganizationController@addBigEvent');
-Route::post('organization/event/add-big-event', 'OrganizationController@storeBigEvent');
+Route::get('organization/{ig}/event/add-big-event', 'OrganizationController@addBigEvent');
+Route::post('organization/{ig}/event/add-big-event', 'OrganizationController@storeBigEvent');
 
-Route::get('organization/event/add', 'OrganizationController@addEvent');
-Route::post('organization/event/add', 'OrganizationController@storeEvent');
+Route::get('organization/{ig}/event/add', 'OrganizationController@addEvent');
+Route::post('organization/{ig}/event/add', 'OrganizationController@storeEvent');
 
-Route::get('organization/event', 'OrganizationController@event');
-Route::get('organization/event/{slug}', 'OrganizationController@searchEvent');
+Route::get('organization/{ig}/event', 'OrganizationController@event');
+Route::get('organization/{ig}/event/{slug}', 'OrganizationController@searchEvent');
 
 //Alfikri
 //Guest
@@ -64,13 +58,3 @@ Route::get('/superadminrambo', function(){
 Route::get('/superadmin/home', function(){
 	return view('superAdmin.home');
 });
-
-// Admin
-// Route::get('root', 'AdminController@index');
-// Route::get('root/user-management','AdminController@indexUser');
-// Route::get('root/user-management/blocked','AdminController@indexDeletedUser');
-// Route::post('root/user-management/delete/{id}','AdminController@deleteUser');
-// Route::post('root/user-management/destroy/{id}','AdminController@destroyUser');
-// Route::post('root/user-management/restore/{id}','AdminController@restoreUser');
-// Route::post('root/user-management/update/{id}','AdminController@updateUser');
-// Route::post('root/user-management/reset-password/{id}','AdminController@resetPasswordUser');

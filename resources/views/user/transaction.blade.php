@@ -1,6 +1,6 @@
 @include('partial/_header')
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{{asset('client/vendors/bootstrap/css/bootstrap.min.css')}}">
+	<!-- <link rel="stylesheet" type="text/css" href="{{asset('client/vendors/bootstrap/css/bootstrap.min.css')}}"> -->
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="{{asset('client/fonts/font-awesome-4.7.0/css/font-awesome.min.css')}}">
 <!--===============================================================================================-->

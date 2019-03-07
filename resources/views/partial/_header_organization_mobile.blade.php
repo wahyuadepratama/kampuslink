@@ -1,7 +1,7 @@
 <!-- START - Mobile Menu -------------------->
 <div class="menu-mobile menu-activated-on-click color-scheme-dark">
   <div class="mm-logo-buttons-w">
-    <a class="mm-logo" href="index.html"><img src="{{ asset('_admin/img/logo.png')}}"><span>Neo Telemetri</span></a>
+    <a class="mm-logo" href="/"><img src="{{ asset('_admin/img/logo.png')}}"><span>{{ $name }}</span></a>
     <div class="mm-buttons">
       <div class="content-panel-open">
         <div class="os-icon os-icon-grid-circles"></div>
@@ -28,7 +28,7 @@
     <!-- START - Mobile Menu List -------------------->
     <ul class="main-menu">
       <li>
-        <a href="index.php">
+        <a href="{{ url('organization') }}">
           <div class="icon-w">
             <div class="os-icon os-icon-layout"></div>
           </div>
