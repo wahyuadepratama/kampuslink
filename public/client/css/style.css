@@ -30,7 +30,7 @@ Table of Content:
 14/ features
 15/ career
 16/ contact
-17/ footer 
+17/ footer
 
 =====================================================================*/
 /*----------------------------------------------------*/
@@ -73,7 +73,7 @@ textarea{
   border-radius: 0 !important;
 }
 textarea:focus{
-  box-shadow: none !important; 
+  box-shadow: none !important;
   border-color: whitesmoke !important;
 }
 .p_120 {
@@ -4423,7 +4423,7 @@ h6 {
 .order_details_table {
   background: #f9f9ff;
   padding: 30px;
-  margin-top: 75px; }
+  }
   .order_details_table h2 {
     color: #222222;
     font-size: 18px;
@@ -5546,10 +5546,9 @@ span.r_acara span.not{/*not*/
   width: 100%;
   background: white;
   min-height: 200px;
-  transform: translateY(50%);
-  border:5px solid #4e504d;
-  padding: 4px;
+  border:5px solid #4e504d;  
   position: relative;
+  margin-top: 5%;
 }
 .tiket .head{
   width: 100%;
@@ -5683,3 +5682,45 @@ span.r_acara span.not{/*not*/
   opacity: 0;
 }
 
+/* ticket css */
+.tiket{
+  background: white;
+  width: 100%;
+  position: relative;
+  /*transform: translateY(50%);*/
+  padding: 7px 20px;
+}
+.tiket h4{
+  margin-bottom: 0;
+}
+.tiket p{
+  color: black;
+  font-weight: 500;
+  line-height: 20px;
+}
+.tiket .body,
+.tiket .foot{
+  margin-top: 32px;
+}
+.tiket .header{
+  text-align: center;
+}
+.tiket .header h1{
+  text-decoration: underline;
+  margin-bottom: 0px;
+  color: black;
+  font-weight: 500;
+}
+.tiket_box_area .qr-code{
+  background: white;
+  width: 100%;
+  min-height: 200px;
+  position: relative;
+  border-radius: 2px;
+  padding: 20px;
+  margin-top: 20px;
+}
+.tiket_box_area .qr-code .img{
+    display: flex;
+    justify-content: center;
+}
