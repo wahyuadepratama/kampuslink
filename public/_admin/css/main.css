@@ -29042,3 +29042,6 @@ Contents:
 .support-index .support-ticket-content-w .support-ticket-info::-webkit-scrollbar-thumb:hover{
   background: #0356ad;
 }
+.event-produk{
+  overflow: hidden;
+}

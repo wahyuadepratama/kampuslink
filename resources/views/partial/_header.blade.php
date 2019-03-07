@@ -125,7 +125,6 @@
 								</div>
 
 								@elseif(Auth::user()->role_id == 2)
-
 								<div class="col-lg-2">
 									<ul class="nav navbar-nav navbar-right right_nav pull-right"><hr>
 										<li class="nav-item">
@@ -138,15 +137,20 @@
 														<!-- <img src="{{ asset('storage/avatar/'. Auth::user()->photo_profile) }}" width="50"> -->
 														<img src="{{ asset('client/img/icon/user.png') }}" width="50">
 													</div>
-													<!-- <div>
+													<div>
 														<h4>{{ Auth::user()->fullname }}</h4>
 														<p>{{ Auth::user()->email }}</p>
-													</div> -->
+													</div>
 												</div>
 												<div class="body">
 													<ul>
-														<li><a href="/organization"><i class="fa fa-ticket"></i> Dashboard</a></li>
-														<li><a href="/transaction"><i class="fa fa-ticket"></i> Transaksi & Tiket</a> <span>@php $count = \App\Models\Transaction::where('seen', false)->get(); $counted = count($count); echo $counted; @endphp</span></li>
+														<li><a href="/organization"><i class="fa fa-sitemap"></i> Nama Organisasi</a></li>
+														<li><a href="/transaction"><i class="fa fa-ticket"></i> Transaksi & Tiket</a>
+														@php $count = \App\Models\Transaction::where('seen', false)->get(); $counted = count($count);
+														if($counted > 0){
+															echo "<span>".$counted."</span>";
+														}
+														@endphp</li>
 														<li><a href="/profile"><i class="fa fa-cog"></i> Edit Profil</a></li>
 													</ul>
 													<div class="logout">

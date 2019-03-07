@@ -277,6 +277,7 @@ a {
 }
 .header_area .navbar .right_nav .nav-item div.mediaD{
   bottom: 204px;
+  left: -261px;
   position: absolute;
   visibility: hidden;
   transition: visibility 0s, opacity 0.2s linear;
@@ -5546,7 +5547,7 @@ span.r_acara span.not{/*not*/
   width: 100%;
   background: white;
   min-height: 200px;
-  border:5px solid #4e504d;  
+  border:5px solid #4e504d;
   position: relative;
   margin-top: 5%;
 }
