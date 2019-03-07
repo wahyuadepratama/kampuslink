@@ -150,8 +150,8 @@
 
         @if(isset($subEvent))
         <div class="property-items as-grid">
-
-            <div class="property-item">
+          <div class="row">
+            <div class="property-item col-4 col-md-4">
               <div class="event-tambah">
                 <div class="profile-tile profile-tile-inlined">
                   <a class="profile-tile-box faded" href="{{ url('organization/event/add') }}">
@@ -167,7 +167,7 @@
             </div>
 
             @foreach($subEvent as $key)
-              <div class="property-item event-produk">
+              <div class="property-item event-produk col-4 col-md-4">
               <a class="item-media-w" href="#">
                 <div class="item-media" style="background-image: url({{ asset('storage/poster/_medium/'.$key['photo'].')')}}"></div>
               </a>
@@ -198,13 +198,14 @@
               </div>
             </div>
             @endforeach
+          </div>
         </div>
         @endif
 
         @if(isset($event))
         <div class="property-items as-grid">
-
-            <div class="property-item">
+          <div class="row">
+            <div class="property-item col-4 col-md-4">
               <div class="event-tambah">
                 <div class="profile-tile profile-tile-inlined">
                   <a class="profile-tile-box faded" href="{{ url('organization/event/add-big-event') }}">
@@ -220,7 +221,7 @@
             </div>
 
             @foreach($event as $key)
-              <div class="property-item event-produk">
+              <div class="property-item event-produk b-r col-4 col-md-4">
               <a class="item-media-w" href="#">
                 <div class="item-media" style="background-image: url({{ asset('storage/poster/_medium/'.$key['photo'].')')}}"></div>
               </a>
@@ -241,6 +242,7 @@
               </div>
             </div>
             @endforeach
+          </div>
         </div>
         @endif
 
