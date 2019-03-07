@@ -153,7 +153,12 @@ class UserController extends Controller
       'organization_id' => $create->id
     ]);
 
+<<<<<<< HEAD
     return redirect('/organization'. '/' . $request->ig);
+=======
+    $name = base64_encode(base64_encode($create->id));
+    return redirect('/organization'. '/'. $name);
+>>>>>>> origin/front-end
   }
 
 }

@@ -50,6 +50,20 @@ Table of Content:
       -ms-flex: 0 0 50%;
       flex: 0 0 50%; } }
 
+@font-face {
+font-family: 'Insaniburger';
+font-style: normal;
+font-weight: normal;
+src: local('Insaniburger'), url('../fonts/insaniburger/Insanibu.woff') format('woff');
+}
+
+
+@font-face {
+font-family: 'Insaniburger with Cheese';
+font-style: normal;
+font-weight: normal;
+src: local('Insaniburger with Cheese'), url('../fonts/insaniburger/Insanibc.woff') format('woff');
+}
 /*---------------------------------------------------- */
 /*----------------------------------------------------*/
 body {
@@ -276,17 +290,17 @@ a {
   height: 16px;
 }
 .header_area .navbar .right_nav .nav-item div.mediaD{
-  bottom: 204px;
+  top: -800px;
   left: -261px;
   position: absolute;
   visibility: hidden;
-  transition: visibility 0s, opacity 0.2s linear;
+  transition: visibility 0.3s, opacity 0.2s linear;
 }
 .header_area .navbar .right_nav .nav-item:hover div.mediaD{
   visibility: visible;
   position: absolute;
   left: -261px;
-  bottom: -204px;
+  top: 80px;
   background: white;
   border-radius: 3px;
   width: 350px;
@@ -2940,7 +2954,7 @@ h6 {
   transition: all 0.3s ease 0s;
   line-height: 28px;
   min-height: 28px;
-  font-size: 12px;
+  font-size: 16px;
   padding-left: 45px; }
 
 .form-select .nice-select .list .option.selected {
@@ -5684,44 +5698,135 @@ span.r_acara span.not{/*not*/
 }
 
 /* ticket css */
-.tiket{
-  background: white;
+.box-tiket{
+  margin-top: 5%;
+  border:4px solid #505050;
   width: 100%;
+}
+.box-tiket .box-tiket2{
+  padding: 2px;
+}
+.box-tiket .box-tiket2 .head-tiket{
+  background: #6599ff;
+  width: 100%;
+  padding: 1px;
+  padding-left: 28px;
   position: relative;
-  /*transform: translateY(50%);*/
-  padding: 7px 20px;
 }
-.tiket h4{
-  margin-bottom: 0;
+.box-tiket .box-tiket2 .head-tiket h1{
+  color: white;
+  font-family:'Insaniburger';
 }
-.tiket p{
+.box-tiket .box-tiket2 .head-tiket p:nth-child(2){
+  color: black;
+  font-weight: 700;
+  margin: 0;
+  position: absolute;
+  right: 14px;
+  top: 4px;
+}
+.box-tiket .box-tiket2 .head-tiket p:nth-child(3){
   color: black;
   font-weight: 500;
-  line-height: 20px;
+  margin: 0;
+  position: absolute;
+  right: 14px;
+  top: 20px;
 }
-.tiket .body,
-.tiket .foot{
-  margin-top: 32px;
-}
-.tiket .header{
-  text-align: center;
-}
-.tiket .header h1{
-  text-decoration: underline;
-  margin-bottom: 0px;
-  color: black;
-  font-weight: 500;
-}
-.tiket_box_area .qr-code{
-  background: white;
-  width: 100%;
-  min-height: 200px;
+.box-tiket .box-tiket2 .body-tiket{
+  padding-top: 4px;
   position: relative;
-  border-radius: 2px;
-  padding: 20px;
-  margin-top: 20px;
 }
-.tiket_box_area .qr-code .img{
-    display: flex;
-    justify-content: center;
+.box-tiket .box-tiket2 .body-tiket div.row{
+  margin-left: -8px;
+}
+.box-tiket .box-tiket2 .body-tiket div div div div{
+  padding-left: 2px;
+  padding-right: 2px;
+}
+.box-tiket .box-tiket2 .body-tiket .kode{
+  background: white;
+  padding: 5px 5px 10px 5px;
+}
+.box-tiket .box-tiket2 .body-tiket .kode.lok{
+  margin-top: 4px;
+}
+.box-tiket .box-tiket2 .body-tiket .box-tiket3{
+  display: inline-block;
+  margin-left: 16px;
+}
+.box-tiket .box-tiket2 .body-tiket .kode p:nth-child(1){
+  color: black;
+  font-weight: 400;
+  margin: 0;
+}
+.box-tiket .box-tiket2 .body-tiket .kode p:nth-child(2){
+  color: black;
+  font-weight: 700;
+  margin: -5px 0 0 0;
+  line-height: 14px;
+}
+.box-tiket .box-tiket2 .body-tiket .box-tiket3{
+  padding-left: 0;
+  padding-right: 0;
+  position: relative;
+}
+.box-tiket .box-tiket2 .body-tiket .supp{
+  padding-left: 0;
+}
+.box-tiket .box-tiket2 .body-tiket .supp span{
+  font-weight: 500;
+  color: black;
+  font-size:10px;
+}
+.box-tiket .box-tiket2 .body-tiket .box-tiket3.qr{
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.box-tiket .box-tiket2 .body-tiket .logo{
+  width: 50%;
+}
+.box-tiket .qr img{
+  border:2px solid #6599ff;
+  width:60%;
+}
+@media (max-width: 767.98px) {
+  .box-tiket .box-tiket2 .head-tiket{
+    padding-bottom: 7px;
+  }
+  .box-tiket .box-tiket2 .head-tiket h1{
+    margin-bottom: 0;
+    line-height: 28px;
+  }
+  .box-tiket .box-tiket2 .head-tiket p:nth-child(2){
+    top: 0;
+    left: 0;
+    position: relative;
+    line-height: 20px;
+  }
+  .box-tiket .box-tiket2 .head-tiket p:nth-child(3){
+    top: 0;
+    right: 0;
+    position: relative;
+    line-height: 10px;
+  }
+  .box-tiket .box-tiket2 .body-tiket div.row{
+    margin-right: -8px;
+  }
+  .box-tiket .box-tiket2 .body-tiket .logo{
+    width: 50%;
+  }
+  .box-tiket .qr img{
+    margin-bottom: 14px;
+  }
+  .order_details .alert{
+    margin-top: 5%;
+  }
+  .order_details .order_details_div{
+    margin-top: 5%;
+  }
+}
+.nice-select .current{
+  font-size: 16px;
 }

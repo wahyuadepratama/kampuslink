@@ -51,6 +51,9 @@ Route::get('/kontak', function(){
 Route::get('/register_organization', function(){
 	return view('user.register_organization');
 });
+Route::get('/register_organization_message', function(){
+	return view('user.register_organization_message');
+});
 //superadmin
 Route::get('/superadminrambo', function(){
 	return view('superAdmin.login');

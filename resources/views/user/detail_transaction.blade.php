@@ -52,7 +52,8 @@
 							</div>
 					</div>
 				</div>
-				<div class="col-md-8">
+				
+				<div class="col-md-8 order_details_div">
 					<div class="order_details_table">
 						<h2>Detail Pembayaran</h2>
 						<div class="table-responsive">
@@ -110,6 +111,64 @@
 				</div>
 			</div>
 
+<<<<<<< HEAD
+			<!-- start tiket -->
+			<section class="tiket_box_area">
+				<div class="row" style="display: flex;justify-content: center;align-items: center; margin-right: 0;">
+					<div class="col-12 col-md-12">
+
+						<div class="box-tiket">
+							<div class="box-tiket2">
+								<div class="head-tiket">
+									<h1>HACKATHON 5.0</h1>
+									<p>Senin, 4 Februari 2019</p>
+									<p>@ 11.00 - 14.00</p>
+								</div>
+								<div class="body-tiket">
+									<div class="row">
+										<div class="col-md-10">
+											<div class="row">
+												<div class="col-md-3">
+													<div class="kode">
+														<p>TIKET #</p>
+														<p>46P85M-14</p>
+													</div>
+												</div>
+												<div class="col-md-3">
+													<div class="kode">
+														<p>PEMBELI</p>
+														<p>ALFIKRI ALFIKRI ALFIKRI</p>
+													</div>
+												</div>
+												<div class="col-md-3">
+													<div class="kode">
+														<p>JENIS TIKET</p>
+														<p>REGULER</p>
+													</div>
+												</div>
+												<div class="col-md-3">
+													<div class="kode">
+														<p>ORGANISASI</p>
+														<p>NEO TELEMETRI</p>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-9">
+													<div class="kode lok">
+														<p>LOKASI</p>
+														<p>Jl. Sudirman No.11, Koto Baru, Payakumbuh Utara, Kota Payakumbuh, Sumatera Barat 26218</p>
+													</div>
+												</div>
+												<div class="col-md-3" style="display: flex;justify-content: center;align-items: center;">
+													<img src="{{asset('client/img/logo/logo.png')}}" class="logo">
+												</div>
+											</div>
+										</div>
+										<div class="col-md-2 qr" style="display: flex;justify-content: center;align-items: center;">
+											<img src="{{asset('client/img/icon/qr-kode.png')}}">
+										</div>
+=======
 				<section class="tiket_box_area">
 					<div class="row">
 						<div class="tiket">
@@ -154,10 +213,18 @@
 									<div class="col-lg-3">
 										<h4>ORGANISASI</h4>
 										<p>NEO TELEMETRI</p>
+>>>>>>> master
 									</div>
 								</div>
 							</div>
 						</div>
+<<<<<<< HEAD
+
+					</div>
+				</div>
+			</section>
+			<!-- end tiket -->
+=======
 						<div class="qr-code">
 							<div class="row">
 								<div class="col-lg-3 img">
@@ -171,6 +238,7 @@
 						</div>
 					</div>
 				</section>
+>>>>>>> master
 
 		</div>
 	</section>
