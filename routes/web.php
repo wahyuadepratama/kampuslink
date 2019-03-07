@@ -14,7 +14,6 @@ Route::get('/kontak', function(){	return view('guest.kontak'); });
 Route::get('/register-organization','UserController@showRegisterOrganization');
 
 
-
 Route::get('profile', 'UserController@profile');
 Route::get('get-campus', 'UserController@getDataCampus');
 Route::get('get-faculty', 'UserController@getDataFaculty');
@@ -50,6 +49,9 @@ Route::get('/kontak', function(){
 //user
 Route::get('/register_organization', function(){
 	return view('user.register_organization');
+});
+Route::get('/register_organization_message', function(){
+	return view('user.register_organization_message');
 });
 //superadmin
 Route::get('/superadminrambo', function(){

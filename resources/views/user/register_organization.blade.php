@@ -67,13 +67,48 @@
 								</div>
 							</div>
 							<div class="col-md-12 form-group">
-								<button type="button" value="submit" class="btn submit_btn">Buat</button>
+								<button type="button" value="submit" class="btn submit_btn" data-toggle="modal" data-target="#modalLogin">Buat</button>
 								<!-- doc => https://sweetalert2.github.io/  -->
 							</div>
 						</form>
 					</div>
 				</div>
 			</div>
+		</div>
+
+		<!-- Modal -->
+		<div class="modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		  <div class="modal-dialog modal-dialog-centered" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalCenterTitle">Login</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body" style="">
+		        <div class="row">
+		        	<div class="col-12">
+		        		<div class="alert alert-danger" role="alert">
+						  Maaf, akun kamu belum terdaftar sebagai user atau username dan password salah!
+						</div>
+						<form action="/register_organization_message">
+			        		<div class="form-group">
+			        			<label>Username/Email</label>
+			        			<input type="text" class="form-control">
+			        		</div>
+			        		<div class="form-group">
+			        			<label>Password</label>
+			        			<input type="text" class="form-control">
+			        		</div>
+			        		<input type="submit" name="" class="btn btn-success btn-block">
+		        		</form>
+		        		<a href="/register">Belum terdaftar sebagai user?</a>
+		        	</div>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
 		</div>
 	</section>
 	<!--================End Login Box Area =================-->
@@ -85,13 +120,13 @@
 @include('partial/_script_footer')
 <script type="text/javascript">
 $(document).ready(function(){
-	$('button').click(function(){
-		Swal.fire({
-		  type: 'success',
-		  title: 'Berhasil',
-		  text: ''
-		});
-	});
+	// $('button').click(function(){
+	// 	Swal.fire({
+	// 	  type: 'success',
+	// 	  title: 'Berhasil',
+	// 	  text: ''
+	// 	});
+	// });
 	// doc => https://sweetalert2.github.io/
 });
 </script>
