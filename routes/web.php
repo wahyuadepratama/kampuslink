@@ -11,7 +11,7 @@ Route::post('event/{slug}/process', 'TransactionController@postProcessTransactio
 Route::post('event/search', 'GuestController@search');
 Route::get('/kontak', function(){	return view('guest.kontak'); });
 Route::get('/register-organization','UserController@showRegisterOrganization');
-
+Route::post('/store-register-organization', 'UserController@storeRegisterOrganization');
 
 
 Route::get('profile', 'UserController@profile');
@@ -28,9 +28,9 @@ Route::get('transaction/{id}', 'TransactionController@showTransaction');
 Route::get('get-all-sub-event', 'GuestController@getDataSubEvent');
 
 
-Route::get('organization', 'OrganizationController@home');
-Route::get('organization/profile', 'OrganizationController@profile');
-Route::post('organization/profile', 'OrganizationController@saveProfile');
+Route::get('organization/{name}', 'OrganizationController@home');
+Route::get('organization/{name}/profile', 'OrganizationController@profile');
+Route::post('organization/{name}/profile', 'OrganizationController@saveProfile');
 
 Route::get('organization/event/add-big-event', 'OrganizationController@addBigEvent');
 Route::post('organization/event/add-big-event', 'OrganizationController@storeBigEvent');

@@ -23,52 +23,50 @@
 				<div class="col-lg-6">
 					<div class="login_form_inner reg_form">
 						<h3>BUAT AKUN ORGANISASI</h3>
-						<form class="row login_form" action="#" method="post">
+						<form class="row login_form" action="{{ url('store-register-organization') }}" method="post">
+							{{ csrf_field() }}
 							<div class="col-md-12 form-group">
-								<input type="text" class="form-control" id="name" placeholder="Nama Organisasi">
+								<input type="text" name="name" value="{{ old('name') }}" class="form-control" id="name" placeholder="Nama Organisasi" required>
 								<span class="help-block">
 										<strong></strong>
 								</span>
 							</div>
 							<div class="col-md-12 form-group">
-								<input type="text" class="form-control" id="name" placeholder="Nama Kampus">
+								<textarea class="form-control" name="description" placeholder="Deskripsi Organisasi">{{ old('description') }}</textarea>
 								<span class="help-block">
 										<strong></strong>
 								</span>
 							</div>
 							<div class="form-group col-md-12">
 								<div class="form-select" id="default-select">
-									<select style="display: none;">
-										<option value="0">==Nama Kampus==</option>
-										<option value="1">Jurusan</option>
-										<option value="1">Fakultas</option>
-										<option value="1">Kampus</option>
+									<select style="display: none;" name="campus">
+										<option value="0">Pilih Kampus</option>
+										@foreach($campus as $key)
+										<option value="{{ $key->id }}">{{ $key->name }}</option>
+										@endforeach
 									</select>
-									<div class="nice-select" tabindex="0">
-										<span class="current">==Nama Kampus==</span>
-										<ul class="list">
-											<li data-value="1" class="option">Jurusan</li>
-											<li data-value="1" class="option">Fakultas</li>
-											<li data-value="1" class="option">Kampus</li>
-										</ul>
-									</div>
 								</div>
-							</div>
-							<div class="col-md-12 form-group">
-								<textarea class="form-control" placeholder="Deskripsi Organisasi"></textarea>
-								<span class="help-block">
-										<strong></strong>
-								</span>
 							</div>
 							<div class="col-md-12 form-group">
 								<div class="creat_account">
-									<input type="checkbox" id="f-option2" name="selector">
-									<label for="f-option2">Setuju dengan syarat dan ketentuan KampusLink</label>
+									<input type="checkbox" id="f-option2" name="selector" required>
+									<label for="f-option2"> Setuju dengan syarat dan ketentuan KampusLink </label>
 								</div>
 							</div>
 							<div class="col-md-12 form-group">
-								<button type="button" value="submit" class="btn submit_btn">Buat</button>
-								<!-- doc => https://sweetalert2.github.io/  -->
+								<button type="submit" value="submit" class="btn submit_btn">Buat</button><br>
+								@if ( count( $errors ) > 0 )
+						      @foreach($errors->all() as $error)
+						      <div class="alert alert-danger">
+						        {{ $error }}
+						      </div>
+						      @endforeach
+						    @endif
+								@if($message = Session::get('error'))
+						      <div class="alert alert-danger">
+						        {{$message}}
+						      </div>
+						    @endif
 							</div>
 						</form>
 					</div>
@@ -83,18 +81,6 @@
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 @include('partial/_script_footer')
-<script type="text/javascript">
-$(document).ready(function(){
-	$('button').click(function(){
-		Swal.fire({
-		  type: 'success',
-		  title: 'Berhasil',
-		  text: ''
-		});
-	});
-	// doc => https://sweetalert2.github.io/
-});
-</script>
 
 </body>
 

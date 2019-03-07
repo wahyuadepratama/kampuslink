@@ -21,12 +21,17 @@ class OrganizationController extends Controller
       $this->middleware('admin');
     }
 
-    public function home()
+    public function home($name)
     {
-      $organization = UserOrganization::where('user_id', Auth::user()->id)->first();
+      $id = base64_decode(base64_decode($name));
+      $admin = UserOrganization::where('user_id', Auth::user()->id)->where('organization_id', $id)->get();
 
-      $admin = UserOrganization::with('user')->where('organization_id', $organization->organization_id)->get();
-      $event = Event::where('organization_id', $organization->organization_id)->get();
+      if($admin->isEmpty()){
+        return abort(404);
+      }
+
+      $organization = Organization::where('id',$id)->first();
+      $event = Event::where('organization_id', $id)->get();
       $countEvent = count($event);
 
       $countSubEventOngoing = 0;
@@ -42,10 +47,11 @@ class OrganizationController extends Controller
                                       ->with('countEvent', $countEvent)
                                       ->with('countSubEventOngoing', $countSubEventOngoing)
                                       ->with('countSubEventPast', $countSubEventPast)
-                                      ->with('subEvent', $subEvent);
+                                      ->with('subEvent', $subEvent)
+                                      ->with('name', $organization->name);
     }
 
-    public function profile()
+    public function profile($name)
     {
       return view('organization/profile');
     }
@@ -225,7 +231,7 @@ class OrganizationController extends Controller
         'created_at' => Carbon::now()->setTimezone('Asia/Jakarta')
       ]);
 
-      if(isset($request->reguler_total) && isset($request->reguler_price)){        
+      if(isset($request->reguler_total) && isset($request->reguler_price)){
         SubEventTicket::create([
           'sub_event_id' => $subEvent->id,
           'type' => 'Reguler',

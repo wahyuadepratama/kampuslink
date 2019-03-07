@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Campus;
 use App\Models\Ticket;
 use App\Models\Faculty;
+use App\Models\Organization;
 use App\Models\Transaction;
 use App\Models\ProgramStudy;
 use Illuminate\Http\Request;
+use App\Models\UserOrganization;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -106,7 +109,35 @@ class UserController extends Controller
 
   public function showRegisterOrganization()
   {
-    return view('user/register_organization');
+    $campus = Campus::all();
+    return view('user/register_organization')->with('campus', $campus);
+  }
+
+  public function storeRegisterOrganization(Request $request)
+  {
+    $this->validate($request,[
+      'name' => 'required',
+      'description' => 'required',
+    ]);
+
+    if($request->campus == "0"){
+      return back()->withInput()->with('error', 'Please select your campus!');
+    }
+
+    $create = Organization::create([
+      'campus_id' => $request->campus,
+      'name' => $request->name,
+      'description' => $request->description,
+      'created_at' => Carbon::now()->setTimezone('Asia/Jakarta')
+    ]);
+
+    UserOrganization::create([
+      'user_id' => Auth::user()->id,
+      'organization_id' => $create->id
+    ]);
+
+    $name = base64_encode(base64_encode($create->id));
+    return redirect('/organization'. '/'. $name);
   }
 
 }
