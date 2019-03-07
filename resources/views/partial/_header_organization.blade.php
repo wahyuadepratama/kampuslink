@@ -33,7 +33,7 @@
             <a class="logo" href="/">
               <div class="logo-element"></div>
               <div class="logo-label">
-                @php $organization = \App\Models\UserOrganization::where('user_id', Auth::user()->id)->first(); echo $organization->organization->name; @endphp
+                {{ $name }}
               </div>
             </a>
           </div>

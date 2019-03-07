@@ -52,6 +52,7 @@
 							</div>
 					</div>
 				</div>
+				
 				<div class="col-md-8 order_details_div">
 					<div class="order_details_table">
 						<h2>Detail Pembayaran</h2>
@@ -110,6 +111,7 @@
 				</div>
 			</div>
 
+<<<<<<< HEAD
 			<!-- start tiket -->
 			<section class="tiket_box_area">
 				<div class="row" style="display: flex;justify-content: center;align-items: center; margin-right: 0;">
@@ -166,15 +168,77 @@
 										<div class="col-md-2 qr" style="display: flex;justify-content: center;align-items: center;">
 											<img src="{{asset('client/img/icon/qr-kode.png')}}">
 										</div>
+=======
+				<section class="tiket_box_area">
+					<div class="row">
+						<div class="tiket">
+							<div class="header">
+								<h1>Hackathon</h1>
+								<p>Senin, 4 Februari 2019 @ 11.00 - 14.00</p>
+							</div>
+							<div class="body">
+								<div class="row">
+									<div class="col-lg-2">
+										<h4>TIKET #</h4>
+										<p>46P85M-14</p>
+									</div>
+									<div class="col-lg-2">
+										<h4>JENIS TIKET</h4>
+										<p>REGULER</p>
+									</div>
+									<div class="col-lg-2">
+										<h4>PEMBELI</h4>
+										<p>WAHYU</p>
+									</div>
+									<div class="col-lg-3">
+										<h4>KODE KEAMANAN</h4>
+										<p>4RT34F</p>
+									</div>
+									<div class="col-lg-2">
+										<h4>STATUS</h4>
+										<p>AKTIF</p>
+									</div>
+								</div>
+							</div>
+							<div class="foot">
+								<div class="row">
+									<div class="col-lg-6">
+										<h4>LOKASI</h4>
+										<p>Jl. Sudirman No.11, Koto Baru, Payakumbuh Utara, Kota Payakumbuh.</p>
+									</div>
+									<div class="col-lg-3">
+										<h4>KAMPUS</h4>
+										<p>UNIVERSITAS ANDALAS</p>
+									</div>
+									<div class="col-lg-3">
+										<h4>ORGANISASI</h4>
+										<p>NEO TELEMETRI</p>
+>>>>>>> master
 									</div>
 								</div>
 							</div>
 						</div>
+<<<<<<< HEAD
 
 					</div>
 				</div>
 			</section>
 			<!-- end tiket -->
+=======
+						<div class="qr-code">
+							<div class="row">
+								<div class="col-lg-3 img">
+									<img src="img/clients-logo/qr-kode.png">
+								</div>
+								<div class="col-lg-9">
+									<h1>check in untuk acara ini</h1>
+									<p>pindai kode QR ini di acara untuk check in.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+>>>>>>> master
 
 		</div>
 	</section>
