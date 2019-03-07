@@ -235,7 +235,7 @@
                 </h3>
                   <div class="row">
                   <div class="item-price-buttons col-12">
-                      <a class="btn btn-outline-primary btn-block" href="{{ url('organization/even') }}"><span>Detail</span><i class="os-icon os-icon-arrow-2-right"></i></a>
+                      <a class="btn btn-outline-primary btn-block" href="{{ url('organization/event/'. $key['slug']) }}"><span>Detail</span><i class="os-icon os-icon-arrow-2-right"></i></a>
                   </div>
                   </div>
               </div>
