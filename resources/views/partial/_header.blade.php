@@ -125,7 +125,6 @@
 								</div>
 
 								@elseif(Auth::user()->role_id == 2)
-
 								<div class="col-lg-2">
 									<ul class="nav navbar-nav navbar-right right_nav pull-right"><hr>
 										<li class="nav-item">
@@ -138,10 +137,10 @@
 														<!-- <img src="{{ asset('storage/avatar/'. Auth::user()->photo_profile) }}" width="50"> -->
 														<img src="{{ asset('client/img/icon/user.png') }}" width="50">
 													</div>
-													<!-- <div>
+													<div>
 														<h4>{{ Auth::user()->fullname }}</h4>
 														<p>{{ Auth::user()->email }}</p>
-													</div> -->
+													</div>
 												</div>
 												<div class="body">
 													<ul>
