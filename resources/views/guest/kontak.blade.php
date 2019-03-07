@@ -1,17 +1,16 @@
 @include('partial/_header')
 
 	<!--================Home Banner Area =================-->
-	<section class="banner_area">
-		<div class="banner_inner d-flex align-items-center">
+	<section class="new_banner_area">
+		<div class="banner-img bg-overlay-39">
 			<div class="container">
-				<div class="banner_content text-center">
-					<h2>Kontak</h2>
-					<div class="page_link">
-						<a href="/">Home</a>
-						<a href="/kontak">Kontak</a>
-					</div>
-				</div>
+				<h1>Kontak</h1>
+				<ul>
+	              <li><a href="/">Home</a></li>
+	              <li>Kontak</li>
+	            </ul>
 			</div>
+			<div class="box-position" style="background-image: url(client/img/banner/banner-bg.jpg);"></div>
 		</div>
 	</section>
 	<!--================End Home Banner Area =================-->
