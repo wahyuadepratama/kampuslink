@@ -5938,3 +5938,20 @@ span.r_acara span.not{/*not*/
     margin-top: 70px;
   }
 }
+.p_filter_widgets .widgets_inner{
+  max-height: 400px;
+    overflow-y: scroll;
+    position: relative;
+}
+.p_filter_widgets .widgets_inner::-webkit-scrollbar{
+  width: 2px;
+}
+.p_filter_widgets .widgets_inner::-webkit-scrollbar-track{
+  background: #f1f1f1;
+}
+.p_filter_widgets .widgets_inner::-webkit-scrollbar-thumb{
+  background: #c8c8c8;
+}
+.p_filter_widgets .widgets_inner::-webkit-scrollbar-thumb:hover{
+  background: #0356ad;
+}
