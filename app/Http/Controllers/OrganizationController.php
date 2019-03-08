@@ -21,16 +21,31 @@ class OrganizationController extends Controller
       $this->middleware('admin');
     }
 
-    public function home($name)
+    public function checkOrganization($ig)
     {
-      $id = base64_decode(base64_decode($name));
-      $admin = UserOrganization::where('user_id', Auth::user()->id)->where('organization_id', $id)->get();
+      $organization = Organization::where('instagram',$ig)->first();
+      if(!isset($organization)){
+        return false;
+      }else{
+        $admin = UserOrganization::where('user_id', Auth::user()->id)->where('organization_id', $organization->id)->first();
+        if(!isset($admin)){
+          return false;
+        }else{
+          return $organization;
+        }
+      }
+    }
 
-      if($admin->isEmpty()){
+    public function home($ig)
+    {
+      return $ig;
+      $check = $this->checkOrganization($ig);
+      if($check == false){
         return abort(404);
+      }else{
+        $admin = UserOrganization::where('organization_id', $check->id)->get();
       }
 
-      $organization = Organization::where('id',$id)->first();
       $event = Event::where('organization_id', $id)->get();
       $countEvent = count($event);
 
@@ -48,10 +63,10 @@ class OrganizationController extends Controller
                                       ->with('countSubEventOngoing', $countSubEventOngoing)
                                       ->with('countSubEventPast', $countSubEventPast)
                                       ->with('subEvent', $subEvent)
-                                      ->with('name', $organization->name);
+                                      ->with('name', $check->name);
     }
 
-    public function profile($name)
+    public function profile()
     {
       return view('organization/profile');
     }

@@ -164,7 +164,7 @@
               <span>Menu</span>
             </li>
             <li class="selected has-sub-menu">
-              <a href="{{ url('organization') }}">
+              <a href="{{ url('organization/') }}">
                 <div class="icon-w">
                   <div class="os-icon os-icon-layout"></div>
                 </div>

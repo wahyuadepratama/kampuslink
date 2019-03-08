@@ -109,15 +109,21 @@ class UserController extends Controller
 
   public function showRegisterOrganization()
   {
-
-    $campus = Campus::all();
-    return view('user/register_organization')->with('campus', $campus);
+    $userOrganization = UserOrganization::where('user_id', Auth::user()->id)->first();
+    if(isset($userOrganization)){
+      $organization = Organization::where('id', $userOrganization->organization_id)->first();
+      if($organization->approved == )
+    }else{
+      $campus = Campus::all();
+      return view('user/register_organization')->with('campus', $campus);
+    }
   }
 
   public function storeRegisterOrganization(Request $request)
   {
     $this->validate($request,[
       'name' => 'required',
+      'ig' => 'required',
       'description' => 'required',
     ]);
 
@@ -125,9 +131,19 @@ class UserController extends Controller
       return back()->withInput()->with('error', 'Please select your campus!');
     }
 
+    $organization = Organization::where('name', $request->name)->first();
+    if(isset($organization)){
+      return back()->withInput()->with('error', 'Your organization has registered!');
+    }
+
+    if ($request->ig == trim($request->ig) && strpos($request->ig, ' ') !== false) {
+      return back()->withInput()->with('error', 'Your organization has registered!');
+    }
+
     $create = Organization::create([
       'campus_id' => $request->campus,
       'name' => $request->name,
+      'instagram' => $request->ig,
       'description' => $request->description,
       'created_at' => Carbon::now()->setTimezone('Asia/Jakarta')
     ]);
@@ -137,8 +153,12 @@ class UserController extends Controller
       'organization_id' => $create->id
     ]);
 
+<<<<<<< HEAD
+    return redirect('/organization'. '/' . $request->ig);
+=======
     $name = base64_encode(base64_encode($create->id));
     return redirect('/organization'. '/'. $name);
+>>>>>>> origin/front-end
   }
 
 }

@@ -144,13 +144,20 @@
 												</div>
 												<div class="body">
 													<ul>
-														<li><a href="/organization"><i class="fa fa-sitemap"></i> Nama Organisasi</a></li>
-														<li><a href="/transaction"><i class="fa fa-ticket"></i> Transaksi & Tiket</a> 
-														@php $count = \App\Models\Transaction::where('seen', false)->get(); $counted = count($count); 
-														if($counted > 0){
-															echo "<span>".$counted."</span>";
-														}
-														@endphp</li>
+
+														@php $organization = \App\Models\UserOrganization::where('user_id', Auth::user()->id)->get(); @endphp
+														@foreach($organization as $key)
+														<li><a href="/organization/{{ base64_encode(base64_encode($key->organization_id)) }}"><i class="fa fa-sitemap"></i> {{ $key->organization->name }}</a></li>
+														@endforeach
+
+														<li>
+															<a href="/transaction"><i class="fa fa-ticket"></i> Transaksi & Tiket</a>
+															@php $count = \App\Models\Transaction::where('seen', false)->get(); $counted = count($count);
+															if($counted > 0){
+																echo "<span>".$counted."</span>";
+															}
+															@endphp
+														</li>
 														<li><a href="/profile"><i class="fa fa-cog"></i> Edit Profil</a></li>
 													</ul>
 													<div class="logout">
