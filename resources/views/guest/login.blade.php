@@ -39,18 +39,12 @@
 								<input type="text" class="form-control" id="name" name="identity" value="{{ old('username') }}" required autofocus placeholder="Username or Email">
 							</div>
 							<div class="col-md-12 form-group {{ $errors->has('password') ? ' has-error' : '' }}">
-								<input type="password" class="form-control" id="name" name="password" placeholder="Password">
+								<input type="password" class="form-control" id="password" name="password" placeholder="Password">
 								@if ($errors->has('username'))
 										<span>
 												<strong class="text text-danger">{{ $errors->first('username') }}</strong>
 										</span>
 								@endif
-							</div>
-							<div class="col-md-12 form-group">
-								<div class="creat_account">
-									<input type="checkbox" id="f-option2" name="remember" {{ old('remember') ? 'checked' : '' }}>
-									<label for="f-option2">Keep me logged in</label>
-								</div>
 							</div>
 							<div class="col-md-12 form-group">
 								<button type="submit" value="submit" class="btn submit_btn">Log In</button>

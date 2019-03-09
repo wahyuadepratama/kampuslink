@@ -18,6 +18,11 @@
 	<!--================Cart Area =================-->
 	<section class="cart_area">
 		<div class="container">
+			@if($message = Session::get('error'))
+				<div class="alert alert-danger">
+					{{$message}}
+				</div>
+			@endif
 			<div class="cart_inner">
 				<div class="table-responsive">
 					<table class="table">

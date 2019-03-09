@@ -21,10 +21,12 @@
 	<section class="login_box_area p_120">
 		<div class="container">
 			<div class="row justify-content-center">
-				<div class="col-lg-6">
+				<div class="col-lg-8">
 					<div class="login_form_inner reg_form" style="padding: 20px;">
-						<div class="alert alert-success" role="alert">
-						  Berhasil untuk mendaftarkan organisasi "Nama Organisasi", mohon menunggu untuk dikonfirmasi oleh Admin Kampus Link, setelah dikonfirmasi kami akan memberi tahu kamu lewat pemberitahuan Kampus Link. Terima kasih.
+						<div class="alert alert-success" role="alert" style="font-size: 120%">
+							Organisasi <b>{{ $name }}</b> berhasil didaftarkan!<br>
+							Mohon tunggu konfirmasi dari Admin Kampus Link paling lambat 2x24 jam.<br>
+							Setelah proses verifikasi selesai, kami akan membuatkan halaman dashboard khusus untuk organisasi kamu.
 						</div>
 					</div>
 				</div>

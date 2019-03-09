@@ -4,7 +4,7 @@
 <script src="{{asset('client/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('client/js/stellar.js')}}"></script>
 <script src="{{asset('client/vendors/lightbox/simpleLightbox.min.js')}}"></script>
-<script src="{{asset('client/vendors/nice-select/js/jquery.nice-select.min.js')}}"></script>
+<!-- <script src="{{asset('client/vendors/nice-select/js/jquery.nice-select.min.js')}}"></script> -->
 <script src="{{asset('client/vendors/isotope/imagesloaded.pkgd.min.js')}}"></script>
 <script src="{{asset('client/vendors/isotope/isotope-min.js')}}"></script>
 <script src="{{asset('client/vendors/owl-carousel/owl.carousel.min.js')}}"></script>
@@ -13,6 +13,7 @@
 <script src="{{asset('client/vendors/jquery-ui/jquery-ui.js')}}"></script>
 <script src="{{asset('client/vendors/counter-up/jquery.waypoints.min.js')}}"></script>
 <script src="{{asset('client/vendors/counter-up/jquery.counterup.js')}}"></script>
-<script src="{{ asset('client/vendors/sweetalert2/sweetalert2.all.min.js') }}"></script>
-<script src="{{ asset('client/vendors/sweetalert2/sweetalert2.min.js') }}"></script>
-<script src="{{asset('client/js/theme.js')}}"></script>
+<script src="{{ asset('client/js/jquery-3.2.1.min.js') }}"></script>
+<!-- <script src="{{ asset('client/vendors/sweetalert2/sweetalert2.all.min.js') }}"></script>
+<script src="{{ asset('client/vendors/sweetalert2/sweetalert2.min.js') }}"></script> -->
+<!-- <script src="{{asset('client/js/theme.js')}}"></script> -->

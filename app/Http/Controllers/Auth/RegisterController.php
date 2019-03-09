@@ -22,7 +22,7 @@ class RegisterController extends Controller
 
     use RegistersUsers;
 
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     public function __construct()
     {
@@ -33,20 +33,24 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|string|max:191',
-            'username' => 'required|string|max:191|unique:users',
+            'nim' => 'required|unique:users',
+            'program_study' => 'required|not_in:'.'0',
             'email' => 'required|string|email|max:191|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ]);
     }
 
     protected function create(array $data)
-    {
+    {        
+        $username = preg_replace('/@.*?$/', '', $data['email']);
         return User::create([
-            'name' => $data['name'],
-            'username' => $data['username'],
+            'fullname' => $data['name'],
+            'nim' => $data['nim'],
+            'program_study_id' => $data['program_study'],
+            'username' => $username,
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'role_id' => 2,
+            'role_id' => 3,
         ]);
     }
 

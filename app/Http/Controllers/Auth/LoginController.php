@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Illuminate\Http\Request;
+use Request;
+// use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -31,7 +32,10 @@ class LoginController extends Controller
     //Customize login disini.......
 
     public function username()
-    {       
+    {
+      if(isset($_POST['redirect'])){
+        $this->redirectTo = '/register-organization';
+      }
        $login = request()->input('identity');
        $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
        request()->merge([$field => $login]);

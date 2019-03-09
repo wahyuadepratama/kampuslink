@@ -22,9 +22,17 @@
 			<div class="row justify-content-center">
 				<div class="col-lg-6">
 					<div class="login_form_inner reg_form">
-						<h3>BUAT AKUN ORGANISASI</h3>
+						<h3>BUAT AKUN ORGANISASI</h3><br>
 						<form class="row login_form" action="{{ url('store-register-organization') }}" method="post">
 							{{ csrf_field() }}
+							<div class="form-group col-md-12">
+								<select name="campus" class="form-control">
+									<option value="0">Pilih Kampus</option>
+									@foreach($campus as $key)
+									<option value="{{ $key->id }}">{{ $key->name }}</option>
+									@endforeach
+								</select>
+							</div>
 							<div class="col-md-12 form-group">
 								<input type="text" name="name" value="{{ old('name') }}" class="form-control" id="name" placeholder="Nama Organisasi" required>
 							</div>
@@ -33,19 +41,6 @@
 							</div>
 							<div class="col-md-12 form-group">
 								<textarea class="form-control" name="description" placeholder="Deskripsi Organisasi">{{ old('description') }}</textarea>
-								<span class="help-block">
-										<strong></strong>
-								</span>
-							</div>
-							<div class="form-group col-md-12">
-								<div class="form-select" id="default-select">
-									<select style="display: none;" name="campus">
-										<option value="0">Pilih Kampus</option>
-										@foreach($campus as $key)
-										<option value="{{ $key->id }}">{{ $key->name }}</option>
-										@endforeach
-									</select>
-								</div>
 							</div>
 							<div class="col-md-12 form-group">
 								<div class="creat_account">
@@ -54,9 +49,7 @@
 								</div>
 							</div>
 							<div class="col-md-12 form-group">
-								<button type="button" class="btn submit_btn" data-toggle="modal" data-target="#modalLogin">Buat</button>
-								<!-- doc => https://sweetalert2.github.io/  -->
-								<!-- <button type="submit" value="submit" class="btn submit_btn">Buat</button><br> -->
+								<button type="submit" class="btn submit_btn" <?php if(!Auth::check()){ echo 'data-toggle="modal" data-target="#modalLogin"'; } ?>>Buat</button><br>
 								@if ( count( $errors ) > 0 )
 						      @foreach($errors->all() as $error)
 						      <div class="alert alert-danger">
@@ -86,24 +79,26 @@
 		          <span aria-hidden="true">&times;</span>
 		        </button>
 		      </div>
-		      <div class="modal-body" style="">
+		      <div class="modal-body">
 		        <div class="row">
 		        	<div class="col-12">
-		        		<div class="alert alert-danger" role="alert">
-						  Maaf, akun kamu belum terdaftar sebagai user atau username dan password salah!
-						</div>
-						<form action="/register_organization_message">
+		        		<div class="alert alert-success" role="alert" style="text-align:center">
+								  Silahkah login terlebih dahulu sebelum mendaftarkan organisasi kamu.
+								</div>
+								<form action="{{ route('login') }}" method="post" style="margin: 10%">
+									{{ csrf_field() }}
 			        		<div class="form-group">
 			        			<label>Username/Email</label>
-			        			<input type="text" class="form-control">
+			        			<input type="text" class="form-control" name="identity" value="{{ old('username') }}" required autofocus>
 			        		</div>
 			        		<div class="form-group">
 			        			<label>Password</label>
-			        			<input type="text" class="form-control">
+			        			<input type="password" class="form-control" name="password" required>
 			        		</div>
 			        		<input type="submit" name="" class="btn btn-success btn-block">
+									<input type="hidden" name="redirect" value="/register-organization">
 		        		</form>
-		        		<a href="/register">Belum terdaftar sebagai user?</a>
+		        		<a href="/register">Belum terdaftar? Daftar disini!</a>
 		        	</div>
 		        </div>
 		      </div>

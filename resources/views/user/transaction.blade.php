@@ -50,7 +50,7 @@
               </td>
 							<td class="cell100 column3">{{ $transaction->status }}</td>
 							<td class="cell100 column4">@php echo \Carbon\Carbon::parse($transaction->created_at)->format('l, d F Y'); @endphp</td>
-							<td class="cell100 column5"><a href="{{ url('transaction/'. $transaction->id) }}" style="padding-left: 14px"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
+							<td class="cell100 column5"><a href="{{ url('transaction/'. $transaction->unique_code) }}" style="padding-left: 14px"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
 						</tr>
 
             @endforeach

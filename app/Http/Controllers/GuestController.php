@@ -8,10 +8,13 @@ use App\Models\Event;
 use App\Models\SubEvent;
 use App\Models\EventCategory;
 use App\Models\Organization;
+use App\Models\UserOrganization;
 use App\Models\Viewer;
 use App\Models\EventViewer;
 use App\Models\Category;
 use App\Models\Campus;
+use App\Models\Faculty;
+use App\Models\ProgramStudy;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Auth;
@@ -142,7 +145,7 @@ class GuestController extends Controller
       $categories = EventCategory::where('sub_event_id', $subEvent->id)->get();
 
       // Suggesstion Event
-      $suggestions = SubEvent::where('event_id', $subEvent->id)->inRandomOrder()->limit(10)->get();
+      $suggestions = SubEvent::where('event_id', $subEvent->id)->where('approved', 1)->where('status','ongoing')->inRandomOrder()->limit(10)->get();
       $data = [];
       foreach($suggestions as $key){
         if($key->id != $subEvent->id){
@@ -160,7 +163,7 @@ class GuestController extends Controller
         }
 
         if($data == NULL){
-          $data = SubEvent::inRandomOrder()->limit(10)->get();
+          $data = SubEvent::inRandomOrder()->where('approved', 1)->where('status','ongoing')->limit(10)->get();
         }
       }
 
@@ -326,6 +329,70 @@ class GuestController extends Controller
     {
       $data = SubEvent::where('name', $request->event)->first();
       return redirect('/event'.'/'. $data->slug );
+    }
+
+    public function getDataFaculty($id)
+    {
+      return Faculty::where('campus_id' ,$id)->get();
+    }
+
+    public function getDataProgramStudy($id)
+    {
+      return ProgramStudy::where('faculty_id', $id)->get();
+    }
+
+    public function showRegisterOrganization()
+    {
+
+      if(Auth::check()){
+        $organization = Organization::where('creator', Auth::user()->username)->get();
+        foreach($organization as $key){
+          if($key->approved == 0){
+            return view('user/register_organization_message')->with('name', $key->name);
+          }
+        }
+      }
+
+      $campus = Campus::all();
+      return view('user/register_organization')->with('campus', $campus);
+    }
+
+    public function storeRegisterOrganization(Request $request)
+    {
+      $this->validate($request,[
+        'name' => 'required',
+        'ig' => 'required',
+        'description' => 'required',
+      ]);
+
+      if($request->campus == "0"){
+        return back()->withInput()->with('error', 'Please select your campus!');
+      }
+
+      $organization = Organization::where('name', $request->name)->first();
+      if(isset($organization)){
+        return back()->withInput()->with('error', 'Your organization has registered!');
+      }
+
+      if ($request->ig == trim($request->ig) && strpos($request->ig, ' ') !== false) {
+        return back()->withInput()->with('error', 'Your organization has registered!');
+      }
+
+      $create = Organization::create([
+        'campus_id' => $request->campus,
+        'name' => $request->name,
+        'creator' => Auth::user()->username,
+        'instagram' => $request->ig,
+        'description' => $request->description,
+        'created_at' => Carbon::now()->setTimezone('Asia/Jakarta')
+      ]);
+
+      UserOrganization::create([
+        'user_id' => Auth::user()->id,
+        'organization_id' => $create->id
+      ]);
+
+      return redirect('/organization'. '/' . $request->ig);
     }
 
 }

@@ -77,7 +77,8 @@
 							<div class="content">
 								<div class="title">
 									<h2>{{ $subEvent->name }}</h2>
-									<p>@php echo \Carbon\Carbon::parse($subEvent->date)->format('l, d F Y'); @endphp</p>
+									<p>@php echo \Carbon\Carbon::parse($subEvent->date)->format('l, d F Y'); @endphp &nbsp;
+										({{ \Carbon\Carbon::parse($subEvent->start_time)->format('H:i') }} - {{ \Carbon\Carbon::parse($subEvent->end_time)->format('H:i') }})</p>
 								</div>
 								<div class="desk">
 									<p>{{ $subEvent->description }}</p>

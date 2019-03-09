@@ -14,12 +14,11 @@
 	<link rel="stylesheet" href="{{asset('client/vendors/owl-carousel/owl.carousel.min.css')}}">
 	<link rel="stylesheet" href="{{asset('client/vendors/lightbox/simpleLightbox.css')}}">
 	<!-- <link rel="stylesheet" href="vendors/lightbox/lightbox.min.css"> -->
-	<link rel="stylesheet" href="{{asset('client/vendors/nice-select/css/nice-select.css')}}">
+	<!-- <link rel="stylesheet" href="{{asset('client/vendors/nice-select/css/nice-select.css')}}"> -->
 	<link rel="stylesheet" href="{{asset('client/vendors/animate-css/animate.css')}}">
 	<link rel="stylesheet" href="{{asset('client/vendors/jquery-ui/jquery-ui.css')}}">
 	<link rel="stylesheet" href="{{asset('client/css/jquery.bxslider.css')}}">
 	<link href="https://fonts.googleapis.com/css?family=Cabin|Dosis" rel="stylesheet">
-	<link rel="stylesheet" href="{{ asset('client/vendors/sweetalert2/sweetalert2.min.css')}}">
 	<!-- main css -->
 	<link rel="stylesheet" href="{{asset('client/css/style.css')}}">
 	<link rel="stylesheet" href="{{asset('client/css/responsive.css')}}">
@@ -78,7 +77,7 @@
 									<ul class="nav navbar-nav navbar-right right_nav pull-right"><hr>
 										<li class="nav-item">
 											<a href="#" class="login" >
-												<img src="{{ asset('client/img/icon/user.png') }}">
+												<img src="{{ asset('storage/avatar/'. Auth::user()->photo_profile) }}" style="border-radius: 50%">
 												@php
 												$count = \App\Models\Transaction::where('seen', false)->get(); $counted = count($count);
 												if($counted>0){
@@ -88,9 +87,8 @@
 											</a>
 											<div class="mediaD">
 												<div class="header">
-													<div>
-														<!-- <img src="{{ asset('storage/avatar/'. Auth::user()->photo_profile) }}" width="50"> -->
-														<img src="{{ asset('client/img/icon/user.png') }}" width="50">
+													<div style="margin-right:3%">
+														<img src="{{ asset('storage/avatar/'. Auth::user()->photo_profile) }}" width="50">
 													</div>
 													<div>
 														<h4>{{ Auth::user()->fullname }}</h4>
@@ -129,13 +127,12 @@
 									<ul class="nav navbar-nav navbar-right right_nav pull-right"><hr>
 										<li class="nav-item">
 											<a href="#" class="login">
-												<img src="{{ asset('client/img/icon/user.png') }}">
+												<img src="{{ asset('storage/avatar/'. Auth::user()->photo_profile) }}" style="border-radius: 50%">
 											</a>
 											<div class="mediaD">
 												<div class="header">
-													<div>
-														<!-- <img src="{{ asset('storage/avatar/'. Auth::user()->photo_profile) }}" width="50"> -->
-														<img src="{{ asset('client/img/icon/user.png') }}" width="50">
+													<div style="margin-right:3%">
+														<img src="{{ asset('storage/avatar/'. Auth::user()->photo_profile) }}" width="50" style="border-radius: 50%">
 													</div>
 													<div>
 														<h4>{{ Auth::user()->fullname }}</h4>
@@ -147,18 +144,19 @@
 
 														@php $organization = \App\Models\UserOrganization::where('user_id', Auth::user()->id)->get(); @endphp
 														@foreach($organization as $key)
-														<li><a href="/organization/{{ base64_encode(base64_encode($key->organization_id)) }}"><i class="fa fa-sitemap"></i> {{ $key->organization->name }}</a></li>
+														<a href="/organization/{{ $key->organization->instagram }}"><li><i class="fa fa-sitemap"></i>&nbsp; {{ $key->organization->name }}</li></a>
 														@endforeach
 
-														<li>
-															<a href="/transaction"><i class="fa fa-ticket"></i> Transaksi & Tiket</a>
+														<a href="/transaction">
+															<li><i class="fa fa-ticket"></i>&nbsp; Transaksi & Tiket
 															@php $count = \App\Models\Transaction::where('seen', false)->get(); $counted = count($count);
 															if($counted > 0){
 																echo "<span>".$counted."</span>";
 															}
-															@endphp
-														</li>
-														<li><a href="/profile"><i class="fa fa-cog"></i> Edit Profil</a></li>
+															@endphp</li>
+														</a>
+
+														<a href="/profile"><li><i class="fa fa-cog"></i> &nbsp; Edit Profil</li></a>
 													</ul>
 													<div class="logout">
 														<a href="{{ route('logout') }}"

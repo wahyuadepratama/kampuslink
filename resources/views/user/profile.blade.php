@@ -50,7 +50,16 @@
         <!-- =======FORM PROFIL======= -->
         <div class="login_form_inner reg_form" id="form-profil">
           <h3>Edit Profil</h3>
-          <form class="row login_form" action="{{ url('update-profile-user') }}" method="post">
+          <form class="row login_form" action="{{ url('update-profile-user') }}" method="post" enctype="multipart/form-data">
+            <div class="col-md-5"></div>
+            <div class="col-md-2">
+              <div class="card-flex">
+                <dd> <a href="#edit"><img class="hoverColor" id="openAvatarUpload" src="{{ asset('storage/avatar/'. Auth::user()->photo_profile) }}"></a> </dd>
+                <input name="avatar" type="file" id="avatarUpload" style="display:none"/>
+                <script type="text/javascript"> $('#openAvatarUpload').click(function(){ $('#avatarUpload').trigger('click'); }); </script>
+              </div>
+            </div>
+            <div class="col-md-5"></div>
             {{ csrf_field() }}
             <div class="col-md-12 form-group">
               <input name="name" type="text" class="form-control" placeholder="Nama" value="{{ Auth::user()->fullname }}" required>
@@ -89,13 +98,45 @@
               <input type="text" class="form-control" value="{{ Auth::user()->nim }}" disabled>
             </div>
             <div class="col-md-12 form-group">
-              <input id="myCampus" name="campus" type="text" class="form-control" placeholder="Kampus" value="{{ Auth::user()->programStudy->faculty->campus->name }}">
+              <select class="form-control" name="campus" id="campus">
+
+                <option value="{{ Auth::user()->programStudy->faculty->campus->id }}">{{ Auth::user()->programStudy->faculty->campus->name }}</option>
+
+                @php $campus = \App\Models\Campus::all(); @endphp
+                @foreach($campus as $keyCampus)
+                <option value="{{ $keyCampus->id }}">{{ $keyCampus->name }}</option>
+                @endforeach
+
+              </select>
+              @if($message = Session::get('campus'))
+                <span class="help-block">
+                    <small><strong style="color: red">{{ $message }}</strong></small>
+                </span>
+              @endif
             </div>
             <div class="col-md-12 form-group">
-              <input id="myFaculty" name="faculty" type="text" class="form-control" placeholder="Fakultas" value="{{ Auth::user()->programStudy->faculty->name }}">
+              <select class="form-control" name="faculty" id="faculty">
+
+                <option value="{{ Auth::user()->programStudy->faculty->id }}">{{ Auth::user()->programStudy->faculty->name }}</option>
+
+              </select>
+              @if($message = Session::get('faculty'))
+                <span class="help-block">
+                    <small><strong style="color: red">{{ $message }}</strong></small>
+                </span>
+              @endif
             </div>
             <div class="col-md-12 form-group">
-              <input id="myProgramStudy" name="program_study" type="text" class="form-control" placeholder="Jurusan" value="{{ Auth::user()->programStudy->name }}">
+              <select class="form-control" name="program_study" id="program_study">
+
+                <option value="{{ Auth::user()->programStudy->id }}">{{ Auth::user()->programStudy->name }}</option>
+
+              </select>
+              @if ($errors->has('program_study'))
+                  <span class="help-block">
+                      <small><strong style="color: red">{{ $errors->first('program_study') }}</strong></small>
+                  </span>
+              @endif
             </div>
             <div class="col-md-12 form-group">
               <button type="submit" value="submit" class="btn submit_btn">Simpan</button>
@@ -176,27 +217,45 @@
             </dl>
             <dl class="card-flex">
               <dt>Hp</dt>
-              <dd>{{ Auth::user()->phone }}</dd>
+              @if(!isset(Auth::user()->phone))
+                <dd>-</dd>
+              @else
+                <dd>{{ Auth::user()->phone }}</dd>
+              @endif
             </dl>
             <dl class="card-flex">
               <dt>Tanggal Lahir</dt>
-              <dd>{{ \Carbon\Carbon::parse(Auth::user()->date_birth)->format('d F Y') }}</dd>
+              @if(!isset(Auth::user()->date_birth))
+                <dd>-</dd>
+              @else
+                <dd>{{ \Carbon\Carbon::parse(Auth::user()->date_birth)->format('d F Y') }}</dd>
+              @endif
             </dl>
             <dl class="card-flex">
               <dt>Jenis Kelamin</dt>
               @if(Auth::user()->gender == "man")
               <dd>Laki-laki</dd>
-              @else
+              @elseif(Auth::user()->gender == "woman")
               <dd>Perempuan</dd>
+              @else
+              <dd>-</dd>
               @endif
             </dl>
             <dl class="card-flex">
               <dt>Avatar</dt>
-              <dd><img src="{{ asset('client/img/team/alfikri.jpg') }}"></dd>
+              <dd><img src="{{ asset('storage/avatar/'. Auth::user()->photo_profile) }}"></dd>
             </dl>
             <dl class="card-flex">
-              <dt>Kota Asal</dt>
-              <dd>Koto Baru Balai Janggo, Payakumbuh Utara, Payakumbuh</dd>
+              <dt>Status</dt>
+              @if(Auth::user()->status == 0)
+              <dd><button type="button" class="btn btn-sm btn-danger">Belum Diverifikasi</button></dd>
+              @else
+              <dd><button type="button" class="btn btn-sm btn-success">Sudah Diverifikasi</button></dd>
+              @endif
+            </dl>
+            <dl class="card-flex">
+              <dt> </dt>
+              <dd> <small> <strong>*Lengkapi data profil agar akun kamu dapat kami verifikasi!</strong> </small> </dd>
             </dl>
           </div>
 
@@ -215,16 +274,8 @@
               <dd>{{ Auth::user()->programStudy->faculty->name }}</dd>
             </dl>
             <dl class="card-flex">
-              <dt>Jurusan</dt>
-              @if(Auth::user()->status == 0)
-              <dd><button type="button" class="btn btn-sm btn-danger">Belum Diverifikasi</button></dd>
-              @else
-              <dd><button type="button" class="btn btn-sm btn-success">Sudah Diverifikasi</button></dd>
-              @endif
-            </dl>
-            <dl class="card-flex">
-              <dt>Status</dt>
-              <dd>{{ Auth::user()->programStudy->faculty->name }}</dd>
+              <dt>Program Studi</dt>
+              <dd>{{ Auth::user()->programStudy->name }}</dd>
             </dl>
           </div>
 
@@ -232,11 +283,11 @@
             <h6 class="card-text-bold">Akun Login</h6>
             <dl class="card-flex">
               <dt>Email</dt>
-              <dd>email@email.com</dd>
+              <dd>{{ Auth::user()->email }}</dd>
             </dl>
             <dl class="card-flex">
               <dt>Password</dt>
-              <dd>********</dd>
+              <dd>****************</dd>
             </dl>
           </div>
 
@@ -266,11 +317,80 @@
 
 <!--================ start footer Area  =================-->
 @include('partial/_footer')
+<script type="text/javascript">
+
+  $('#campus').on('change', function(){
+    $.ajax({
+      url: '/get-faculty/' + $('#campus').val(),
+      data: "",
+      dataType: 'json',
+      success: function(rows)
+      {
+        var campus = [];
+        var campusVal = [];
+        for(var i in rows){
+          var row = rows[i];
+          var name = row.name;
+          var value = row.id;
+
+          campus.push(name);
+          campusVal.push(value);
+        }
+        // console.log(campus);
+        $('#faculty').html('');
+        $('#program_study').html('');
+        if(campus.length == 0){
+          $('#faculty').append('<option value="0">Choose Another Campus</option>');
+          $('#program_study').append('<option value="0">Choose Another Faculty</option>');
+        }else{
+          $('#faculty').append('<option value="0">Select Faculty</option>');
+          $('#program_study').append('<option value="0">Select Program Study</option>');
+          for (i = 0; i < campus.length; i++) {
+            $('#faculty').append('<option value="'+ campusVal[i] +'">' + campus[i] + '</option>');
+          }
+        }
+      }
+    });
+
+  });
+
+  $('#faculty').on('change', function(){
+    $.ajax({
+      url: '/get-program-study/' + $('#faculty').val(),
+      data: "",
+      dataType: 'json',
+      success: function(rows)
+      {
+        var faculty = [];
+        var facultyVal = [];
+        for(var i in rows){
+          var row = rows[i];
+          var name = row.name;
+          var value = row.id;
+
+          faculty.push(name);
+          facultyVal.push(value);
+        }
+        // console.log(campus);
+        $('#program_study').html('');
+        if(faculty.length == 0){
+          $('#program_study').append('<option value="0">Choose Another Faculty</option>');
+        }else{
+          $('#program_study').append('<option value="0">Select Program Study</option>');
+          for (i = 0; i < faculty.length; i++) {
+            $('#program_study').append('<option value="'+ facultyVal[i] +'">' + faculty[i] + '</option>');
+          }
+        }
+      }
+    });
+
+  });
+
+</script>
 <!--================ End footer Area  =================-->
 
 <!-- Optional JavaScript -->
 @include('partial/_script_footer_user')
-@include('partial/_js_edit_profile')
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
 </body>

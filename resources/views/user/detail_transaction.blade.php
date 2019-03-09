@@ -1,10 +1,15 @@
 @include('partial/_header')
 
 <!--================Order Details Area =================-->
+
 	<section class="order_details p_120">
 		<div class="container">
 
-      @if($status == "Menunggu Pembayaran")
+			@if($status == "Konfirmasi Tiket")
+			<div class="alert alert-primary" role="alert">
+			  Silahkan isi nama pemilik untuk masing - masing tiket. Nama pada tiket juga akan digunakan oleh organisasi untuk membuat sertifikat.
+			</div>
+      @elseif($status == "Menunggu Pembayaran")
       <div class="alert alert-info" role="alert">
 			  Terima Kasih. e-tiket kamu akan kami proses setelah melakukan pembayaran.
 			</div>
@@ -18,11 +23,11 @@
 			</div>
       @elseif($status == "Ditolak")
       <div class="alert alert-danger" role="alert">
-			  Maaf, tiket kamu ditolak mungkin dikarenakan kapasitas tiket sudah full atau hal lainnya, segera hubungi kami!
+			  Maaf, pemesanan tiket kamu dibatalkan! Info lebih lanjut hubungi kami.
 			</div>
       @elseif($status == "Pembayaran Berhasil")
       <div class="alert alert-success" role="alert">
-			  Terima kasih telah menggunakan kampuslink untuk pemesanan tiket, jika ada saran atau komentar tentang kami, silahkan kirimkan pesan melalui email@email.com .
+			  Terima kasih telah menggunakan KampusLink untuk pemesanan tiket, jika ada saran atau komentar tentang kami, silahkan kirimkan pesan melalui email <i>tanyakami@kampuslink.com</i> .
 			</div>
       @endif
 
@@ -44,75 +49,198 @@
 										<a href="#">
 											<span>Total</span> : Rp {{number_format(($total),0,',','.')}}</a>
 									</li>
+									@if($status == "Pembayaran Berhasil")
+									<br><input type="submit" onclick="printDiv('printableArea')" value="Download Ticket" class="btn btn-success form-control">
+									@endif
+									@if($status == "Diproses" | $status == "Pembayaran Berhasil")  @else
 									<li>
 										<a href="#">
 											<span>Waktu Pembayaran</span> : <div id="waktu_pembayaran"></div></a>
 									</li>
+									@endif
+									<br>
 								</ul>
 							</div>
 					</div>
 				</div>
-				
+
+				@if($status == "Konfirmasi Tiket")
+
 				<div class="col-md-8 order_details_div">
 					<div class="order_details_table">
-						<h2>Detail Pembayaran</h2>
+						<h2>Detail Tiket {{ $transaction->subEvent->name }}</h2>
 						<div class="table-responsive">
 							<table class="table" width="100%">
 								<thead>
 									<tr>
-										<th scope="col">Event</th>
 										<th scope="col">Jenis</th>
-										<th scope="col">Jumlah</th>
 										<th scope="col">Total</th>
 									</tr>
 								</thead>
 								<tbody>
+									<form class="" action="{{ url('transaction/'. $transaction->unique_code . '/confirm') }}" method="post">
+									{{ csrf_field() }}
+
+									@php $ticket = \App\Models\Ticket::where('transaction_id', $transaction->id)->get(); @endphp
+									@foreach($ticket as $data)
 									<tr>
+										<td>{{ $data->type }}</td>
+										<td>Rp {{number_format(($data->price),0,',','.')}}</td>
 										<td>
-											<p>{{ $transaction->subEvent->name }}</p>
-										</td>
-										<td>
-											<p>Reguler</p>
-										</td>
-										<td>
-											<h5>x 02</h5>
-										</td>
-										<td>
-											<p>Rp 50,000</p>
+											<input type="text" name="value[{{ $data->id }}]" class="form-control" placeholder="Nama Pemilik Tiket">
 										</td>
 									</tr>
-									<tr>
-										<td></td>
-										<td>
-											<p>VIP</p>
-										</td>
-										<td>
-											<h5>x 02</h5>
-										</td>
-										<td>
-											<p>Rp 100,000</p>
-										</td>
-									</tr>
+									@endforeach
 									<tr>
 										<td colspan="2">
+										</td>
+										<td>
+											<input type="submit" value="Konfirmasi" class="form-control btn btn-sm btn-success">
+										</td>
+									</tr>
+									</form>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+
+				@elseif($status == "Ditolak" | $status == "Pembayaran Dibatalkan")
+
+				<div class="col-md-8 order_details_div">
+					<div class="order_details_table">
+						<h2>Detail Tiket {{ $transaction->subEvent->name }}</h2>
+						<div class="table-responsive">
+							<table class="table" width="100%">
+								<thead>
+									<tr>
+										<th scope="col">Jenis</th>
+										<th scope="col">Total</th>
+									</tr>
+								</thead>
+								<tbody>
+									@php $ticket = \App\Models\Ticket::where('transaction_id', $transaction->id)->get(); @endphp
+
+									@foreach($ticket as $data)
+									<tr>
+										<td>{{ $data->type }}</td>
+										<td>Rp {{number_format(($data->price),0,',','.')}}</td>
+									</tr>
+									@endforeach
+
+									<tr>
+										<td>
 											<h4>Total SEMUA</h4>
 										</td>
 										<td>
-											<h5></h5>
+											<p>Rp {{number_format(($total),0,',','.')}}</p>
+										</td>
+										<td></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div><br><br>
+
+				@else
+
+				<div class="col-md-8 order_details_div">
+					<div class="order_details_table">
+						<h2>Detail Tiket {{ $transaction->subEvent->name }}</h2>
+						<div class="table-responsive">
+							<table class="table" width="100%">
+								<thead>
+									<tr>
+										<th scope="col">Jenis</th>
+										<th scope="col">Total</th>
+										<th scope="col">Nama</th>
+									</tr>
+								</thead>
+								<tbody>
+									@php $ticket = \App\Models\Ticket::where('transaction_id', $transaction->id)->get(); @endphp
+
+									@foreach($ticket as $data)
+									<tr>
+										<td>{{ $data->type }}</td>
+										<td>Rp {{number_format(($data->price),0,',','.')}}</td>
+										<td>{{ $data->owner }}</td>
+									</tr>
+									@endforeach
+
+									<tr>
+										<td>
+											<h4>Total SEMUA</h4>
 										</td>
 										<td>
-											<p>Rp {{ $total }}</p>
+											<p>Rp {{number_format(($total),0,',','.')}}</p>
+										</td>
+										<td></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+					@if($status == "Menunggu Pembayaran")
+					<div class="order_details_table">
+						<h2>Proses Pembayaran</h2>
+						<div class="table-responsive">
+							<table class="table" width="100%">
+								<thead>
+									<tr>
+										<th scope="col">Bank</th>
+										<th scope="col">A/N</th>
+										<th scope="col">No Rekening</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><img src="{{ asset('client/img/icon/mandiri.png') }}" width="90px"></td>
+										<td>Badu Badui</td>
+										<td>6218721183298</td>
+									</tr>
+									<tr>
+										<td><img src="{{ asset('client/img/icon/bni.png') }}" width="90px"></td>
+										<td>Badu Badui</td>
+										<td>6218721183298</td>
+									</tr>
+									<tr>
+										<td><img src="{{ asset('client/img/icon/bri.png') }}" width="90px"></td>
+										<td>Badu Badui</td>
+										<td>6218721183298</td>
+									</tr>
+									<tr>
+										<td colspan="3">
+											<form class="" action="{{ url('/transaction/'. $transaction->unique_code . '/proof/upload') }}" method="post" enctype="multipart/form-data">
+												<input type="file" name="proof" class="form-control-file"><br> {{ csrf_field() }}
+												<input type="submit" class="btn btn-sm btn-success form-control" value="Upload">
+											</form>
+										</td>
+									</tr>
+									<tr>
+										<td colspan="3">
+												<li>Lakukan pembayaran ke salah satu rekening di atas.</li>
+												<li>Upload bukti pembayaran pada form di atas atau</li>
+												<li>Upload bukti pembayaran melalui nomor WhatsApp berikut: 0812XXXXX</li>
+												<li>Pembayaran anda akan segera diproses setelah anda melakukan konfirmasi</li>
 										</td>
 									</tr>
 								</tbody>
 							</table>
 						</div>
 					</div>
+					@endif
+
 				</div>
+
+				@endif
+
 			</div>
 
-<<<<<<< HEAD
-			<!-- start tiket -->
+		@if($status == "Pembayaran Berhasil")
+
+			<div id="printableArea">
+			@foreach($ticket as $data)
 			<section class="tiket_box_area">
 				<div class="row" style="display: flex;justify-content: center;align-items: center; margin-right: 0;">
 					<div class="col-12 col-md-12">
@@ -120,9 +248,9 @@
 						<div class="box-tiket">
 							<div class="box-tiket2">
 								<div class="head-tiket">
-									<h1>HACKATHON 5.0</h1>
-									<p>Senin, 4 Februari 2019</p>
-									<p>@ 11.00 - 14.00</p>
+									<h1>{{ $transaction->subEvent->name }}</h1>
+									<p>{{ \Carbon\Carbon::parse($transaction->subEvent->date)->format('l, d F Y') }}</p>
+									<p>{{ \Carbon\Carbon::parse($transaction->subEvent->start_time)->format('H:i') }} - {{ \Carbon\Carbon::parse($transaction->subEvent->end_time)->format('H:i') }}</p>
 								</div>
 								<div class="body-tiket">
 									<div class="row">
@@ -130,26 +258,26 @@
 											<div class="row">
 												<div class="col-md-3">
 													<div class="kode">
-														<p>TIKET #</p>
-														<p>46P85M-14</p>
+														<p>TIKET</p>
+														<p>#{{ $data->id }}</p>
 													</div>
 												</div>
 												<div class="col-md-3">
 													<div class="kode">
 														<p>PEMBELI</p>
-														<p>ALFIKRI ALFIKRI ALFIKRI</p>
+														<p>{{ $data->owner }}</p>
 													</div>
 												</div>
 												<div class="col-md-3">
 													<div class="kode">
 														<p>JENIS TIKET</p>
-														<p>REGULER</p>
+														<p>{{ $data->type }}</p>
 													</div>
 												</div>
 												<div class="col-md-3">
 													<div class="kode">
 														<p>ORGANISASI</p>
-														<p>NEO TELEMETRI</p>
+														<p>{{ $transaction->subEvent->event->organization->name }}</p>
 													</div>
 												</div>
 											</div>
@@ -157,7 +285,7 @@
 												<div class="col-md-9">
 													<div class="kode lok">
 														<p>LOKASI</p>
-														<p>Jl. Sudirman No.11, Koto Baru, Payakumbuh Utara, Kota Payakumbuh, Sumatera Barat 26218</p>
+														<p>{{ $transaction->subEvent->location }}</p>
 													</div>
 												</div>
 												<div class="col-md-3" style="display: flex;justify-content: center;align-items: center;">
@@ -168,80 +296,33 @@
 										<div class="col-md-2 qr" style="display: flex;justify-content: center;align-items: center;">
 											<img src="{{asset('client/img/icon/qr-kode.png')}}">
 										</div>
-=======
-				<section class="tiket_box_area">
-					<div class="row">
-						<div class="tiket">
-							<div class="header">
-								<h1>Hackathon</h1>
-								<p>Senin, 4 Februari 2019 @ 11.00 - 14.00</p>
-							</div>
-							<div class="body">
-								<div class="row">
-									<div class="col-lg-2">
-										<h4>TIKET #</h4>
-										<p>46P85M-14</p>
-									</div>
-									<div class="col-lg-2">
-										<h4>JENIS TIKET</h4>
-										<p>REGULER</p>
-									</div>
-									<div class="col-lg-2">
-										<h4>PEMBELI</h4>
-										<p>WAHYU</p>
-									</div>
-									<div class="col-lg-3">
-										<h4>KODE KEAMANAN</h4>
-										<p>4RT34F</p>
-									</div>
-									<div class="col-lg-2">
-										<h4>STATUS</h4>
-										<p>AKTIF</p>
-									</div>
 								</div>
-							</div>
-							<div class="foot">
-								<div class="row">
-									<div class="col-lg-6">
-										<h4>LOKASI</h4>
-										<p>Jl. Sudirman No.11, Koto Baru, Payakumbuh Utara, Kota Payakumbuh.</p>
-									</div>
-									<div class="col-lg-3">
-										<h4>KAMPUS</h4>
-										<p>UNIVERSITAS ANDALAS</p>
-									</div>
-									<div class="col-lg-3">
-										<h4>ORGANISASI</h4>
-										<p>NEO TELEMETRI</p>
->>>>>>> master
-									</div>
 								</div>
 							</div>
 						</div>
-<<<<<<< HEAD
 
 					</div>
 				</div>
 			</section>
-			<!-- end tiket -->
-=======
-						<div class="qr-code">
-							<div class="row">
-								<div class="col-lg-3 img">
-									<img src="img/clients-logo/qr-kode.png">
-								</div>
-								<div class="col-lg-9">
-									<h1>check in untuk acara ini</h1>
-									<p>pindai kode QR ini di acara untuk check in.</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</section>
->>>>>>> master
+			@endforeach
+			</div>
 
-		</div>
-	</section>
+			<script type="text/javascript">
+				function printDiv(divName) {
+					 var printContents = document.getElementById(divName).innerHTML;
+					 var originalContents = document.body.innerHTML;
+
+					 document.body.innerHTML = printContents;
+
+					 window.print();
+
+					 document.body.innerHTML = originalContents;
+				}
+			</script>
+
+		@endif
+
+						<br><br>
 	<!--================End Order Details Area =================-->
 
 @include('partial/_footer')
@@ -263,11 +344,11 @@
 <!-- <script src="{{asset('client/vendors/flipclock/timer.js')}}"></script> -->
 <script src="{{asset('client/vendors/counter-up/jquery.counterup.js')}}"></script>
 <script src="{{asset('client/js/mail-script.js')}}"></script>
-<script src="{{asset('client/js/theme.js')}}"></script>
+<!-- <script src="{{asset('client/js/theme.js')}}"></script> -->
 <script type="text/javascript">
 $(document).ready(function () {
 // Set the date we're counting down to
-var countDownDate = new Date("Feb 18, 2019 8:59:00").getTime();
+var countDownDate = new Date("@php echo \Carbon\Carbon::parse($transaction->countdown)->format('M d, Y H:i:s'); @endphp").getTime();
 
 // Update the count down every 1 second
 var x = setInterval(function() {
@@ -283,7 +364,6 @@ var x = setInterval(function() {
   var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
   var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
   var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
   // Output the result in an element with id="demo"
   // document.getElementById("getting-started").innerHTML = days + "d " + hours + "h "
   // + minutes + "m " + seconds + "s ";

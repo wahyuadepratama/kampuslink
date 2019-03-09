@@ -65,7 +65,7 @@
                           Tanggal: {{ \Carbon\Carbon::parse($sub_event->date)->format('d F Y') }}
                         </div>
                         <div class="label">
-                          Jam: {{ \Carbon\Carbon::parse($sub_event->start_time)->format('H:m') }} - {{ \Carbon\Carbon::parse($sub_event->end_time)->format('H:m') }}
+                          Jam: {{ \Carbon\Carbon::parse($sub_event->start_time)->format('H:i') }} - {{ \Carbon\Carbon::parse($sub_event->end_time)->format('H:i') }}
                         </div>
                         <div class="label">
                           WA: {{ $sub_event->whatsapp }}

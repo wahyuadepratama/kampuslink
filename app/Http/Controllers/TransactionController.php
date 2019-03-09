@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DateTime;
 use Carbon\Carbon;
 use App\Models\Ticket;
 use App\Models\SubEvent;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
+use Intervention\Image\Facades\Image as Image;
 
 class TransactionController extends Controller
 {
@@ -24,18 +26,12 @@ class TransactionController extends Controller
     {
       $transaction  = Transaction::where('user_id', Auth::user()->id)->orderBy('created_at','desc')->get();
 
-      // return Transaction::join('ticket','ticket.transaction_id','=','transaction.id')
-      //                 ->select('transaction.*', 'ticket.price', 'ticket.qr_code', 'ticket.link', 'ticket.status', 'transaction.status as transaction_status')
-      //                 ->where('transaction.user_id', Auth::user()->id)
-      //                 ->orderBy('transaction.created_at','asc')
-      //                 ->get();
-
       return view('user.transaction')->with('transactions', $transaction);
     }
 
-    public function showTransaction($id)
+    public function showTransaction($code)
     {
-      $oneTransaction = Transaction::find($id);
+      $oneTransaction = Transaction::where('unique_code', $code)->first();
       $this->checkOwner($oneTransaction->user_id);
 
       $oneTransaction->seen = true;
@@ -48,11 +44,37 @@ class TransactionController extends Controller
         $total = $total + $key->price;
       }
 
+      if($oneTransaction->status == "Menunggu Pembayaran" | $oneTransaction->status == "Konfirmasi Tiket"){
+        $past = false;
+        if(Carbon::now()->setTimezone('Asia/Jakarta')->year >= Carbon::parse($oneTransaction->countdown)->year){
+          $past = true;
+          if(Carbon::now()->setTimezone('Asia/Jakarta')->month >= Carbon::parse($oneTransaction->countdown)->month){
+            $past = true;
+            if(Carbon::now()->setTimezone('Asia/Jakarta')->day >= Carbon::parse($oneTransaction->countdown)->day){
+              $past = true;
+              if(Carbon::now()->setTimezone('Asia/Jakarta')->hour >= Carbon::parse($oneTransaction->countdown)->hour){
+                $past = true;
+                if(Carbon::now()->setTimezone('Asia/Jakarta')->minute >= Carbon::parse($oneTransaction->countdown)->minute){
+                  $past = true;
+                  if(Carbon::now()->setTimezone('Asia/Jakarta')->second >= Carbon::parse($oneTransaction->countdown)->second){
+                    $past = true;
+                  }else{ $past = false; }
+                }else{ $past = false; }
+              }else{ $past = false; }
+            }else{ $past = false; }
+          }else{ $past = false; }
+        }else{ $past = false; }
+
+        if($past === true){
+          $oneTransaction->status = "Pembayaran Dibatalkan";
+          $oneTransaction->seen = 0;
+          $oneTransaction->save();
+        }
+      }
+
       return view('user.detail_transaction')->with('status', $oneTransaction->status)
                                             ->with('transaction', $oneTransaction)
                                             ->with('total', $total);
-
-      $ticket = Ticket::where('transaction_id', $id)->get();
     }
 
     public function checkOwner($id)
@@ -72,29 +94,99 @@ class TransactionController extends Controller
 
     public function postProcessTransaction(Request $request, $slug)
     {
-      $subEvent = SubEvent::where('slug', $slug)->first();
-      $subEventTicket = SubEventTicket::where('sub_event_id', $subEvent->id)->get();
+      $totalData = 0;
+      $totalReguler = 0;
+      $totalVip = 0;
 
-      $unique_code = $new =  rand(100,900);
+      foreach ($request->qty as $key => $value) {
+        $totalData = $totalData + $value;
+        if($key == "Reguler"){
+          $totalReguler = $totalReguler + $value;
+        }elseif($key == "VIP"){
+          $totalVip = $totalVip + $value;
+        }
+      }
+
+      if($totalData <= 0){
+          return back()->with('error', 'Kamu belum memesan apapun!');
+      }
+
+      $subEvent = SubEvent::where('slug', $slug)->first();
+      $countdown = Carbon::now()->setTimezone('Asia/Jakarta')->addHour(2);
+
+      $subEventTicketReguler = SubEventTicket::where('sub_event_id', $subEvent->id)->where('type', 'Reguler')->first();
+      $subEventTicketVip = SubEventTicket::where('sub_event_id', $subEvent->id)->where('type', 'VIP')->first();
+
+      if(isset($subEventTicketReguler)){
+        if($subEventTicketReguler->stock <= $totalReguler){
+          return back()->with('error', 'Kuota tiket reguler sudah habis!');
+        }
+      }
+
+      if(isset($subEventTicketVip)){
+        if($subEventTicketVip->stock <= $totalVip){
+          return back()->with('error', 'Kuota tiket VIP sudah habis!');
+        }
+      }
 
       $new = Transaction::create([
         'user_id' => Auth::user()->id,
         'sub_event_id' => $subEvent->id,
-        'admin_cost' => 300,
-        'unique_code' => $unique_code,
+        'unique_code' => time(),
+        'countdown' => $countdown,
         'created_at' => Carbon::now()->setTimezone('Asia/Jakarta')
       ]);
 
-      foreach($subEventTicket as $key){
+      for($x = 0;$x < $totalReguler;$x++){
         Ticket::create([
           'transaction_id' => $new->id,
-          'price' => $request->qty[$key->type] * $key->price,
+          'price' => $subEventTicketReguler->price,
+          'type' => "Reguler",
+          'qr_code' => 'qr/'. rand(100000000000,900000000000),
+          'link' => 'link/'. rand(100000000000,900000000000),
+          'created_at' => Carbon::now()->setTimezone('Asia/Jakarta')
+        ]);
+      }
+
+      for($x = 0;$x < $totalVip;$x++){
+        Ticket::create([
+          'transaction_id' => $new->id,
+          'price' => $subEventTicketVip->price,
+          'type' => "VIP",
           'qr_code' => 'qr/'. rand(1000000000,9000000000),
           'link' => 'link/'. rand(1000000000,9000000000),
           'created_at' => Carbon::now()->setTimezone('Asia/Jakarta')
         ]);
       }
 
-      return redirect('transaction/'. $new->id);
+      return redirect('transaction/'. $new->unique_code);
+    }
+
+    public function confirmTransaction(Request $request, $slug)
+    {
+      foreach($request->value as $key => $value){
+        $ticket = Ticket::find($key);
+        $ticket->owner = $value;
+        $ticket->save();
+      }
+      $transaction = Transaction::where('unique_code', $slug)->first();
+      $transaction->status = "Menunggu Pembayaran";
+      $transaction->seen = 0;
+      $transaction->save();
+      return back();
+    }
+
+    public function proofTransaction(Request $request, $slug)
+    {
+      $thumbnail     = $request->file('proof');
+      $filename      = 'payment_' . str_slug($slug).'_'.time() . '.' . $thumbnail->getClientOriginalExtension();
+      $small         = 'storage/proof/' . $filename;
+      $createSmall   = Image::make($thumbnail)->resize(300, 300)->save($small);
+
+      $transaction = Transaction::where('unique_code', $slug)->first();
+      $transaction->status = "Diproses";
+      $transaction->seen = 0;
+      $transaction->save();
+      return back();
     }
 }
