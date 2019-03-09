@@ -1,18 +1,16 @@
 @include('partial/_header')
 
 	<!--================Home Banner Area =================-->
-	<section class="banner_area">
-		<div class="banner_inner d-flex align-items-center">
+	<section class="new_banner_area">
+		<div class="banner-img bg-overlay-39">
 			<div class="container">
-				<div class="banner_content text-center">
-					<h2>Shop Category Page</h2>
-					<div class="page_link">
-						<a href="index.html">Home</a>
-						<a href="category.html">Category</a>
-						<a href="category.html">Women Fashion</a>
-					</div>
-				</div>
+				<h1>Semua Event</h1>
+				<ul>
+	              <li><a href="index.html">Home</a></li>
+	              <li>Semua Event</li>
+	            </ul>
 			</div>
+			<div class="box-position" style="background-image: url(client/img/banner/banner-bg.jpg);"></div>
 		</div>
 	</section>
 	<!--================End Home Banner Area =================-->
@@ -133,7 +131,6 @@
 
 					</div>
 				</div>
-
 				<div class="col-lg-3">
 					<div class="left_sidebar_area">
 						<aside class="left_widgets p_filter_widgets">

@@ -99,4 +99,55 @@ class UserController extends Controller
      return back()->with('success', 'Kamu Berhasil Memperbarui Data Login');
   }
 
+
+  public function showRegisterOrganization()
+  {
+    $userOrganization = UserOrganization::where('user_id', Auth::user()->id)->first();
+    if(isset($userOrganization)){
+      $organization = Organization::where('id', $userOrganization->organization_id)->first();
+      if($organization->approved == )
+    }else{
+      $campus = Campus::all();
+      return view('user/register_organization')->with('campus', $campus);
+    }
+  }
+
+  public function storeRegisterOrganization(Request $request)
+  {
+    $this->validate($request,[
+      'name' => 'required',
+      'ig' => 'required',
+      'description' => 'required',
+    ]);
+
+    if($request->campus == "0"){
+      return back()->withInput()->with('error', 'Please select your campus!');
+    }
+
+    $organization = Organization::where('name', $request->name)->first();
+    if(isset($organization)){
+      return back()->withInput()->with('error', 'Your organization has registered!');
+    }
+
+    if ($request->ig == trim($request->ig) && strpos($request->ig, ' ') !== false) {
+      return back()->withInput()->with('error', 'Your organization has registered!');
+    }
+
+    $create = Organization::create([
+      'campus_id' => $request->campus,
+      'name' => $request->name,
+      'instagram' => $request->ig,
+      'description' => $request->description,
+      'created_at' => Carbon::now()->setTimezone('Asia/Jakarta')
+    ]);
+
+    UserOrganization::create([
+      'user_id' => Auth::user()->id,
+      'organization_id' => $create->id
+    ]);
+
+    return redirect('/organization'. '/' . $request->ig);
+
+  }
+  
 }

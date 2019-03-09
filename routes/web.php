@@ -18,7 +18,6 @@ Route::get('/kontak', function(){	return view('guest.kontak'); });
 Route::get('/register-organization','GuestController@showRegisterOrganization');
 Route::post('/store-register-organization', 'GuestController@storeRegisterOrganization');
 
-
 Route::get('profile', 'UserController@profile');
 Route::post('update-profile-user', 'UserController@updateDataProfileUser');
 Route::post('update-kampus-user', 'UserController@updateDataKampusUser');
