@@ -49,17 +49,20 @@ class UserController extends Controller
     $this->validate($request,[
       'name' => 'required',
       'phone' => 'required|max:15',
-      'avatar' => 'mimes:jpeg,jpg,png|max:52400'
+      'avatar' => 'mimes:jpeg,jpg,png|max:5000'
     ]);
 
-    if(file_exists(public_path('storage/avatar/'. Auth::user()->photo_profile))){
-      unlink(public_path('storage/avatar/'. Auth::user()->photo_profile));
+    if(isset($request->avatar)){
+      if(file_exists(public_path('storage/avatar/'. Auth::user()->photo_profile))){
+        unlink(public_path('storage/avatar/'. Auth::user()->photo_profile));
+      }
+      $thumbnail     = $request->file('avatar');
+      $filename      = 'avatar_' . str_slug($request->name).'_'.time() . '.' . $thumbnail->getClientOriginalExtension();
+      $small         = 'storage/avatar/' . $filename;
+      $createSmall   = Image::make($thumbnail)->resize(150, 150)->save($small);
+    }else{
+      $filename = Auth::user()->photo_profile;
     }
-
-    $thumbnail     = $request->file('avatar');
-    $filename      = 'avatar_' . str_slug($request->name).'_'.time() . '.' . $thumbnail->getClientOriginalExtension();
-    $small         = 'storage/avatar/' . $filename;
-    $createSmall   = Image::make($thumbnail)->resize(150, 150)->save($small);
 
     $data = User::find(Auth::user()->id);
     $data->fullname    = $request->name;
@@ -99,19 +102,6 @@ class UserController extends Controller
      return back()->with('success', 'Kamu Berhasil Memperbarui Data Login');
   }
 
-
-  public function showRegisterOrganization()
-  {
-    $userOrganization = UserOrganization::where('user_id', Auth::user()->id)->first();
-    if(isset($userOrganization)){
-      $organization = Organization::where('id', $userOrganization->organization_id)->first();
-      if($organization->approved == )
-    }else{
-      $campus = Campus::all();
-      return view('user/register_organization')->with('campus', $campus);
-    }
-  }
-
   public function storeRegisterOrganization(Request $request)
   {
     $this->validate($request,[
@@ -149,5 +139,5 @@ class UserController extends Controller
     return redirect('/organization'. '/' . $request->ig);
 
   }
-  
+
 }

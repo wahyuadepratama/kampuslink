@@ -70,7 +70,7 @@ class TransactionController extends Controller
           $oneTransaction->seen = 0;
           $oneTransaction->save();
         }
-      }
+      }      
 
       return view('user.detail_transaction')->with('status', $oneTransaction->status)
                                             ->with('transaction', $oneTransaction)

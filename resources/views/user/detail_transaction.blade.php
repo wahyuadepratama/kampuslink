@@ -277,7 +277,7 @@
 												<div class="col-md-3">
 													<div class="kode">
 														<p>ORGANISASI</p>
-														<p>{{ $transaction->subEvent->event->organization->name }}</p>
+														<p>{{ $transaction->subEvent->organization->name }}</p>
 													</div>
 												</div>
 											</div>

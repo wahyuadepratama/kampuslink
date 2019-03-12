@@ -4,7 +4,10 @@
           -------------------->
           <ul class="breadcrumb">
             <li class="breadcrumb-item">
-              <a href="event.php">Event</a>
+              <a href="{{ url('organization/'. $organization->instagram) }}">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item">
+              <a href="{{ url('organization/'. $organization->instagram .'/event') }}">Event</a>
             </li>
             <li class="breadcrumb-item">
               <span>Buat Event</span>
@@ -25,13 +28,20 @@
                       Buat Event
                     </h6>
                     <div class="element-content">
+                      @if ( count( $errors ) > 0 )
+                        @foreach($errors->all() as $error)
+                        <div class="alert alert-danger">
+                          {{ $error }}
+                        </div>
+                        @endforeach
+                      @endif
                       @if (\Session::has('message'))
                           <div class="alert alert-success">
                               {!! \Session::get('message') !!}
                           </div>
                       @endif
                       <div class="element-box">
-                        <form method="post" action="{{url('organization/event/add')}}" enctype="multipart/form-data" id="formValidate">
+                        <form method="post" action="{{url('organization/'. $organization->instagram .'/event/add/store')}}" enctype="multipart/form-data" id="formValidate">
                           {{ csrf_field() }}
                           <div class="form-desc">
                             Semua form yang bertanda  <code class="highlighter-rouge">*</code> wajib di isi, setelah mengisi form ini event kamu akan kami proses secepatnya.
@@ -44,9 +54,8 @@
                                 <option value="0">
                                   Tidak tergabung ke dalam Big Event apapun
                                 </option>
-                                @php $organization = \App\Models\UserOrganization::where('user_id', Auth::user()->id)->first(); @endphp
                                 @php
-                                  $bigEvent = \App\Models\Event::where('organization_id', $organization->organization->id )->get();
+                                  $bigEvent = \App\Models\Event::where('organization_id', $organization->id )->where('approved', 1)->get();
                                   foreach($bigEvent as $key){
                                     echo "
                                     <option value='". $key->id ."'>
@@ -58,11 +67,7 @@
                             </div>
                             <div class="form-group">
                               <label for=""> Judul <code class="highlighter-rouge">*</code> </label><input value="{{  old('name') }}" name="name" class="form-control" data-error="Judul harus diisi" placeholder="Judul" required="required" type="text">
-                              <div class="help-block form-text with-errors form-control-feedback">
-                                @if (\Session::has('judul'))
-                                  {!! \Session::get('judul') !!}
-                                @endif
-                              </div>
+                              <div class="help-block form-text with-errors form-control-feedback"></div>
                             </div>
                             <div class="form-group">
                               <label for=""> Kategori <code class="highlighter-rouge">*</code></label>

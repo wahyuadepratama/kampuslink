@@ -10,12 +10,12 @@ class SubEvent extends Model
 
   protected $guarded = [];
 
-  public function category(){
-    return $this->belongsTo('App\Models\Category','category_id');
-  }
-
   public function event(){
     return $this->belongsTo('App\Models\Event','event_id');
+  }
+
+  public function organization(){
+    return $this->belongsTo('App\Models\Organization','organization_id');
   }
 
   public function eventCategory(){

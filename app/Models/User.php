@@ -4,6 +4,8 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Cache;
+use App\Models\UserOrganization;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -33,5 +35,15 @@ class User extends Authenticatable
     public function isOnline($id)
     {
       return Cache::has('user-is-online-' . $id);
+    }
+
+    public function checkRoleUserOrganization($idOrganization)
+    {
+      $data = UserOrganization::where('organization_id', $idOrganization)->where('user_id', Auth::user()->id)->first();
+      if($data->role == "Admin"){
+        return "Admin";
+      }else{
+        return "Anggota";
+      }
     }
 }

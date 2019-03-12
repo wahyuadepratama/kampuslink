@@ -45,7 +45,7 @@
 									</li>
 									<li>
 										<a href="#">
-											<span><i class="fa fa-home"></i></span> {{ $subEvent->event->organization->name }}
+											<span><i class="fa fa-home"></i></span> {{ $subEvent->organization->name }}
 										</a>
 									</li>
 									<li>
@@ -81,7 +81,7 @@
 										({{ \Carbon\Carbon::parse($subEvent->start_time)->format('H:i') }} - {{ \Carbon\Carbon::parse($subEvent->end_time)->format('H:i') }})</p>
 								</div>
 								<div class="desk">
-									<p>{{ $subEvent->description }}</p>
+									<p><?= $subEvent->description; ?></p>
 								</div>
 								<div class="e-tiket">
 									<a href="{{ url('event/' .$subEvent->slug)}}/process">BELI TIKET</a>

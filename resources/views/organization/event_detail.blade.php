@@ -5,121 +5,160 @@
           -------------------->
           <ul class="breadcrumb">
             <li class="breadcrumb-item">
-              <a href="event.php">Event</a>
+              <a href="{{ url('organization/'. $organization->instagram) }}">Dashboard</a>
             </li>
             <li class="breadcrumb-item">
-              <span>Detail Event</span>
+              <span>Event</span>
+            </li>
+            <li class="breadcrumb-item">
+              <span>Event Detail ({{ $sub_event->name }})</span>
             </li>
           </ul>
           <!--
           END - Breadcrumbs
           -------------------->
-          <div class="content-i">
-            <div class="content-box">
-              <div class="support-index">
-                <div class="support-ticket-content-w">
-                  <div class="col-md-7">
-                    <div class="support-ticket-content">
-                      <div class="support-ticket-content-header">
-                        <h3 class="ticket-header">
-                          {{ $sub_event->name }}
-                        </h3>
-                        <a class="back-to-index" href="#"><i class="os-icon os-icon-arrow-left5"></i><span>Back</span></a><a class="show-ticket-info" href="#"><span>Show Details</span><i class="os-icon os-icon-documents-03"></i></a>
-                      </div>
-                      <div class="ticket-thread">
-                        <div class="ticket-reply">
-                          <div class="ticket-reply-content">
-                            {{ $sub_event->description }}
+
+          <div class="container">
+            <div class="row" style="margin: 2%">
+              <div class="col-sm-12">
+                <div class="element-wrapper">
+                  <div class="element-box">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="support-ticket-info">
+                          <!-- <a class="close-ticket-info" href="#"><i class="os-icon os-icon-ui-23"></i></a> -->
+                          <div class="support-ticket-content-header">
+                            <h3 class="ticket-header">
+                              {{ $sub_event->name }}
+                            </h3>
                           </div>
+                          <div class="customer">
+                            <div class="row">
+                              <div class="col-md-4">
+                                <div class="avatar poster">
+                                  <img alt="" src="{{ asset('storage/poster/_large/'. $sub_event->photo) }}" class="hoverZoomLink">
+                                </div>
+                              </div>
+                              <div class="col-md-4"></div>
+                              <div class="col-md-4">
+                                <div class="avatar poster">
+                                  <img alt="" src="{{ asset('storage/qr/'. $sub_event->qr_code) }}" class="hoverZoomLink">
+                                </div>
+                              </div>
+                            </div>
+                          </div><br>
+                          <div class="info-section text-left">
+                            <div class="table-responsive">
+                              <table class="table table-lightborder">
+                                <tbody>
+                                  <tr>
+                                    <td>Deskripsi</td>
+                                    <td><?php echo $sub_event->description; ?></td>
+                                  </tr>
+                                  <tr>
+                                    <td>Kategori</td>
+                                    <td>
+                                      @php $sub_event_category = \App\Models\EventCategory::where('sub_event_id', $sub_event->id)->get(); @endphp
+                                      @foreach($sub_event_category as $key)
+                                        {{ $key->category->name }}
+                                      @endforeach
+                                    </td>
+                                  <tr>
+                                  <tr>
+                                    <td>Tanggal</td>
+                                    <td>{{ \Carbon\Carbon::parse($sub_event->date)->format('l, d F Y') }}</td>
+                                  </tr>
+                                  <tr>
+                                    <td>Waktu</td>
+                                    <td>{{ \Carbon\Carbon::parse($sub_event->start_time)->format('H:i') }} - {{ \Carbon\Carbon::parse($sub_event->end_time)->format('H:i') }}</td>
+                                  </tr>
+                                  <tr>
+                                    <td>WhatsApp</td>
+                                    <td>{{ $sub_event->whatsapp }}</td>
+                                  </tr>
+                                  <tr>
+                                    <td>Line</td>
+                                    <td>{{ $sub_event->line }}</td>
+                                  </tr>
+                                  <tr>
+                                    <td>Web</td>
+                                    <td>{{ $sub_event->web_link }}</td>
+                                  </tr>
+                                  <tr>
+                                    <td>Lokasi</td>
+                                    <td>{{ $sub_event->location }}</td>
+                                  </tr>
+                                  <tr>
+                                    <td>Status</td>
+                                    <td>
+                                      @if($sub_event->approved == '0')
+                                      <div class="badge badge-warning">
+                                        Pending
+                                      </div>
+                                      @elseif($sub_event->approved == 1)
+                                      <div class="badge badge-success">
+                                        Approved
+                                      </div>
+                                      @elseif($sub_event->approved == 2)
+                                      <div class="badge badge-danger">
+                                        Ditolak
+                                      </div>
+                                      @endif
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div><br>
+
+                            @if($sub_event->approved == 1)
+                            <h5 class="info-header text-left">
+                              Peserta Terdaftar
+                            </h5><br>
+                            <div class="info-section">
+                              <ul class="users-list as-tiles">
+                                @php $transaction = \App\Models\Transaction::where('sub_event_id', $sub_event->id)->where('status','Pembayaran Berhasil')->get(); @endphp
+                                @foreach($transaction as $list)
+                                  @php $ticketMember = \App\Models\Ticket::where('transaction_id', $list->id)->get(); @endphp
+                                  <div class="row">
+                                  @foreach($ticketMember as $ticket)
+                                  <div class="col-md-4">
+                                    <div class="users-list-w">
+                                      <div class="user-w with-status status-green">
+                                        <div class="user-avatar-w">
+                                          <div class="user-avatar">
+                                            <img alt="" src="{{ asset('storage/avatar/user.png')}}">
+                                          </div>
+                                        </div>
+                                        <div class="user-name">
+                                          <h6 class="user-title">
+                                            {{ $ticket->owner }}
+                                          </h6>
+                                          <div class="user-role">
+                                            Tiket {{ $ticket->type }}
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  @endforeach
+                                  </div>
+                                @endforeach
+                              </ul>
+                            </div>
+                            @endif
+
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="col-md-5">
-                    <div class="support-ticket-info">
-                      <a class="close-ticket-info" href="#"><i class="os-icon os-icon-ui-23"></i></a>
-                      <div class="customer">
-                        <div class="avatar poster">
-                          <img alt="" src="{{ asset('storage/poster/_medium/'. $sub_event->photo) }}" class="hoverZoomLink">
-                        </div>
-                      </div>
-                      <div class="customer">
-                        <div class="avatar poster">
-                          <img alt="" src="{{ asset('storage/qr/'. $sub_event->qr_code) }}" class="hoverZoomLink">
-                        </div>
-                        <div class="customer-tickets">
-                          QR Kode Event
-                        </div>
-                      </div>
-                      <h5 class="info-header text-left">
-                        Event Details
-                      </h5>
-                      <div class="info-section text-left">
-                        <div class="label">
-                          Kategori: @php $sub_event_category = \App\Models\EventCategory::where('sub_event_id', $sub_event->id)->get(); @endphp
-                          @foreach($sub_event_category as $key)
-                            {{ $key->category->name }}
-                          @endforeach
-                        </div>
-                        <div class="value">
-                          Tanggal: {{ \Carbon\Carbon::parse($sub_event->date)->format('d F Y') }}
-                        </div>
-                        <div class="label">
-                          Jam: {{ \Carbon\Carbon::parse($sub_event->start_time)->format('H:i') }} - {{ \Carbon\Carbon::parse($sub_event->end_time)->format('H:i') }}
-                        </div>
-                        <div class="label">
-                          WA: {{ $sub_event->whatsapp }}
-                        </div>
-                        <div class="label">
-                          ID Line: {{ $sub_event->line }}
-                        </div>
-                        <div class="label">
-                          Web: {{ $sub_event->web_link }}
-                        </div>
-                        <div class="label">
-                          Lokasi: {{ $sub_event->location }}
-                        </div>
-                        <div class="value">
-                          Status:
-                          @if($sub_event->status == 'past')
-                          <div class="badge badge-danger">
-                            Sudah Berlalu
-                          </div>
-                          @elseif($sub_event->approved == 1)
-                          <div class="badge badge-success">
-                            Approved
-                          </div>
-                          @else
-                          <div class="badge badge-warning">
-                            Pending
-                          </div>
-                          @endif
-                        </div>
-                      </div>
-                      <h5 class="info-header text-left">
-                        Peserta
-                      </h5>
-                      <div class="info-section">
-                        <ul class="users-list as-tiles">
-                          @php $transaction = \App\Models\Transaction::where('sub_event_id', $sub_event->id)->get(); @endphp
-                          @foreach($transaction as $list)
-                          <li>
-                            <a class="author with-avatar" href="#">
-                              <div class="avatar" style="background-image: url({{ asset('storage/avatar/'. $list->user->photo_profile) }})"></div>
-                              <span>{{ $list->user->fullname }}</span></a>
-                          </li>
-                          @endforeach
-                        </ul>
-                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+
       </div>
-      <div class="display-type"></div>
+
     </div>
 
     @include('partial/_script_footer_admin')

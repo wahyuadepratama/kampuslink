@@ -33,21 +33,21 @@
             <a class="logo" href="/">
               <div class="logo-element"></div>
               <div class="logo-label">
-                {{ $name }}
+                {{ $organization->name }}
               </div>
             </a>
           </div>
           <div class="logged-user-w avatar-inline">
             <div class="logged-user-i">
               <div class="avatar-w" style="background-color: white">
-                <img alt="" src="{{ asset('client/img/icon/user.png')}}">
+                <img alt="" src="{{ asset('storage/avatar/'. Auth::user()->photo_profile)}}">
               </div>
               <div class="logged-user-info-w">
                 <div class="logged-user-name">
                   {{ Auth::user()->fullname }}
                 </div>
                 <div class="logged-user-role">
-                  Anggota
+                  {{ Auth::user()->checkRoleUserOrganization($organization->id) }}
                 </div>
               </div>
               <div class="logged-user-toggler-arrow">
@@ -56,7 +56,7 @@
               <div class="logged-user-menu color-style-bright">
                 <div class="logged-user-avatar-info">
                   <div class="avatar-w">
-                    <img alt="" src="{{ asset('client/img/icon/user.png')}}">
+                    <img alt="" src="{{ asset('storage/avatar/'. Auth::user()->photo_profile)}}">
                   </div>
                   <div class="logged-user-info-w">
                     <div class="logged-user-name">
@@ -67,10 +67,13 @@
                     </div>
                   </div>
                 </div>
-                <div class="bg-icon">
-                  <i class="os-icon os-icon-wallet-loaded"></i>
-                </div>
                 <ul>
+                  <li>
+                    <a href="{{ url('transaction') }}"><i class="os-icon os-icon-coins-4"></i><span>Transaksi & Tiket</span></a>
+                  </li>
+                  <li>
+                    <a href="{{ url('profile') }}"><i class="os-icon os-icon-ui-46"></i><span>Edit Profil</span></a>
+                  </li>
                   <li>
                     <a href="/"><i class="os-icon os-icon-common-07"></i><span>Kembali</span></a>
                   </li>
@@ -91,17 +94,18 @@
             START - Settings Link in secondary top menu
             -------------------->
             <div class="top-icon top-settings os-dropdown-trigger os-dropdown-position-right">
-              <i class="os-icon os-icon-ui-46"></i>
+              <i class="os-icon os-icon-hierarchy-structure-2" data-toggle="tooltip" data-placement="right" data-original-title="Coming Soon"></i>
+            </div>
+
+            <div class="top-icon top-settings os-dropdown-trigger os-dropdown-position-right">
+              <i class="os-icon os-icon-wallet-loaded"></i>
               <div class="os-dropdown">
                 <div class="icon-w">
-                  <i class="os-icon os-icon-ui-46"></i>
+                  <i class="os-icon os-icon-wallet-loaded"></i>
                 </div>
                 <ul>
                   <li>
-                    <a href="{{ url('organization/profile') }}"><i class="os-icon os-icon-ui-49"></i><span>Profile Settings</span></a>
-                  </li>
-                  <li>
-                    <a href="#" data-placement="right" data-toggle="tooltip" title=""  data-original-title="Coming Soon"><i class="os-icon os-icon-hierarchy-structure-2"></i><span>Kepengurusan</span></a>
+                    <a href="{{ url('organization/'. $organization->instagram .'/wallet') }}"><i class="os-icon os-icon-delivery-box-2"></i><span>Dana Terkumpul</span></a>
                   </li>
                 </ul>
               </div>
@@ -163,15 +167,29 @@
             <li class="sub-header">
               <span>Menu</span>
             </li>
-            <li class="selected has-sub-menu">
-              <a href="{{ url('organization/') }}">
+            <li class="selected has-sub-menu" style="margin: 2%">
+              <a href="{{ url('organization/'. $organization->instagram) }}">
                 <div class="icon-w">
                   <div class="os-icon os-icon-layout"></div>
                 </div>
                 <span>Dashboard</span></a>
             </li>
-            <li class="selected has-sub-menu">
-              <a href="{{ url('organization/event') }}">
+            <li class="selected has-sub-menu" style="margin: 2%">
+              <a href="{{ url('organization/'. $organization->instagram .'/profile') }}">
+                <div class="icon-w">
+                  <div class="os-icon os-icon-ui-49"></div>
+                </div>
+                <span>Profile</span></a>
+            </li>
+            <li class="selected has-sub-menu" style="margin: 2%">
+              <a href="{{ url('organization/'. $organization->instagram .'/members') }}">
+                <div class="icon-w">
+                  <div class="os-icon os-icon-users"></div>
+                </div>
+                <span>Members</span></a>
+            </li>
+            <li class="selected has-sub-menu" style="margin: 2%">
+              <a href="{{ url('organization/'. $organization->instagram .'/event') }}">
                 <div class="icon-w">
                   <div class="os-icon os-icon-file-text"></div>
                 </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Intervention\Image\Facades\Image as Image;
 use Illuminate\Support\Facades\Auth;
 use App\Models\UserOrganization;
@@ -25,11 +26,11 @@ class OrganizationController extends Controller
     {
       $organization = Organization::where('instagram',$ig)->first();
       if(!isset($organization)){
-        return false;
+        return abort(404);
       }else{
         $admin = UserOrganization::where('user_id', Auth::user()->id)->where('organization_id', $organization->id)->first();
         if(!isset($admin)){
-          return false;
+          return abort(404); //cuztome halamannyanya disini
         }else{
           return $organization;
         }
@@ -38,15 +39,11 @@ class OrganizationController extends Controller
 
     public function home($ig)
     {
-      return $ig;
       $check = $this->checkOrganization($ig);
-      if($check == false){
-        return abort(404);
-      }else{
-        $admin = UserOrganization::where('organization_id', $check->id)->get();
-      }
 
-      $event = Event::where('organization_id', $id)->get();
+      $admin = UserOrganization::where('organization_id', $check->id)->get();
+
+      $event = Event::where('organization_id', $check->id)->get();
       $countEvent = count($event);
 
       $countSubEventOngoing = 0;
@@ -63,98 +60,109 @@ class OrganizationController extends Controller
                                       ->with('countSubEventOngoing', $countSubEventOngoing)
                                       ->with('countSubEventPast', $countSubEventPast)
                                       ->with('subEvent', $subEvent)
-                                      ->with('name', $check->name);
+                                      ->with('organization', $check);
     }
 
-    public function profile()
+    public function profile($ig)
     {
-      return view('organization/profile');
+      $check = $this->checkOrganization($ig);
+      return view('organization/profile')->with('organization', $check);
     }
 
-    public function saveProfile(Request $request)
+    public function saveProfile(Request $request, $ig)
     {
       $this->validate($request,[
         'name' => 'required',
-        'phone' => 'required|max:15',
-        'description' => 'required'
+        'phone' => 'required|max:15|unique:users',
+        'description' => 'required',
+        'cover' => 'mimes:jpeg,jpg,png|max:5000'
       ]);
 
-      $userOrganization = UserOrganization::where('user_id', Auth::user()->id)->first();
-      $organization = Organization::where('id', $userOrganization->organization_id)->first();
+      $organization = Organization::where('instagram', $ig)->first();
+
+      if (isset($request->cover)) {
+        if(file_exists(public_path('storage/cover/'. $organization->photo_cover))){
+          unlink(public_path('storage/cover/'. $organization->photo_cover));
+        }
+        $thumbnail      = $request->file('cover');
+        $filename      = 'cover_' . str_slug($request->name).'_'.time() . '.' . $thumbnail->getClientOriginalExtension();
+        $small          = 'storage/cover/' . $filename;
+        $createSmall   = Image::make($thumbnail)->resize(300, 300)->save($small);
+      }else{
+        $filename = $organization->photo_cover;
+      }
+
       $organization->name = $request->name;
       $organization->phone = $request->phone;
-      $organization->instagram = $request->instagram;
       $organization->facebook = $request->facebook;
       $organization->line = $request->line;
       $organization->whatsapp = $request->whatsapp;
       $organization->description = $request->description;
+      $organization->photo_cover = $filename;
       $organization->save();
 
       return back()->with('success', 'Kamu Berhasil Memperbarui Data Organisasi');
     }
 
-    public function event()
+    public function event($ig)
     {
-      $organization = UserOrganization::where('user_id', Auth::user()->id)->first();
+      $check = $this->checkOrganization($ig);
 
       if(isset($_GET['search'])){
         if($_GET['search'] == "all-big-event"){
-          $event = Event::where('organization_id', $organization->organization_id)->where('status', 1)->get();
-          return view('organization/event')->with('event', $event);
+          $event = Event::where('organization_id', $check->id)->get();
+          return view('organization/event')->with('event', $event)->with('organization', $check);
         }
         if($_GET['search'] == "all-event"){
-          $event = Event::where('organization_id', $organization->organization_id)->where('status', 1)->get();
-          $subEvent = [];
-          foreach($event as $key){
-            $subEvent = array_merge($subEvent, SubEvent::where('status', 'ongoing')->where('event_id', $key->id)->get()->toArray() );
-          }
-          return view('organization/event')->with('subEvent', $subEvent)->with('oldSearch', ['name' => 'Semua Event', 'value' => 'all-event']);
+          $subEvent = SubEvent::where('organization_id', $check->id)->get();
+          return view('organization/event')->with('subEvent', $subEvent)->with('oldSearch', ['name' => 'Semua Event', 'value' => 'all-event'])->with('organization', $check);
         }
         if($_GET['search'] == "event-approved"){
-          $event = Event::where('organization_id', $organization->organization_id)->where('status', 1)->get();
-          $subEvent = [];
-          foreach($event as $key){
-            $subEvent = array_merge($subEvent, SubEvent::where('status', 'ongoing')->where('approved', 1)->where('event_id', $key->id)->get()->toArray() );
-          }
-          return view('organization/event')->with('subEvent', $subEvent)->with('oldSearch', ['name' => 'Event yang Sudah Disetujui', 'value' => 'event-approved']);
+          $subEvent = SubEvent::where('approved', 1)->where('organization_id', $check->id)->get();
+          return view('organization/event')->with('subEvent', $subEvent)->with('oldSearch', ['name' => 'Event yang Sudah Disetujui', 'value' => 'event-approved'])->with('organization', $check);
         }
         if($_GET['search'] == "event-pending"){
-          $event = Event::where('organization_id', $organization->organization_id)->where('status', 1)->get();
-          $subEvent = [];
-          foreach($event as $key){
-            $subEvent = array_merge($subEvent, SubEvent::where('status', 'ongoing')->where('approved', 0)->where('event_id', $key->id)->get()->toArray() );
-          }
-          return view('organization/event')->with('subEvent', $subEvent)->with('oldSearch', ['name' => 'Event yang Pending', 'value' => 'event-pending']);
+          $subEvent = SubEvent::where('approved', 0)->where('organization_id', $check->id)->get();
+          return view('organization/event')->with('subEvent', $subEvent)->with('oldSearch', ['name' => 'Event yang Sudah Disetujui', 'value' => 'event-approved'])->with('organization', $check);
         }
         if($_GET['search'] == "event-reject"){
-          $event = Event::where('organization_id', $organization->organization_id)->where('status', 1)->get();
-          $subEvent = [];
-          foreach($event as $key){
-            $subEvent = array_merge($subEvent, SubEvent::where('status', 'ongoing')->where('approved', 2)->where('event_id', $key->id)->get()->toArray() );
-          }
-          return view('organization/event')->with('subEvent', $subEvent)->with('oldSearch', ['name' => 'Event yang Ditolak', 'value' => 'event-reject']);
+          $subEvent = SubEvent::where('approved', 2)->where('organization_id', $check->id)->get();
+          return view('organization/event')->with('subEvent', $subEvent)->with('oldSearch', ['name' => 'Event yang Sudah Disetujui', 'value' => 'event-approved'])->with('organization', $check);
         }
         if($_GET['search'] == "event-past"){
-          $event = Event::where('organization_id', $organization->organization_id)->where('status', 1)->get();
-          $subEvent = [];
-          foreach($event as $key){
-            $subEvent = array_merge($subEvent, SubEvent::where('status', 'past')->where('event_id', $key->id)->get()->toArray() );
-          }
-          return view('organization/event')->with('subEvent', $subEvent)->with('oldSearch', ['name' => 'Event yang Sudah Berlalu', 'value' => 'event-past']);
+          $subEvent = SubEvent::where('status', 'past')->where('organization_id', $check->id)->get();
+          return view('organization/event')->with('subEvent', $subEvent)->with('oldSearch', ['name' => 'Event yang Sudah Disetujui', 'value' => 'event-approved'])->with('organization', $check);
         }
       }else{
-        $event = Event::where('organization_id', $organization->organization_id)->get();
-        return view('organization/event')->with('event', $event);
+        $event = Event::where('organization_id', $check->id)->get();
+        return view('organization/event')->with('event', $event)->with('organization', $check);
       }
     }
 
-    public function addBigEvent(Request $request)
+    public function addBigEvent(Request $request, $ig)
     {
-      return view('organization/big_event_add');
+      $check = $this->checkOrganization($ig);
+      if(Auth::user()->checkRoleUserOrganization($check->id) == "Anggota"){
+        return abort(404);
+      }
+      return view('organization/big_event_add')->with('organization', $check);
     }
 
-    public function storeBigEvent(Request $request)
+    public function storeBigEvent(Request $request, $ig)
     {
+      $check = $this->checkOrganization($ig);
+      if(Auth::user()->checkRoleUserOrganization($check->id) == "Anggota"){
+        return abort(404);
+      }
+
+      $this->validate($request,[
+        'name' => 'required|unique:event',
+        'description' => 'required',
+        'photo' => 'mimes:jpeg,jpg,png|max:5000',
+        'start_date' => 'required',
+        'end_date' => 'required'
+      ]);
+
       $start_date = Carbon::parse($request->start_date)->format('Y-m-d');
       $end_date = Carbon::parse($request->end_date)->format('Y-m-d');
       $organization = UserOrganization::where('user_id', Auth::user()->id)->first();
@@ -171,10 +179,15 @@ class OrganizationController extends Controller
       $large          = 'storage/poster/_large/' . $filename;
       $createLarge   = Image::make($thumbnail)->resize(794, 1123)->save($large);
 
+      $qr = $_SERVER['SERVER_NAME'] . '/event' . '/' . str_slug($request->name);
+      $qrResult = QrCode::size(500)->generate($qr, 'storage/qr/event/'. 'big_event_'. str_slug($request->name) . '.jpg');
+
       Event::create([
         'organization_id' => $organization->organization_id,
         'name' => $request->name,
+        'slug' => str_slug($request->name),
         'description' => $request->description,
+        'qr_code' => str_slug($request->name) . '.jpg',
         'photo' => $filename,
         'start_date' => $start_date,
         'end_date' => $end_date,
@@ -182,39 +195,43 @@ class OrganizationController extends Controller
         'created_at' => Carbon::now()->setTimezone('Asia/Jakarta')
       ]);
 
-      return back()->with('message', 'Kamu berhasil menambahkan sebuah Big Event. Cek <a href="/organization/event"> disini </a>');
+      return back()->with('message', 'Kamu berhasil menambahkan sebuah Big Event. Cek <a href="/organization/'. $check->instagram .'/event"> <b>disini</b> </a>');
     }
 
-    public function addEvent()
+    public function addEvent($ig)
     {
-      return view('organization/event_add');
-    }
-
-    public function storeEvent(Request $request)
-    {
-      $date = Carbon::parse($request->date)->format('Y-m-d');
-
-      // Cek apakah nama event sudah ada
-      $checkName = SubEvent::where('name', $request->name)->first();
-      if($checkName){
-        return back()->withInput()->with('judul', 'Event dengan nama ini sudah ada, coba gunakan nama lain');
+      $check = $this->checkOrganization($ig);
+      if(Auth::user()->checkRoleUserOrganization($check->id) == "Anggota"){
+        return abort(404);
       }
-      // End Cek
+      return view('organization/event_add')->with('organization', $check);
+    }
+
+    public function storeEvent(Request $request, $ig)
+    {
+      $check = $this->checkOrganization($ig);
+      if(Auth::user()->checkRoleUserOrganization($check->id) == "Anggota"){
+        return abort(404);
+      }
+
+      $this->validate($request,[
+        'name' => 'required|unique:sub_event',
+        'description' => 'required',
+        'photo' => 'mimes:jpeg,jpg,png|max:5000',
+        'location' => 'required',
+        'start_time' => 'required',
+        'end_time' => 'required'
+      ]);
 
       // Cek apakah event merupakan bagian dari Big Event
       if ($request->event_id == "0") {
-        $organization = UserOrganization::where('user_id', Auth::user()->id)->first();
-        $event = Event::create([
-          'organization_id' => $organization->organization_id,
-          'status' => 0,
-          'name' => $request->name,
-          'created_at' => Carbon::now()->setTimezone('Asia/Jakarta')
-        ]);
-        $event['id'] = $event->id;
+        $event['id'] = NULL;
       }else{
         $event['id'] = $request->event_id;
       }
       // End Cek
+
+      $date = Carbon::parse($request->date)->format('Y-m-d');
 
       $thumbnail      = $request->file('photo');
       $filename      = 'event_' . str_slug($request->name).'_'.time() . '.' . $thumbnail->getClientOriginalExtension();
@@ -228,8 +245,12 @@ class OrganizationController extends Controller
       $large          = 'storage/poster/_large/' . $filename;
       $createLarge   = Image::make($thumbnail)->resize(794, 1123)->save($large);
 
+      $qr = $_SERVER['SERVER_NAME'] . '/event' . '/' . str_slug($request->name);
+      $qrResult = QrCode::size(500)->generate($qr, 'storage/qr/event/'. 'event_'. str_slug($request->name) . '.jpg');
+
       $subEvent = SubEvent::create([
         'event_id' => $event['id'],
+        'organization_id' => $check->id,
         'name' => $request->name,
         'slug'=> str_slug($request->name),
         'description' => $request->description,
@@ -264,12 +285,26 @@ class OrganizationController extends Controller
         ]);
       }
 
-      return back()->with('message', 'Kamu berhasil menambahkan sebuah Event. Cek <a href="/organization/event?search=all-event"> disini </a>');
+      return back()->with('message', 'Kamu berhasil menambahkan sebuah Event. Cek <a href="/organization/'. $check->instagram .'/event?search=all-event"> disini </a>');
     }
 
-    public function searchEvent($slug)
+    public function indexMember($ig)
     {
+      $check = $this->checkOrganization($ig);
+      return view('organization/member')->with('organization', $check);
+    }
+
+    public function showEvent($ig, $slug)
+    {
+      $check = $this->checkOrganization($ig);
       $subEvent = SubEvent::where('slug', $slug)->first();
-      return view('organization/event_detail')->with('sub_event', $subEvent);
+      return view('organization/event_detail')->with('organization', $check)->with('sub_event', $subEvent);
+    }
+
+    public function showBigEvent($ig, $slug)
+    {
+      $check = $this->checkOrganization($ig);
+      $bigEvent = Event::where('slug', $slug)->first();
+      return view('organization/big_event_detail')->with('organization', $check)->with('big_event', $bigEvent);
     }
 }

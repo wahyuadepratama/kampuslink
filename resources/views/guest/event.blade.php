@@ -4,11 +4,11 @@
 	<section class="new_banner_area">
 		<div class="banner-img bg-overlay-39">
 			<div class="container">
-				<h1>Semua Event</h1>
+				<h1 style="margin-top:3%">Semua Event</h1>
 				<ul>
-	              <li><a href="index.html">Home</a></li>
-	              <li>Semua Event</li>
-	            </ul>
+          <li><a href="{{ url('/') }}">Home</a></li>
+          <li>Semua Event</li>
+        </ul>
 			</div>
 			<div class="box-position" style="background-image: url(client/img/banner/banner-bg.jpg);"></div>
 		</div>
@@ -49,7 +49,7 @@
 								<div class="f_p_item">
 									<div class="f_p_img">
 										<img class="img-fluid load-delay{{$subEvent->id}}" src="/client/css/images/bx_loader.gif" data-original="{{asset('storage/poster/_medium/'. $subEvent->photo)}}" alt="">
-										<div class="p_icon">											
+										<div class="p_icon">
 											@if(\Carbon\Carbon::parse($subEvent->created_at)->format('Y-m-d') == \Carbon\Carbon::now()->toDateString())
 											<span class="badge" style="color:black;">New</span>&nbsp;&nbsp;&nbsp;&nbsp;
 											@endif

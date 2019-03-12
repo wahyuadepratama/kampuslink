@@ -66,7 +66,7 @@
                         <div class="col-sm-4 col-xxxl-3">
                           <a class="element-box el-tablo" href="#">
                             <div class="label">
-                              Pengurus
+                              Anggota
                             </div>
                             <div class="value">
                               @php echo count($admin); @endphp
@@ -183,6 +183,7 @@
                       </div>
                       @endforeach
 
+                      @if(empty($subEvent))
                       <div class="project-box">
                         <div class="project-info">
                           <div class="row align-items-center">
@@ -192,6 +193,7 @@
                           </div>
                         </div>
                       </div>
+                      @endif
 
                     </div>
                     <!--END - Projects list-->
@@ -206,26 +208,31 @@
               <div class="content-panel-close">
                 <i class="os-icon os-icon-close"></i>
               </div>
+              @if(Auth::user()->checkRoleUserOrganization($organization->id) == "Admin")
               <div class="element-wrapper">
                 <h6 class="element-header">
                   Pintasan
                 </h6>
                 <div class="element-box-tp">
                   <div class="el-buttons-list full-width">
-                    <a class="btn btn-white btn-sm" href="{{ url('organization/event/add') }}"><i class="os-icon os-icon-delivery-box-2"></i><span>Buat Event Baru</span></a>
+                    <a class="btn btn-white btn-sm" href="{{ url('organization/' . $organization->instagram . '/event/add-big-event/show') }}"><i class="os-icon os-icon-delivery-box-2"></i><span>+ Big Event Baru</span></a>
+                  </div>
+                  <div class="el-buttons-list full-width">
+                    <a class="btn btn-white btn-sm" href="{{ url('organization/' . $organization->instagram . '/event/add/show') }}"><i class="os-icon os-icon-delivery-box-2"></i><span>+ Event Baru</span></a>
                   </div>
                 </div>
               </div>
+              @endif
               <!--
               START - Team Members
               -------------------->
               <div class="element-wrapper">
                 <h6 class="element-header">
-                  Pengurus
+                  Anggota
                 </h6>
                 <div class="element-box-tp">
                   <div class="input-search-w">
-                    <input class="form-control rounded bright" placeholder="Cari Pengurus..." type="search">
+                    <input class="form-control rounded bright" placeholder="Cari Anggota..." type="search">
                   </div>
                   <div class="users-list-w">
 
@@ -234,7 +241,7 @@
                       <div class="user-w with-status status-green">
                         <div class="user-avatar-w">
                           <div class="user-avatar">
-                            <img alt="" src="{{ asset('client/img/icon/user.png')}}">
+                            <img alt="" src="{{ asset('storage/avatar/'. $key->user->photo_profile)}}">
                           </div>
                         </div>
                         <div class="user-name">
@@ -253,7 +260,7 @@
                       <div class="user-w with-status status-red">
                         <div class="user-avatar-w">
                           <div class="user-avatar">
-                            <img alt="" src="{{ asset('client/img/icon/user.png')}}">
+                            <img alt="" src="{{ asset('storage/avatar/'. $key->user->photo_profile)}}">
                           </div>
                         </div>
                         <div class="user-name">

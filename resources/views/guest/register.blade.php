@@ -4,11 +4,11 @@
 	<section class="new_banner_area">
 		<div class="banner-img bg-overlay-39">
 			<div class="container">
-				<h1>Register</h1>
+				<h1 style="margin-top:3%">Register</h1>
 				<ul>
-	              <li><a href="/">Home</a></li>
-	              <li>Register</li>
-	            </ul>
+          <li><a href="{{ url('/') }}">Home</a></li>
+          <li>Register</li>
+        </ul>
 			</div>
 			<div class="box-position" style="background-image: url(client/img/banner/banner-bg.jpg);"></div>
 		</div>

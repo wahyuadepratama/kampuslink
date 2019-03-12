@@ -343,7 +343,6 @@ class GuestController extends Controller
 
     public function showRegisterOrganization()
     {
-
       if(Auth::check()){
         $organization = Organization::where('creator', Auth::user()->username)->get();
         foreach($organization as $key){

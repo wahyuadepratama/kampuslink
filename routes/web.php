@@ -34,27 +34,22 @@ Route::get('get-all-sub-event', 'GuestController@getDataSubEvent');
 Route::get('organization/{ig}', 'OrganizationController@home');
 Route::get('organization/{ig}/profile', 'OrganizationController@profile');
 Route::post('organization/{ig}/profile', 'OrganizationController@saveProfile');
-
-Route::get('organization/{ig}/event/add-big-event', 'OrganizationController@addBigEvent');
-Route::post('organization/{ig}/event/add-big-event', 'OrganizationController@storeBigEvent');
-
-Route::get('organization/{ig}/event/add', 'OrganizationController@addEvent');
-Route::post('organization/{ig}/event/add', 'OrganizationController@storeEvent');
+Route::get('organization/{ig}/members', 'OrganizationController@indexMember');
 
 Route::get('organization/{ig}/event', 'OrganizationController@event');
-Route::get('organization/{ig}/event/{slug}', 'OrganizationController@searchEvent');
+Route::get('organization/{ig}/event/{slug}', 'OrganizationController@showEvent');
+Route::get('organization/{ig}/big-event/{slug}', 'OrganizationController@showBigEvent');
 
-//user
-Route::get('/register_organization', function(){
-	return view('user.register_organization');
-});
-Route::get('/register_organization_message', function(){
-	return view('user.register_organization_message');
-});
+Route::get('organization/{ig}/event/add-big-event/show', 'OrganizationController@addBigEvent');
+Route::post('organization/{ig}/event/add-big-event/store', 'OrganizationController@storeBigEvent');
+
+Route::get('organization/{ig}/event/add/show', 'OrganizationController@addEvent');
+Route::post('organization/{ig}/event/add/store', 'OrganizationController@storeEvent');
+
 //superadmin
 Route::get('/superadminrambo', function(){
-	return view('superAdmin.login');
+	return view('super_admin.login');
 });
 Route::get('/superadmin/home', function(){
-	return view('superAdmin.home');
+	return view('super_admin.home');
 });

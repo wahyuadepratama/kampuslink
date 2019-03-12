@@ -209,7 +209,7 @@
 					<div class="box-produk">
 						<div class="produk-img">
 							<img class="load-delay-second{{ $data->subEvent->id }}" src="/client/css/images/bx_loader.gif" data-original="{{ asset('storage/poster/_medium/'. $data->subEvent->photo)}}">
-							<a class="icon_btn qr" href="{{asset('client/img/clients-logo/qr-kode.png')}}">
+							<a class="icon_btn qr" href="{{asset('storage/qr/event/'. $data->subEvent->qr_code)}}">
 								<i class="fa fa-qrcode"></i>
 							</a>
 						</div>

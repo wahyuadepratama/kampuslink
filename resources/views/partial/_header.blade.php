@@ -73,7 +73,7 @@
 
 								@if(Auth::user()->role_id == 3)
 
-								<div class="col-lg-2">
+								<div class="col-lg-2" style="font-family: 'Cabin' !important">
 									<ul class="nav navbar-nav navbar-right right_nav pull-right"><hr>
 										<li class="nav-item">
 											<a href="#" class="login" >
@@ -123,7 +123,7 @@
 								</div>
 
 								@elseif(Auth::user()->role_id == 2)
-								<div class="col-lg-2">
+								<div class="col-lg-2" style="font-family: 'Cabin' !important">
 									<ul class="nav navbar-nav navbar-right right_nav pull-right"><hr>
 										<li class="nav-item">
 											<a href="#" class="login">

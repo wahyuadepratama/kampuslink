@@ -21,4 +21,8 @@ class Organization extends Model
   public function campus(){
     return $this->belongsTo('App\Models\Campus','campus_id');
   }
+
+  public function subEvent(){
+    return $this->hasMany('App\Models\SubEvent');
+  }
 }
