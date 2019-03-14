@@ -105,7 +105,7 @@
                 </div>
                 <ul>
                   <li>
-                    <a href="{{ url('organization/'. $organization->instagram .'/wallet') }}"><i class="os-icon os-icon-delivery-box-2"></i><span>Dana Terkumpul</span></a>
+                    <a href="{{ url('organization/'. $organization->instagram .'/fund-collected') }}"><i class="os-icon os-icon-delivery-box-2"></i><span>Dana Terkumpul</span></a>
                   </li>
                 </ul>
               </div>

@@ -53,7 +53,7 @@
 											@if(\Carbon\Carbon::parse($subEvent->created_at)->format('Y-m-d') == \Carbon\Carbon::now()->toDateString())
 											<span class="badge" style="color:black;">New</span>&nbsp;&nbsp;&nbsp;&nbsp;
 											@endif
-											<a href="{{asset('client/img/icon/qr-kode.png')}}">
+											<a href="{{asset('storage/qr/event/'. $subEvent->qr_code)}}">
 												<i class="fa fa-qrcode" aria-hidden="true"></i>
 											</a>
 											<a href="{{asset('storage/poster/_medium/'. $subEvent->photo)}}">
@@ -205,7 +205,25 @@
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-@include('partial/_script_footer')
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="{{asset('client/js/jquery-3.2.1.min.js')}}"></script>
+<script src="{{asset('client/js/popper.js')}}"></script>
+<script src="{{asset('client/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('client/js/stellar.js')}}"></script>
+<script src="{{asset('client/vendors/lightbox/simpleLightbox.min.js')}}"></script>
+<!-- <script src="vendors/lightbox/lightbox-plus-jquery.min.js"></script> -->
+<script src="{{asset('client/vendors/nice-select/js/jquery.nice-select.min.js')}}"></script>
+<script src="{{asset('client/vendors/isotope/imagesloaded.pkgd.min.js')}}"></script>
+<script src="{{asset('client/vendors/isotope/isotope-min.js')}}"></script>
+<script src="{{asset('client/vendors/owl-carousel/owl.carousel.min.js')}}"></script>
+<script src="{{asset('client/js/jquery.ajaxchimp.min.js')}}"></script>
+<script src="{{asset('client/vendors/counter-up/jquery.waypoints.min.js')}}"></script>
+<!-- <script src="{{asset('client/vendors/flipclock/timer.js')}}"></script> -->
+<script src="{{asset('client/vendors/counter-up/jquery.counterup.js')}}"></script>
+<script src="{{asset('client/js/mail-script.js')}}"></script>
+<!-- <script src="{{asset('client/js/theme.js')}}"></script> -->
+<script src="{{asset('client/js/jquery.bxslider.min.js')}}"></script>
 
 <script type="text/javascript">
 $(document).ready(function(){

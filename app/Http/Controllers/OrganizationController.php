@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Intervention\Image\Facades\Image as Image;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Models\UserOrganization;
 use Illuminate\Http\Request;
 use App\Models\Transaction;
@@ -180,14 +181,14 @@ class OrganizationController extends Controller
       $createLarge   = Image::make($thumbnail)->resize(794, 1123)->save($large);
 
       $qr = $_SERVER['SERVER_NAME'] . '/event' . '/' . str_slug($request->name);
-      $qrResult = QrCode::size(500)->generate($qr, 'storage/qr/event/'. 'big_event_'. str_slug($request->name) . '.jpg');
+      $qrResult = QrCode::size(500)->generate($qr, 'storage/qr/event/'. 'big_event_'. str_slug($request->name) . '.svg');
 
       Event::create([
         'organization_id' => $organization->organization_id,
         'name' => $request->name,
         'slug' => str_slug($request->name),
         'description' => $request->description,
-        'qr_code' => str_slug($request->name) . '.jpg',
+        'qr_code' => str_slug($request->name) . '.svg',
         'photo' => $filename,
         'start_date' => $start_date,
         'end_date' => $end_date,
@@ -246,7 +247,7 @@ class OrganizationController extends Controller
       $createLarge   = Image::make($thumbnail)->resize(794, 1123)->save($large);
 
       $qr = $_SERVER['SERVER_NAME'] . '/event' . '/' . str_slug($request->name);
-      $qrResult = QrCode::size(500)->generate($qr, 'storage/qr/event/'. 'event_'. str_slug($request->name) . '.jpg');
+      $qrResult = QrCode::size(500)->generate($qr, 'storage/qr/event/'. 'event_'. str_slug($request->name) . '.svg');
 
       $subEvent = SubEvent::create([
         'event_id' => $event['id'],
@@ -257,7 +258,7 @@ class OrganizationController extends Controller
         'location' => $request->location,
         'whatsapp' => $request->whatsapp,
         'line' => $request->line,
-        'qr_code' => $request->qr_code,
+        'qr_code' => str_slug($request->name) . '.svg',
         'status' => 'ongoing',
         'start_time' => $request->start_time,
         'end_time' => $request->end_time,
@@ -291,7 +292,30 @@ class OrganizationController extends Controller
     public function indexMember($ig)
     {
       $check = $this->checkOrganization($ig);
-      return view('organization/member')->with('organization', $check);
+      $member = UserOrganization::where('organization_id', $check->id)->get();
+      return view('organization/member')->with('organization', $check)->with('member', $member);
+    }
+
+    public function updateRoleMember(Request $request, $ig)
+    {
+      $check = $this->checkOrganization($ig);
+      if(Auth::user()->checkRoleUserOrganization($check->id) == "Anggota"){
+        return abort(404);
+      }
+
+      if($request->role == "anggota"){
+        DB::table('user_organization')
+            ->where('user_id', $request->user_id)
+            ->where('organization_id',$check->id)
+            ->update(['role' => 'Anggota']);
+      }elseif($request->role == "admin"){
+        DB::table('user_organization')
+            ->where('user_id', $request->user_id)
+            ->where('organization_id',$check->id)
+            ->update(['role' => 'Admin']);
+      }
+
+      return back()->with('message', 'Kamu berhasil mengubah role anggota '. $check->name);
     }
 
     public function showEvent($ig, $slug)
@@ -306,5 +330,12 @@ class OrganizationController extends Controller
       $check = $this->checkOrganization($ig);
       $bigEvent = Event::where('slug', $slug)->first();
       return view('organization/big_event_detail')->with('organization', $check)->with('big_event', $bigEvent);
+    }
+
+    public function fundCollected($ig)
+    {
+      $check = $this->checkOrganization($ig);
+      $subEvent = SubEvent::where('organization_id', $check->id)->get();
+      return view('organization/fund_collected')->with('organization', $check)->with('subEvent', $subEvent);
     }
 }

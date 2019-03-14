@@ -42,7 +42,7 @@
                               <div class="col-md-4"></div>
                               <div class="col-md-4">
                                 <div class="avatar poster">
-                                  <img alt="" src="{{ asset('storage/qr/'. $sub_event->qr_code) }}" class="hoverZoomLink">
+                                  <img alt="" src="{{ asset('storage/qr/event/'. $sub_event->qr_code) }}" class="hoverZoomLink">
                                 </div>
                               </div>
                             </div>

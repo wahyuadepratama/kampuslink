@@ -33,8 +33,10 @@ Route::get('get-all-sub-event', 'GuestController@getDataSubEvent');
 
 Route::get('organization/{ig}', 'OrganizationController@home');
 Route::get('organization/{ig}/profile', 'OrganizationController@profile');
+Route::get('organization/{ig}/fund-collected', 'OrganizationController@fundCollected');
 Route::post('organization/{ig}/profile', 'OrganizationController@saveProfile');
 Route::get('organization/{ig}/members', 'OrganizationController@indexMember');
+Route::post('organization/{ig}/members/update-role', 'OrganizationController@updateRoleMember');
 
 Route::get('organization/{ig}/event', 'OrganizationController@event');
 Route::get('organization/{ig}/event/{slug}', 'OrganizationController@showEvent');
@@ -45,11 +47,3 @@ Route::post('organization/{ig}/event/add-big-event/store', 'OrganizationControll
 
 Route::get('organization/{ig}/event/add/show', 'OrganizationController@addEvent');
 Route::post('organization/{ig}/event/add/store', 'OrganizationController@storeEvent');
-
-//superadmin
-Route::get('/superadminrambo', function(){
-	return view('super_admin.login');
-});
-Route::get('/superadmin/home', function(){
-	return view('super_admin.home');
-});

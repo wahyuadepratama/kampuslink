@@ -65,9 +65,12 @@
 								</ul>
 							</div>
 
-							<!-- <div class="qr">
-								<img src="{{ asset('client/img/clients-logo/qr-kode.png') }}">
-							</div> -->
+							<div class="row">
+								<div class="col-md-8"></div>
+								<div class="col-md-4">
+									<img src="{{ asset('storage/qr/event/'. $subEvent->qr_code) }}" width="100px">
+								</div>
+							</div>
 
 						</div>
 					</div>

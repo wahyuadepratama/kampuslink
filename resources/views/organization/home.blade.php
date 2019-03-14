@@ -232,56 +232,61 @@
                 </h6>
                 <div class="element-box-tp">
                   <div class="input-search-w">
-                    <input class="form-control rounded bright" placeholder="Cari Anggota..." type="search">
-                  </div>
-                  <div class="users-list-w">
-
-                    @foreach($admin as $key)
-                      @if($key->user->isOnline($key->user->id))
-                      <div class="user-w with-status status-green">
-                        <div class="user-avatar-w">
-                          <div class="user-avatar">
-                            <img alt="" src="{{ asset('storage/avatar/'. $key->user->photo_profile)}}">
-                          </div>
-                        </div>
-                        <div class="user-name">
-                          <h6 class="user-title">
+                    <input id="anggota" onkeyup="searchJs()" class="form-control rounded bright" placeholder="Cari Anggota..." type="search">
+                    <div id="myUL">
+                      <div class="users-list-w">
+                      @foreach($admin as $key)
+                      <span>
+                        <b>
+                          <div style="display:none">
                             {{ $key->user->fullname }}
-                          </h6>
-                          <div class="user-role">
-                            {{ Auth::user()->programStudy->name }}
                           </div>
-                        </div>
-                        <a class="user-action" href="#" data-placement="right" data-toggle="tooltip" title=""  data-original-title="Coming Soon">
-                          <div class="os-icon os-icon-email-forward"></div>
-                        </a>
+                          @if($key->user->isOnline($key->user->id))
+                          <div class="user-w with-status status-green">
+                            <div class="user-avatar-w">
+                              <div class="user-avatar">
+                                <img alt="" src="{{ asset('storage/avatar/'. $key->user->photo_profile)}}">
+                              </div>
+                            </div>
+                            <div class="user-name">
+                              <h6 class="user-title">
+                                {{ $key->user->fullname }}
+                              </h6>
+                              <div class="user-role">
+                                {{ $key->user->programStudy->name }}
+                              </div>
+                            </div>
+                            <a class="user-action" href="#" data-placement="right" data-toggle="tooltip" title=""  data-original-title="Coming Soon">
+                              <div class="os-icon os-icon-email-forward"></div>
+                            </a>
+                          </div>
+                          @else
+                          <div class="user-w with-status status-red">
+                            <div class="user-avatar-w">
+                              <div class="user-avatar">
+                                <img alt="" src="{{ asset('storage/avatar/'. $key->user->photo_profile)}}">
+                              </div>
+                            </div>
+                            <div class="user-name">
+                              <h6 class="user-title">
+                                {{ $key->user->fullname }}
+                              </h6>
+                              <div class="user-role">
+                                {{ $key->user->programStudy->name }}
+                              </div>
+                            </div>
+                            <a class="user-action" href="#" data-placement="right" data-toggle="tooltip" title=""  data-original-title="Coming Soon">
+                              <div class="os-icon os-icon-email-forward"></div>
+                            </a>
+                          </div>
+                          @endif
+                        </b>
+                      </span>
+                      @endforeach
                       </div>
-                      @else
-                      <div class="user-w with-status status-red">
-                        <div class="user-avatar-w">
-                          <div class="user-avatar">
-                            <img alt="" src="{{ asset('storage/avatar/'. $key->user->photo_profile)}}">
-                          </div>
-                        </div>
-                        <div class="user-name">
-                          <h6 class="user-title">
-                            {{ $key->user->fullname }}
-                          </h6>
-                          <div class="user-role">
-                            Sistem Informasi
-                          </div>
-                        </div>
-                        <a class="user-action" href="#" data-placement="right" data-toggle="tooltip" title=""  data-original-title="Coming Soon">
-                          <div class="os-icon os-icon-email-forward"></div>
-                        </a>
-                      </div>
-                      @endif
-                    @endforeach
-
-                    <!-- <div class="user-w with-status">
-                      Belum Ada Pengurus
-                    </div> -->
+                    </div>
                   </div>
+
                 </div>
               </div>
               <!--
@@ -296,6 +301,28 @@
       </div>
       <div class="display-type"></div>
     </div>
+
+    <script>
+      function searchJs() {
+        // Declare variables
+        var input, filter, ul, li, a, i, txtValue;
+        input = document.getElementById('anggota');
+        filter = input.value.toUpperCase();
+        ul = document.getElementById("myUL");
+        li = ul.getElementsByTagName('span');
+
+        // Loop through all list items, and hide those who don't match the search query
+        for (i = 0; i < li.length; i++) {
+          a = li[i].getElementsByTagName("b")[0];
+          txtValue = a.textContent || a.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+          } else {
+            li[i].style.display = "none";
+          }
+        }
+      }
+    </script>
 
     @include('partial/_script_footer_admin')
 
