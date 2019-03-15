@@ -64,20 +64,22 @@
                                     </h5>
                                     <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true"> ×</span></button>
                                   </div>
-                                  <div class="modal-body">
-                                    <form>
+                                  <form method="post" action="{{ url('organization/'.$organization->instagram.'/members/update-role') }}">
+                                    {{ csrf_field() }}
+                                    <div class="modal-body">
                                       <div class="form-group">
                                         <label for=""> Role</label>
                                         <select class="form-control" name="role">
                                           <option value="anggota">Anggota</option>
                                           <option value="admin">Admin</option>
                                         </select>
+                                        <input type="hidden" name="user_id" value="{{ $key->user_id }}">
                                       </div>
-                                    </form>
-                                  </div>
-                                  <div class="modal-footer">
-                                    <button class="btn btn-secondary" data-dismiss="modal" type="button"> Close</button><button class="btn btn-primary" type="button"> Save changes</button>
-                                  </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button class="btn btn-secondary" data-dismiss="modal" type="button"> Close</button><button class="btn btn-primary" type="submit"> Simpan</button>
+                                    </div>
+                                  </form>
                                 </div>
                               </div>
                             </div>

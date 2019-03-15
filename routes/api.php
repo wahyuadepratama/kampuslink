@@ -13,6 +13,10 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::post('{token}/register', 'Api\UserController@register');
+Route::post('{token}/login', 'Api\UserController@login');
+Route::get('{token}/campus/index', 'Api\CampusController@indexCampus');
+Route::get('{token}/faculty/show/{id}', 'Api\CampusController@showFaculty');
+Route::get('{token}/program-study/show/{id}', 'Api\CampusController@showProgramStudy');
+
+// ->middleware('jwt.verify')

@@ -61,5 +61,7 @@ class Kernel extends HttpKernel
         // cuztome disini
         'admin' => \App\Http\Middleware\CheckAdmin::class,
         'user' => \App\Http\Middleware\CheckUser::class,
+        'jwt.verify' => \App\Http\Middleware\JwtMiddleware::class,
+        'token.client' => \App\Http\Middleware\ApiAccess::class,
     ];
 }

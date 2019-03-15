@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use Request;
-// use Illuminate\Http\Request;
+use App\Models\User;
+use Carbon\Carbon;
+use Illuminate\Http\Request as Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -47,4 +49,8 @@ class LoginController extends Controller
         return view('guest.login');
     }
 
+    public function authenticated(Requests $request, $user) {
+        $user->last_login = Carbon::now()->setTimezone('Asia/Jakarta');
+        $user->save();
+    }
 }

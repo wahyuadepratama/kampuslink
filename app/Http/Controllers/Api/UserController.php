@@ -3,14 +3,22 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\User;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use JWTAuth;
+use Carbon\Carbon;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
 class UserController extends Controller
 {
+
+    public function __construct()
+    {
+      $this->middleware('token.client');
+    }
+
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
@@ -23,7 +31,17 @@ class UserController extends Controller
             return response()->json(['error' => 'could_not_create_token'], 500);
         }
 
-        return response()->json(compact('token'));
+        $user = User::where('email', $request->email)->first();
+        $user->last_login = Carbon::now()->setTimezone('Asia/Jakarta');
+        $user->save();
+        $user->makeHidden(['password','role_id','remember_token', 'program_study_id', 'created_at', 'updated_at', 'deleted_at']);
+
+        $user->programStudy->faculty->campus;
+        $user->programStudy->makeHidden(['created_at', 'updated_at', 'faculty_id']);
+        $user->programStudy->faculty->makeHidden(['created_at', 'updated_at', 'campus_id']);
+        $user->programStudy->faculty->campus->makeHidden(['created_at', 'updated_at', 'description', 'background_color', 'location', 'logo']);
+
+        return response()->json(compact('user', 'token'));
     }
 
     public function register(Request $request)
@@ -49,9 +67,16 @@ class UserController extends Controller
             'email' => $request->get('email'),
             'password' => bcrypt($request->get('password')),
             'role_id' => 3,
+            'last_login' => Carbon::now()->setTimezone('Asia/Jakarta')
         ]);
 
+        $user->makeHidden(['password', 'role_id','remember_token']);
         $token = JWTAuth::fromUser($user);
+
+        $user->programStudy->faculty->campus;
+        $user->programStudy->makeHidden(['created_at', 'updated_at', 'faculty_id']);
+        $user->programStudy->faculty->makeHidden(['created_at', 'updated_at', 'campus_id']);
+        $user->programStudy->faculty->campus->makeHidden(['created_at', 'updated_at', 'description', 'background_color', 'location', 'logo']);
 
         return response()->json(compact('user','token'),201);
     }
