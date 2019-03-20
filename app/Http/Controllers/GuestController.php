@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Auth;
 class GuestController extends Controller
 {
     public function index()
-    {
+    {      
       $this->checkDueEvent();
       $subEvents = Cache::remember('index_sub_events', 30, function () {
                       return SubEvent::with('event')->where('approved', 1)->where('status','ongoing')

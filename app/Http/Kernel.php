@@ -59,6 +59,7 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         // cuztome disini
+        'super.admin' => \App\Http\Middleware\CheckSuperAdmin::class,
         'admin' => \App\Http\Middleware\CheckAdmin::class,
         'user' => \App\Http\Middleware\CheckUser::class,
         'jwt.verify' => \App\Http\Middleware\JwtMiddleware::class,

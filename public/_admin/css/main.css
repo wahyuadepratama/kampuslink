@@ -29045,3 +29045,18 @@ Contents:
 .event-produk{
   overflow: hidden;
 }
+.card-tolak{
+  position: relative;
+}
+.tutup{
+  visibility:hidden;
+  position: absolute;
+  opacity: 0;
+  transition: 0.5s;
+}
+.buka{
+  visibility:visible;
+  position: relative;
+  opacity: 1;
+  transition: 0.5s;
+}
