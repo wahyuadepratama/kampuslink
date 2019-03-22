@@ -18,11 +18,11 @@ Route::get('/kontak', function(){	return view('guest.kontak'); });
 Route::get('/register-organization','GuestController@showRegisterOrganization');
 Route::post('/store-register-organization', 'GuestController@storeRegisterOrganization');
 
+// User
 Route::get('profile', 'UserController@profile');
 Route::post('update-profile-user', 'UserController@updateDataProfileUser');
 Route::post('update-kampus-user', 'UserController@updateDataKampusUser');
 Route::post('update-login-user', 'UserController@updateDataLoginUser');
-
 
 Route::get('transaction', 'TransactionController@indexTransaction');
 Route::get('transaction/{id}', 'TransactionController@showTransaction');
@@ -30,7 +30,7 @@ Route::post('transaction/{id}/confirm', 'TransactionController@confirmTransactio
 Route::post('transaction/{id}/proof/upload', 'TransactionController@proofTransaction');
 Route::get('get-all-sub-event', 'GuestController@getDataSubEvent');
 
-
+// Organisasi
 Route::get('organization/{ig}', 'OrganizationController@home');
 Route::get('organization/{ig}/profile', 'OrganizationController@profile');
 Route::get('organization/{ig}/fund-collected', 'OrganizationController@fundCollected');
@@ -47,3 +47,6 @@ Route::post('organization/{ig}/event/add-big-event/store', 'OrganizationControll
 
 Route::get('organization/{ig}/event/add/show', 'OrganizationController@addEvent');
 Route::post('organization/{ig}/event/add/store', 'OrganizationController@storeEvent');
+
+// Super Admin
+Route::get('admin', 'AdminController@index');

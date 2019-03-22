@@ -172,6 +172,19 @@
 									</ul>
 								</div>
 
+								@elseif(Auth::user()->role_id == 1)
+
+								<div class="col-lg-2">
+									<ul class="nav navbar-nav navbar-right right_nav pull-right"><hr>
+										<li class="nav-item">
+											<a href="/admin" class="login">
+												Dashboard
+											</a>
+										</li>
+										<hr>
+									</ul>
+								</div>
+
 								@endif
 
 							@else
