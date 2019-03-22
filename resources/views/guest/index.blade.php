@@ -236,7 +236,7 @@
 							<div class="foot">
 
 							</div>
-							<span class="lokasi">{{ $data->subEvent->location }} </span>
+							<span class="lokasi"><span>{{ $data->subEvent->location }} </span></span>
 							<a href="{{ url('event/' . $data->subEvent->slug) }}" class="btn-view">VIEW DETAIL</a>
 						</div>
 					</div>

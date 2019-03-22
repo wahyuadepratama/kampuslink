@@ -23,8 +23,7 @@
 							<h2>DETAIL INFO </h2>
 						</div>
 						<div class="detail">
-
-							<div class="content" style="display: flex;">
+							<div class="content" style="display: flex;width: 100%;">
 								<ul class="list">
 									<li>
 										<a class="active" href="#">
@@ -63,7 +62,9 @@
 										<a href="{{ $subEvent->web_link }}"><img src="{{asset('client/img/icon/web.png')}}" style="width: 4%">&nbsp; {{ $subEvent->web_link }}</a>
 									</li>
 								</ul>
-								<img src="{{ asset('storage/qr/event/'. $subEvent->qr_code) }}" width="100" height="100">
+								<div class="qr-detail">
+									<img src="{{ asset('storage/qr/event/'. $subEvent->qr_code) }}" width="100" height="100">
+								</div>
 							</div>
 
 							<!-- <div class="row">

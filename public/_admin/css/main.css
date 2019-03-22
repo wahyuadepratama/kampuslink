@@ -12470,6 +12470,7 @@ strong {
 .all-wrapper.white-bg-content .content-w {
   background-color: #fff;
   background-image: none;
+  min-height: 100vh;
 }
 
 .all-wrapper.solid-bg-all {

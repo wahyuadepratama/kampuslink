@@ -44,7 +44,7 @@
           <!-- <h4>Atur</h4> -->
           <button class="btn-profil" id="edit">Profil</button>
           <button class="btn-kampus" id="edit">Kampus</button>
-          <button class="btn-login" id="edit">Login</button>
+          <button class="btn-login" id="edit">Email&Password</button>
         </div>
         <!-- =======FORM PROFIL======= -->
         <div class="login_form_inner reg_form" id="form-profil">
@@ -206,7 +206,7 @@
             <!-- <h4>Atur</h4> -->
             <button class="btn-profil" id="detail">Profil</button>
             <button class="btn-kampus" id="detail">Kampus</button>
-            <button class="btn-login" id="detail">Login</button>
+            <button class="btn-login" id="detail">Email&Password</button>
           </div>
           <div class="card-profil" id="detail-profil">
             <h6 class="card-text-bold">Profil</h6>
