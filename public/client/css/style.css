@@ -5125,6 +5125,7 @@ span.r_acara span.not{/*not*/
 .view-set.view-1 .produk .box-produk .produk-img{
   max-height: 400px;
   overflow: hidden;
+  position: relative;
 }
 .view-set.view-1 .produk .box-produk .produk-img img{
   width: 100%;
@@ -5265,9 +5266,17 @@ span.r_acara span.not{/*not*/
 /*END view-2 = SMALL*/
 /*END PRODUK*/
 /*Large devices (desktops, 992px and up)*/
+a.icon_btn{
+  cursor: pointer;
+}
 @media (min-width: 992px) {
   .feature_product_area{
     padding-bottom: 0px !important;
+  }
+  .s_product_text .detail .content .qr-detail{
+    width: 50%;
+    display: flex;
+    justify-content: center;
   }
 }
 @media (max-width: 575.98px) {
@@ -5331,14 +5340,41 @@ span.r_acara span.not{/*not*/
   }
   /*START view-1 dan view-2*/
   .view-set.view-1 .produk .box-produk .content{
-    padding: 1em 0.2em 0.2em 1em;
+    padding: 1em 1.5em 0.2em 0.5em;
   }
-  .view-set.view-1 .produk .box-produk .foot{
+  .view-set.view-1 .produk .box-produk .content-set{
     padding: 0 0 1em 1em;
   }
-  .view-set.view-1 .produk .box-produk .foot a.btn-view{
-    right: 0.4em;
-    padding: 4px 14px;
+  .view-set.view-1 .produk .box-produk .produk-img .qr{
+    right: 1.5em;
+    bottom: 1em;
+    position: absolute;
+    box-shadow: 0px 0px 10px #000000bf;
+    border-radius: 2px;
+    background: white;
+    width: 40px;
+    height: 40px;
+  }
+  .view-set.view-1 .produk .box-produk .produk-img .qr .fa-qrcode{
+    font-size: 35px;
+    padding: 4px 6px;
+    color: black;
+  }
+  .view-set.view-1 .produk .box-produk .content-set span.lokasi{
+    font-size: 12px;
+    line-height: 12px;
+    position: absolute;
+    bottom: 1em;
+    padding: 7px 28px 18px 8px;
+    max-width: 250px;
+    max-height: 32px;
+    overflow: hidden;
+  }
+  .view-set.view-1 .produk .box-produk .content-set a.btn-view{
+    right: 1.5em;
+    bottom: 1em;
+    padding: 2px 18px;
+    font-size: 12px;
   }
   /*===========================*/
   .view-set.view-2 .produk .box-produk{
@@ -5363,23 +5399,29 @@ span.r_acara span.not{/*not*/
     margin-top: 2px;
     font-size: 10px;
   }
-  .view-set.view-2 .produk .box-produk .foot{
+  .view-set.view-2 .produk .box-produk .content-set{
     margin-top: 0;
     padding: 0;
     line-height: 12px;
   }
-  .view-set.view-2 .produk .box-produk .foot span.lokasi{
-    font-size: 7px;
-    line-height: 12px;
+  .view-set.view-2 .produk .box-produk .produk-img .qr{
+    right: 0.3em;
+    bottom: 0.3em;
+    padding: 0px 7px;
+  }
+  .view-set.view-2 .produk .box-produk .content-set span.lokasi{
+    font-size: 8px;
+    line-height: 9px;
     font-weight: 400;
     padding-left: 7px;
   }
-  .view-set.view-2 .produk .box-produk .foot a.btn-view{
+  .view-set.view-2 .produk .box-produk .content-set a.btn-view{
     right: -2px;
-    bottom: -5px;
+    bottom: 0;
     background: #30a2e9;
     padding: 3px 8px;
     font-size: 10px;
+    border-radius: 0;
   }
   /*END view-1 dan view-2*/
 }
