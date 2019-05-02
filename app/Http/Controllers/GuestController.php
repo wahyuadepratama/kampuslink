@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Auth;
 class GuestController extends Controller
 {
     public function index()
-    {      
+    {
       $this->checkDueEvent();
       $subEvents = Cache::remember('index_sub_events', 30, function () {
                       return SubEvent::with('event')->where('approved', 1)->where('status','ongoing')
@@ -63,7 +63,7 @@ class GuestController extends Controller
 
     public function checkDueEvent()
     {
-      $subEvents = SubEvent::with('event')->where('approved', 1)->where('status','ongoing')->get();
+      $subEvents = SubEvent::with('event')->where('status','ongoing')->get();
       foreach ($subEvents as $subEvent) {
         if (strtotime($subEvent->date) < strtotime(Carbon::now()->toDateString())) {
           $data = SubEvent::where('id', $subEvent->id)->first();
@@ -328,7 +328,17 @@ class GuestController extends Controller
     public function search(Request $request)
     {
       $data = SubEvent::where('name', $request->event)->first();
-      return redirect('/event'.'/'. $data->slug );
+      if($data){
+        return redirect('/event'.'/'. $data->slug );
+      }else{
+        return redirect('/event/search/'. $request->event);
+      }
+    }
+
+    public function indexSearch($query)
+    {
+      $data = SubEvent::where('name', 'like', '%' . $query . '%')->get();
+      return view('guest/index_search')->with('event', $data)->with('query', $query);
     }
 
     public function getDataFaculty($id)
@@ -374,7 +384,7 @@ class GuestController extends Controller
       }
 
       if ($request->ig == trim($request->ig) && strpos($request->ig, ' ') !== false) {
-        return back()->withInput()->with('error', 'Your organization has registered!');
+        return back()->withInput()->with('error', 'Your instagram organization has registered!');
       }
 
       $create = Organization::create([

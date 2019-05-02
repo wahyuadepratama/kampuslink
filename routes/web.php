@@ -13,6 +13,7 @@ Route::get('get-program-study/{id}', 'GuestController@getDataProgramStudy');
 Route::get('event/{slug}/process', 'TransactionController@processTransaction');
 Route::post('event/{slug}/process', 'TransactionController@postProcessTransaction');
 Route::post('event/search', 'GuestController@search');
+Route::get('event/search/{query}', 'GuestController@indexSearch');
 
 Route::get('/kontak', function(){	return view('guest.kontak'); });
 Route::get('/register-organization','GuestController@showRegisterOrganization');
@@ -50,3 +51,8 @@ Route::post('organization/{ig}/event/add/store', 'OrganizationController@storeEv
 
 // Super Admin
 Route::get('admin', 'AdminController@index');
+
+Route::get('admin/university', 'AdminController@indexCampus');
+Route::post('admin/university/store', 'AdminController@storeCampus');
+Route::get('admin/university/destroy/{id}', 'AdminController@destroyCampus');
+Route::post('admin/university/update/{id}', 'AdminController@updateCampus');

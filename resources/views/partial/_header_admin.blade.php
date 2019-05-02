@@ -127,6 +127,34 @@
                 </div>
                 <span>Pesan</span></a>
             </li>
+              <li class=" has-sub-menu">
+                <a href="#">
+                  <div class="icon-w">
+                    <div class="os-icon os-icon-file-text"></div>
+                  </div>
+                  <span>Campus</span></a>
+                <div class="sub-menu-w">
+                  <div class="sub-menu-header">
+                    Campus
+                  </div>
+                  <div class="sub-menu-icon">
+                    <i class="os-icon os-icon-file-text"></i>
+                  </div>
+                  <div class="sub-menu-i">
+                    <ul class="sub-menu">
+                      <li>
+                        <a href="{{ url('admin/university') }}">University</a>
+                      </li>
+                      <li>
+                        <a href="{{ url('admin/faculty') }}">Faculty</a>
+                      </li>
+                      <li>
+                        <a href="{{ url('admin/faculty') }}">Program Study</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
           </ul>
         </div>
         <!--

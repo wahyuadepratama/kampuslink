@@ -40,6 +40,10 @@
 						</div>
 					</div>
 
+					@if($subEvents->isEmpty())
+						<h3 style="text-align:center;margin-top:10%">Belum ada event untuk saat ini!</h3>
+					@endif
+
           <div class="latest_product_inner row">
 
 						@if(isset($subEvents) and ! is_null( $subEvents) )

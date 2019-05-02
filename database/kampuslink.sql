@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6deb5
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Mar 15, 2019 at 10:39 AM
--- Server version: 10.1.38-MariaDB-0ubuntu0.18.04.1
--- PHP Version: 7.2.15-0ubuntu0.18.04.1
+-- Host: 127.0.0.1
+-- Generation Time: May 02, 2019 at 07:11 AM
+-- Server version: 10.1.37-MariaDB
+-- PHP Version: 7.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -54,20 +56,20 @@ CREATE TABLE `campus` (
   `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `background_color` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `campus`
 --
 
-INSERT INTO `campus` (`id`, `name`, `logo`, `location`, `description`, `background_color`, `created_at`, `updated_at`) VALUES
-(1, 'Universitas Andalas', 'default-logo.svg', 'Limau Manih', 'bla bla bla bla bla', '#ffffff', '2018-09-27 00:12:34', '2018-09-27 00:12:34'),
-(2, 'Universitas Indonesia', 'default-logo.svg', 'jakarta', 'bla bla bla bla bla', '#ffffff', '2018-09-27 00:12:34', '2018-09-27 00:12:34'),
-(3, 'Universitas Bung Hatta', 'default-logo.svg', 'yogyakarta', 'bla bla bla bla bla', '#ffffff', '2018-09-27 00:12:34', '2018-09-27 00:12:34'),
-(4, 'YPTK UPI', 'default-logo.svg', 'Limau Manih', 'bla bla bla bla bla', '#ffffff', '2019-01-25 02:00:16', '2019-01-25 02:00:16'),
-(5, 'Universitas Riau', 'default-logo.svg', 'jakarta', 'bla bla bla bla bla', '#ffffff', '2019-01-25 02:00:16', '2019-01-25 02:00:16'),
-(6, 'Institut Teknologi Padang', 'default-logo.svg', 'yogyakarta', 'bla bla bla bla bla', '#ffffff', '2019-01-25 02:00:16', '2019-01-25 02:00:16');
+INSERT INTO `campus` (`id`, `name`, `logo`, `location`, `description`, `background_color`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Universitas Andalas', 'logo_universitas-andalas_1556770598.jpg', 'Limau Manis', 'bla bla bla bla bla', '#24b314', '2018-09-27 00:12:34', '2019-05-01 21:16:38', NULL),
+(2, 'Universitas Indonesia', 'default.png', 'jakarta', 'bla bla bla bla bla', '#ffffff', '2018-09-27 00:12:34', '2019-05-01 18:23:11', '2019-05-01 18:23:11'),
+(3, 'Universitas Bung Hatta', 'default.png', 'yogyakarta', 'bla bla bla bla bla', '#ffffff', '2018-09-27 00:12:34', '2019-05-01 18:23:08', '2019-05-01 18:23:08'),
+(4, 'YPTK UPI', 'default.png', 'Limau Manih', 'bla bla bla bla bla', '#ffffff', '2019-01-25 02:00:16', '2019-05-01 18:23:05', '2019-05-01 18:23:05'),
+(5, 'Universitas Riau', 'default.png', 'jakarta', 'bla bla bla bla bla', '#ffffff', '2019-01-25 02:00:16', '2019-05-01 18:22:54', '2019-05-01 18:22:54');
 
 -- --------------------------------------------------------
 
@@ -267,7 +269,10 @@ INSERT INTO `event_viewer` (`id`, `viewer_id`, `sub_event_id`, `seen_on`) VALUES
 (70, 2, 14, '2019-03-10 06:32:25'),
 (71, 2, 6, '2019-03-11 06:49:01'),
 (72, 2, 14, '2019-03-12 06:00:27'),
-(73, 2, 15, '2019-03-12 06:11:50');
+(73, 2, 15, '2019-03-12 06:11:50'),
+(74, 2, 4, '2019-04-30 03:33:39'),
+(75, 2, 9, '2019-04-30 04:05:35'),
+(76, 2, 10, '2019-05-01 14:17:41');
 
 -- --------------------------------------------------------
 
@@ -418,8 +423,8 @@ INSERT INTO `sub_event` (`id`, `event_id`, `organization_id`, `name`, `slug`, `d
 (2, 1, 1, 'Hackathon Hackathon Hackathon Hackathon Hackathon Hackathon', 'hackathon-91238291', 'Hackathon adalah bla bla bla bla bla', 'DilLo Padang', '0813713219889', 'id_line_eu', 'default-image.png', 'past', 0, '07:12:35', '07:12:35', '2019-02-04', '2.jpeg', 'firetech.neotelemetri.com', '2018-09-27 00:12:35', '2019-03-11 10:07:24'),
 (3, 2, 2, 'Expo dan Bazar', 'expo-dan-bazar-328391823', 'Expo dan bazar adalah bla bla bla bla bla', 'Fakultas Teknologi Informasi, Universitas Andalas', '08137321239', 'id_line_eur', 'default-image.png', 'ongoing', 1, '07:12:35', '07:12:35', '2019-05-16', '3.jpeg', 'isce.hmsiunand.com', '2018-09-27 00:12:35', '2019-03-11 10:07:22'),
 (4, 2, 2, 'Lomba Desain', 'lomba-desain-934384', 'bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain bal bla bla bal ini deskripsi lomba desain', 'Padang Selatan', '92389283', 'djfkdjf', 'default-image.png', 'ongoing', 1, '08:00:00', '12:00:00', '2019-06-12', '4.jpeg', '', '2019-01-29 01:00:00', '2019-03-11 10:07:20'),
-(5, 1, 1, 'Lomba MLBB', 'lomba-mlbb-8384934', 'bal bal balb alb albal alb alb al balbab', 'Padang', NULL, NULL, 'default-image.png', 'ongoing', 2, '10:00:00', '20:00:00', '2019-03-30', '1.jpeg', 'bla.com', '2019-01-29 03:00:00', '2019-03-11 10:07:17'),
-(6, 2, 2, 'Lomba PUBG', 'lomba-pubg-3434134', 'adfafda adaf d ffdfdf dfdf d f', 'Pekanbaru', NULL, NULL, 'default-image.png', 'ongoing', 1, '10:00:00', '18:00:00', '2019-03-28', '5.jpeg', 'dfdf', '2019-01-29 05:00:00', '2019-03-11 10:07:15'),
+(5, 1, 1, 'Lomba MLBB', 'lomba-mlbb-8384934', 'bal bal balb alb albal alb alb al balbab', 'Padang', NULL, NULL, 'default-image.png', 'past', 2, '10:00:00', '20:00:00', '2019-03-30', '1.jpeg', 'bla.com', '2019-01-29 03:00:00', '2019-04-30 00:29:22'),
+(6, 2, 2, 'Lomba PUBG', 'lomba-pubg-3434134', 'adfafda adaf d ffdfdf dfdf d f', 'Pekanbaru', NULL, NULL, 'default-image.png', 'past', 1, '10:00:00', '18:00:00', '2019-03-28', '5.jpeg', 'dfdf', '2019-01-29 05:00:00', '2019-04-29 20:29:53'),
 (7, 2, 2, 'Lomba Mikrotik', 'lomba-mikrotik-343847', 'adfafdadf dfdf df dfd f dfdf', 'Padang, Unand', NULL, NULL, 'default-image.png', 'past', 1, '09:00:00', '16:00:00', '2019-03-14', '7.jpeg', 'erererer', '2019-01-29 08:00:00', '2019-03-14 18:32:32'),
 (8, 2, 2, 'Lomba Lari 200km Padang - Payakumbuh', 'tes-9348934', 'adfadfafdafafd', 'adfaf', NULL, NULL, 'default-image.png', 'ongoing', 1, '08:00:00', '18:00:00', '2019-06-14', '8.jpeg', 'dfdf', '2019-01-29 09:00:00', '2019-03-11 10:07:11'),
 (9, 2, 2, 'Lomba lorem ipsum', 'lomba-lorem-ipsum-293829', 'Lorem ipsum dolor sit amet, ipsum consulatu molestiae ut vis, et vix omnes praesent. Eirmod mediocritatem mei in, ei ipsum assum recteque ius. Zril efficiendi his ei. Meliore torquatos nec ea, eu viderer percipit pri. Iuvaret luptatum petentium mea id, eu probatus abhorreant eos.', 'Lorem ipsum dolor sit amet, ipsum consulatu', '23123213', '2131212', 'default-image.png', 'ongoing', 1, '07:00:00', '15:00:00', '2019-06-13', 'default-image.png', 'Lorem ipsum dolor sit amet, ipsum consulatu', '2019-02-03 17:00:00', '2019-03-11 10:07:09'),
@@ -526,7 +531,9 @@ INSERT INTO `ticket` (`id`, `transaction_id`, `price`, `type`, `owner`, `qr_code
 (67, 36, 5000, 'Reguler', 'Lionel Messi', 'qr/582723950726', 'link/414592988228', 'active', '2019-03-09 02:50:10', '2019-03-10 14:07:23'),
 (68, 36, 5000, 'VIP', 'Bambang Pamungkas', 'qr/4808202366', 'link/1756139441', 'active', '2019-03-09 02:50:10', '2019-03-10 14:07:29'),
 (69, 36, 5000, 'VIP', 'Johny English', 'qr/6613661714', 'link/1845612663', 'active', '2019-03-09 02:50:11', '2019-03-10 14:07:37'),
-(70, 36, 5000, 'VIP', 'Horasindura Kolakiptano', 'qr/3550594421', 'link/8857220503', 'active', '2019-03-09 02:50:11', '2019-03-10 14:07:50');
+(70, 36, 5000, 'VIP', 'Horasindura Kolakiptano', 'qr/3550594421', 'link/8857220503', 'active', '2019-03-09 02:50:11', '2019-03-10 14:07:50'),
+(78, 43, 50000, 'Reguler', 'jdjd', 'qr/43359938', 'link/43821883', 'active', '2019-04-30 07:51:49', '2019-04-30 00:52:24'),
+(79, 43, 50000, 'Reguler', 'jdkfja', 'qr/43200994', 'link/43683040', 'active', '2019-04-30 07:51:49', '2019-04-30 00:52:24');
 
 -- --------------------------------------------------------
 
@@ -570,7 +577,14 @@ INSERT INTO `transaction` (`id`, `user_id`, `sub_event_id`, `unique_code`, `stat
 (33, 5, 6, 1552089439, 'Pembayaran Dibatalkan', NULL, 1, '2019-03-09 08:54:19', '2019-03-08 23:57:19', '2019-03-08 19:24:44'),
 (34, 5, 1, 1552097591, 'Diproses', NULL, 1, '2019-03-09 11:13:11', '2019-03-09 02:13:11', '2019-03-08 19:42:22'),
 (35, 5, 14, 1552099646, 'Pembayaran Dibatalkan', NULL, 1, '2019-03-09 09:49:00', '2019-03-09 02:47:26', '2019-03-09 19:51:49'),
-(36, 5, 14, 1552099810, 'Pembayaran Berhasil', NULL, 1, '2019-03-09 11:50:10', '2019-03-09 02:50:10', '2019-03-10 07:21:19');
+(36, 5, 14, 1552099810, 'Pembayaran Berhasil', NULL, 1, '2019-03-09 11:50:10', '2019-03-09 02:50:10', '2019-04-30 00:19:16'),
+(37, 5, 15, 1556610181, 'Konfirmasi Tiket', NULL, 1, '2019-04-30 16:43:01', '2019-04-30 07:43:01', '2019-04-30 00:43:01'),
+(38, 5, 15, 1556610196, 'Konfirmasi Tiket', NULL, 1, '2019-04-30 16:43:16', '2019-04-30 07:43:16', '2019-04-30 00:43:16'),
+(39, 5, 15, 1556610231, 'Konfirmasi Tiket', NULL, 1, '2019-04-30 16:43:51', '2019-04-30 07:43:51', '2019-04-30 00:43:51'),
+(40, 5, 15, 1556610343, 'Konfirmasi Tiket', NULL, 1, '2019-04-30 16:45:43', '2019-04-30 07:45:43', '2019-04-30 00:48:18'),
+(41, 5, 10, 1556610513, 'Konfirmasi Tiket', NULL, 1, '2019-04-30 16:48:33', '2019-04-30 07:48:33', '2019-04-30 00:48:35'),
+(42, 5, 3, 1556610563, 'Konfirmasi Tiket', NULL, 1, '2019-04-30 16:49:23', '2019-04-30 07:49:23', '2019-04-30 00:49:24'),
+(43, 5, 4, 1556610709, 'Diproses', NULL, 1, '2019-04-30 16:51:49', '2019-04-30 07:51:49', '2019-04-30 00:52:48');
 
 -- --------------------------------------------------------
 
@@ -608,11 +622,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `role_id`, `program_study_id`, `status`, `username`, `email`, `password`, `fullname`, `nim`, `phone`, `photo_profile`, `photo_ktm`, `date_birth`, `gender`, `phone_type`, `android_type`, `apps_version`, `remember_token`, `last_login`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, 1, 1, 'admin', 'admin@gmail.com', '$2y$10$.7hqO3OKindL4AA.nxVTb.2QJGo/mpPBNjDc2Uc800T0HTmrl9wGa', 'Administrator', '1511521021', '081371321919', 'user.png', 'default-avatar.svg', NULL, 'man', NULL, NULL, NULL, NULL, NULL, '2018-09-27 00:12:34', '2019-02-14 04:56:21', NULL),
+(1, 1, 1, 1, 'admin', 'admin@gmail.com', '$2y$10$.7hqO3OKindL4AA.nxVTb.2QJGo/mpPBNjDc2Uc800T0HTmrl9wGa', 'Administrator', '1511521021', '081371321919', 'user.png', 'default-avatar.svg', NULL, 'man', NULL, NULL, NULL, 'QkMzmGyoLXbXIRXt0EhxXMpqER9AS9Qnz2D7JezPmTnQB9apS8ZmYyLsnj3R', '2019-05-02 04:08:21', '2018-09-27 00:12:34', '2019-05-01 21:08:21', NULL),
 (2, 3, 1, 1, 'badusaputra', 'badu@gmail.com', '$2y$10$4zCFV55pzomQcNirljybIeNx8C.q8ijGis9M2sFHFq534aI/dz8RC', 'Badu Saputra', '1511521022', '081371321914', 'user.png', 'default-avatar.svg', '2019-01-09', 'man', NULL, NULL, NULL, NULL, '2019-03-15 02:28:39', '2018-09-27 00:12:34', '2019-03-14 19:28:39', NULL),
 (3, 3, 3, 0, 'budiperkasa', 'budi@gmail.com', '$2y$10$.7hqO3OKindL4AA.nxVTb.2QJGo/mpPBNjDc2Uc800T0HTmrl9wGa', 'Budi Perkasa', '1511521023', '081371421919', 'user.png', 'default-avatar.svg', NULL, 'man', NULL, NULL, NULL, NULL, NULL, '2018-09-27 00:12:34', '2019-02-14 04:58:21', NULL),
 (4, 2, 3, 0, 'sitisarah', 'siti@gmail.com', '$2y$10$.7hqO3OKindL4AA.nxVTb.2QJGo/mpPBNjDc2Uc800T0HTmrl9wGa', 'Siti Sarah', '1511521020', '08137141919', 'user.png', 'default-avatar.svg', NULL, 'woman', NULL, NULL, NULL, 'Kfh7kghZZ0pD2TWHjcDIX6OKqQFLfTzzAtMIxKQxNVYReCbGgsg75ciFaRsC', '2019-03-15 03:18:37', '2018-09-27 00:12:34', '2019-03-15 03:27:41', NULL),
-(5, 2, 5, 0, 'wahyuadepratama', 'wahyuadepratama@gmail.com', '$2y$10$.7hqO3OKindL4AA.nxVTb.2QJGo/mpPBNjDc2Uc800T0HTmrl9wGa', 'Wahyu Ade Pratama', '1511521024', '0813713219712', 'avatar_wahyu-ade-pratama_1552120981.jpg', 'default-avatar.svg', '1998-03-14', 'man', NULL, NULL, NULL, 'dwnY63XAj12UheirGJdy95psN4x29CWuHMlREDWSaCMTN44qfHiHE6zD8fhj', '2019-03-15 03:29:11', '2018-10-01 03:32:24', '2019-03-14 20:29:11', NULL),
+(5, 2, 5, 0, 'wahyuadepratama', 'wahyuadepratama@gmail.com', '$2y$10$.7hqO3OKindL4AA.nxVTb.2QJGo/mpPBNjDc2Uc800T0HTmrl9wGa', 'Wahyu Ade Pratama', '1511521024', '0813713219712', 'avatar_wahyu-ade-pratama_1552120981.jpg', 'default-avatar.svg', '1998-03-14', 'man', NULL, NULL, NULL, 'rFpYNppmnyL676UrS3vMTxM9BFXF66pwYJ20jpjx7NiODMMkpP4yiBSdFWwG', '2019-05-01 14:01:35', '2018-10-01 03:32:24', '2019-05-01 14:16:49', NULL),
 (9, 3, 5, 0, 'john', 'john@gamil.com', '$2y$10$fTuHYTwmz2BVAQpsT51Nt.dI5jzA43xmkurlH1niNcOVOjONkrqXm', 'John', '1511521000', NULL, 'user.png', 'user.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-03-07 20:31:13', '2019-03-08 03:56:54', NULL),
 (10, 3, 3, 0, 'adik.badu', 'adik.badu@gmail.com', '$2y$10$yF2ChQLFEyd61GwBFU65o.ky1LH0hrJD3cQXXRt7uLIJGpc6MCe0S', 'Adik Badu', '1611521022', '0877632732', 'user.png', 'user.png', '1997-03-08', 'man', NULL, NULL, NULL, NULL, NULL, '2019-03-07 20:32:11', '2019-03-08 04:08:25', NULL);
 
@@ -655,7 +669,7 @@ CREATE TABLE `viewer` (
 --
 
 INSERT INTO `viewer` (`id`, `ip_address`, `last_view`) VALUES
-(2, '127.0.0.1', '2019-03-12 06:00:27'),
+(2, '127.0.0.1', '2019-05-01 14:17:41'),
 (3, '10.21.2.112', '2019-01-29 02:50:06'),
 (4, '192.168.43.1', '2019-02-15 08:50:07'),
 (5, '192.168.43.99', '2019-02-15 08:57:14');
@@ -805,86 +819,103 @@ ALTER TABLE `viewer`
 --
 ALTER TABLE `api_access`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `campus`
 --
 ALTER TABLE `campus`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT for table `comment`
 --
 ALTER TABLE `comment`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT for table `event`
 --
 ALTER TABLE `event`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `event_category`
 --
 ALTER TABLE `event_category`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
 --
 -- AUTO_INCREMENT for table `event_viewer`
 --
 ALTER TABLE `event_viewer`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+
 --
 -- AUTO_INCREMENT for table `faculty`
 --
 ALTER TABLE `faculty`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT for table `organization`
 --
 ALTER TABLE `organization`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
 --
 -- AUTO_INCREMENT for table `program_study`
 --
 ALTER TABLE `program_study`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT for table `sub_event`
 --
 ALTER TABLE `sub_event`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
 --
 -- AUTO_INCREMENT for table `sub_event_ticket`
 --
 ALTER TABLE `sub_event_ticket`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
 --
 -- AUTO_INCREMENT for table `ticket`
 --
 ALTER TABLE `ticket`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+
 --
 -- AUTO_INCREMENT for table `transaction`
 --
 ALTER TABLE `transaction`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
 --
 -- AUTO_INCREMENT for table `viewer`
 --
 ALTER TABLE `viewer`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- Constraints for dumped tables
 --
@@ -972,6 +1003,7 @@ ALTER TABLE `users`
 ALTER TABLE `user_organization`
   ADD CONSTRAINT `user_organization_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `user_organization_ibfk_2` FOREIGN KEY (`organization_id`) REFERENCES `organization` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

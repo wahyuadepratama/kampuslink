@@ -1,18 +1,16 @@
 @include('partial/_header')
 
 	<!--================Home Banner Area =================-->
-	<section class="banner_area">
-		<div class="banner_inner d-flex align-items-center">
+	<section class="new_banner_area">
+		<div class="banner-img bg-overlay-39">
 			<div class="container">
-				<div class="banner_content text-center">
-					<h2>Buat Akun Organisasi</h2>
-					<div class="page_link">
-						<a href="/">Home</a>
-						<a href="/">Buat Akun Organisasi</a>
-						<a href="/">Pemberitahuan</a>
-					</div>
-				</div>
+				<h1 style="margin-top:3%">{{$name}}</h1>
+				<ul>
+          <li><a href="{{ url('/') }}">Home</a></li>
+          <li>Buat Organisasi</li>
+        </ul>
 			</div>
+			<div class="box-position" style="background-image: url(client/img/banner/banner-bg.jpg);"></div>
 		</div>
 	</section>
 	<!--================End Home Banner Area =================-->
@@ -41,16 +39,6 @@
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 @include('partial/_script_footer')
 <script type="text/javascript">
-$(document).ready(function(){
-	// $('button').click(function(){
-	// 	Swal.fire({
-	// 	  type: 'success',
-	// 	  title: 'Berhasil',
-	// 	  text: ''
-	// 	});
-	// });
-	// doc => https://sweetalert2.github.io/
-});
 </script>
 
 </body>

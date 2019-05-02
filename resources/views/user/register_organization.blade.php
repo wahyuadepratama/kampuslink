@@ -48,7 +48,11 @@
 								</div>
 							</div>
 							<div class="col-md-12 form-group">
-								<button type="submit" class="btn submit_btn" <?php if(!Auth::check()){ echo 'data-toggle="modal" data-target="#modalLogin"'; } ?>>Buat</button><br>
+								@if(!Auth::check())
+								<a class="btn submit_btn" data-toggle="modal" data-target="#modalLogin">Buat</a>
+								@else
+								<button type="submit" class="btn submit_btn" data-toggle="modal" data-target="#modalLogin">Buat</button><br>
+								@endif
 								@if ( count( $errors ) > 0 )
 						      @foreach($errors->all() as $error)
 						      <div class="alert alert-danger">
