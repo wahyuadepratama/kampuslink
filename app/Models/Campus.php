@@ -9,6 +9,7 @@ class Campus extends Model
 {
   protected $table = "campus";
   protected $quarded = [];
+  protected $fillable = ['id', 'name', 'logo', 'location', 'description', 'background_color'];
 
   use SoftDeletes;
 

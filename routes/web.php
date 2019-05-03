@@ -56,3 +56,7 @@ Route::get('admin/university', 'AdminController@indexCampus');
 Route::post('admin/university/store', 'AdminController@storeCampus');
 Route::get('admin/university/destroy/{id}', 'AdminController@destroyCampus');
 Route::post('admin/university/update/{id}', 'AdminController@updateCampus');
+
+Route::get('admin/faculty', 'AdminController@indexFaculty');
+Route::post('admin/faculty/store', 'AdminController@storeFaculty');
+Route::get('admin/faculty/destroy/{id}', 'AdminController@destroyFaculty');

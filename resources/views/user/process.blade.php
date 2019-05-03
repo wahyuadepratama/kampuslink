@@ -49,7 +49,7 @@
 											@else
 											{{ $key->subEvent->name }}
 											@endif
-										</div>										
+										</div>
 									</div>
                   @endif
 								</td>

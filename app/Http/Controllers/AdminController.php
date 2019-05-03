@@ -6,6 +6,8 @@ use App\Models\User;
 use App\Models\Role;
 use App\Models\SubEvent;
 use App\Models\Campus;
+use App\Models\Faculty;
+use App\Models\ProgramStudy;
 use App\Models\Event;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
@@ -122,6 +124,19 @@ class AdminController extends Controller
       ]);
 
       return back()->with('success', 'New data successfull added!');
+    }
+
+    public function indexFaculty()
+    {
+      $data = Faculty::with('campus')->get();      
+      return view('admin/faculty')->with('data', $data);
+    }
+
+    public function destroyFaculty($id)
+    {
+      $campus = Faculty::find($id);
+      $campus->delete();
+      return back()->with('success', 'Destroy faculty successful!');
     }
 
 }
