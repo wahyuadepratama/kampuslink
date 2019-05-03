@@ -17,7 +17,7 @@
 	<!-- <link rel="stylesheet" href="{{asset('client/vendors/nice-select/css/nice-select.css')}}"> -->
 	<link rel="stylesheet" href="{{asset('client/vendors/animate-css/animate.css')}}">
 	<link rel="stylesheet" href="{{asset('client/vendors/jquery-ui/jquery-ui.css')}}">
-	<link rel="stylesheet" href="{{asset('client/css/jquery.bxslider.css')}}">
+	<!-- <link rel="stylesheet" href="{{asset('client/css/jquery.bxslider.css')}}"> -->
 	<link href="https://fonts.googleapis.com/css?family=Cabin|Dosis" rel="stylesheet">
 	<!-- main css -->
 	<link rel="stylesheet" href="{{asset('client/css/style.css')}}">

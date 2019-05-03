@@ -70,7 +70,7 @@ class TransactionController extends Controller
           $oneTransaction->seen = 0;
           $oneTransaction->save();
         }
-      }      
+      }
 
       return view('user.detail_transaction')->with('status', $oneTransaction->status)
                                             ->with('transaction', $oneTransaction)
@@ -142,8 +142,8 @@ class TransactionController extends Controller
           'transaction_id' => $new->id,
           'price' => $subEventTicketReguler->price,
           'type' => "Reguler",
-          'qr_code' => 'qr/'. rand(100000000000,900000000000),
-          'link' => 'link/'. rand(100000000000,900000000000),
+          'qr_code' => 'qr/'. $new->id . rand(10000, 1000000),
+          'link' => 'link/'.  $new->id . rand(10000, 1000000),
           'created_at' => Carbon::now()->setTimezone('Asia/Jakarta')
         ]);
       }
@@ -153,8 +153,8 @@ class TransactionController extends Controller
           'transaction_id' => $new->id,
           'price' => $subEventTicketVip->price,
           'type' => "VIP",
-          'qr_code' => 'qr/'. rand(1000000000,9000000000),
-          'link' => 'link/'. rand(1000000000,9000000000),
+          'qr_code' => 'qr/'.  $new->id . rand(10000, 1000000),
+          'link' => 'link/'.  $new->id . rand(10000, 1000000),
           'created_at' => Carbon::now()->setTimezone('Asia/Jakarta')
         ]);
       }

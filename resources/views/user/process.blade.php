@@ -44,10 +44,11 @@
                   @if($limit == false)
 									<div class="media">
 										<div class="d-flex">
-											{{ $key->subEvent->event->name }}
-										</div>
-										<div class="media-body">
-											<p>{{ $key->subEvent->name }}</p>
+											@if(isset($key->subEvent->event->name))
+											{{ $key->subEvent->event->name }} ({{ $key->subEvent->name }})
+											@else
+											{{ $key->subEvent->name }}
+											@endif
 										</div>
 									</div>
                   @endif

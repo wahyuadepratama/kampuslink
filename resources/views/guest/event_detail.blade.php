@@ -104,101 +104,53 @@
 	<section class="feature_product_area p_120">
 		<div class="container-fluid">
 			<h4>Event Disarankan</h4>
-			<div class="sliderx-set">
 				<!-- box set 1 -->
 				<div class="box-set">
 					@php $a = 10; $x = 1000; @endphp
 					@foreach($suggestions as $subEvent)
 						@if($a > 5)
-					<div class="card">
-						<div class="card-img" style="width:100%;height:200px;overflow:hidden;">
-							<img class="card-img-top load-delay{{ $subEvent->id }}" src="/client/css/images/bx_loader.gif" data-original="{!! URL::asset('storage/poster/_medium/'.$subEvent->photo) !!}">
-						</div>
-						<a href="{{ url('event/' . $subEvent->slug) }}">
-						<div class="card-body">
-					    	<h5 class="card-title">
-					    		@php
-									$string = $subEvent->name;
-									$string = strip_tags($string);
+							<div class="card">
+								<div class="card-img" style="width:100%;height:200px;overflow:hidden;">
+									<img class="card-img-top load-delay{{ $subEvent->id }}" src="/client/css/images/bx_loader.gif" data-original="{!! URL::asset('storage/poster/_medium/'.$subEvent->photo) !!}">
+								</div>
+								<a href="{{ url('event/' . $subEvent->slug) }}">
+								<div class="card-body">
+							    	<h5 class="card-title">
+							    		@php
+											$string = $subEvent->name;
+											$string = strip_tags($string);
 
-									if (strlen($string) > 15) {
-										$trimstring = substr($string, 0, 15);
-									} else {
-										$trimstring = $string;
-									}
-									echo $trimstring . ' ..';
-								@endphp
-					    	</h5>
-					    	<p style="font-size: 80%" class="waktu"><span><i class="fa fa-calendar"></i></span> @php echo \Carbon\Carbon::parse($subEvent->date)->format('l, d F Y'); @endphp</p>
-					    	<p style="font-size: 80%" class="lokasi"><span><i class="fa fa-map-marker"></i></span> {{ $subEvent->location }}</p>
-						</div>
-						</a>
-					</div>
+											if (strlen($string) > 15) {
+												$trimstring = substr($string, 0, 15);
+											} else {
+												$trimstring = $string;
+											}
+											echo $trimstring . ' ..';
+										@endphp
+							    	</h5>
+							    	<p style="font-size: 80%" class="waktu"><span><i class="fa fa-calendar"></i></span> @php echo \Carbon\Carbon::parse($subEvent->date)->format('l, d F Y'); @endphp</p>
+							    	<p style="font-size: 80%" class="lokasi"><span><i class="fa fa-map-marker"></i></span> {{ $subEvent->location }}</p>
+								</div>
+								</a>
+							</div>
 
-					<script type="text/javascript">
-						$(document).ready(function () {
-						setTimeout(function () {
-							$('.load-delay{{ $subEvent->id }}').each(function () {
-								var imagex = $(this);
-								var imgOriginal = imagex.data('original');
-								$(imagex).attr('src', imgOriginal);
-							});
-						}, 1000 + {{ $x }});
-						});
-					</script>
-
-						@endif
-					@php $a--; $x = $x + 1000; @endphp
-					@endforeach
-				</div>
-
-				<div class="box-set">
-					@php $a = 10; $x = 3000; @endphp
-					@foreach($suggestions as $subEvent)
-						@if($a < 6)
-					<div class="card">
-						<div class="card-img" style="width:100%;height:200px;overflow:hidden;">
-							<img class="card-img-top load-delay{{ $subEvent->id }}" src="/client/css/images/bx_loader.gif" data-original="{!! URL::asset('storage/poster/_medium/'.$subEvent->photo) !!}">
-						</div>
-						<a href="{{ url('event/' . $subEvent->slug) }}">
-						<div class="card-body">
-					    	<h5 class="card-title">
-					    		@php
-									$string = $subEvent->name;
-									$string = strip_tags($string);
-
-									if (strlen($string) > 15) {
-										$trimstring = substr($string, 0, 15);
-									} else {
-										$trimstring = $string;
-									}
-									echo $trimstring . ' ..';
-								@endphp
-					    	</h5>
-					    	<p class="waktu" style="font-size: 80%"><span><i class="fa fa-calendar"></i></span> @php echo \Carbon\Carbon::parse($subEvent->date)->format('l, d F Y'); @endphp</p>
-					    	<p class="lokasi" style="font-size: 80%"><span><i class="fa fa-map-marker"></i></span> {{ $subEvent->location }}</p>
-						</div>
-						</a>
-					</div>
-
-					<script type="text/javascript">
-						$(document).ready(function () {
-						setTimeout(function () {
-							$('.load-delay{{ $subEvent->id }}').each(function () {
-								var imagex = $(this);
-								var imgOriginal = imagex.data('original');
-								$(imagex).attr('src', imgOriginal);
-							});
-						}, 1000 + {{ $x }});
-						});
-					</script>
+							<script type="text/javascript">
+								$(document).ready(function () {
+								setTimeout(function () {
+									$('.load-delay{{ $subEvent->id }}').each(function () {
+										var imagex = $(this);
+										var imgOriginal = imagex.data('original');
+										$(imagex).attr('src', imgOriginal);
+									});
+								}, 1000 + {{ $x }});
+								});
+							</script>
 
 						@endif
 					@php $a--; $x = $x + 1000; @endphp
 					@endforeach
 				</div>
 
-			</div>
 		</div>
 	</section>
 
@@ -219,7 +171,7 @@
 <script src="{{asset('client/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('client/js/stellar.js')}}"></script>
 <script src="{{asset('client/vendors/lightbox/simpleLightbox.min.js')}}"></script>
-<script src="vendors/lightbox/lightbox-plus-jquery.min.js"></script>
+<!-- <script src="vendors/lightbox/lightbox-plus-jquery.min.js"></script> -->
 <script src="{{asset('client/vendors/nice-select/js/jquery.nice-select.min.js')}}"></script>
 <script src="{{asset('client/vendors/isotope/imagesloaded.pkgd.min.js')}}"></script>
 <script src="{{asset('client/vendors/isotope/isotope-min.js')}}"></script>
@@ -229,7 +181,7 @@
 <!-- <script src="{{asset('client/vendors/flipclock/timer.js')}}"></script> -->
 <script src="{{asset('client/vendors/counter-up/jquery.counterup.js')}}"></script>
 <script src="{{asset('client/js/mail-script.js')}}"></script>
-<script src="{{asset('client/js/theme.js')}}"></script>
+<!-- <script src="{{asset('client/js/theme.js')}}"></script> -->
 <script src="{{asset('client/js/jquery.bxslider.min.js')}}"></script>
 <script>
 	$(document).ready(function(){

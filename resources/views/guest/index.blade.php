@@ -22,7 +22,7 @@
 				<div class="search-menu"></div>
 
 				<div class="search-box col-lg-10">
-					<form action="{{ url('event/search') }}" method="post">
+					<form name="fsearch" action="{{ url('event/search') }}" method="post">
 						{{ csrf_field() }}
 						<div class="cari">
 							<input id="cari" type="text" name="event" placeholder="Cari Event Disini .." autofocus="autofocus">
@@ -48,10 +48,11 @@
 						<img class="img-fluid" src="{{asset('client/img/deal1.jpg')}}">
 
 						<div class="content">
-							<!-- <h2>Daftarkan Dirimu Agar Kami Tahu Kampus Mu</h2> -->
-							<!-- <h2>Daftarkan Diri Agar Kamu Tahu Teman Kampus Mu Yang Telah Tergabung</h2> -->
+							@if(!Auth::check())
 							<h2>Daftarkan Dirimu Disini!</h2>
-							<!-- <p>Bergabunglah dengan ribuan orang lainnya untuk berbagi informasi dunia kampus disini!</p> -->
+							@else
+							<h2>Welcome {{ Auth::user()->username }}</h2>
+							@endif
 						</div>
 						<a class="hot_deal_link" href="{{ url('register')}}"></a>
 					</div>
@@ -75,15 +76,11 @@
 	<!--================Kategori =================-->
 	<section class="clients_logo_area">
 		<div class="container-fluid">
-			<!-- <h3>KATEGORI</h3> -->
-			<div class="clients_slider owl-carousel kategori">
-				@foreach($categories as $category)
-				<div class="item">
-					<h3>{{ $category->name }}</h3>
-					<h6 style="color: white">{{ $category->description }}</h6>
-				</div>
-				@endforeach
-			</div>
+			<marquee scrollamount="3">
+			@foreach($categories as $value)
+				<a href="{{ url('event/all/all/' . $value->id) }}" style="font-size: 200%;margin-right: 5%;color:white;font-weight:bold"> {{$value->name}} </a>
+			@endforeach
+			</marquee>
 		</div>
 	</section>
 	<!--================End Kategori =================-->
@@ -91,100 +88,52 @@
 	<!--================Feature Product Area =================-->
 	<section class="feature_product_area section_gap">
 		<div class="container-fluid">
-			<div class="sliderx-set">
 				<!-- box set 1 -->
 				<div class="box-set">
 					@php $a = 10; $x = 1000; @endphp
 					@foreach($subEvents as $subEvent)
 						@if($a > 5)
-					<div class="card">
-						<div class="card-img" style="width:100%;height:200px;overflow:hidden;">
-							<img class="card-img-top load-delay{{ $subEvent->id }}" src="/client/css/images/bx_loader.gif" data-original="{!! URL::asset('storage/poster/_medium/'.$subEvent->photo) !!}">
-						</div>
-						<a href="{{ url('event/' . $subEvent->slug) }}">
-						<div class="card-body">
-					    	<h5 class="card-title">
-					    		@php
-									$string = $subEvent->name;
-									$string = strip_tags($string);
+							<div class="card">
+								<div class="card-img" style="width:100%;height:200px;overflow:hidden;">
+									<img class="card-img-top load-delay{{ $subEvent->id }}" src="/client/css/images/bx_loader.gif" data-original="{!! URL::asset('storage/poster/_medium/'.$subEvent->photo) !!}">
+								</div>
+								<a href="{{ url('event/' . $subEvent->slug) }}">
+								<div class="card-body">
+							    	<h5 class="card-title">
+							    		@php
+											$string = $subEvent->name;
+											$string = strip_tags($string);
 
-									if (strlen($string) > 15) {
-										$trimstring = substr($string, 0, 15);
-									} else {
-										$trimstring = $string;
-									}
-									echo $trimstring . ' ..';
-								@endphp
-					    	</h5>
-					    	<p style="font-size: 80%" class="waktu"><span><i class="fa fa-calendar"></i></span> @php echo \Carbon\Carbon::parse($subEvent->date)->format('l, d F Y'); @endphp</p>
-					    	<p style="font-size: 80%" class="lokasi"><span><i class="fa fa-map-marker"></i></span> {{ $subEvent->location }}</p>
-						</div>
-						</a>
-					</div>
+											if (strlen($string) > 15) {
+												$trimstring = substr($string, 0, 15);
+											} else {
+												$trimstring = $string;
+											}
+											echo $trimstring . ' ..';
+										@endphp
+							    	</h5>
+							    	<p style="font-size: 80%" class="waktu"><span><i class="fa fa-calendar"></i></span> @php echo \Carbon\Carbon::parse($subEvent->date)->format('l, d F Y'); @endphp</p>
+							    	<p style="font-size: 80%" class="lokasi"><span><i class="fa fa-map-marker"></i></span> {{ $subEvent->location }}</p>
+								</div>
+								</a>
+							</div>
 
-					<script type="text/javascript">
-						$(document).ready(function () {
-						setTimeout(function () {
-							$('.load-delay{{ $subEvent->id }}').each(function () {
-								var imagex = $(this);
-								var imgOriginal = imagex.data('original');
-								$(imagex).attr('src', imgOriginal);
-							});
-						}, 1000 + {{ $x }});
-						});
-					</script>
-
-						@endif
-					@php $a--; $x = $x + 1000; @endphp
-					@endforeach
-				</div>
-				<!-- box set 2 -->
-				<div class="box-set">
-					@php $a = 10; $x = 3000; @endphp
-					@foreach($subEvents as $subEvent)
-						@if($a < 6)
-					<div class="card">
-						<div class="card-img" style="width:100%;height:200px;overflow:hidden;">
-							<img class="card-img-top load-delay{{ $subEvent->id }}" src="/client/css/images/bx_loader.gif" data-original="{!! URL::asset('storage/poster/_medium/'.$subEvent->photo) !!}">
-						</div>
-						<a href="{{ url('event/' . $subEvent->slug) }}">
-						<div class="card-body">
-					    	<h5 class="card-title">
-					    		@php
-									$string = $subEvent->name;
-									$string = strip_tags($string);
-
-									if (strlen($string) > 15) {
-										$trimstring = substr($string, 0, 15);
-									} else {
-										$trimstring = $string;
-									}
-									echo $trimstring . ' ..';
-								@endphp
-					    	</h5>
-					    	<p class="waktu" style="font-size: 80%"><span><i class="fa fa-calendar"></i></span> @php echo \Carbon\Carbon::parse($subEvent->date)->format('l, d F Y'); @endphp</p>
-					    	<p class="lokasi" style="font-size: 80%"><span><i class="fa fa-map-marker"></i></span> {{ $subEvent->location }}</p>
-						</div>
-						</a>
-					</div>
-
-					<script type="text/javascript">
-						$(document).ready(function () {
-						setTimeout(function () {
-							$('.load-delay{{ $subEvent->id }}').each(function () {
-								var imagex = $(this);
-								var imgOriginal = imagex.data('original');
-								$(imagex).attr('src', imgOriginal);
-							});
-						}, 1000 + {{ $x }});
-						});
-					</script>
+							<script type="text/javascript">
+								$(document).ready(function () {
+								setTimeout(function () {
+									$('.load-delay{{ $subEvent->id }}').each(function () {
+										var imagex = $(this);
+										var imgOriginal = imagex.data('original');
+										$(imagex).attr('src', imgOriginal);
+									});
+								}, 1000 + {{ $x }});
+								});
+							</script>
 
 						@endif
 					@php $a--; $x = $x + 1000; @endphp
 					@endforeach
 				</div>
-			</div>
 		</div>
 	</section>
 	<!--================End Feature Product Area =================-->
@@ -206,7 +155,7 @@
 
 					@php $x = 5000; @endphp
 					@foreach($subEventRatings as $data)
-					<div class="box-produk">
+					<div class="box-produk" style="margin:5%">
 						<div class="produk-img">
 							<img class="load-delay-second{{ $data->subEvent->id }}" src="/client/css/images/bx_loader.gif" data-original="{{ asset('storage/poster/_medium/'. $data->subEvent->photo)}}">
 							<a class="icon_btn qr" href="{{asset('storage/qr/event/'. $data->subEvent->qr_code)}}">
@@ -255,6 +204,8 @@
 
 						@php $x = $x + 1000; @endphp
 					@endforeach
+
+				 <center><a href="{{ url('event') }}" class="btn btn-primary">Show More</a></center>
 
 				</div>
 			</div>
