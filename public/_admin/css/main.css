@@ -12479,7 +12479,6 @@ strong {
 
 .all-wrapper.solid-bg-all .content-w {
   background-image: none;
-  min-height: 100vh;
 }
 
 .auth-wrapper .all-wrapper {
@@ -12527,13 +12526,11 @@ body.menu-position-side .content-w {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
-          min-height: 100vh;
 }
 
 /* MENU ON TOP */
 body.menu-position-top .content-w {
   border-radius: 0px 0px 6px 6px;
-  min-height: 100vh;
 }
 
 body.menu-position-top .top-bar + .layout-w .menu-w {
