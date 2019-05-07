@@ -29,14 +29,14 @@
                         <div class="info_item">
                             <i class="lnr lnr-phone-handset"></i>
                             <h6>
-                                <a href="#">085263xxxxxx</a>
+                                <a href="#">0852-7479-9422</a>
                             </h6>
                             <p>Setiap hari 9.00 - 18.00</p>
                         </div>
                         <div class="info_item">
                             <i class="lnr lnr-envelope"></i>
                             <h6>
-                                <a href="#">tanyakami@kampuslink.com</a>
+                                <a href="#">cs@kampuslink.com</a>
                             </h6>
                             <p>Kirimi kami pertanyaan Anda kapan saja!</p>
                         </div>
@@ -70,7 +70,7 @@
     </section>
     <!--================Contact Area =================-->
 
-    <div class="section-top-border p_120">
+    {{-- <div class="section-top-border p_120">
     	<div class="container">
     		<h3 class="title_color team">Team Kami</h3>
 			<div class="row gallery-item">
@@ -152,7 +152,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> --}}
 
 
 	@include('partial/_footer')

@@ -2,6 +2,9 @@
 
 	<!--================Home Banner Area =================-->
 	<section class="home_banner_area">
+		<div class="e-img-bg">
+			<div class="img-bg"></div>
+		</div>
 		<div class="overlay"></div>
 		<div class="banner_inner d-flex align-items-center">
 			<div class="container-fluid">
@@ -104,8 +107,8 @@
 											$string = $subEvent->name;
 											$string = strip_tags($string);
 
-											if (strlen($string) > 15) {
-												$trimstring = substr($string, 0, 15);
+											if (strlen($string) > 30) {
+												$trimstring = substr($string, 0, 30);
 											} else {
 												$trimstring = $string;
 											}
@@ -155,7 +158,7 @@
 
 					@php $x = 5000; @endphp
 					@foreach($subEventRatings as $data)
-					<div class="box-produk" style="margin:5%">
+					<div class="box-produk" style="margin:5% 5% 5% 2%">
 						<div class="produk-img">
 							<img class="load-delay-second{{ $data->subEvent->id }}" src="/client/css/images/bx_loader.gif" data-original="{{ asset('storage/poster/_medium/'. $data->subEvent->photo)}}">
 							<a class="icon_btn qr" href="{{asset('storage/qr/event/'. $data->subEvent->qr_code)}}">

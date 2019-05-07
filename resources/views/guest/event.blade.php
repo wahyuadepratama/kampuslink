@@ -47,7 +47,7 @@
           <div class="latest_product_inner row">
 
 						@if(isset($subEvents) and ! is_null( $subEvents) )
-						@php $x = 1000; @endphp
+						@php $x = 1000; $no=1;@endphp
 							@foreach($subEvents as $subEvent)
 							<div class="col-md-3">
 								<div class="f_p_item">
@@ -65,15 +65,15 @@
 											</a>
 										</div>
 									</div>
-									<div class="f_p_body">
+									<div class="f_p_body" id="bodyx@php echo $no++; @endphp">
 										<div class="p_desc">
-											<span class="p_title" style="font-size: 80%; font-weight: bolder">
+											<span class="p_title" style="font-size: 80%; font-weight: bolder;line-height: 16px;">
 												@php
 													$string = $subEvent->name;
 													$string = strip_tags($string);
 
-													if (strlen($string) > 15) {
-														$trimstring = substr($string, 0, 15) . ' ..';
+													if (strlen($string) > 25) {
+														$trimstring = substr($string, 0, 25) . ' ..';
 													} else {
 														$trimstring = $string;
 													}
@@ -87,8 +87,8 @@
 														$string = $subEvent->location;
 														$string = strip_tags($string);
 
-														if (strlen($string) > 20) {
-															$trimstring = substr($string, 0, 20)  . ' ..';
+														if (strlen($string) > 30) {
+															$trimstring = substr($string, 0, 30)  . ' ..';
 														} else {
 															$trimstring = $string;
 														}
@@ -232,6 +232,24 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	var lightbox = $('.f_p_img .p_icon a').simpleLightbox();
+
+	var cekT = []; 
+	var HcekT = 0;
+	for (var i = 1; i <= <?php echo $no-1; ?>; i++) {
+		cekT[i]=$('#bodyx'+i).height();
+		if (cekT[i]>HcekT) {
+			HcekT = cekT[i]; 
+			// console.log(HcekT);
+		}
+	}
+	if($('body').width()>900){
+		$('.f_p_body').height(HcekT);
+	}
+	// alert($('.f_p_body').height());
+	// alert($('#bodyx2').height());
+	// alert(HcekT);
+	// console.log(cekT);
+	// console.log(HcekT);
 });
 </script>
 </body>

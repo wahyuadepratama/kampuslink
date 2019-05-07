@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="{{asset('client/css/bootstrap.css')}}">
 	<link rel="stylesheet" href="{{asset('client/vendors/linericon/style.css')}}">
 	<link rel="stylesheet" href="{{asset('client/css/font-awesome.min.css')}}">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
 	<link rel="stylesheet" href="{{asset('client/vendors/owl-carousel/owl.carousel.min.css')}}">
 	<link rel="stylesheet" href="{{asset('client/vendors/lightbox/simpleLightbox.css')}}">
 	<!-- <link rel="stylesheet" href="vendors/lightbox/lightbox.min.css"> -->
@@ -23,7 +24,7 @@
 	<link rel="stylesheet" href="{{asset('client/css/style.css')}}">
 	<link rel="stylesheet" href="{{asset('client/css/responsive.css')}}">
 	<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script> -->
-	<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 </head>
 
 <body>
@@ -66,6 +67,7 @@
 									<li class="nav-item {{ Request::is('kontak') ? 'active' : '' }}">
 										<a class="nav-link" href="/kontak" style="font-family: 'Cabin' !important">Kontak</a>
 									</li>
+
 								</ul>
 							</div>
 
@@ -76,7 +78,7 @@
 								<div class="col-lg-2" style="font-family: 'Cabin' !important">
 									<ul class="nav navbar-nav navbar-right right_nav pull-right"><hr>
 										<li class="nav-item">
-											<a href="#" class="login" >
+											<a href="#" class="login" id="klik_login">
 												<img src="{{ asset('storage/avatar/'. Auth::user()->photo_profile) }}" style="border-radius: 50%">
 												@php
 												$count = \App\Models\Transaction::where('seen', false)->get(); $counted = count($count);
@@ -124,10 +126,11 @@
 
 								@elseif(Auth::user()->role_id == 2)
 								<div class="col-lg-2" style="font-family: 'Cabin' !important">
-									<ul class="nav navbar-nav navbar-right right_nav pull-right"><hr>
+									<ul class="nav navbar-nav navbar-right right_nav pull-right">
+										<li class="nav-item" style="display: flex;justify-content:center;align-items: center;padding-right: 10px;"><a class="nav-link lonceng" href="/" style="font-family: 'Cabin' !important"><i class="fas fa-bell fa-2x"></i></a></li><hr>
 										<li class="nav-item">
 											<a href="#" class="login">
-												<img src="{{ asset('storage/avatar/'. Auth::user()->photo_profile) }}" style="border-radius: 50%">
+												<img src="{{ asset('storage/avatar/'. Auth::user()->photo_profile) }}" style="border-radius: 50%;width: 36px;">
 											</a>
 											<div class="mediaD">
 												<div class="header">
@@ -237,6 +240,14 @@
 	      });
 	    } // End if
 	  });
+
+	  if($('body').width()<902){
+		  $('.login').click(function(){
+		  	$('.header_area .navbar-collapse').css('max-height','500px');
+		  	$('.header_area .navbar-collapse').css('height','500px');
+		  	// alert("berhasil");
+		  });
+	  }
 	});
 	</script>
 

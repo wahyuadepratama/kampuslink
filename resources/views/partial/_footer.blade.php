@@ -42,9 +42,9 @@
       <div class="col-lg-3 col-md-6 col-sm-6">
         <div class="single-footer-widget f_social_wd">
           <h6 class="footer_title">Kontak</h6>
-          <p><i class="fa fa-phone"></i> 085263xxxxxx</p>
-          <p><i class="fa fa-envelope"></i> tanyakami@kampuslink.com</p>
-          <p><i class="fa fa-instagram"></i> kampuslink</p>
+          <p><i class="fa fa-phone"></i> 0852-7479-9422</p>
+          <p><i class="fa fa-envelope"></i> cs@kampuslink.com</p>
+          <p><i class="fa fa-instagram"></i><a href="#"></a> kampuslink</p>
         </div>
       </div>
     </div>

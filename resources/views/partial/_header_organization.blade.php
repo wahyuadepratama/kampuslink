@@ -87,17 +87,17 @@
               </div>
             </div>
           </div>
-          <div class="menu-actions">
+          {{-- <div class="menu-actions"> --}}
             <!--
             END - Messages Link in secondary top menu
             --------------------><!--
             START - Settings Link in secondary top menu
             -------------------->
-            <div class="top-icon top-settings os-dropdown-trigger os-dropdown-position-right">
+            {{-- <div class="top-icon top-settings os-dropdown-trigger os-dropdown-position-right">
               <i class="os-icon os-icon-hierarchy-structure-2" data-toggle="tooltip" data-placement="right" data-original-title="Coming Soon"></i>
-            </div>
+            </div> --}}
 
-            <div class="top-icon top-settings os-dropdown-trigger os-dropdown-position-right">
+            {{-- <div class="top-icon top-settings os-dropdown-trigger os-dropdown-position-right">
               <i class="os-icon os-icon-wallet-loaded"></i>
               <div class="os-dropdown">
                 <div class="icon-w">
@@ -109,13 +109,13 @@
                   </li>
                 </ul>
               </div>
-            </div>
+            </div> --}}
             <!--
             END - Settings Link in secondary top menu
             --------------------><!--
             START - Messages Link in secondary top menu
             -------------------->
-            <div class="messages-notifications os-dropdown-trigger os-dropdown-position-right">
+            {{-- <div class="messages-notifications os-dropdown-trigger os-dropdown-position-right">
               <i class="os-icon os-icon-email-forward"></i>
               <div class="new-messages-count">
                 4
@@ -157,9 +157,9 @@
                   </li>
                 </ul>
               </div>
-            </div>
+            </div> --}}
             <!---  END - Messages Link in secondary top menu -------------------->
-          </div>
+          {{-- </div> --}}
           <h1 class="menu-page-header">
             Page Header
           </h1>
@@ -194,6 +194,13 @@
                   <div class="os-icon os-icon-file-text"></div>
                 </div>
                 <span>Event</span></a>
+            </li>
+            <li class="selected has-sub-menu" style="margin: 2%">
+              <a href="{{ url('organization/'. $organization->instagram .'/fund-collected') }}">
+                <div class="icon-w">
+                  <div class="os-icon os-icon-delivery-box-2"></div>
+                </div>
+                <span>Dana Terkumpul</span></a>
             </li>
           </ul>
         </div>
