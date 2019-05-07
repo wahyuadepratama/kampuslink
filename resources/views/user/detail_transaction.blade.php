@@ -27,7 +27,7 @@
 			</div>
       @elseif($status == "Pembayaran Berhasil")
       <div class="alert alert-success" role="alert">
-			  Terima kasih telah menggunakan KampusLink untuk pemesanan tiket, jika ada saran atau komentar tentang kami, silahkan kirimkan pesan melalui email <i>tanyakami@kampuslink.com</i> .
+			  Terima kasih telah menggunakan KampusLink untuk pemesanan tiket, jika ada saran atau komentar tentang kami, silahkan kirimkan pesan melalui email <i>cs@kampuslink.com</i> .
 			</div>
       @endif
 
