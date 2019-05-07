@@ -53,7 +53,7 @@ class UserController extends Controller
     ]);
 
     if(isset($request->avatar)){
-      if(file_exists(public_path('storage/avatar/'. Auth::user()->photo_profile))){
+      if(file_exists(public_path('storage/avatar/'. Auth::user()->photo_profile)) && Auth::user()->photo_profile != 'user.png' ){
         unlink(public_path('storage/avatar/'. Auth::user()->photo_profile));
       }
       $thumbnail     = $request->file('avatar');

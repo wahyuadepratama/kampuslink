@@ -1,4 +1,4 @@
-@include('partial/_header')
+@include('partial/_guest_header')
 
 	<!--================Single Product Area =================-->
 	<div class="product_image_area">
@@ -155,11 +155,11 @@
 	</section>
 
   <!--================ Subscription Area ================-->
-  @include('partial/_subscribe_area')
+  @include('partial/_guest_subscribe_area')
   <!--================ End Subscription Area ================-->
 
   <!--================ start footer Area  =================-->
-  @include('partial/_footer')
+  @include('partial/_guest_footer')
   <!--================ End footer Area  =================-->
 
 

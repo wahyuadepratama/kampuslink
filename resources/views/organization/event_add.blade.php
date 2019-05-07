@@ -1,4 +1,4 @@
-@include('partial/_header_organization')
+@include('partial/_admin_header')
           <!--
           START - Breadcrumbs
           -------------------->
@@ -72,21 +72,10 @@
                             <div class="form-group">
                               <label for=""> Kategori <code class="highlighter-rouge">*</code></label>
                               <select class="form-control select2" data-error="Kategori harus diisi" required="required" multiple="true" name="category[]">
-                                <option>
-                                  E-Sport
-                                </option>
-                                <option>
-                                  PUBG
-                                </option>
-                                <option>
-                                  Mobile Legend
-                                </option>
-                                <option>
-                                  Seminar
-                                </option>
-                                <option>
-                                  Teknologi
-                                </option>
+                                @php $c = \App\Models\Category::all(); @endphp
+                                @foreach($c as $v)
+                                  <option value="{{ $v->id }}">{{ $v->name }}</option>
+                                @endforeach
                               </select>
                               <div class="help-block form-text with-errors form-control-feedback"></div>
                             </div>
@@ -183,7 +172,7 @@
       <div class="display-type"></div>
     </div>
 
-    @include('partial/_script_footer_admin')
+    @include('partial/_admin_script_footer')
 
   </body>
 </html>

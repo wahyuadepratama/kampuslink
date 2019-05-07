@@ -1,4 +1,4 @@
-@include('partial/_header')
+@include('partial/_guest_header')
 
 <!--================Order Details Area =================-->
 
@@ -325,7 +325,7 @@
 						<br><br>
 	<!--================End Order Details Area =================-->
 
-@include('partial/_footer')
+@include('partial/_guest_footer')
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

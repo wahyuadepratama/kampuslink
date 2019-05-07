@@ -1,4 +1,4 @@
-@include('partial/_header')
+@include('partial/_guest_header')
 <!--===============================================================================================-->
 	<!-- <link rel="stylesheet" type="text/css" href="{{asset('client/vendors/bootstrap/css/bootstrap.min.css')}}"> -->
 <!--===============================================================================================-->
@@ -34,6 +34,10 @@
 				<table>
 					<tbody>
 
+						@if(count($transactions) == 0)
+							<br><center> <h4>Belum ada transaksi</h4> </center><br>
+						@endif
+
             @foreach($transactions as $transaction)
 
             <tr class="row100 body <?php if($transaction->seen == false){echo 'active';}  ?>">
@@ -58,11 +62,12 @@
 					</tbody>
 				</table>
 			</div>
+
 		</div>
 	</div>
 </section>
 
-@include('partial/_footer')
+@include('partial/_guest_footer')
 
 <!--===============================================================================================-->
 	<script src="{{asset('client/vendors/jquery/jquery-3.2.1.min.js')}}"></script>

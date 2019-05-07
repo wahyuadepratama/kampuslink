@@ -8,9 +8,9 @@ class UserOrganization extends Model
 {
   protected $table = 'user_organization';
 
-  protected $guarded = [];
+  protected $fillable = ['id','user_id', 'organization_id'];
 
-  public $timestamps = false;  
+  public $timestamps = false;
 
   public function user(){
     return $this->belongsTo('App\Models\User','user_id');

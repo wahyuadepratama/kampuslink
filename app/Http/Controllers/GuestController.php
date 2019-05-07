@@ -343,12 +343,12 @@ class GuestController extends Controller
 
     public function getDataFaculty($id)
     {
-      return Faculty::where('campus_id' ,$id)->get();
+      return Faculty::where('campus_id' ,$id)->orderBy('name')->get();
     }
 
     public function getDataProgramStudy($id)
     {
-      return ProgramStudy::where('faculty_id', $id)->get();
+      return ProgramStudy::where('faculty_id', $id)->orderBy('name')->get();
     }
 
     public function showRegisterOrganization()
@@ -401,7 +401,7 @@ class GuestController extends Controller
         'organization_id' => $create->id
       ]);
 
-      return redirect('/organization'. '/' . $request->ig);
+      return redirect('/register-organization');
     }
 
 }

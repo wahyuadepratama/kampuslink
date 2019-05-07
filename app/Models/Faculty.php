@@ -8,7 +8,7 @@ class Faculty extends Model
 {
   protected $table = "faculty";
 
-  protected $quarded = [];
+  protected $fillable = ['id', 'campus_id', 'name'];
 
   public function campus(){
     return $this->belongsTo('App\Models\Campus','campus_id');

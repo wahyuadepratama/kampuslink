@@ -1,4 +1,4 @@
-@include('partial/_header')
+@include('partial/_guest_header')
 
 	<!--================Home Banner Area =================-->
 	<section class="new_banner_area">
@@ -197,14 +197,14 @@
 	<!--================End Category Product Area =================-->
 
 	<!--================ Subscription Area ================-->
-	@include('partial/_subscribe_area')
+	@include('partial/_guest_subscribe_area')
 	<!--================ End Subscription Area ================-->
 
 	<!--================ start footer Area  =================-->
-	@include('partial/_footer')
+	@include('partial/_guest_footer')
 	<!--================ End footer Area  =================-->
 
-	@include('partial/_js_searching')
+	@include('partial/_guest_js_searching')
 
 
 <!-- Optional JavaScript -->

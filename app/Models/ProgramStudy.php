@@ -9,6 +9,7 @@ class ProgramStudy extends Model
   protected $table = "program_study";
 
   protected $quarded = [];
+  protected $fillable = ['id', 'faculty_id', 'name'];
 
   public function faculty(){
     return $this->belongsTo('App\Models\Faculty','faculty_id');

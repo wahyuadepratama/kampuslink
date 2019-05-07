@@ -1,4 +1,4 @@
-@include('partial/_header_admin')
+@include('partial/_superadmin_header')
 
 <ul class="breadcrumb">
   <li class="breadcrumb-item">
@@ -163,7 +163,7 @@
 <div class="display-type"></div>
 </div>
 
-  @include('partial/_script_footer_superadmin')
+  @include('partial/_superadmin_script_footer')
 
 </body>
 </html>

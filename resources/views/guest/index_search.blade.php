@@ -1,4 +1,4 @@
-@include('partial/_header')
+@include('partial/_guest_header')
 
 	<!--================Home Banner Area =================-->
 	<section class="home_banner_area">
@@ -111,10 +111,10 @@
 	.autocomplete-items div:hover{background-color:#019fe8}
 	.autocomplete-active{background-color:#1e90ff!important;color:#fff}
 	</style>
-	@include('partial/_js_search_index')
+	@include('partial/_guest_js_search_index')
 
-	@include('partial/_subscribe_area')
-	@include('partial/_footer')
+	@include('partial/_guest_subscribe_area')
+	@include('partial/_guest_footer')
 
 
 <!-- Optional JavaScript -->

@@ -1,4 +1,4 @@
-@include('partial/_header')
+@include('partial/_guest_header')
 <!--================Home Banner Area =================-->
 <section class="new_banner_area">
   <div class="banner-img bg-overlay-39">
@@ -315,7 +315,7 @@
 
 
 <!--================ start footer Area  =================-->
-@include('partial/_footer')
+@include('partial/_guest_footer')
 <script type="text/javascript">
 
   $('#campus').on('change', function(){
@@ -389,7 +389,7 @@
 <!--================ End footer Area  =================-->
 
 <!-- Optional JavaScript -->
-@include('partial/_script_footer_user')
+@include('partial/_user_script_footer')
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
 </body>
