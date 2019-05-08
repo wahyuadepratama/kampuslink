@@ -115,6 +115,9 @@
                 <div class="sub-menu-i">
                   <ul class="sub-menu">
                     <li>
+                      <a href="{{ url('admin/big-event') }}">Big Event</a>
+                    </li>
+                    <li>
                       <a href="{{ url('admin/event') }}">Event</a>
                     </li>
                     <li>

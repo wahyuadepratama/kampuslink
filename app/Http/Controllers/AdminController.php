@@ -236,16 +236,42 @@ class AdminController extends Controller
     {
       $s = SubEvent::find($id);
       $s->approved = 1;
+      $s->reason = NULL;
       $s->save();
       return back()->with('success', 'Event berhasil di approve!');
     }
 
-    public function rejectEvent($id)
+    public function rejectEvent(Request $request, $id)
     {
       $s = SubEvent::find($id);
       $s->approved = 2;
+      $s->reason = $request->reason;
       $s->save();
       return back()->with('success', 'Event berhasil di reject!');
+    }
+
+    public function indexBigEvent()
+    {
+      $b = Event::all();
+      return view('admin/big_event')->with('data', $b);
+    }
+
+    public function approveBigEvent($id)
+    {
+      $b = Event::find($id);
+      $b->approved = 1;
+      $b->reason = NULL;
+      $b->save();
+      return back()->with('success', 'Big Event berhasil di approve!');
+    }
+
+    public function rejectBigEvent(Request $request, $id)
+    {
+      $s = Event::find($id);
+      $s->approved = 2;
+      $s->reason = $request->reason;
+      $s->save();
+      return back()->with('success', 'Big Event berhasil di reject!');
     }
 
 }

@@ -86,6 +86,15 @@
                                       @endif
                                     </td>
                                   </tr>
+                                  @if(isset($big_event->reason))
+                                  <tr>
+                                    <td>Alasan Penolakan</td>
+                                    <td>
+                                      @php echo $big_event->reason; $id = \Crypt::encryptString($big_event->id);@endphp<br>
+                                      <a href="{{ url('organization/'. $organization->instagram .'/event/big-event/edit/'. $id) }}" class="btn btn-warning">Edit Big Event</a>
+                                    </td>
+                                  </tr>
+                                  @endif
                                 </tbody>
                               </table>
                             </div><br>

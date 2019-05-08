@@ -50,8 +50,14 @@ Route::get('organization/{ig}/big-event/{slug}', 'OrganizationController@showBig
 Route::get('organization/{ig}/event/add-big-event/show', 'OrganizationController@addBigEvent');
 Route::post('organization/{ig}/event/add-big-event/store', 'OrganizationController@storeBigEvent');
 
+Route::get('organization/{ig}/event/big-event/edit/{id}', 'OrganizationController@editBigEvent');
+Route::post('organization/{ig}/event/big-event/update/{id}', 'OrganizationController@updateBigEvent');
+
 Route::get('organization/{ig}/event/add/show', 'OrganizationController@addEvent');
 Route::post('organization/{ig}/event/add/store', 'OrganizationController@storeEvent');
+
+Route::get('organization/{ig}/event/edit/{id}', 'OrganizationController@editEvent');
+Route::post('organization/{ig}/event/update/{id}', 'OrganizationController@updateEvent');
 
 // Super Admin
 Route::get('admin', 'AdminController@index');
@@ -60,9 +66,13 @@ Route::get('admin/user', 'AdminController@indexUser');
 Route::get('admin/user/approve/{id}', 'AdminController@approveUser');
 Route::get('admin/user/reject/{id}', 'AdminController@rejectUser');
 
+Route::get('admin/big-event', 'AdminController@indexBigEvent');
+Route::get('admin/big-event/approve/{id}', 'AdminController@approveBigEvent');
+Route::post('admin/big-event/reject/{id}', 'AdminController@rejectBigEvent');
+
 Route::get('admin/event', 'AdminController@indexEvent');
 Route::get('admin/event/approve/{id}', 'AdminController@approveEvent');
-Route::get('admin/event/reject/{id}', 'AdminController@rejectEvent');
+Route::post('admin/event/reject/{id}', 'AdminController@rejectEvent');
 
 Route::get('admin/university', 'AdminController@indexCampus');
 Route::post('admin/university/store', 'AdminController@storeCampus');

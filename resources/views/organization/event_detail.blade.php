@@ -105,6 +105,15 @@
                                       @endif
                                     </td>
                                   </tr>
+                                  @if(isset($sub_event->reason))
+                                  <tr>
+                                    <td>Alasan Penolakan</td>
+                                    <td>
+                                      @php echo $sub_event->reason; $id = \Crypt::encryptString($sub_event->id);@endphp<br>
+                                      <a href="{{ url('organization/'. $organization->instagram .'/event/edit/'. $id) }}" class="btn btn-warning">Edit Event</a>
+                                    </td>
+                                  </tr>
+                                  @endif
                                 </tbody>
                               </table>
                             </div><br>
@@ -143,6 +152,9 @@
                                   </div>
                                 @endforeach
                               </ul>
+                              @if(count($transaction) == 0)
+                              <p>Belum ada peserta terdaftar!</p>
+                              @endif
                             </div>
                             @endif
 

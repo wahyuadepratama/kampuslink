@@ -5,7 +5,7 @@
     <span>Dashboard</span>
   </li>
   <li class="breadcrumb-item">
-    <span>Event</span>
+    <span>Big Event</span>
   </li>
 </ul>
 
@@ -61,11 +61,7 @@
               {{ $value->organization->name }}
             </td>
             <td style="text-align:center">
-              @if($value->status == 'ongoing')
-                <div style="color:green;font-weight:bold">Ongoing</div>
-              @elseif($value->status == 'past')
-                <div style="color:red;font-weight:bold">Past</div>
-              @endif
+              {{ $value->start_date }} - {{ $value->end_date }}
             </td>
             <td style="text-align:center">
               @if($value->approved == 1)
@@ -107,50 +103,26 @@
                       </div>
                       <div class="row" style="margin:1%">
                         <div class="col-md-4" style="text-align:left">
-                          Location
+                          Start Date
                         </div>
                         <div class="col-md-8" style="text-align:left">
-                          {{ $value->location }}
+                          {{ $value->start_date }}
                         </div>
                       </div>
                       <div class="row" style="margin:1%">
                         <div class="col-md-4" style="text-align:left">
-                          WhatsApp
+                          End Date
                         </div>
                         <div class="col-md-8" style="text-align:left">
-                          {{ $value->whatsapp }}
+                          {{ $value->end_date }}
                         </div>
                       </div>
                       <div class="row" style="margin:1%">
                         <div class="col-md-4" style="text-align:left">
-                          Line
+                          Website
                         </div>
                         <div class="col-md-8" style="text-align:left">
-                          {{ $value->line }}
-                        </div>
-                      </div>
-                      <div class="row" style="margin:1%">
-                        <div class="col-md-4" style="text-align:left">
-                          Start Time
-                        </div>
-                        <div class="col-md-8" style="text-align:left">
-                          {{ $value->start_time }}
-                        </div>
-                      </div>
-                      <div class="row" style="margin:1%">
-                        <div class="col-md-4" style="text-align:left">
-                          End Time
-                        </div>
-                        <div class="col-md-8" style="text-align:left">
-                          {{ $value->end_time }}
-                        </div>
-                      </div>
-                      <div class="row" style="margin:1%">
-                        <div class="col-md-4" style="text-align:left">
-                          Date
-                        </div>
-                        <div class="col-md-8" style="text-align:left">
-                          {{ $value->date }}
+                          {{ $value->web_link }}
                         </div>
                       </div>
                       <div class="row" style="margin:1%">
@@ -192,7 +164,7 @@
                       </div>
                       <div class="modal-body">
                         <div class="row" style="margin:1%">
-                          <form action="{{ url('admin/event/reject/'. $value->id) }}" method="post">
+                          <form action="{{ url('admin/big-event/reject/'. $value->id) }}" method="post">
                             {{ csrf_field() }}
                             <div class="form-group">
                               <textarea name="reason" rows="8" cols="80" id="ckeditor1"></textarea>
@@ -207,7 +179,7 @@
                   </div>
                 </div>
                 @else
-                <a href="{{ url('admin/event/approve/'. $value->id) }}" onclick="return confirm('Apakah kamu yakin?')" class="btn btn-sm btn-success">Approve</a>
+                <a href="{{ url('admin/big-event/approve/'. $value->id) }}" onclick="return confirm('Apakah kamu yakin?')" class="btn btn-sm btn-success">Approve</a>
                 @endif
               @endif
             </td>

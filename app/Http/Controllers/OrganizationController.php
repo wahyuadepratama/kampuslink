@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Crypt;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Intervention\Image\Facades\Image as Image;
 use Illuminate\Support\Facades\Auth;
@@ -208,6 +209,85 @@ class OrganizationController extends Controller
       return back()->with('message', 'Kamu berhasil menambahkan sebuah Big Event. Cek <a href="/organization/'. $check->instagram .'/event"> <b>disini</b> </a>');
     }
 
+    public function editBigEvent($ig, $id)
+    {
+      $id = Crypt::decryptString($id);
+      $check = $this->checkOrganization($ig);
+      if(Auth::user()->checkRoleUserOrganization($check->id) == "Anggota"){
+        return abort(404);
+      }
+      $e = Event::find($id);
+      if ($e->reason == NULL) {
+        return abort(404);
+      }
+      return view('organization/big_event_edit')->with('organization', $check)->with('event', $e);
+    }
+
+    public function updateBigEvent(Request $request, $ig, $id)
+    {
+      $id = Crypt::decryptString($id);
+      $check = $this->checkOrganization($ig);
+      if(Auth::user()->checkRoleUserOrganization($check->id) == "Anggota"){
+        return abort(404);
+      }
+
+      $this->validate($request,[
+        'name' => 'required',
+        'description' => 'required',
+        'photo' => 'mimes:jpeg,jpg,png|max:5000',
+        'start_date' => 'required',
+        'end_date' => 'required'
+      ]);
+
+      $e = Event::find($id);
+      // unlink(public_path('storage/poster/_small/'. $e->photo));
+      // unlink(public_path('storage/poster/_medium/'. $e->photo));
+      // unlink(public_path('storage/poster/_large/'. $e->photo));
+      // unlink(public_path('storage/qr/event/'. $e->qr_code));
+      foreach ($e as $key) {
+        $set = SubEvent::where('event_id', $e->id)->first();
+        if(isset($set)){
+          $set->event_id = NULL;
+          $set->save();
+        }
+      }
+      $e->delete();
+
+      $start_date = Carbon::parse($request->start_date)->format('Y-m-d');
+      $end_date = Carbon::parse($request->end_date)->format('Y-m-d');
+      $organization = UserOrganization::where('user_id', Auth::user()->id)->first();
+
+      $thumbnail      = $request->file('photo');
+      $filename      = 'big_event_' . str_slug($request->name).'_'.time() . '.' . $thumbnail->getClientOriginalExtension();
+
+      $small          = 'storage/poster/_small/' . $filename;
+      $createSmall   = Image::make($thumbnail)->resize(25, 35)->save($small);
+
+      $medium          = 'storage/poster/_medium/' . $filename;
+      $createMedium   = Image::make($thumbnail)->resize(210, 297)->save($medium);
+
+      $large          = 'storage/poster/_large/' . $filename;
+      $createLarge   = Image::make($thumbnail)->resize(794, 1123)->save($large);
+
+      $qr = $_SERVER['SERVER_NAME'] . '/event' . '/' . str_slug($request->name);
+      $qrResult = QrCode::size(500)->generate($qr, 'storage/qr/event/'. 'big_event_'. str_slug($request->name) . '.svg');
+
+      Event::create([
+        'organization_id' => $organization->organization_id,
+        'name' => $request->name,
+        'slug' => str_slug($request->name),
+        'description' => $request->description,
+        'qr_code' => 'big_event_'. str_slug($request->name) . '.svg',
+        'photo' => $filename,
+        'start_date' => $start_date,
+        'end_date' => $end_date,
+        'web_link' => $request->web_link,
+        'created_at' => Carbon::now()->setTimezone('Asia/Jakarta')
+      ]);
+
+      return redirect('organization/'. $ig . '/event');
+    }
+
     public function addEvent($ig)
     {
       $check = $this->checkOrganization($ig);
@@ -227,7 +307,7 @@ class OrganizationController extends Controller
       $this->validate($request,[
         'name' => 'required|unique:sub_event',
         'description' => 'required',
-        'photo' => 'mimes:jpeg,jpg,png|max:5000',
+        'photo' => 'required|mimes:jpeg,jpg,png|max:5000',
         'location' => 'required',
         'start_time' => 'required',
         'end_time' => 'required'
@@ -303,6 +383,122 @@ class OrganizationController extends Controller
       }
 
       return back()->with('message', 'Kamu berhasil menambahkan sebuah Event. Cek <a href="/organization/'. $check->instagram .'/event?search=all-event"> disini </a>');
+    }
+
+    public function editEvent($ig, $id)
+    {
+      $id = Crypt::decryptString($id);
+      $check = $this->checkOrganization($ig);
+      if(Auth::user()->checkRoleUserOrganization($check->id) == "Anggota"){
+        return abort(404);
+      }
+      $e = SubEvent::find($id);
+      if ($e->reason == NULL) {
+        return abort(404);
+      }
+      return view('organization/event_edit')->with('organization', $check)->with('event', $e);
+    }
+
+    public function updateEvent(Request $request, $ig, $id)
+    {
+      $id = Crypt::decryptString($id);
+      $check = $this->checkOrganization($ig);
+      if(Auth::user()->checkRoleUserOrganization($check->id) == "Anggota"){
+        return abort(404);
+      }
+
+      $this->validate($request,[
+        'name' => 'required',
+        'description' => 'required',
+        'photo' => 'required|mimes:jpeg,jpg,png|max:5000',
+        'location' => 'required',
+        'start_time' => 'required',
+        'end_time' => 'required'
+      ]);
+
+      // Cek apakah event merupakan bagian dari Big Event
+      if ($request->event_id == "0") {
+        $event['id'] = NULL;
+      }else{
+        $event['id'] = $request->event_id;
+      }
+      // End Cek
+
+      $e = SubEvent::find($id);
+      unlink(public_path('storage/poster/_small/'. $e->photo));
+      unlink(public_path('storage/poster/_medium/'. $e->photo));
+      unlink(public_path('storage/poster/_large/'. $e->photo));
+      unlink(public_path('storage/qr/event/'. $e->qr_code));
+      foreach ($e as $key) {
+        $set = SubEventTicket::where('sub_event_id', $e->id)->first();
+        if(isset($set)){
+          $set->delete();
+        }
+      }
+      $e->delete();
+
+      $date = Carbon::parse($request->date)->format('Y-m-d');
+
+      $thumbnail      = $request->file('photo');
+      $filename      = 'event_' . str_slug($request->name).'_'.time() . '.' . $thumbnail->getClientOriginalExtension();
+
+      $small          = 'storage/poster/_small/' . $filename;
+      $createSmall   = Image::make($thumbnail)->resize(25, 35)->save($small);
+
+      $medium          = 'storage/poster/_medium/' . $filename;
+      $createMedium   = Image::make($thumbnail)->resize(210, 297)->save($medium);
+
+      $large          = 'storage/poster/_large/' . $filename;
+      $createLarge   = Image::make($thumbnail)->resize(794, 1123)->save($large);
+
+      $qr = $_SERVER['SERVER_NAME'] . '/event' . '/' . str_slug($request->name);
+      $qrResult = QrCode::size(500)->generate($qr, 'storage/qr/event/'. 'event_'. str_slug($request->name) . '.svg');
+
+      $subEvent = SubEvent::create([
+        'event_id' => $event['id'],
+        'organization_id' => $check->id,
+        'name' => $request->name,
+        'slug'=> str_slug($request->name),
+        'description' => $request->description,
+        'location' => $request->location,
+        'whatsapp' => $request->whatsapp,
+        'line' => $request->line,
+        'qr_code' => 'event_'. str_slug($request->name) . '.svg',
+        'status' => 'ongoing',
+        'start_time' => $request->start_time,
+        'end_time' => $request->end_time,
+        'date' => $date,
+        'photo' => $filename,
+        'web_link' => $request->web_link,
+        'created_at' => Carbon::now()->setTimezone('Asia/Jakarta')
+      ]);
+
+      foreach ($request->category as $value) {
+        EventCategory::create([
+          'category_id' => $value,
+          'sub_event_id' => $subEvent->id
+        ]);
+      }
+
+      if(isset($request->reguler_total) && isset($request->reguler_price)){
+        SubEventTicket::create([
+          'sub_event_id' => $subEvent->id,
+          'type' => 'Reguler',
+          'price' => $request->reguler_price,
+          'stock' => $request->reguler_total
+        ]);
+      }
+
+      if(isset($request->vip_total) && isset($request->vip_price)){
+        SubEventTicket::create([
+          'sub_event_id' => $subEvent->id,
+          'type' => 'VIP',
+          'price' => $request->reguler_price,
+          'stock' => $request->reguler_total
+        ]);
+      }
+
+      return redirect('organization/'. $ig . '/event');
     }
 
     public function indexMember($ig)
