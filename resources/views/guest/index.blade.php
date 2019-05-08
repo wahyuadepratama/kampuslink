@@ -3,7 +3,7 @@
 	<!--================Home Banner Area =================-->
 	<section class="home_banner_area">
 		<div class="e-img-bg">
-			<div class="img-bg"></div>
+			<div class="img-bg" id="parallax"></div>
 		</div>
 		<div class="overlay"></div>
 		<div class="banner_inner d-flex align-items-center">
@@ -297,6 +297,13 @@ $(document).ready(function(){
     });
     // end   view medium dan smalll
 
+    const parallax = document.getElementById("parallax");
+    window.addEventListener("scroll", function(){
+    	let offset = window.pageYOffset;
+    	// console.log('Offset: ' + offset);
+    	// console.log('offset * 0.7 = ' + offset * 0.7);
+    	parallax.style.backgroundPositionY = (offset*0.1) + "px";
+    });
 });
 </script>
 </body>
