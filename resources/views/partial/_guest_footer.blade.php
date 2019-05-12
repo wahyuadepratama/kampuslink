@@ -5,7 +5,7 @@
       <div class="col-lg-3  col-md-6 col-sm-6">
         <div class="single-footer-widget">
           <h6 class="footer_title">Tentang Kami</h6>
-          <p>Dalam usaha untuk membantu kampus dalam teknologi informasi, maka KampusLink hadir untuk memudahkan mahasiswa dan organisasi kampus mendapatkan event dan informasi yang up to date.</p>
+          <p>Dalam usaha untuk membantu dunia kampus dalam memanfaatkan teknologi informasi, maka KampusLink hadir untuk memudahkan mahasiswa dan organisasi kampus mendapatkan informasi yang up to date dan dapat saling terhubung satu sama lain.</p>
         </div>
       </div>
       <div class="col-lg-5 col-md-6 col-sm-6">
@@ -42,8 +42,8 @@
       <div class="col-lg-3 col-md-6 col-sm-6">
         <div class="single-footer-widget f_social_wd">
           <h6 class="footer_title">Kontak</h6>
-          <p><i class="fa fa-phone"></i> 085263xxxxxx</p>
-          <p><i class="fa fa-envelope"></i> tanyakami@kampuslink.com</p>
+          <p><i class="fa fa-phone"></i> +62 852-7479-9422</p>
+          <p><i class="fa fa-envelope"></i> cs@kampuslink.com</p>
           <p><i class="fa fa-instagram"></i> kampuslink</p>
         </div>
       </div>

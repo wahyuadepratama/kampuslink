@@ -26,9 +26,18 @@
 						{{ csrf_field() }}
 						<div class="cari">
 							<input id="cari" type="text" name="event" placeholder="Cari Event Disini .." autofocus="autofocus">
+							<script type="text/javascript">
+								var input = document.getElementById("cari");
+								input.addEventListener("keyup", function(event) {
+								if (event.keyCode === 13) {
+								 event.preventDefault();
+								 document.getElementById("myBtn").click();
+								}
+								});
+							</script>
 						</div>
 						<div class="submit">
-							<button type="submit" style="font-size:95%">SEARCH</button>
+							<button id="myBtn" type="submit" style="font-size:95%">SEARCH</button>
 						</div>
 					</form>
 				</div>

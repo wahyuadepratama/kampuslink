@@ -1,9 +1,10 @@
 <?php
 
-Route::get('/', 'GuestController@index');
+// Route::get('/', 'GuestController@index');
+Route::get('/', function(){ return redirect('/login'); });
 
 Auth::routes();
-Route::get('event', 'GuestController@indexEvent');
+// Route::get('event', 'GuestController@indexEvent');
 Route::get('event/{slug}', 'GuestController@showEvent');
 Route::get('event/{campus}/{organization}/{category}', 'GuestController@filter');
 
@@ -15,7 +16,7 @@ Route::post('event/{slug}/process', 'TransactionController@postProcessTransactio
 Route::post('event/search', 'GuestController@search');
 Route::get('event/search/{query}', 'GuestController@indexSearch');
 
-Route::get('/kontak', function(){	return view('guest.kontak'); });
+// Route::get('/kontak', function(){	return view('guest.kontak'); });
 Route::get('/register-organization','GuestController@showRegisterOrganization');
 Route::post('/store-register-organization', 'GuestController@storeRegisterOrganization');
 
