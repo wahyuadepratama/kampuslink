@@ -1,10 +1,10 @@
 <?php
 
-// Route::get('/', 'GuestController@index');
-Route::get('/', function(){ return redirect('/login'); });
+Route::get('/', 'GuestController@index');
 
 Auth::routes();
 // Route::get('event', 'GuestController@indexEvent');
+Route::get('event', function(){return view('errors/coming_soon');});
 Route::get('event/{slug}', 'GuestController@showEvent');
 Route::get('event/{campus}/{organization}/{category}', 'GuestController@filter');
 
@@ -17,10 +17,11 @@ Route::post('event/search', 'GuestController@search');
 Route::get('event/search/{query}', 'GuestController@indexSearch');
 
 // Route::get('/kontak', function(){	return view('guest.kontak'); });
+Route::get('kontak', function(){return view('errors/coming_soon');});
 Route::get('/register-organization','GuestController@showRegisterOrganization');
 Route::post('/store-register-organization', 'GuestController@storeRegisterOrganization');
 
-// User
+// _____________________________ User
 Route::get('profile', 'UserController@profile');
 Route::post('update-profile-user', 'UserController@updateDataProfileUser');
 Route::post('update-kampus-user', 'UserController@updateDataKampusUser');
@@ -32,7 +33,7 @@ Route::post('transaction/{id}/confirm', 'TransactionController@confirmTransactio
 Route::post('transaction/{id}/proof/upload', 'TransactionController@proofTransaction');
 Route::get('get-all-sub-event', 'GuestController@getDataSubEvent');
 
-// Organisasi
+// _____________________________ Organisasi
 Route::get('organization/{ig}', 'OrganizationController@home');
 Route::get('organization/{ig}/profile', 'OrganizationController@profile');
 Route::get('organization/{ig}/fund-collected', 'OrganizationController@fundCollected');
@@ -60,7 +61,7 @@ Route::post('organization/{ig}/event/add/store', 'OrganizationController@storeEv
 Route::get('organization/{ig}/event/edit/{id}', 'OrganizationController@editEvent');
 Route::post('organization/{ig}/event/update/{id}', 'OrganizationController@updateEvent');
 
-// Super Admin
+// _____________________________ Super Admin
 Route::get('admin', 'AdminController@index');
 
 Route::get('admin/user', 'AdminController@indexUser');

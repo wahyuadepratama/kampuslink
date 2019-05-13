@@ -240,18 +240,10 @@ class OrganizationController extends Controller
       ]);
 
       $e = Event::find($id);
-      // unlink(public_path('storage/poster/_small/'. $e->photo));
-      // unlink(public_path('storage/poster/_medium/'. $e->photo));
-      // unlink(public_path('storage/poster/_large/'. $e->photo));
-      // unlink(public_path('storage/qr/event/'. $e->qr_code));
-      foreach ($e as $key) {
-        $set = SubEvent::where('event_id', $e->id)->first();
-        if(isset($set)){
-          $set->event_id = NULL;
-          $set->save();
-        }
-      }
-      $e->delete();
+      unlink(public_path('storage/poster/_small/'. $e->photo));
+      unlink(public_path('storage/poster/_medium/'. $e->photo));
+      unlink(public_path('storage/poster/_large/'. $e->photo));
+      unlink(public_path('storage/qr/event/'. $e->qr_code));
 
       $start_date = Carbon::parse($request->start_date)->format('Y-m-d');
       $end_date = Carbon::parse($request->end_date)->format('Y-m-d');
@@ -272,18 +264,17 @@ class OrganizationController extends Controller
       $qr = $_SERVER['SERVER_NAME'] . '/event' . '/' . str_slug($request->name);
       $qrResult = QrCode::size(500)->generate($qr, 'storage/qr/event/'. 'big_event_'. str_slug($request->name) . '.svg');
 
-      Event::create([
-        'organization_id' => $organization->organization_id,
-        'name' => $request->name,
-        'slug' => str_slug($request->name),
-        'description' => $request->description,
-        'qr_code' => 'big_event_'. str_slug($request->name) . '.svg',
-        'photo' => $filename,
-        'start_date' => $start_date,
-        'end_date' => $end_date,
-        'web_link' => $request->web_link,
-        'created_at' => Carbon::now()->setTimezone('Asia/Jakarta')
-      ]);
+      $e->organization_id = $organization->organization_id;
+      $e->name = $request->name;
+      $e->slug = str_slug($request->name);
+      $e->description = $request->description;
+      $e->qr_code = 'big_event_'. str_slug($request->name) . '.svg';
+      $e->photo = $filename;
+      $e->start_date = $start_date;
+      $e->end_date = $end_date;
+      $e->web_link = $request->web_link;
+      $e->approved = 0;
+      $e->save();
 
       return redirect('organization/'. $ig . '/event');
     }
@@ -399,7 +390,7 @@ class OrganizationController extends Controller
       return view('organization/event_edit')->with('organization', $check)->with('event', $e);
     }
 
-    public function updateEvent(Request $request, $ig, $id)
+      public function updateEvent(Request $request, $ig, $id)
     {
       $id = Crypt::decryptString($id);
       $check = $this->checkOrganization($ig);

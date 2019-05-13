@@ -195,7 +195,7 @@
                           <form action="{{ url('admin/event/reject/'. $value->id) }}" method="post">
                             {{ csrf_field() }}
                             <div class="form-group">
-                              <textarea name="reason" rows="8" cols="80" id="ckeditor1"></textarea>
+                              <textarea class="form-control" name="reason" rows="8" cols="80" id="ckeditor1"></textarea>
                             </div>
                             <div class="form-group">
                               <button type="submit" class="btn btn-warning">Kirim Penolakan</button>

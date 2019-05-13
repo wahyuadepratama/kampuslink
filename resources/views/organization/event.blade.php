@@ -186,7 +186,7 @@
                         @if($key->status == "past")
                         <a class="btn btn-danger form-control btn-sm" href="#">Sudah Berlalu</a>
                         @elseif($key->status == "ongoing")
-                        <a class="btn btn-success form-control btn-sm" href="#">Akan Datang</a>
+                        {{ \Carbon\Carbon::parse($key->date)->format('d F Y') }}
                         @endif
                       </td>
                       <td class="text-center">

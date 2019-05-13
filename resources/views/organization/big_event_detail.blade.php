@@ -49,7 +49,7 @@
                               <table class="table table-lightborder">
                                 <tbody>
                                   <tr>
-                                    <td>Deskripsi</td>
+                                    <td style="vertical-align: top">Deskripsi</td>
                                     <td><?php echo $big_event->description; ?></td>
                                   </tr>
                                   <tr>
@@ -88,7 +88,7 @@
                                   </tr>
                                   @if(isset($big_event->reason))
                                   <tr>
-                                    <td>Alasan Penolakan</td>
+                                    <td style="vertical-align: top">Alasan Penolakan</td>
                                     <td>
                                       @php echo $big_event->reason; $id = \Crypt::encryptString($big_event->id);@endphp<br>
                                       <a href="{{ url('organization/'. $organization->instagram .'/event/big-event/edit/'. $id) }}" class="btn btn-warning">Edit Big Event</a>

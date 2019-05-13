@@ -23,6 +23,20 @@ class GuestController extends Controller
 {
     public function index()
     {
+
+      if(isset(Auth::user()->role_id)){
+        if(Auth::user()->role_id == 3){
+          return view('errors/coming_soon');
+        }elseif(Auth::user()->role_id == 2){
+          $o = UserOrganization::where('user_id', Auth::user()->id)->first();
+          return redirect('organization/'. $o->organization->instagram);
+        }elseif(Auth::user()->role_id == 1){
+          return redirect('admin');
+        }
+      }else{
+        return redirect('login');
+      }
+
       $this->checkDueEvent();
       $subEvents = Cache::remember('index_sub_events', 30, function () {
                       return SubEvent::with('event')->where('approved', 1)->where('status','ongoing')
