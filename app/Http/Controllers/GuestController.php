@@ -401,6 +401,10 @@ class GuestController extends Controller
         return back()->withInput()->with('error', 'Your instagram organization has registered!');
       }
 
+      if (substr($request->ig,0,1) != "@") {
+        return back()->withInput()->with('error', 'Gunakan @ pada kolom instagram, contoh @neotelemetri!');
+      }
+
       $create = Organization::create([
         'campus_id' => $request->campus,
         'name' => $request->name,
