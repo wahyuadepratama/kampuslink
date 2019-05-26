@@ -24,8 +24,6 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
-    protected $redirectTo = '/';
-
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
@@ -33,11 +31,18 @@ class LoginController extends Controller
 
     //Customize login disini.......
 
+    protected function redirectTo()
+    {
+        if(isset($_POST['redirect'])){
+            return '/register-organization'->with('tes','tesssss');
+        }else{
+            return '/';
+        }
+    }
+
     public function username()
     {
-      if(isset($_POST['redirect'])){
-        $this->redirectTo = '/register-organization';
-      }
+      
        $login = request()->input('identity');
        $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
        request()->merge([$field => $login]);
