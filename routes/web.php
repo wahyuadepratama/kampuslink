@@ -60,3 +60,11 @@ Route::post('admin/university/update/{id}', 'AdminController@updateCampus');
 Route::get('admin/faculty', 'AdminController@indexFaculty');
 Route::post('admin/faculty/store', 'AdminController@storeFaculty');
 Route::get('admin/faculty/destroy/{id}', 'AdminController@destroyFaculty');
+
+//koran
+Route::get('koran_a', function(){
+	return view('koran.koran_unverify');
+});
+Route::get('koran_b', function(){
+	return view('koran.koran_verify');
+});
