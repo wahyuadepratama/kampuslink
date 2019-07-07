@@ -56,13 +56,16 @@
 									<li class="nav-item {{ Request::is('event', 'event/*') ? 'active' : '' }}">
 										<a class="nav-link" href="/event" style="font-family: 'Cabin' !important">Event</a>
 									</li>
-									<li class="nav-item submenu dropdown">
+									{{-- <li class="nav-item submenu dropdown">
 										<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="font-family: 'Cabin' !important">Koran</a>
 										<ul class="dropdown-menu">
 											<li class="nav-item">
 												<a class="nav-link" href="#"style="font-family: 'Cabin' !important">Coming Soon</a>
 											</li>
 										</ul>
+									</li> --}}
+									<li class="nav-item">
+										<a href="/koran_b" class="nav-link" style="font-family: 'Cabin' !important">Koran</a>
 									</li>
 									<li class="nav-item {{ Request::is('kontak') ? 'active' : '' }}">
 										<a class="nav-link" href="/kontak" style="font-family: 'Cabin' !important">Kontak</a>
