@@ -20,11 +20,6 @@
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-lg-6">
-					@if (session('tes'))
-					<div class="alert alert-warning">
-				        {{ session('tes') }}
-				    </div>
-					@endif
 					<div class="login_form_inner reg_form">
 						<h3>BUAT AKUN ORGANISASI</h3><br>
 						<form class="row login_form" action="{{ url('store-register-organization') }}" method="post">
@@ -55,44 +50,6 @@
 							<div class="col-md-12 form-group">
 								@if(!Auth::check())
 								<a class="btn submit_btn" data-toggle="modal" data-target="#modalLogin" style="color:black">Buat</a>
-								
-	<!-- Modal -->
-	<div class="modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-	  <div class="modal-dialog modal-dialog-centered" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalCenterTitle">Login</h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-	      <div class="modal-body">
-	        <div class="row">
-	        	<div class="col-12">
-	        		<div class="alert alert-success" role="alert" style="text-align:center">
-							  Silahkah login terlebih dahulu sebelum mendaftarkan organisasi kamu.
-							</div>
-							<form action="{{ route('login') }}" method="post" style="margin: 10%">
-								{{ csrf_field() }}
-		        		<div class="form-group">
-		        			<label>Username/Email</label>
-		        			<input type="text" class="form-control" name="identity" value="{{ old('username') }}" required autofocus>
-		        		</div>
-		        		<div class="form-group">
-		        			<label>Password</label>
-		        			<input type="password" class="form-control" name="password" required>
-		        		</div>
-		        		<input type="submit" name="" class="btn btn-success btn-block">
-								<input type="hidden" name="redirect" value="/register-organization">
-	        		</form>
-	        		<a href="/register">Belum terdaftar? Daftar disini!</a>
-	        	</div>
-	        </div>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-
 								@else
 								<button type="submit" class="btn submit_btn" style="color:black">Buat</button><br>
 								@endif
@@ -115,6 +72,42 @@
 			</div>
 		</div>
 
+		<!-- Modal -->
+		<div class="modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		  <div class="modal-dialog modal-dialog-centered" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalCenterTitle">Login</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		        <div class="row">
+		        	<div class="col-12">
+		        		<div class="alert alert-success" role="alert" style="text-align:center">
+								  Silahkah login terlebih dahulu sebelum mendaftarkan organisasi kamu.
+								</div>
+								<form action="{{ route('login') }}" method="post" style="margin: 10%">
+									{{ csrf_field() }}
+			        		<div class="form-group">
+			        			<label>Username/Email</label>
+			        			<input type="text" class="form-control" name="identity" value="{{ old('username') }}" required autofocus>
+			        		</div>
+			        		<div class="form-group">
+			        			<label>Password</label>
+			        			<input type="password" class="form-control" name="password" required>
+			        		</div>
+			        		<input type="submit" name="" class="btn btn-success btn-block">
+									<input type="hidden" name="redirect" value="/register-organization">
+		        		</form>
+		        		<a href="/register">Belum terdaftar? Daftar disini!</a>
+		        	</div>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
+		</div>
 	</section>
 	<!--================End Login Box Area =================-->
 

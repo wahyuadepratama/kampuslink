@@ -92,3 +92,11 @@ Route::get('admin/program-study/destroy/{id}', 'AdminController@destroyProgramSt
 Route::get('admin/organization', 'AdminController@indexOrganization');
 Route::get('admin/organization/approve/{id}', 'AdminController@approveOrganization');
 Route::get('admin/organization/reject/{id}', 'AdminController@rejectOrganization');
+
+Route::get('logout', function(){
+   return view('user.logout'); 
+});
+//kuisioner
+Route::get('kuesioner', 'GuestController@kuisioner');
+Route::get('kuisioner', 'GuestController@kuisioner');
+Route::post('kuisioner_submit', 'GuestController@kuisioner_submit');

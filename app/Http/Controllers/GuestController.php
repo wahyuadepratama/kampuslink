@@ -15,6 +15,7 @@ use App\Models\Category;
 use App\Models\Campus;
 use App\Models\Faculty;
 use App\Models\ProgramStudy;
+use App\Models\Kuisioner_1;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Auth;
@@ -400,11 +401,11 @@ class GuestController extends Controller
       if ($request->ig == trim($request->ig) && strpos($request->ig, ' ') !== false) {
         return back()->withInput()->with('error', 'Your instagram organization has registered!');
       }
-
+        
       if (substr($request->ig,0,1) != "@") {
         return back()->withInput()->with('error', 'Gunakan @ pada kolom instagram, contoh @neotelemetri!');
       }
-
+        
       $create = Organization::create([
         'campus_id' => $request->campus,
         'name' => $request->name,
@@ -420,6 +421,52 @@ class GuestController extends Controller
       ]);
 
       return redirect('/register-organization');
+    }
+    
+    public function kuisioner(){
+      return view('guest.kuisioner');
+    }
+    public function kuisioner_submit(Request $request){
+      if($request->isMethod('post')){
+        $d = $request->all();
+        $k = new Kuisioner_1;
+        $k->nama       = ucwords($d['nama']);
+        $k->jk         = $d['jk'];
+        $k->kampus     = $d['kampus'];
+        $k->nim        = $d['nim'];
+        $k->email      = $d['email'];
+        $k->wa         = $d['wa'];
+        $k->hobi       = $d['hobi'];
+
+        $acara_c = count($request->get('acara'));
+        $acara   = "";
+        for ($i=0; $i<$acara_c; $i++) { 
+          $acara .= $request->get('acara')[$i].", ";
+        }
+        $k->acara      = $acara;
+
+        $info_c = count($request->get('info'));
+        $info   = "";
+        for ($i=0; $i<$info_c; $i++) { 
+          $info .= $request->get('info')[$i].", ";
+        }
+        $k->info       = $info;
+        
+        $k->bukan_ai   = $d['bukan_ai'];
+        $k->tertarik   = $d['tertarik'];
+        $k->harap      = $d['harap'];
+        $k->kf         = $d['kf'];
+        $k->kf2        = $d['kf2'];
+        $k->passion    = $d['passion'];
+        $k->passion2   = $d['passion2'];
+        $k->created_at = Carbon::now()->setTimezone('Asia/Jakarta');
+        $k->save();
+        
+        $nama = $d['nama'];
+      }
+
+      return view('guest.kuisioner_submit')->with(compact('nama'));
+      // return $acara;
     }
 
 }

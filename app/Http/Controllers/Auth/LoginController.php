@@ -30,19 +30,18 @@ class LoginController extends Controller
     }
 
     //Customize login disini.......
-
+    
     protected function redirectTo()
     {
         if(isset($_POST['redirect'])){
-            return '/register-organization'->with('tes','tesssss');
+            return '/register-organization';
         }else{
             return '/';
         }
     }
-
+    
     public function username()
     {
-      
        $login = request()->input('identity');
        $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
        request()->merge([$field => $login]);

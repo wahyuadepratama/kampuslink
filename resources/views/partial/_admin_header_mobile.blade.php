@@ -52,13 +52,24 @@
         </a>
       </li>
       <li>
-        <a href="event.php">
+        <a href="{{ url('organization/'. $organization->instagram .'/event') }}">
           <div class="icon-w">
             <div class="os-icon os-icon-file-text"></div>
           </div>
           <span>Event</span>
         </a>
       </li>
+      <li>
+        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+          <div class="icon-w">
+            <div class="os-icon os-icon-signs-11"></div>
+          </div>
+          <span>Logout</span>
+        </a>
+      </li>
+      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        {{ csrf_field() }}
+                    </form>
     </ul>
     <!-- END - Mobile Menu List -------------------->
   </div>
