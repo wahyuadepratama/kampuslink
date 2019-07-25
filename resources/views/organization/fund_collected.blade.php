@@ -1,4 +1,4 @@
-@include('partial/_header_organization')
+@include('partial/_admin_header')
 
         <ul class="breadcrumb">
           <li class="breadcrumb-item">
@@ -128,7 +128,7 @@
       }
     </script>
 
-    @include('partial/_script_footer_admin')
+    @include('partial/_admin_script_footer')
 
   </body>
 </html>

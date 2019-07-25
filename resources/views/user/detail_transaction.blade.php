@@ -1,4 +1,4 @@
-@include('partial/_header')
+@include('partial/_guest_header')
 
 <!--================Order Details Area =================-->
 
@@ -27,7 +27,7 @@
 			</div>
       @elseif($status == "Pembayaran Berhasil")
       <div class="alert alert-success" role="alert">
-			  Terima kasih telah menggunakan KampusLink untuk pemesanan tiket, jika ada saran atau komentar tentang kami, silahkan kirimkan pesan melalui email <i>cs@kampuslink.com</i> .
+			  Terima kasih telah menggunakan KampusLink untuk pemesanan tiket, jika ada saran atau komentar tentang kami, silahkan kirimkan pesan melalui email <i>tanyakami@kampuslink.com</i> .
 			</div>
       @endif
 
@@ -243,7 +243,7 @@
 			@foreach($ticket as $data)
 			<section class="tiket_box_area">
 				<div class="row" style="display: flex;justify-content: center;align-items: center; margin-right: 0;">
-					<div class="col-12 col-md-8">
+					<div class="col-12 col-md-12">
 
 						<div class="box-tiket">
 							<div class="box-tiket2">
@@ -325,7 +325,7 @@
 						<br><br>
 	<!--================End Order Details Area =================-->
 
-@include('partial/_footer')
+@include('partial/_guest_footer')
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

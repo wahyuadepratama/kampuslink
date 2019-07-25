@@ -1,4 +1,4 @@
-@include('partial/_header')
+@include('partial/_guest_header')
 
 	<!--================Home Banner Area =================-->
 	<section class="new_banner_area">
@@ -49,9 +49,9 @@
 							</div>
 							<div class="col-md-12 form-group">
 								@if(!Auth::check())
-								<a class="btn submit_btn" data-toggle="modal" data-target="#modalLogin">Buat</a>
+								<a class="btn submit_btn" data-toggle="modal" data-target="#modalLogin" style="color:black">Buat</a>
 								@else
-								<button type="submit" class="btn submit_btn" data-toggle="modal" data-target="#modalLogin">Buat</button><br>
+								<button type="submit" class="btn submit_btn" style="color:black">Buat</button><br>
 								@endif
 								@if ( count( $errors ) > 0 )
 						      @foreach($errors->all() as $error)
@@ -111,11 +111,11 @@
 	</section>
 	<!--================End Login Box Area =================-->
 
-  @include('partial/_footer')
+  @include('partial/_guest_footer')
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-@include('partial/_script_footer')
+@include('partial/_guest_script_footer')
 
 <script type="text/javascript">
 $(document).ready(function(){

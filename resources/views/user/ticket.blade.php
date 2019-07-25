@@ -1,4 +1,4 @@
-@include('partial/_header')
+@include('partial/_guest_header')
 <section class="tiket_box_area">
 	<div class="container">
 		<div class="tiket row">

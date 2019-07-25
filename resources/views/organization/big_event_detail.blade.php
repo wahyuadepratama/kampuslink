@@ -1,4 +1,4 @@
-@include('partial/_header_organization')
+@include('partial/_admin_header')
 
           <!---
           START - Breadcrumbs
@@ -32,18 +32,15 @@
                               {{ $big_event->name }}
                             </h3>
                           </div>
-                          <div class="customer">
+                          <div class="customer" style="text-align:center;">
                             <div class="row">
-                              <div class="col-md-4">
-                                <div class="avatar poster">
-                                  <img alt="" src="{{ asset('storage/poster/_large/'. $big_event->photo) }}" class="hoverZoomLink">
-                                </div>
+                              <div class="col-md-8">
+                                <img src="{{ asset('storage/poster/_large/'. $big_event->photo) }}" class="form-control">
                               </div>
-                              <div class="col-md-4"></div>
+
                               <div class="col-md-4">
-                                <div class="avatar poster">
-                                  <img alt="" src="{{ asset('storage/qr/event/'. $big_event->qr_code) }}" class="hoverZoomLink">
-                                </div>
+                                  <img src="{{ asset('storage/qr/event/'. $big_event->qr_code) }}" class="form-control">
+                                  <small>Scan QR Code for more information</small>
                               </div>
                             </div>
                           </div><br>
@@ -52,7 +49,7 @@
                               <table class="table table-lightborder">
                                 <tbody>
                                   <tr>
-                                    <td>Deskripsi</td>
+                                    <td style="vertical-align: top">Deskripsi</td>
                                     <td><?php echo $big_event->description; ?></td>
                                   </tr>
                                   <tr>
@@ -89,6 +86,15 @@
                                       @endif
                                     </td>
                                   </tr>
+                                  @if(isset($big_event->reason))
+                                  <tr>
+                                    <td style="vertical-align: top">Alasan Penolakan</td>
+                                    <td>
+                                      @php echo $big_event->reason; $id = \Crypt::encryptString($big_event->id);@endphp<br>
+                                      <a href="{{ url('organization/'. $organization->instagram .'/event/big-event/edit/'. $id) }}" class="btn btn-warning">Edit Big Event</a>
+                                    </td>
+                                  </tr>
+                                  @endif
                                 </tbody>
                               </table>
                             </div><br>
@@ -107,7 +113,7 @@
 
     </div>
 
-    @include('partial/_script_footer_admin')
+    @include('partial/_admin_script_footer')
 
   </body>
 </html>

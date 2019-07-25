@@ -1,4 +1,4 @@
-@include('partial/_header')
+@include('partial/_guest_header')
 
 	<!--================Home Banner Area =================-->
 	<section class="new_banner_area">
@@ -57,11 +57,11 @@
 	</section>
 	<!--================End Login Box Area =================-->
 
-	@include('partial/_footer')
+	@include('partial/_guest_footer')
 
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	@include('partial/_script_footer')
+	@include('partial/_guest_script_footer')
 
 </body>
 

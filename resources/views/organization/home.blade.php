@@ -1,4 +1,4 @@
-@include('partial/_header_organization')
+@include('partial/_admin_header')
 
           <ul class="breadcrumb">
             <li class="breadcrumb-item">
@@ -22,7 +22,7 @@
                       <div class="row">
 
                         <div class="col-sm-4 col-xxxl-3">
-                          <a class="element-box el-tablo" href="#">
+                          <a class="element-box el-tablo" href="{{ url('organization/'. $organization->instagram .'/event') }}">
                             <div class="label">
                               Big Events
                             </div>
@@ -36,7 +36,7 @@
                         </div>
 
                         <div class="col-sm-4 col-xxxl-3">
-                          <a class="element-box el-tablo" href="#">
+                          <a class="element-box el-tablo" href="{{ url('organization/'. $organization->instagram .'/event?search=all-event') }}">
                             <div class="label">
                               Ongoing Events
                             </div>
@@ -50,7 +50,7 @@
                         </div>
 
                         <div class="col-sm-4 col-xxxl-3">
-                          <a class="element-box el-tablo" href="#">
+                          <a class="element-box el-tablo" href="{{ url('organization/'. $organization->instagram .'/event?search=event-past') }}">
                             <div class="label">
                               Past Events
                             </div>
@@ -64,7 +64,7 @@
                         </div>
 
                         <div class="col-sm-4 col-xxxl-3">
-                          <a class="element-box el-tablo" href="#">
+                          <a class="element-box el-tablo" href="{{ url('organization/'. $organization->instagram .'/members') }}">
                             <div class="label">
                               Anggota
                             </div>
@@ -289,9 +289,6 @@
 
                 </div>
               </div>
-              <!--
-              END - Team Members
-              -------------------->
             </div>
             <!--
             END - Sidebar
@@ -324,7 +321,7 @@
       }
     </script>
 
-    @include('partial/_script_footer_admin')
+    @include('partial/_admin_script_footer')
 
   </body>
 </html>

@@ -39,7 +39,7 @@
                 </div>
                 <div class="onboarding-content with-gradient">
                   <h4 class="onboarding-title">
-                    Tentang Kuisioner Ini!
+                    Tentang Kuesioner Ini!
                   </h4>
                   <div class="onboarding-text">
                     Kuesioner ini berisi beberapa pertanyaan mengenai keinginan kamu sebagai mahasiswa dikampus. Dalam  kuesioner ini, kamu akan menemukan tiga kelompok pertanyaan; kelompok pertanyaan pertama meminta kamu untuk pengenalan diri, pertanyaan kedua meminta kamu untuk menyampaikan keinginan setelah berada dikampus ini,  dan pertanyaan ketiga meminta kamu untuk menyampaikan rencana kamu di kemudian hari. Kami sedang mengumpulkan data mengenai keinginan kamu untuk menggapai rencana sebagai mahasiswa kedepannya.
@@ -149,7 +149,7 @@
               <label> 4. Hal apakah yang membuatmu tertarik dikampus saat ini? berikan pandapatmu!</label><textarea class="form-control" rows="3" name="tertarik"></textarea>
             </div>
             <div class="form-group">
-              <label> 5. Apa yang kamu harap dari pengakuan dan penerimaan dari Orang-Orang?</label><textarea class="form-control" rows="3" name="harap"></textarea>
+              <label> 5. Apa yang kamu harapkan dari teman2 mu kedepan?</label><textarea class="form-control" rows="3" name="harap"></textarea>
             </div>
             <div class="form-buttons-w text-right">
               <a class="btn btn-primary step-trigger-btn" href="#stepContent3"> Continue</a>

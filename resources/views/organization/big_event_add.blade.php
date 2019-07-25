@@ -1,4 +1,4 @@
-@include('partial/_header_organization')
+@include('partial/_admin_header')
           <!--
           START - Breadcrumbs
           -------------------->
@@ -92,7 +92,7 @@
       <div class="display-type"></div>
     </div>
 
-    @include('partial/_script_footer_admin')
+    @include('partial/_admin_script_footer')
 
   </body>
 </html>

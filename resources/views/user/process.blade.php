@@ -1,4 +1,4 @@
-@include('partial/_header')
+@include('partial/_guest_header')
 	<!--================Home Banner Area =================-->
 	<section class="new_banner_area">
 		<div class="banner-img bg-overlay-39">
@@ -205,7 +205,7 @@
 	<!--================End Cart Area =================-->
 
 	<!--================ start footer Area  =================-->
-	@include('partial/_footer')
+	@include('partial/_guest_footer')
 	<!--================ End footer Area  =================-->
 
 

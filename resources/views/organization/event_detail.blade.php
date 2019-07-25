@@ -1,4 +1,4 @@
-@include('partial/_header_organization')
+@include('partial/_admin_header')
 
           <!---
           START - Breadcrumbs
@@ -27,23 +27,20 @@
                       <div class="col-md-12">
                         <div class="support-ticket-info">
                           <!-- <a class="close-ticket-info" href="#"><i class="os-icon os-icon-ui-23"></i></a> -->
-                          <div class="support-ticket-content-header">
+                          <div class="support-ticket-content-header" style="margin-bottom:5%">
                             <h3 class="ticket-header">
                               {{ $sub_event->name }}
                             </h3>
                           </div>
-                          <div class="customer">
+                          <div class="customer" style="text-align:center;">
                             <div class="row">
-                              <div class="col-md-4">
-                                <div class="avatar poster">
-                                  <img alt="" src="{{ asset('storage/poster/_large/'. $sub_event->photo) }}" class="hoverZoomLink">
-                                </div>
+                              <div class="col-md-8">
+                                <img src="{{ asset('storage/poster/_large/'. $sub_event->photo) }}" class="form-control">
                               </div>
-                              <div class="col-md-4"></div>
+
                               <div class="col-md-4">
-                                <div class="avatar poster">
-                                  <img alt="" src="{{ asset('storage/qr/event/'. $sub_event->qr_code) }}" class="hoverZoomLink">
-                                </div>
+                                  <img src="{{ asset('storage/qr/event/'. $sub_event->qr_code) }}" class="form-control">
+                                  <small>Scan QR Code for more information</small>
                               </div>
                             </div>
                           </div><br>
@@ -52,7 +49,7 @@
                               <table class="table table-lightborder">
                                 <tbody>
                                   <tr>
-                                    <td>Deskripsi</td>
+                                    <td style="vertical-align:top">Deskripsi</td>
                                     <td><?php echo $sub_event->description; ?></td>
                                   </tr>
                                   <tr>
@@ -60,7 +57,9 @@
                                     <td>
                                       @php $sub_event_category = \App\Models\EventCategory::where('sub_event_id', $sub_event->id)->get(); @endphp
                                       @foreach($sub_event_category as $key)
-                                        {{ $key->category->name }}
+                                        <div class="badge badge-primary">
+                                          {{ $key->category->name }}
+                                        </div>
                                       @endforeach
                                     </td>
                                   <tr>
@@ -106,6 +105,15 @@
                                       @endif
                                     </td>
                                   </tr>
+                                  @if(isset($sub_event->reason))
+                                  <tr>
+                                    <td style="vertical-align:top">Alasan Penolakan</td>
+                                    <td>
+                                      @php echo $sub_event->reason; $id = \Crypt::encryptString($sub_event->id);@endphp<br><br><br>
+                                      <a href="{{ url('organization/'. $organization->instagram .'/event/edit/'. $id) }}" class="btn btn-warning">Edit Event</a>
+                                    </td>
+                                  </tr>
+                                  @endif
                                 </tbody>
                               </table>
                             </div><br>
@@ -144,6 +152,9 @@
                                   </div>
                                 @endforeach
                               </ul>
+                              @if(count($transaction) == 0)
+                              <p>Belum ada peserta terdaftar!</p>
+                              @endif
                             </div>
                             @endif
 
@@ -161,7 +172,7 @@
 
     </div>
 
-    @include('partial/_script_footer_admin')
+    @include('partial/_admin_script_footer')
 
   </body>
 </html>

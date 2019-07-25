@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -41,7 +42,7 @@ class RegisterController extends Controller
     }
 
     protected function create(array $data)
-    {        
+    {
         $username = preg_replace('/@.*?$/', '', $data['email']);
         return User::create([
             'fullname' => $data['name'],
@@ -51,6 +52,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'role_id' => 3,
+            'created_at' => Carbon::now()->setTimezone('Asia/Jakarta')
         ]);
     }
 

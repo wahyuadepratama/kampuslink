@@ -1,10 +1,7 @@
-@include('partial/_header')
+@include('partial/_guest_header')
 
 	<!--================Home Banner Area =================-->
 	<section class="home_banner_area">
-		<div class="e-img-bg">
-			<div class="img-bg" id="parallax"></div>
-		</div>
 		<div class="overlay"></div>
 		<div class="banner_inner d-flex align-items-center">
 			<div class="container-fluid">
@@ -29,9 +26,18 @@
 						{{ csrf_field() }}
 						<div class="cari">
 							<input id="cari" type="text" name="event" placeholder="Cari Event Disini .." autofocus="autofocus">
+							<script type="text/javascript">
+								var input = document.getElementById("cari");
+								input.addEventListener("keyup", function(event) {
+								if (event.keyCode === 13) {
+								 event.preventDefault();
+								 document.getElementById("myBtn").click();
+								}
+								});
+							</script>
 						</div>
 						<div class="submit">
-							<button type="submit" style="font-size:95%">SEARCH</button>
+							<button id="myBtn" type="submit" style="font-size:95%">SEARCH</button>
 						</div>
 					</form>
 				</div>
@@ -107,8 +113,8 @@
 											$string = $subEvent->name;
 											$string = strip_tags($string);
 
-											if (strlen($string) > 30) {
-												$trimstring = substr($string, 0, 30);
+											if (strlen($string) > 15) {
+												$trimstring = substr($string, 0, 15);
 											} else {
 												$trimstring = $string;
 											}
@@ -158,7 +164,7 @@
 
 					@php $x = 5000; @endphp
 					@foreach($subEventRatings as $data)
-					<div class="box-produk" style="margin:5% 5% 5% 2%">
+					<div class="box-produk" style="margin:5%">
 						<div class="produk-img">
 							<img class="load-delay-second{{ $data->subEvent->id }}" src="/client/css/images/bx_loader.gif" data-original="{{ asset('storage/poster/_medium/'. $data->subEvent->photo)}}">
 							<a class="icon_btn qr" href="{{asset('storage/qr/event/'. $data->subEvent->qr_code)}}">
@@ -224,10 +230,10 @@
 	.autocomplete-items div:hover{background-color:#019fe8}
 	.autocomplete-active{background-color:#1e90ff!important;color:#fff}
 	</style>
-	@include('partial/_js_search_index')
+	@include('partial/_guest_js_search_index')
 
-	@include('partial/_subscribe_area')
-	@include('partial/_footer')
+	@include('partial/_guest_subscribe_area')
+	@include('partial/_guest_footer')
 
 
 <!-- Optional JavaScript -->
@@ -297,13 +303,6 @@ $(document).ready(function(){
     });
     // end   view medium dan smalll
 
-    const parallax = document.getElementById("parallax");
-    window.addEventListener("scroll", function(){
-    	let offset = window.pageYOffset;
-    	// console.log('Offset: ' + offset);
-    	// console.log('offset * 0.7 = ' + offset * 0.7);
-    	parallax.style.backgroundPositionY = (offset*0.1) + "px";
-    });
 });
 </script>
 </body>

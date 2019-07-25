@@ -1,4 +1,4 @@
-@include('partial/_header')
+@include('partial/_guest_header')
 
 	<!--================Home Banner Area =================-->
 	<section class="home_banner_area">
@@ -21,9 +21,18 @@
 						{{ csrf_field() }}
 						<div class="cari">
 							<input id="cari" type="text" name="event" placeholder="Cari Event Disini .." autofocus="autofocus">
+							<script type="text/javascript">
+								var input = document.getElementById("cari");
+								input.addEventListener("keyup", function(event) {
+								if (event.keyCode === 13) {
+								 event.preventDefault();
+								 document.getElementById("myBtn").click();
+								}
+								});
+							</script>
 						</div>
 						<div class="submit">
-							<button type="submit" style="font-size:95%">SEARCH</button>
+							<button id="myBtn" type="submit" style="font-size:95%">SEARCH</button>
 						</div>
 					</form>
 				</div>
@@ -111,10 +120,10 @@
 	.autocomplete-items div:hover{background-color:#019fe8}
 	.autocomplete-active{background-color:#1e90ff!important;color:#fff}
 	</style>
-	@include('partial/_js_search_index')
+	@include('partial/_guest_js_search_index')
 
-	@include('partial/_subscribe_area')
-	@include('partial/_footer')
+	@include('partial/_guest_subscribe_area')
+	@include('partial/_guest_footer')
 
 
 <!-- Optional JavaScript -->

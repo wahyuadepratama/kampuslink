@@ -1,4 +1,4 @@
-@include('partial/_header_organization')
+@include('partial/_admin_header')
 
           <ul class="breadcrumb">
             <li class="breadcrumb-item">
@@ -12,11 +12,11 @@
           <div class="content-box">
             <div class="element-wrapper">
               <div class="user-profile">
-                <div class="up-head-w" style="background-image:url({{ asset('storage/cover/'. $organization->photo_cover)}})">
+                <div class="up-head-w" style="background-image:url({{ asset('storage/organization_cover/'. $organization->photo_cover)}})">
                   <div class="up-main-info">
                     <div class="user-avatar-w">
                       <div class="user-avatar">
-                        <img alt="" src="{{ asset('client/img/icon/user.png')}}">
+                        <img alt="" src="{{ asset('storage/organization/'. $organization->photo_profile)}}">
                       </div>
                     </div>
                     <h1 class="up-header">
@@ -170,13 +170,20 @@
               </div>
             </div>
           </div>
+
+          <div class="content-panel">
+            <div class="content-panel-close">
+              <i class="os-icon os-icon-close"></i>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
     <div class="display-type"></div>
   </div>
 
-  @include('partial/_script_footer_admin')
+  @include('partial/_admin_script_footer')
 
 </body>
 </html>

@@ -41,7 +41,9 @@
       <img src="{{asset('client/img/logo/logo.png')}}" class="logo_k" height="111" width="300">
     </div>
     <br>
-    Terima Kasih {{ $nama }} telah mengisi kuisioner, semoga sukses kuliahnya dan lancar, amiiin :)
+    Terima Kasih {{ $nama }} telah mengisi kuesioner, semoga sukses kuliahnya dan lancar, amiiin :)
+    <br>
+    Jangan lupa follow instagram kami yaa untuk update dan launching aplikasi khusus kampus ini. <a href='https://www.instagram.com/kampuslink/'>Pergi ke Instagram Kampus Link</a>
   </div>
 </div>
 </div>

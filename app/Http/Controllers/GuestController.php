@@ -24,6 +24,20 @@ class GuestController extends Controller
 {
     public function index()
     {
+
+      if(isset(Auth::user()->role_id)){
+        if(Auth::user()->role_id == 3){
+          return view('errors/coming_soon');
+        }elseif(Auth::user()->role_id == 2){
+          $o = UserOrganization::where('user_id', Auth::user()->id)->first();
+          return redirect('organization/'. $o->organization->instagram);
+        }elseif(Auth::user()->role_id == 1){
+          return redirect('admin');
+        }
+      }else{
+        return redirect('login');
+      }
+
       $this->checkDueEvent();
       $subEvents = Cache::remember('index_sub_events', 30, function () {
                       return SubEvent::with('event')->where('approved', 1)->where('status','ongoing')
@@ -344,12 +358,12 @@ class GuestController extends Controller
 
     public function getDataFaculty($id)
     {
-      return Faculty::where('campus_id' ,$id)->get();
+      return Faculty::where('campus_id' ,$id)->orderBy('name')->get();
     }
 
     public function getDataProgramStudy($id)
     {
-      return ProgramStudy::where('faculty_id', $id)->get();
+      return ProgramStudy::where('faculty_id', $id)->orderBy('name')->get();
     }
 
     public function showRegisterOrganization()
@@ -387,7 +401,11 @@ class GuestController extends Controller
       if ($request->ig == trim($request->ig) && strpos($request->ig, ' ') !== false) {
         return back()->withInput()->with('error', 'Your instagram organization has registered!');
       }
-
+        
+      if (substr($request->ig,0,1) != "@") {
+        return back()->withInput()->with('error', 'Gunakan @ pada kolom instagram, contoh @neotelemetri!');
+      }
+        
       $create = Organization::create([
         'campus_id' => $request->campus,
         'name' => $request->name,
@@ -402,9 +420,9 @@ class GuestController extends Controller
         'organization_id' => $create->id
       ]);
 
-      return redirect('/organization'. '/' . $request->ig);
+      return redirect('/register-organization');
     }
-
+    
     public function kuisioner(){
       return view('guest.kuisioner');
     }
