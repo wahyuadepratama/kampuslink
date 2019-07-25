@@ -29,7 +29,7 @@ header {
 header {
   float: left;
   width: 100%;
-  background-color: #e44d3a; }
+  background-color: #30a2e9; }
 
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
   margin: 0;
@@ -149,7 +149,7 @@ input {
         border: 0;
         border-radius: 4px; }
         .header-data .search-bar form button i {
-          color: #e44d3a;
+          color: #30a2e9;
           font-size: 20px;
           font-weight: bold; }
   .header-data nav {
@@ -176,7 +176,7 @@ input {
         top: 100%;
         left: 0;
         width: 200px;
-        background-color: #e44d3a;
+        background-color: #30a2e9;
         text-align: left;
         padding: 20px 0 10px 0;
         opacity: 0;
@@ -230,8 +230,8 @@ input {
   .header-data .user-account {
     float: right;
     width: 110px;
-    border-left: 1px solid #dd3e2b;
-    border-right: 1px solid #dd3e2b;
+    border-left: 1px solid #1072af;
+    border-right: 1px solid #1072af;
     box-sizing: border-box;
     position: relative; }
     .header-data .user-account .user-info {
@@ -332,7 +332,7 @@ input {
                 color: #ffffff;
                 opacity: 0;
                 visibility: hidden;
-                background-color: #e44d3a;
+                background-color: #30a2e9;
                 position: absolute;
                 font-family: fontawesome;
                 top: 49%;
@@ -475,7 +475,7 @@ main {
 .username-dt {
   float: left;
   width: 100%;
-  background-color: #e44d3a;
+  background-color: #30a2e9;
   padding-top: 40px; }
 
 .usr-pic {
@@ -521,7 +521,7 @@ main {
       font-size: 20px;
       margin-bottom: 10px; }
     .user-fw-status li a {
-      color: #e44d3a;
+      color: #30a2e9;
       font-size: 14px;
       font-weight: 600; }
   .user-fw-status li:nth-child(1), .user-fw-status li:nth-child(2) {
@@ -645,7 +645,7 @@ main {
   text-align: center;
   padding-top: 10px; }
   .view-more > a {
-    color: #e44d3a;
+    color: #30a2e9;
     font-size: 14px;
     font-weight: 700; }
 
@@ -658,7 +658,7 @@ main {
   width: 100%;
   padding: 23px 20px;
   background-color: #fff;
-  border-top: 4px solid #e44d3a;
+  border-top: 4px solid #30a2e9;
   border-left: 1px solid #e4e4e4;
   border-bottom: 1px solid #e4e4e4;
   border-right: 1px solid #e4e4e4;
@@ -692,7 +692,7 @@ main {
       line-height: 40px;
       font-weight: 500; }
       .post-st ul li a:hover, .post-st ul li a.active {
-        background-color: #e44d3a;
+        background-color: #30a2e9;
         color: #fff; }
 
 .posts-section {
@@ -804,14 +804,14 @@ main {
     margin-right: 7px; }
     .bk-links li i {
       color: #fff;
-      font-size: 24px;
+      font-size: 18px;
       width: 30px;
       height: 30px;
       background-color: #53d690;
       text-align: center;
       line-height: 30px; }
-    .bk-links li i.la-envelope {
-      background-color: #e44d3a; }
+    .bk-links li i.fa-envelope {
+      background-color: #30a2e9 !important; }
 
 .job_descp {
   float: left;
@@ -829,7 +829,7 @@ main {
     line-height: 24px;
     margin-bottom: 20px; }
     .job_descp > p a {
-      color: #e44d3a;
+      color: #30a2e9;
       font-weight: 600; }
 
 .job-dt {
@@ -908,12 +908,20 @@ main {
         font-size: 17px;
         position: relative;
         top: 2px; }
+      .like-com li a:hover {
+        color: #30a2e9; }
+    .like-com li .com {
+      position: relative;
+      top: -5px; }
+      .like-com li .com img {
+        margin-top: 3px;
+        margin-right: 10px; }
     .like-com li span {
       color: #ffffff;
       font-size: 13px;
       width: 30px;
       height: 30px;
-      background-color: #e44d3a;
+      background-color: #30a2e9;
       line-height: 30px;
       -webkit-border-radius: 30px;
       -moz-border-radius: 30px;
@@ -924,11 +932,6 @@ main {
       text-align: center;
       font-weight: 600;
       margin-left: -25px; }
-    .like-com li .like-com li .com {
-      position: relative;
-      top: -5px; }
-      .like-com li .like-com li .com img {
-        margin-right: 10px; }
 
 .top-profiles {
   float: left;
@@ -1023,7 +1026,7 @@ main {
     border-top: 1px solid #ececec;
     font-weight: 600; }
     .user-profy > a:hover {
-      background-color: #e44d3a;
+      background-color: #30a2e9;
       color: #fff; }
 
 .posty {
@@ -1114,7 +1117,7 @@ main {
       font-weight: 600;
       margin-right: 6px; }
   .comment > a.active, .comment > a:hover {
-    color: #e44d3a; }
+    color: #30a2e9; }
 
 .post-comment {
   float: left;
@@ -1143,7 +1146,7 @@ main {
   .comment_box form button {
     float: right;
     color: #fff;
-    background-color: #e44d3a;
+    background-color: #30a2e9;
     height: 40px;
     padding: 0 10px;
     text-align: center;
@@ -1210,7 +1213,7 @@ main {
       color: #000; }
   .sign_link > a {
     display: inline-block;
-    color: #e44d3a;
+    color: #30a2e9;
     font-size: 14px;
     font-weight: 500; }
 
@@ -1275,7 +1278,7 @@ main {
     left: 0;
     width: 200px;
     height: 100%;
-    background-color: #e44d3a;
+    background-color: #30a2e9;
     padding: 25px 20px;
     opacity: 0;
     visibility: hidden;
@@ -1577,7 +1580,7 @@ main {
     top: 0;
     left: 0;
     width: 240px;
-    background-color: #e44d3a;
+    background-color: #30a2e9;
     height: 100%;
     padding: 0 20px;
     opacity: 0;
@@ -1622,213 +1625,216 @@ main {
   .message-inner-dt > img {
     margin-bottom: 10px; } }
 @media (max-width: 576px) {
+  .main-left-sidebar {
+    display: none !important; }
+
   .signin-pop {
-    margin-bottom: 40px; }
+    margin-bottom: 40px !important; }
 
   .login-resources ul li {
-    margin-bottom: 7px; }
+    margin-bottom: 7px !important; }
 
   .logo {
-    width: 100%;
-    text-align: center; }
+    width: 100px !important;
+    text-align: center !important; }
 
   .logo img {
-    float: none; }
+    float: none !important; }
 
   .search-bar {
-    width: 100%; }
+    width: 100% !important; }
 
   .user-account {
-    float: left; }
+    float: left !important; }
 
   .cm_img {
-    width: 100%;
+    width: 100% !important;
     text-align: center;
-    margin-bottom: 10px; }
+    margin-bottom: 10px !important; }
 
   .cm_img img {
-    float: none; }
+    float: none !important; }
 
   .comment_box {
     width: 100%; }
 
   .comment_box input {
-    width: 100%;
-    margin-bottom: 10px; }
+    width: 100% !important;
+    margin-bottom: 10px !important; }
 
   .comment_box form button {
-    float: none; }
+    float: none !important; }
 
   .post-comment {
-    text-align: center; }
+    text-align: center !important; }
 
   .comment_box form button {
-    padding: 0 15px; }
+    padding: 0 15px !important; }
 
   .job-details {
-    width: 80%; }
+    width: 80% !important; }
 
   .cover-sec {
-    height: 200px; }
+    height: 200px !important; }
 
   .cover-sec img {
-    height: 100%;
-    object-fit: cover; }
+    height: 100% !important;
+    object-fit: cover !important; }
 
   .star-descp > ul {
-    width: 100%;
-    margin-top: 10px; }
+    width: 100% !important;
+    margin-top: 10px !important; }
 
   .like-com li {
-    margin-right: 5px; }
+    margin-right: 5px !important; }
 
   .bk-links {
     width: 100%;
-    margin-top: 15px; }
+    margin-top: 15px !important; }
 
   main {
-    padding: 20px 0 40px 0; }
+    padding: 20px 0 40px 0 !important; }
 
   .bk-links {
-    margin-bottom: 10px; }
+    margin-bottom: 10px !important; }
 
   .star-descp {
-    margin-bottom: 25px; }
+    margin-bottom: 25px !important; }
 
   .like-com li {
-    float: left;
-    width: 100%;
-    margin-bottom: 15px; }
+    float: left !important;
+    width: 100% !important;
+    margin-bottom: 15px !important; }
 
   .job-status-bar > a {
-    float: left;
-    width: 100%;
-    margin-top: -5px; }
+    float: left !important;
+    width: 100% !important;
+    margin-top: -5px !important; }
 
   .lt-sec h4 {
-    font-size: 14px; }
+    font-size: 14px !important; }
 
   .cc-head ul {
-    float: left;
-    width: 100%;
-    margin-top: 10px; }
+    float: left !important;
+    width: 100% !important;
+    margin-top: 10px !important; }
 
   .add-billing-method span {
-    width: 85%;
-    line-height: 18px; }
+    width: 85% !important;
+    line-height: 18px !important; }
 
   .add-billing-method h4 img {
-    margin-top: 10px; }
+    margin-top: 10px !important; }
 
   .star-descp span {
-    font-size: 14px; }
+    font-size: 14px !important; }
 
   .footy-sec {
-    margin-top: 30px; }
+    margin-top: 30px !important; }
 
   .post-popup {
-    width: 100%;
-    overflow: scroll; }
+    width: 100% !important;
+    overflow: scroll !important; }
 
   .price-br {
-    float: left;
+    float: left !important;
     width: 100% !important; }
 
   .price-sec span {
-    padding: 0;
-    margin-bottom: 20px; }
+    padding: 0 !important;
+    margin-bottom: 20px !important; }
 
   .post-project > a {
-    top: 21px;
-    right: 20px; }
+    top: 21px !important;
+    right: 20px !important; }
 
   .forum-bar h2 {
-    float: left;
-    width: 100%;
-    text-align: center; }
+    float: left !important;
+    width: 100% !important;
+    text-align: center !important; }
 
   .forum-bar {
-    margin-top: 0;
-    width: 100%; }
+    margin-top: 0 !important;
+    width: 100% !important; }
 
   .forum-bar ul {
-    width: 100%;
-    text-align: center;
-    margin-top: 30px;
-    padding-bottom: 20px; }
+    width: 100% !important;
+    text-align: center !important;
+    margin-top: 30px !important;
+    padding-bottom: 20px !important; }
 
   .forum-bar ul li {
-    float: left;
-    width: 100%;
-    text-align: center;
-    margin-bottom: 25px; }
+    float: left !important;
+    width: 100% !important;
+    text-align: center !important;
+    margin-bottom: 25px !important; }
 
   .usr_quest > h3 {
-    line-height: 22px; }
+    line-height: 22px !important; }
 
   .quest-posted-time {
-    position: static;
-    float: left;
-    width: 100%;
-    margin-top: 20px; }
+    position: static !important;
+    float: left !important;
+    width: 100% !important;
+    margin-top: 20px !important; }
 
   .react-links li {
-    float: left;
-    width: 100%;
-    margin-bottom: 15px; }
+    float: left !important;
+    width: 100% !important;
+    margin-bottom: 15px !important; }
 
   .react-links li:last-child {
-    margin-bottom: 0; }
+    margin-bottom: 0 !important; }
 
   .pagination {
-    display: block; }
+    display: block !important; }
 
   .pagination li {
-    margin-bottom: 15px; }
+    margin-bottom: 15px !important; }
 
   .post_comment_sec {
-    width: 100%;
-    margin-top: 20px; }
+    width: 100% !important;
+    margin-top: 20px !important; }
 
   .widget-adver img {
-    width: 100%; }
+    width: 100% !important; }
 
   .message-inner-dt > p {
-    width: 80%; }
+    width: 80% !important; }
 
   .mf-field button {
     width: auto;
-    padding: 0 20px; }
+    padding: 0 20px !important; }
 
   .save-stngs ul li {
-    float: left;
-    width: 100%;
-    margin-bottom: 15px; }
+    float: left !important;
+    width: 100% !important;
+    margin-bottom: 15px !important; }
 
   .save-stngs ul li:last-child {
-    margin-bottom: 0; }
+    margin-bottom: 0 !important; }
 
   .notification-info {
-    width: 100%;
-    padding: 0;
-    margin-top: 15px; }
+    width: 100% !important;
+    padding: 0 !important;
+    margin-top: 15px !important; }
 
   .notification-info h3 {
-    line-height: 18px; }
+    line-height: 18px !important; }
 
   .conversation-box {
-    width: 100%;
-    right: 0; }
+    width: 100% !important;
+    right: 0 !important; }
 
   .user-account-settingss {
     right: auto;
-    left: 0; }
+    left: 0 !important; }
 
   .login-resources {
-    text-align: left; }
+    text-align: left !important; }
 
   .forum-bar ul li:last-child {
-    margin-bottom: 0; } }
+    margin-bottom: 0 !important; } }
 @media (max-width: 410px) {
   .post-st ul li a {
     font-size: 12px;

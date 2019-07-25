@@ -68,3 +68,6 @@ Route::get('koran_a', function(){
 Route::get('koran_b', function(){
 	return view('koran.koran_verify');
 });
+//kuisioner
+Route::get('kuisioner', 'GuestController@kuisioner');
+Route::post('kuisioner_submit', 'GuestController@kuisioner_submit');

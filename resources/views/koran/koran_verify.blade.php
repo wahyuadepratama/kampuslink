@@ -24,7 +24,7 @@
 			<div class="search-bar">
 				<form>
 					<input type="text" name="search" placeholder="Cari organisasi...">
-					<button type="submit"><i class="la la-search"></i></button>
+					<button type="submit"><i class="fas fa-search"></i></button>
 				</form>
 			</div><!--search-bar end-->
 			<nav>
@@ -389,13 +389,13 @@
 									<div class="job-status-bar">
 										<ul class="like-com">
 											<li>
-												<a href="#"><i class="la la-heart"></i> Like</a>
+												<a href="#"><i class="fas fa-heart"></i> Like</a>
 												<img src="{{asset('client/img/template-koran/liked-img.png')}}" alt="">
 												<span>25</span>
 											</li> 
 											<li><a href="#" title="" class="com"><img src="{{asset('client/img/template-koran/com.png')}}" alt=""> Comment 15</a></li>
 										</ul>
-										<a><i class="la la-eye"></i>Views 50</a>
+										<a><i class="far fa-eye"></i></i>Views 50</a>
 									</div>
 								</div><!--post-bar end-->
 								<div class="top-profiles">

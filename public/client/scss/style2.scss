@@ -29,7 +29,7 @@ header {
 header {
     float: left;
     width: 100%;
-    background-color: #e44d3a;
+    background-color: #30a2e9;
 }
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
     margin: 0;
@@ -155,7 +155,7 @@ input {
 			    border: 0;
 			    border-radius: 4px;	
 			    i {
-				    color: #e44d3a;
+				    color: #30a2e9;
 				    font-size: 20px;
 				    font-weight: bold;
 				}
@@ -189,7 +189,7 @@ input {
 			    top: 100%;
 			    left: 0;
 			    width: 200px;
-			    background-color: #e44d3a;
+			    background-color: #30a2e9;
 			    text-align: left;
 			    padding: 20px 0 10px 0;
 			    opacity: 0;
@@ -271,8 +271,8 @@ input {
 	.user-account {
 	    float: right;
 	    width: 110px;
-	    border-left: 1px solid #dd3e2b;
-	    border-right: 1px solid #dd3e2b;
+	    border-left: 1px solid #1072af;
+	    border-right: 1px solid #1072af;
 	    box-sizing: border-box;
 	    position: relative;
 	    .user-info {
@@ -381,7 +381,7 @@ input {
     							color: #ffffff;
     							opacity: 0;
     							visibility: hidden;
-    							background-color: #e44d3a;
+    							background-color: #30a2e9;
     							position: absolute;
     							font-family: fontawesome;
     							top: 49%;
@@ -545,7 +545,7 @@ main {
 .username-dt {
     float: left;
     width: 100%;
-    background-color: #e44d3a;
+    background-color: #30a2e9;
     padding-top: 40px;
 }
 .usr-pic {
@@ -595,7 +595,7 @@ main {
 		    margin-bottom: 10px;
 		}
 		a {
-		    color: #e44d3a;
+		    color: #30a2e9;
 		    font-size: 14px;
 		    font-weight: 600;
 		}
@@ -737,7 +737,7 @@ main {
     text-align: center;
     padding-top: 10px;
     & > a {
-	    color: #e44d3a;
+	    color: #30a2e9;
 	    font-size: 14px;
 	    font-weight: 700;
 	}
@@ -753,7 +753,7 @@ main {
     width: 100%;
     padding: 23px 20px;
     background-color: #fff;
-    border-top: 4px solid #e44d3a;
+    border-top: 4px solid #30a2e9;
     border-left: 1px solid #e4e4e4;
     border-bottom: 1px solid #e4e4e4;
     border-right: 1px solid #e4e4e4;
@@ -788,7 +788,7 @@ main {
 		    line-height: 40px;
 		    font-weight: 500;
 		    &:hover, &.active{
-		    	background-color: #e44d3a;
+		    	background-color: #30a2e9;
     			color: #fff;
 		    }
 		}
@@ -914,15 +914,15 @@ main {
 	    margin-right: 7px;
 	    i {
 		    color: #fff;
-		    font-size: 24px;
+		    font-size: 18px;
 		    width: 30px;
 		    height: 30px;
 		    background-color: #53d690;
 		    text-align: center;
 		    line-height: 30px;
 		}
-		i.la-envelope {
-    		background-color: #e44d3a;
+		i.fa-envelope {
+    		background-color: #30a2e9 !important;
 		}
 	}
 }
@@ -943,7 +943,7 @@ main {
 	    line-height: 24px;
 	    margin-bottom: 20px;
 	    a {
-		    color: #e44d3a;
+		    color: #30a2e9;
 		    font-weight: 600;
 		}
 	}
@@ -1032,13 +1032,24 @@ main {
 			    position: relative;
 			    top: 2px;
 			}
+			&:hover{
+				color: #30a2e9;
+			}
+		}
+		.com {
+		    position: relative;
+		    top: -5px;
+		    img {
+		    	margin-top:3px;
+    			margin-right: 10px;
+			}
 		}
 		span {
 		    color: #ffffff;
 		    font-size: 13px;
 		    width: 30px;
 		    height: 30px;
-		    background-color: #e44d3a;
+		    background-color: #30a2e9;
 		    line-height: 30px;
 		    -webkit-border-radius: 30px;
 		    -moz-border-radius: 30px;
@@ -1049,13 +1060,6 @@ main {
 		    text-align: center;
 		    font-weight: 600;
 		    margin-left: -25px;
-		}
-		.like-com li .com {
-		    position: relative;
-		    top: -5px;
-		    img {
-    			margin-right: 10px;
-			}
 		}
 	}
 }
@@ -1161,7 +1165,7 @@ main {
 	    border-top: 1px solid #ececec;
 	    font-weight: 600;
 	    &:hover{
-			background-color: #e44d3a;
+			background-color: #30a2e9;
 			color: #fff;
 		}
 	}
@@ -1265,7 +1269,7 @@ main {
 		}	
 	}
 	& > a.active, & > a:hover {
-    	color: #e44d3a;
+    	color: #30a2e9;
 	}
 }
 .post-comment {
@@ -1297,7 +1301,7 @@ main {
 	form button {
 	    float: right;
 	    color: #fff;
-	    background-color: #e44d3a;
+	    background-color: #30a2e9;
 	    height: 40px;
 	    padding: 0 10px;
 	    text-align: center;
@@ -1374,7 +1378,7 @@ main {
 	}
 	& > a {
 	    display: inline-block;
-	    color: #e44d3a;
+	    color: #30a2e9;
 	    font-size: 14px;
 	    font-weight: 500;
 	}
@@ -1440,7 +1444,7 @@ main {
 	.comment_box input {width: 350px;}
 }
 @media (max-width: 1200px) {
-	header nav {position: fixed;top: 0;left: 0;width: 200px;height: 100%;background-color: #e44d3a;padding: 25px 20px;opacity: 0;visibility: hidden;z-index: 0}
+	header nav {position: fixed;top: 0;left: 0;width: 200px;height: 100%;background-color: #30a2e9;padding: 25px 20px;opacity: 0;visibility: hidden;z-index: 0}
 	header nav.active {opacity: 1;visibility: visible;z-index: 9999;}
 	header nav ul li {float: left;width: 100%;text-align: left;padding: 0 0 0 0;margin-bottom: 20px;}
 	.menu-btn {display: block;}
@@ -1535,7 +1539,7 @@ main {
 	.forum-links ul li {margin-right: 20px;}
 	.forum-links ul li a {font-size: 13px;}
 	.forum-links-btn {display: block;}
-	.forum-links {position: fixed;top: 0;left: 0;width: 240px;background-color: #e44d3a;height: 100%;padding: 0 20px;opacity: 0;visibility: hidden;}
+	.forum-links {position: fixed;top: 0;left: 0;width: 240px;background-color: #30a2e9;height: 100%;padding: 0 20px;opacity: 0;visibility: hidden;}
 	.forum-links ul li {float: left;width: 100%;padding: 0;margin-bottom: 20px;}
 	.forum-links ul li a {color: #fff;font-size: 16px;}
 	.forum-questions .usr_quest {width: 100%;padding: 0;}
@@ -1550,62 +1554,63 @@ main {
 
 
 @media (max-width: 576px) {
-	.signin-pop {margin-bottom: 40px;}
-	.login-resources ul li {margin-bottom: 7px;}
-	.logo {width: 100%;text-align: center;}
-	.logo img {float: none;}
-	.search-bar {width: 100%;}
-	.user-account {float: left;}
-	.cm_img {width: 100%;text-align: center;margin-bottom: 10px;}
-	.cm_img img {float: none;}
+	.main-left-sidebar{display: none !important;}
+	.signin-pop {margin-bottom: 40px !important;}
+	.login-resources ul li {margin-bottom: 7px !important;}
+	.logo {width: 100px !important;text-align: center !important;}
+	.logo img {float: none !important;}
+	.search-bar {width: 100% !important;}
+	.user-account {float: left !important;}
+	.cm_img {width: 100% !important;text-align: center;margin-bottom: 10px !important;}
+	.cm_img img {float: none !important;}
 	.comment_box {width: 100%;}
-	.comment_box input {width: 100%;margin-bottom: 10px;}
-	.comment_box form button {float: none;}
-	.post-comment {text-align: center;}
-	.comment_box form button {padding: 0 15px;}
-	.job-details {width: 80%;}
-	.cover-sec {height: 200px;}
-	.cover-sec img {height: 100%;object-fit: cover;}
-	.star-descp > ul {width: 100%;margin-top: 10px;}
-	.like-com li {margin-right: 5px;}
-	.bk-links {width: 100%;margin-top: 15px;}
-	main {padding: 20px 0 40px 0}
-	.bk-links {margin-bottom: 10px;}
-	.star-descp {margin-bottom: 25px;}
-	.like-com li {float: left;width: 100%;margin-bottom: 15px;}
-	.job-status-bar > a {float: left;width: 100%;margin-top: -5px;}
-	.lt-sec h4 {font-size: 14px;}
-	.cc-head ul {float: left;width: 100%;margin-top: 10px;}
-	.add-billing-method span {width: 85%;line-height: 18px;}
-	.add-billing-method h4 img {margin-top: 10px;}
-	.star-descp span {font-size: 14px;}
-	.footy-sec {margin-top: 30px;}
-	.post-popup {width: 100%;overflow: scroll;}
-	.price-br {float: left;width: 100% !important;}
-	.price-sec span {padding: 0;margin-bottom: 20px;}
-	.post-project > a {top: 21px;right: 20px;}
-	.forum-bar h2 {float: left;width: 100%;text-align: center;}
-	.forum-bar {margin-top: 0;width: 100%;}
-	.forum-bar ul {width: 100%;text-align: center;margin-top: 30px;padding-bottom: 20px;}
-	.forum-bar ul li {float: left;width: 100%;text-align: center;margin-bottom: 25px;}
-	.usr_quest > h3 {line-height: 22px;}
-	.quest-posted-time {position: static;float: left;width: 100%;margin-top: 20px;}
-	.react-links li {float: left;width: 100%;margin-bottom: 15px;}
-	.react-links li:last-child {margin-bottom: 0;}
-	.pagination {display: block;}
-	.pagination li {margin-bottom: 15px;}
-	.post_comment_sec {width: 100%;margin-top: 20px;}
-	.widget-adver img {width: 100%;}
-	.message-inner-dt > p {width: 80%;}
-	.mf-field button {width: auto;padding: 0 20px;}
-	.save-stngs ul li {float: left;width: 100%;margin-bottom: 15px;}
-	.save-stngs ul li:last-child {margin-bottom: 0;}
-	.notification-info {width: 100%;padding: 0;margin-top: 15px;}
-	.notification-info h3 {line-height: 18px;}
-	.conversation-box {width: 100%;right: 0;}
-	.user-account-settingss {right: auto;left: 0;}
-	.login-resources {text-align: left;}
-	.forum-bar ul li:last-child {margin-bottom: 0;}
+	.comment_box input {width: 100% !important;margin-bottom: 10px !important;}
+	.comment_box form button {float: none !important;}
+	.post-comment {text-align: center !important;}
+	.comment_box form button {padding: 0 15px !important;}
+	.job-details {width: 80% !important;}
+	.cover-sec {height: 200px !important;}
+	.cover-sec img {height: 100% !important;object-fit: cover !important;}
+	.star-descp > ul {width: 100% !important;margin-top: 10px !important;}
+	.like-com li {margin-right: 5px !important;}
+	.bk-links {width: 100%;margin-top: 15px !important;}
+	main {padding: 20px 0 40px 0 !important}
+	.bk-links {margin-bottom: 10px !important;}
+	.star-descp {margin-bottom: 25px !important;}
+	.like-com li {float: left !important;width: 100% !important;margin-bottom: 15px !important;}
+	.job-status-bar > a {float: left !important;width: 100% !important;margin-top: -5px !important;}
+	.lt-sec h4 {font-size: 14px !important;}
+	.cc-head ul {float: left !important;width: 100% !important;margin-top: 10px !important;}
+	.add-billing-method span {width: 85% !important;line-height: 18px !important;}
+	.add-billing-method h4 img {margin-top: 10px !important;}
+	.star-descp span {font-size: 14px !important;}
+	.footy-sec {margin-top: 30px !important;}
+	.post-popup {width: 100% !important;overflow: scroll !important;}
+	.price-br {float: left !important;width: 100% !important;}
+	.price-sec span {padding: 0 !important;margin-bottom: 20px !important;}
+	.post-project > a {top: 21px !important;right: 20px !important;}
+	.forum-bar h2 {float: left !important;width: 100% !important;text-align: center !important;}
+	.forum-bar {margin-top: 0 !important;width: 100% !important;}
+	.forum-bar ul {width: 100% !important;text-align: center !important;margin-top: 30px !important;padding-bottom: 20px !important;}
+	.forum-bar ul li {float: left !important;width: 100% !important;text-align: center !important;margin-bottom: 25px !important;}
+	.usr_quest > h3 {line-height: 22px !important;}
+	.quest-posted-time {position: static !important;float: left !important;width: 100% !important;margin-top: 20px !important;}
+	.react-links li {float: left !important;width: 100% !important;margin-bottom: 15px !important;}
+	.react-links li:last-child {margin-bottom: 0 !important;}
+	.pagination {display: block !important;}
+	.pagination li {margin-bottom: 15px !important;}
+	.post_comment_sec {width: 100% !important;margin-top: 20px !important;}
+	.widget-adver img {width: 100% !important;}
+	.message-inner-dt > p {width: 80% !important;}
+	.mf-field button {width: auto;padding: 0 20px !important;}
+	.save-stngs ul li {float: left !important;width: 100% !important;margin-bottom: 15px !important;}
+	.save-stngs ul li:last-child {margin-bottom: 0 !important;}
+	.notification-info {width: 100% !important;padding: 0 !important;margin-top: 15px !important;}
+	.notification-info h3 {line-height: 18px !important;}
+	.conversation-box {width: 100% !important;right: 0 !important;}
+	.user-account-settingss {right: auto;left: 0 !important;}
+	.login-resources {text-align: left !important;}
+	.forum-bar ul li:last-child {margin-bottom: 0 !important;}
 }
 
 @media (max-width: 410px) {
